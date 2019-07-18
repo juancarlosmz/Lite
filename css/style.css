@@ -1,0 +1,22 @@
+.row{
+    height: 100%;
+}
+.secleft{
+    background-color: #001529;
+    height: 100%;
+}
+
+.menuleft{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+}
+
+.menuleft li a {
+    color: #ffffffa6;
+    text-decoration: none;
+    display: block;
+    padding: 10px 10px 10px 20px;
+}
