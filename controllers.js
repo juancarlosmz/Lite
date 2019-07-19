@@ -4,7 +4,7 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope','$http', functio
     empleados();
     
     function empleados(){
-        $http.get('http://localhost:50/IHM_SITE/api/?a=listar').then(function(response){
+        $http.get('http://localhost:50/Lite/api/?a=listar').then(function(response){
             $scope.model = response.data;
         });
     }
@@ -12,7 +12,7 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope','$http', functio
     $scope.retirar = function(id){
         if(confirm('Esta seguro de realizar esta accion?')){
 
-            $http.get('http://localhost:50/IHM_SITE/api/?a=eliminar&id='+ id).then(function(response){
+            $http.get('http://localhost:50/Lite/api/?a=eliminar&id='+ id).then(function(response){
                 empleados();
             });
         }
@@ -26,7 +26,7 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope','$http', functio
             sexo: $scope.sexo,
             fnacimiento: $scope.fnacimiento
         };
-        $http.post('http://localhost:50/IHM_SITE/api/?a=registrar',model).then(function(response){
+        $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function(response){
             empleados();
             $scope.Nombre = null,
             $scope.Apellido = null,
@@ -41,14 +41,14 @@ empleadoControllers.controller('EmpleadoListadoCtrl', ['$scope','$http', functio
 
 empleadoControllers.controller('EmpleadoVerCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {   
         
-        $http.get('http://localhost:50/IHM_SITE/api/?a=obtener&id=' + $routeParams.id).then(function(response){
+        $http.get('http://localhost:50/Lite/api/?a=obtener&id=' + $routeParams.id).then(function(response){
             $scope.model = response.data;
         });  
 }]);
 
 empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($scope,$http) {
     
-    $scope.url = "http://localhost:50/IHM_SITE/partials/login.html";
+    $scope.url = "http://localhost:50/Lite/partials/login.html";
     $scope.startlogin = function(){
         /*
         memail = $scope.email;
@@ -73,7 +73,7 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
             contra : $scope.contra 
         });
         
-        $http.post('http://localhost:50/IHM_SITE/api/?a=startlogin',user).then(function(response){
+        $http.post('http://localhost:50/Lite/api/?a=startlogin',user).then(function(response){
             console.log("error fatal");
             console.log("accesos correcto");
 
@@ -86,20 +86,29 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
 
 empleadoControllers.controller('AllProducts', ['$scope','$http','products', function($scope,$http,products) {
     //return $http.get('http://localhost:50/IHM_SITE/php/Products.php')
-
+/*
         $http.get('https://s3.amazonaws.com/codecademy-content/courses/ltp4/photos-api/photos.json')
             .then(function(response) {
                $scope.products = response.data;
         });
-           
+      */     
   }]);
 
-  empleadoControllers.controller('HomeController', ['$scope','$http','products', function($scope,$http,products) {
-    //return $http.get('http://localhost:50/IHM_SITE/php/Products.php')
+  empleadoControllers.controller('HomeController', ['$scope','products', function($scope,products) {
+    products.list(function(products) {
+        $scope.products = products;
+      });
 
-        $http.get('https://s3.amazonaws.com/codecademy-content/courses/ltp4/photos-api/photos.json')
-            .then(function(response) {
-               $scope.products = response.data;
-        });
-           
   }]);
+
+  empleadoControllers.controller('Productview', ['$scope', '$routeParams', '$http','product', function($scope,$routeParams, $http,product) {
+   
+    
+    $http.get('http://localhost:50/Lite/chinabrands/GetProductInformation.php?id=' + $routeParams.id).then(function(response){
+        products.list(function(products) {
+            $scope.products = products;
+          });
+        }); 
+
+  }]);
+  

@@ -21,6 +21,4 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
 $result = curl_exec($curl); //resultado de retorno
 echo $result;
 curl_close($curl);
-
-
 ?>

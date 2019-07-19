@@ -22,6 +22,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AllProducts',
         method: 'GET',
       }).
+      when('/products/:id', {
+        templateUrl: 'partials/product/product.html',
+        controller: 'Productview',
+        method: 'GET',
+      }).
       when('/ver/:id', {
         templateUrl: 'partials/ver.html',
         controller: 'EmpleadoVerCtrl',
