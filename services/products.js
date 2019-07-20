@@ -12,13 +12,13 @@ app.factory('products', ['$http', function($http) {
     };
   }]);
 
-
-  app.factory('product', ['$http', function($http) { 
+ 
+  app.factory('product', ['$http','$routeParams', function($http,$routeParams) { 
     return {
       list: function (callback){
         $http({
           method: 'GET',
-          url: 'http://localhost:50/Lite/chinabrands/chinabrands/GetProductInformation.php',
+          url: 'http://localhost:50/Lite/chinabrands/GetProductInformation.php?id='+ $routeParams.id,
           cache: true
         }).success(callback);
       }

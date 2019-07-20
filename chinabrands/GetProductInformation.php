@@ -5,11 +5,11 @@
 
 if(isset($_GET['id']) ) {
 $goods_sn = $_GET['id'];
-}
+
 
 
 $post_data = array(
-'token' => 'ba588cb93c4dd8f5e318b9f061247247',
+'token' => 'dbbce96f12d60ede443faa99bbff8ff7',
 'goods_sn' => json_encode($goods_sn)
 );
 $api_url="https://cnapi.chinabrands.com/v2/product/index";
@@ -22,5 +22,5 @@ curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
 $result = curl_exec($curl); //返回结果
 echo $result;
 curl_close($curl);
-
+}
 ?>

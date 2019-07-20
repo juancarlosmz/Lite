@@ -101,14 +101,10 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
 
   }]);
 
-  empleadoControllers.controller('Productview', ['$scope', '$routeParams', '$http','product', function($scope,$routeParams, $http,product) {
-   
-    
-    $http.get('http://localhost:50/Lite/chinabrands/GetProductInformation.php?id=' + $routeParams.id).then(function(response){
-        products.list(function(products) {
-            $scope.products = products;
-          });
-        }); 
+  empleadoControllers.controller('Productview', ['$scope','product', function($scope,product) {
+    product.list(function(product) {
+            $scope.product = product;
+    });
 
   }]);
   
