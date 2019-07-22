@@ -3,27 +3,28 @@
                 <div class="container">
               
                   <h2>Search Products</h2>
-                  
+                  <button id="filtercoll" onclick="myFunctionin()">Ver</button>
                   <div class="row">
-                    <div class="item col-md-4" ng-repeat="prod in products.msg">
-                      <a href="#/products/{{ prod.sku }}">
+
+                    <div class="item col-md-4 col-sm-6 col-xs-12 showsku" ng-repeat="prod in products.msg">
+
+
+                      <a class="itemhover" href="#/products/{{ prod.sku }}">
                         <p class="theimg" ng-repeat="img in prod.original_img">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                        <input class="valuesku" type="hidden" value="{{ prod.sku }}">
                         <p class="title">{{ prod.title }}</p>
                         <p class="price">{{ prod.warehouse_list.YB.price }}</p>
 
                         <p class="btnadd"><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
                         <br>
                       </a>
+
+
                     </div>
-                    <div data-pagination="" data-num-pages="numOfPages()" 
-                    data-current-page="curPage" data-max-size="maxSize"  
-                    data-boundary-links="true"></div>  
+
                   </div>
                   <a style="width: 35% !important; float: right;" style="width: 20% !important;" href="#/" class="btn btn-default btn-block"> Atras</a>
                 </div>
               </div>
-
-
-

@@ -24,6 +24,18 @@ app.factory('products', ['$http', function($http) {
       }
     };
   }]);  
+
+  app.factory('stock', ['$http','$routeParams', function($http,$routeParams) { 
+    return {
+      list: function (callback){
+        $http({
+          method: 'GET',
+          url: 'http://localhost:50/Lite/chinabrands/GetProductStock.php?id='+ $routeParams.id,
+          cache: true
+        }).success(callback);
+      }
+    };
+  }]);  
   
 /*
  app.factory('products', ['$http', function($http) { 

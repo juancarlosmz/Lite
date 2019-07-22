@@ -1,18 +1,256 @@
-<div class="main">
-<div class="container">
-<div class="row">
-        <div class="item col-md-4" ng-repeat="prod in product.msg">
-          
-            <p class="theimg" ng-repeat="img in prod.original_img">
-              <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-            </p>
-            <p class="title">{{ prod.title }}</p>
-            <p class="price">{{ prod.warehouse_list.YB.price }}</p>
 
-            <p class="btnadd"><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
-            <br>
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div ng-if="$index==0" class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in product.msg">
+          <p class="theimg" ng-repeat="img in prod.original_img">
+              <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+          </p>
+          
+          <br>
+
+          
+
+          <div style="width: 100%;" class="row">
+            <div class="item col-md-3 col-sm-3 col-xs-3">
+                <p class="theimgshort" ng-repeat="img in prod.original_img">
+                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                </p>
+            </div>
+            <div class="item col-md-3 col-sm-3 col-xs-3">
+                <p class="theimgshort" ng-repeat="img in prod.original_img">
+                    <img ng-if="$index==1" class="img-responsive" ng-src="{{img}}">
+                </p>
+            </div>
+            <div class="item col-md-3 col-sm-3 col-xs-3">
+                <p class="theimgshort" ng-repeat="img in prod.original_img">
+                    <img ng-if="$index==2" class="img-responsive" ng-src="{{img}}">
+                </p>
+            </div>
+            <div class="item col-md-3 col-sm-3 col-xs-3">
+                <p class="theimgshort" ng-repeat="img in prod.original_img">
+                    <img ng-if="$index==3" class="img-responsive" ng-src="{{img}}">
+                </p>
+            </div>
+          </div>
+
+          <div style="width: 100%;" class="row">
+              <div class="item col-md-3 col-sm-3 col-xs-3">
+                  <p class="theimgshort" ng-repeat="img in prod.original_img">
+                      <img ng-if="$index==4" class="img-responsive" ng-src="{{img}}">
+                  </p>
+              </div>
+              <div class="item col-md-3 col-sm-3 col-xs-3">
+                  <p class="theimgshort" ng-repeat="img in prod.original_img">
+                      <img ng-if="$index==5" class="img-responsive" ng-src="{{img}}">
+                  </p>
+              </div>
+              <div class="item col-md-3 col-sm-3 col-xs-3">
+                  <p class="theimgshort" ng-repeat="img in prod.original_img">
+                      <img ng-if="$index==6" class="img-responsive" ng-src="{{img}}">
+                  </p>
+              </div>
+              <div class="item col-md-3 col-sm-3 col-xs-3">
+                  <p class="theimgshort" ng-repeat="img in prod.original_img">
+                      <img ng-if="$index==7" class="img-responsive" ng-src="{{img}}">
+                  </p>
+              </div>
+            </div>
+
+            <div style="width: 100%;" class="row">
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==8" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==9" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==10" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==11" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+            </div>
+
+            <div style="width: 100%;" class="row">
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==12" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==13" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==14" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+                <div class="item col-md-3 col-sm-3 col-xs-3">
+                    <p class="theimgshort" ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==15" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                </div>
+            </div>
+
+          <!-- este es el slider -->
+<!--
+    <div class="carrusel">  
+        <div id="slides_control">
+          <div>
+            <carousel interval="myInterval">
+              <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}">
+                <div class="carousel-caption">
+                  <h4>Slide {{$index+1}}</h4>
+                </div>
+              </slide>
+            </carousel>
+          </div>
+        </div>
+    </div>
+-->
+      </div> 
+
+
+
+
+      <div class="item col-md-8 col-sm-6 col-xs-12" > 
         
-        </div> 
+        <div class="row">
+          <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+              <p >{{ prod.title }}</p>
+              <p >sku: {{ prod.sku }}</p>
+              <p ><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+              <p >Price: $ {{ prod.warehouse_list.YB.price }}</p>
+          </div>
+        </div>
+
+<!-- Imagenes con colores hacer un filtro-->
+
+        <div class="row">
+            
+            <div class="item col-md-12 col-sm-12 col-xs-12">
+                <p> Color:  </p> 
+                <div class="row">
+                  <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>  
+                  <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>
+                  <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>
+                  <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>
+                  <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>
+                  <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                    <p > {{ prod.color }}</p>
+                    <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                    </p>
+                  </div>
+                </div>  
+
+
+                <div class="row">  
+                  <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                      <p > {{ prod.color }}</p>
+                      <p  ng-repeat="img in prod.original_img">
+                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                      </p>
+                  </div>
+                  <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                        <p  > {{ prod.color }}</p>
+                        <p  ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                  </div>
+                  <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                        <p > {{ prod.color }}</p>
+                        <p  ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                  </div>
+                  <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                        <p  > {{ prod.color }}</p>
+                        <p ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                  </div>
+                  <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                        <p > {{ prod.color }}</p>
+                        <p  ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                  </div>
+                  <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                        <p class="color" > {{ prod.color }}</p>
+                        <p ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+
+
+
+<!-- Info que se cambiara con el filtro-->
+          <div class="row">
+              <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="stk in stock.msg.page_result">
+                  <p >Available Stock:  {{ stk.goods_number }}</p>
+              </div>
+              </di>
+            </div>
+
+
       </div>
-    </div>      
-  </div>
+
+    </div>
+
+
+
+
+<!--Informacion  del producto-->
+
+    <div class="row">
+      <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
+        <h1>Product Information</h1>
+        <p >{{ prod.title }}</p>
+        <p >{{ prod.goods_desc | json}}</p>
+      </div>
+    </div>
+
+  </div>  
+</div>

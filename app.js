@@ -1,6 +1,7 @@
 var app = angular.module('appLite', [
   'ngRoute',
-  'empleadoControllers'
+  'empleadoControllers',
+  'ui.bootstrap'
 ]);
 
 app.config(['$routeProvider', '$locationProvider',
@@ -47,4 +48,5 @@ app.config(['$routeProvider', '$locationProvider',
         method: 'GET',
       });
   }]);
+
 

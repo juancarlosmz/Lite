@@ -156,13 +156,34 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
     products.list(function(products) {
         $scope.products = products;
       });
-
+      
   }]);
 
-  empleadoControllers.controller('Productview', ['$scope','product', function($scope,product) {
+  empleadoControllers.controller('Productview', ['$scope','product','stock', function($scope,product,stock) {
     product.list(function(product) {
             $scope.product = product;
     });
 
+    stock.list(function(stock) {
+            $scope.stock = stock;
+    });
+
+    $scope.myInterval = 3000;
+    $scope.slides = [
+      {
+        image: 'http://lorempixel.com/400/200/'
+      },
+      {
+        image: 'http://lorempixel.com/400/200/food'
+      },
+      {
+        image: 'http://lorempixel.com/400/200/sports'
+      },
+      {
+        image: 'http://lorempixel.com/400/200/people'
+      }
+    ];
+
   }]);
   
+
