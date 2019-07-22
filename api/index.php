@@ -25,11 +25,57 @@ switch($action) {
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
         break;
     case 'startlogin':
-        header('Content-Type: application/json');
-        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
-        $email = $data->email;
-        $contra = $data->contra;
-        print_r(json_encode(startlogin($fluent,$email,$contra)));
+        
+
+        session_start();
+
+        $form_data = json_decode(file_get_contents("php://input"));
+
+        $validation_error = '';
+        
+        if(empty($form_data->email)){
+            $error[] = 'Email is Required';
+        }else{
+            if(!filter_var($form_data->email, FILTER_VALIDATE_EMAIL)){
+                $error[] = 'Invalid Email Format';
+            }else{
+                $data[':email'] = $form_data->email;
+            }
+        }
+
+        if(empty($form_data->password)){
+            $error[] = 'Password is Required';
+        }
+
+        if(empty($error)){
+            $query = "
+            SELECT * FROM user 
+            WHERE email = :email
+            ";
+            $statement = $connect->prepare($query);
+            if($statement->execute($data)){
+                $result = $statement->fetchAll();
+                if($statement->rowCount() > 0){
+                    foreach($result as $row){
+                        if(password_verify($form_data->password, $row["password"])){
+                            $_SESSION["name"] = $row["name"];
+                        }else{
+                            $validation_error = 'Wrong Password';
+                        }
+                    }
+                }else{
+                    $validation_error = 'Wrong Email';
+                }
+            }
+        }else{
+            $validation_error = implode(", ", $error);
+        }
+
+        $output = array(
+        'error' => $validation_error
+        );
+
+        echo json_encode($output);
         break;
 }
 function listar($fluent){
@@ -55,6 +101,7 @@ function registrar($fluent, $data){
            ->execute();    
     return true;
 }
+/*
 function startlogin($fluent,$email,$contra){
     $fluent->from('user')
            ->select('user.*') 
@@ -62,18 +109,24 @@ function startlogin($fluent,$email,$contra){
            ->fetch();
     return true;  
 }
+*/
+
 //TESTS
+/*
 $test = $fluent->from('user', 3)
 ->select('user.*, user.Nombre as User')
 ->fetch();
 print_r(json_encode($query));
 print_r(json_encode($test));
-
+*/
 ?>
 
 <?php  
+/*
      if(!isset($_POST) || empty($_POST)) { 
+*/       
      ?> 
+<!--
 <html>
 <form method="post" action="">
     <input type="text" name="email" action="">  
@@ -81,15 +134,18 @@ print_r(json_encode($test));
     <button type="submit">Log in</button>
 </form>
 </html>
+     -->
    <?php  
+   /*
         } else { 
         $example = file_get_contents("php://input");
+        */
   /*      
         $email = $request->email;
         $contra = $request->contra;
         echo $email;  
 */
-
+/*
         echo $example; 
     
         $query2 = $fluent->from('user')
@@ -99,4 +155,5 @@ print_r(json_encode($test));
             ->fetch();   
         print_r(json_encode($query2));     
     }  
+    */
    ?>

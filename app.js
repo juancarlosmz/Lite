@@ -13,7 +13,7 @@ app.config(['$routeProvider', '$locationProvider',
         method: 'GET',
       }).
       when('/login', {
-        templateUrl: 'partials/login.html',
+        templateUrl: 'partials/login.php',
         controller: 'EmpleadoLogin',
         method: 'GET',
       }).

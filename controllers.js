@@ -48,9 +48,66 @@ empleadoControllers.controller('EmpleadoVerCtrl', ['$scope', '$routeParams', '$h
 
 empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($scope,$http) {
     
-    $scope.url = "http://localhost:50/Lite/partials/login.html";
+    $scope.closeMsg = function(){
+        $scope.alertMsg = false;
+       };
+      
+       $scope.login_form = true;
+      
+       $scope.showRegister = function(){
+        $scope.login_form = false;
+        $scope.register_form = true;
+        $scope.alertMsg = false;
+       };
+      
+       $scope.showLogin = function(){
+        $scope.register_form = false;
+        $scope.login_form = true;
+        $scope.alertMsg = false;
+       };
+      
+       $scope.submitRegister = function(){
+        $http({
+         method:"POST",
+         url:"register.php",
+         data:$scope.registerData
+        }).success(function(data){
+         $scope.alertMsg = true;
+         if(data.error != '')
+         {
+          $scope.alertClass = 'alert-danger';
+          $scope.alertMessage = data.error;
+         }
+         else
+         {
+          $scope.alertClass = 'alert-success';
+          $scope.alertMessage = data.message;
+          $scope.registerData = {};
+         }
+        });
+       };
+      
+       $scope.submitLogin = function(){
+
+        $http({
+         method:"POST",
+         url:"api/?a=startlogin",
+         data:$scope.loginData
+        }).then(function successCallback(response) {
+
+          $scope.alertMsg = true;
+          $scope.alertClass = 'alert-danger';
+          $scope.alertMessage = response.data.error;
+
+        }, function errorCallback(response) {
+          location.reload();
+        });
+ 
+       };
+
+/*
     $scope.startlogin = function(){
-        /*
+   
         memail = $scope.email;
         mcontra = $scope.contra;
         console.log("email "+memail+" contra "+ mcontra);
@@ -58,7 +115,7 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
         $http.post('http://localhost:50/IHM_SITE/api/?a=startlogin&email='+memail+"&contra="+mcontra).then(function(response){
             console.log("usuario ingresado");
         });
-*/
+
 
         var encodedString =
         "email=" + encodeURIComponent($scope.email) +
@@ -80,7 +137,7 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
         }); 
 
     }
-
+*/
 }]);
 
 
@@ -95,6 +152,7 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
   }]);
 
   empleadoControllers.controller('HomeController', ['$scope','products', function($scope,products) {
+  
     products.list(function(products) {
         $scope.products = products;
       });

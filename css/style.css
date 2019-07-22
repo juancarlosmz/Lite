@@ -1,15 +1,21 @@
+
 .row{
     height: 100%;
 }
+
+
 .secleft{
     background-color: #001529;
     height: 100%;
 }
+
 .secright{
     background-color: #f0f2f5;
     height: 100%;
 }
+
 #contleft{
+    height: 100%;
     padding: 0px 0px !important;
 }
 #contright{
