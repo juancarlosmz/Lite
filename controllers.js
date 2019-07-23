@@ -50,23 +50,23 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
     
     $scope.closeMsg = function(){
         $scope.alertMsg = false;
-       };
+    };
       
-       $scope.login_form = true;
+    $scope.login_form = true;
       
-       $scope.showRegister = function(){
+    $scope.showRegister = function(){
         $scope.login_form = false;
         $scope.register_form = true;
         $scope.alertMsg = false;
-       };
+    };
       
-       $scope.showLogin = function(){
+    $scope.showLogin = function(){
         $scope.register_form = false;
         $scope.login_form = true;
         $scope.alertMsg = false;
-       };
+    };
       
-       $scope.submitRegister = function(){
+    $scope.submitRegister = function(){
         $http({
          method:"POST",
          url:"register.php",
@@ -85,25 +85,32 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
           $scope.registerData = {};
          }
         });
-       };
+    };
       
-       $scope.submitLogin = function(){
+    $scope.submitLogin = function(){
+        var emailjs = $scope.loginData.email;
+        var contrajs = $scope.loginData.password;
 
         $http({
          method:"POST",
          url:"api/?a=startlogin",
          data:$scope.loginData
         }).then(function successCallback(response) {
-
+            
+          console.log($scope.loginData);
+          console.log(emailjs);
+          console.log(contrajs);
           $scope.alertMsg = true;
           $scope.alertClass = 'alert-danger';
-          $scope.alertMessage = response.data.error;
-
+          $scope.alertMessage = 'usuario no registrado';
         }, function errorCallback(response) {
-          location.reload();
+            location.reload();
         });
+
+
  
-       };
+
+    };
 
 /*
     $scope.startlogin = function(){

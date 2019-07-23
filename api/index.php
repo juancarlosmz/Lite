@@ -25,14 +25,12 @@ switch($action) {
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
         break;
     case 'startlogin':
-        
-
         session_start();
-
         $form_data = json_decode(file_get_contents("php://input"));
-
+        print_r(json_encode(startlogin($fluent, $form_data->data->email,$form_data->data->password)));
+/*
+        $form_data = json_decode(file_get_contents("php://input"));
         $validation_error = '';
-        
         if(empty($form_data->email)){
             $error[] = 'Email is Required';
         }else{
@@ -42,11 +40,9 @@ switch($action) {
                 $data[':email'] = $form_data->email;
             }
         }
-
         if(empty($form_data->password)){
             $error[] = 'Password is Required';
         }
-
         if(empty($error)){
             $query = "
             SELECT * FROM user 
@@ -70,12 +66,11 @@ switch($action) {
         }else{
             $validation_error = implode(", ", $error);
         }
-
         $output = array(
         'error' => $validation_error
         );
-
         echo json_encode($output);
+*/        
         break;
 }
 function listar($fluent){
@@ -101,32 +96,39 @@ function registrar($fluent, $data){
            ->execute();    
     return true;
 }
-/*
+
 function startlogin($fluent,$email,$contra){
     $fluent->from('user')
            ->select('user.*') 
-           ->where('email LIKE ? and contra LIKE ?','%'.$email.'%','%'.$contra.'%')
+           ->where('email = ? and contra = ?',$email,$contra)
            ->fetch();
     return true;  
 }
-*/
+
 
 //TESTS
 /*
 $test = $fluent->from('user', 3)
 ->select('user.*, user.Nombre as User')
 ->fetch();
-print_r(json_encode($query));
 print_r(json_encode($test));
 */
+/*
+    $query2 = $fluent->from('user')
+            ->select('email,contra')
+            ->where('email = ? and contra = ?','jj@gmail.com','jj')
+            ->fetch();   
+        print_r(json_encode($query2));
+*/
+
 ?>
 
 <?php  
-/*
+
      if(!isset($_POST) || empty($_POST)) { 
-*/       
+      
      ?> 
-<!--
+
 <html>
 <form method="post" action="">
     <input type="text" name="email" action="">  
@@ -134,26 +136,26 @@ print_r(json_encode($test));
     <button type="submit">Log in</button>
 </form>
 </html>
-     -->
-   <?php  
-   /*
-        } else { 
-        $example = file_get_contents("php://input");
-        */
-  /*      
-        $email = $request->email;
-        $contra = $request->contra;
-        echo $email;  
-*/
-/*
-        echo $example; 
     
+   <?php  
+
+        } else { 
+        $example = file_get_contents("php://input");  
+        $rest = explode("&",$example);  
+        $email = explode("email=",$rest[0]); 
+        $contra = explode("contra=",$rest[1]);
+        echo rawurldecode($email[1])."<br>";
+        echo rawurldecode($contra[1])."<br>";
+        
         $query2 = $fluent->from('user')
             ->select('email,contra')
-            //->where('email LIKE ? and contra LIKE ?','%'.'aaa@hotmail.com'.'%','%'.'aaa'.'%')
-            ->where('email LIKE ? and contra LIKE ?','%'.'aaa@hotmail.com'.'%','%'.'aaa'.'%')
+            ->where('email = ? and contra = ?',rawurldecode($email[1]),rawurldecode($contra[1]))
             ->fetch();   
         print_r(json_encode($query2));     
+
     }  
-    */
+   
    ?>
+
+
+   
