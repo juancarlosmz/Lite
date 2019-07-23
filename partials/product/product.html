@@ -248,7 +248,10 @@
       <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
         <h1>Product Information</h1>
         <p >{{ prod.title }}</p>
-        <p >{{ prod.goods_desc | json}}</p>
+        <button onclick="myFunctioninfo()">See details</button>
+        <input id="inputinfo" type="hidden" value="{{ prod.goods_desc}}">
+        <p id="infoprod"></p>
+
       </div>
     </div>
 

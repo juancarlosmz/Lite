@@ -12,34 +12,36 @@
 
 
     <div class="row">
-      <div id="contleft" class="col-md-3 col-sm-3 col-xs-3">
-          <section class="secleft">
+      <div id="contleft" class="col-md-2 col-sm-2 col-xs-2">
+          <section id="secleft">
             <div class="header">
-              <div div class="container">
-                <a ng-href="#/">
+              <div class="container contmenuhed">
+                <a class="icohome" href="#/">
                   <i class="glyphicon glyphicon-home"></i>
                 </a> 
+                <a class="icomenuhome" onclick="myFunctioiconohide();">
+                  <i id="iconoleftright" class="glyphicon glyphicon glyphicon-indent-right"></i>
+                </a>
               </div>
-              <div div class="container">
+              <div class="container contmenuhed2">
                   <ul class="menuleft">
-                    <li><a href=""><i class="glyphicon glyphicon-dashboard"></i>  Dashboard</a></li>
-                    <li><a href="#/"><i class="glyphicon glyphicon-home"></i>  Home</a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-search"></i>  Search Products</a></li>
-                    <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user"></i>  Login</a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-user"></i>  Register</a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-user"></i>  FAQ</a></li>
+                    <li><a href=""><i class="glyphicon glyphicon-dashboard">&nbsp; </i>   <span class="hidetextmenu">Dashboard</span></a></li>
+                    <li><a href="#/"><i class="glyphicon glyphicon-home">&nbsp; </i>   <span class="hidetextmenu">Home</span></a></li>
+                    <li><a href=""><i class="glyphicon glyphicon-search">&nbsp; </i>   <span class="hidetextmenu">Search Products</span></a></li>
+                    <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>  <span class="hidetextmenu">Login</span></a></li>
+                    <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   <span class="hidetextmenu">Register</span></a></li>
+                    <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   <span class="hidetextmenu">FAQ</span></a></li>
                   </ul>
                 </div>
             </div>
           </section>
       </div>
-      <div id="contright" class="col-md-9 col-sm-9 col-xs-9">
+      <div id="contright" class="col-md-10 col-sm-10 col-xs-10">
           <section class="secright">
-              <div class="header">
-                  <div div class="container">
-                      <i class="glyphicon glyphicon glyphicon-indent-right"></i>
+              <div class="header contlogohed">
+                  <div class="container">
                     <a ng-href="#/">
-                      <img src="" width="80" height="40">
+                      <img src="img/logo.png" width="100" height="60">
                     </a> 
                   </div>
               </div>
@@ -59,7 +61,7 @@
     </div>
 
 
-    <script src="https://code.angularjs.org/1.5.9/angular.js"></script>
+
     <script src="https://code.angularjs.org/1.5.9/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-route.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-animate.min.js"></script>

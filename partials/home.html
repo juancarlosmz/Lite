@@ -3,7 +3,24 @@
                 <div class="container">
               
                   <h2>Search Products</h2>
-                  <button id="filtercoll" onclick="myFunctionin()">Ver</button>
+
+                  
+
+                  <div class="row">
+                    <div style="padding-right: 0px !important;" class="item col-md-3 col-sm-3 col-xs-3">
+                        <select class="txtselect" name="" id="">
+                          <option value="" ng-repeat="cat in categories.msg">{{cat.cat_name}}</option>
+                        </select>
+                      </div>
+                    <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-7">
+                        <input placeholder="I'm shopping for..." class="txtsearch" type="text">
+                    </div>    
+                    <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-2">
+                        <button class="btn btnsearch">Search</button>
+                    </div>
+                  </div>
+                  <br>
+                  <input type="hidden" id="filtercoll" onclick="myFunctionin();">
                   <div class="row">
 
                     <div class="item col-md-4 col-sm-6 col-xs-12 showsku" ng-repeat="prod in products.msg">
@@ -15,7 +32,7 @@
                         </p>
                         <input class="valuesku" type="hidden" value="{{ prod.sku }}">
                         <p class="title">{{ prod.title }}</p>
-                        <p class="price">{{ prod.warehouse_list.YB.price }}</p>
+                        <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
 
                         <p class="btnadd"><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
                         <br>

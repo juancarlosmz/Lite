@@ -50,3 +50,6 @@ app.config(['$routeProvider', '$locationProvider',
   }]);
 
 
+app.controller('empleadoControllers', function($scope){
+  controllerPrincipal = $scope;
+});

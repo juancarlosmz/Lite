@@ -158,11 +158,15 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
       */     
   }]);
 
-  empleadoControllers.controller('HomeController', ['$scope','products', function($scope,products) {
+  empleadoControllers.controller('HomeController', ['$scope','products','categories', function($scope,products,categories) {
   
     products.list(function(products) {
-        $scope.products = products;
-      });
+        $scope.products = products;  
+    });
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+    });
+    
       
   }]);
 

@@ -1,12 +1,50 @@
-
+/*Los iconos*/
+.icohome{
+  float: left;
+}
+.icohome i{
+  font-size: 30px;
+}
+.icomenuhome{
+  float: right;
+  padding-right: 5px;
+}
+.icomenuhome i{
+  font-size: 30px;
+}
+.glyphicon {
+  font-size: 20px;
+  float: left;
+}
+/**/
 .row{
     height: 100%;
 }
+/*menu*/
+.contmenuhed{
+  width: auto !important;
+  padding-left: 30px !important;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #010d19;
+}
+.contmenuhed2{
+  width: auto !important;
 
-
-.secleft{
+}
+.hidetextmenu{
+  float: left;
+}
+/*logo*/
+.contlogohed{
+  background-color: white;
+}
+/**/
+#secleft{
     background-color: #001529;
     height: 100%;
+    position: fixed;
+    width: 16.6%;
 }
 
 .secright{
@@ -17,6 +55,7 @@
 #contleft{
     height: 100%;
     padding: 0px 0px !important;
+    position:relative;
 }
 #contright{
     padding: 0px 0px !important;
@@ -28,12 +67,13 @@
     font-family: Arial, sans-serif;
     font-size: 11pt;
 }
-
+.menuleft li{
+  padding: 20px 10px 20px 10px;
+}
 .menuleft li a {
     color: #ffffffa6;
     text-decoration: none;
     display: block;
-    padding: 10px 10px 10px 20px;
 }
 
   .itemhover {
@@ -116,4 +156,40 @@ img{
   left:50%;
   top:20px;
  margin-left:-200px;
+}
+
+/*see Information*/
+.xxkkk {
+  width: 100% !important;
+}
+.xktutu {
+  text-align: center;
+}
+/*filtros*/
+.btnsearch{
+  width: 100%;
+  color: #fff !important;
+  background-color: #fb615f !important;
+  border-color: #fb615f !important;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.12) !important;
+  box-shadow: 0 2px 0 rgba(0,0,0,.035) !important;
+}
+.txtsearch{
+  padding-left: 20px;
+  width: 100%;
+}
+.txtselect, .btnsearch, .txtsearch {
+  height: 40px;
+  width: 100%;
+}
+
+/*css responsive*/
+
+
+@media (max-width: 480px) {
+
+  .hidetextmenu{
+    font-size: 9px;
+  }
+  
 }
