@@ -39,10 +39,12 @@
       <div id="contright" class="col-md-10 col-sm-10 col-xs-10">
           <section class="secright">
               <div class="header contlogohed">
-                  <div class="container">
-                    <a ng-href="#/">
-                      <img src="img/logo.png" width="100" height="60">
-                    </a> 
+                  
+                  <div class="container logow">
+                    
+                    <div class="logo">
+                      <a href="#/" ><img src="img/logo.jpg" ></a> 
+                    </div>
                   </div>
               </div>
 

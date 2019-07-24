@@ -6,9 +6,12 @@
   font-size: 30px;
 }
 .icomenuhome{
+
   float: right;
   padding-right: 5px;
+ 
 }
+
 .icomenuhome i{
   font-size: 30px;
 }
@@ -26,11 +29,10 @@
   padding-left: 30px !important;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #010d19;
+  background-color: #6fb717;
 }
 .contmenuhed2{
   width: auto !important;
-
 }
 .hidetextmenu{
   float: left;
@@ -39,9 +41,18 @@
 .contlogohed{
   background-color: white;
 }
+.container.logow{
+  padding-left: 30px;
+}
+.logo{
+  width: 300px;
+}
+.logo img{
+  width: 100%;
+}
 /**/
 #secleft{
-    background-color: #001529;
+    background-color: #fe924a;
     height: 100%;
     position: fixed;
     width: 16.6%;
@@ -182,6 +193,20 @@ img{
   height: 40px;
   width: 100%;
 }
+/*Estilos para el color de los prod*/
+.colorhide{
+  display: none;
+  position: absolute;
+    background-color: #00000073;
+    color: white;
+    border-radius: 5px;
+    bottom: 100%;
+    padding: 0px 5px 0px 5px;
+    font-size: 0.7em;
+    text-align: center;
+    left: 20%;
+}
+
 
 /*css responsive*/
 
