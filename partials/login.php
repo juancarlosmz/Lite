@@ -4,7 +4,7 @@
       <div class="item col-md-4">
 
       <?php
-   if(!isset($_SESSION["name"]))
+   if(!isset($_SESSION["nombre"]))
    {
    ?>
    <div class="alert {{alertClass}} alert-dismissible" ng-show="alertMsg">
@@ -71,7 +71,7 @@
      <h3 class="panel-title">Welcome to system</h3>
     </div>
     <div class="panel-body">
-     <h1>Welcome - <?php echo $_SESSION["name"];?></h1>
+     <h1>Welcome - <?php echo $_SESSION["nombre"];?></h1>
      <a href="logout.php">Logout</a>
     </div>
    </div>

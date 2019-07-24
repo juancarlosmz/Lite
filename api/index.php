@@ -26,8 +26,10 @@ switch($action) {
         break;
     case 'startlogin':
         session_start();
-        $form_data = json_decode(file_get_contents("php://input"));
-        print_r(json_encode(startlogin($fluent, $form_data->data->email,$form_data->data->password)));
+        $example = file_get_contents("php://input");  
+        $email = explode("email=",$rest[0]); 
+        $contra = explode("contra=",$rest[1]);
+        print_r(json_encode(startlogin($fluent,$email,$contra )));
 /*
         $form_data = json_decode(file_get_contents("php://input"));
         $validation_error = '';
@@ -142,14 +144,14 @@ print_r(json_encode($test));
         } else { 
         $example = file_get_contents("php://input");  
         $rest = explode("&",$example);  
-        $email = explode("email=",$rest[0]); 
-        $contra = explode("contra=",$rest[1]);
-        echo rawurldecode($email[1])."<br>";
-        echo rawurldecode($contra[1])."<br>";
+        $email2 = explode("email=",$rest[0]); 
+        $contra2 = explode("contra=",$rest[1]);
+        echo rawurldecode($email2[1])."<br>";
+        echo rawurldecode($contra2[1])."<br>";
         
         $query2 = $fluent->from('user')
             ->select('email,contra')
-            ->where('email = ? and contra = ?',rawurldecode($email[1]),rawurldecode($contra[1]))
+            ->where('email = ? and contra = ?',rawurldecode($email2[1]),rawurldecode($contra2[1]))
             ->fetch();   
         print_r(json_encode($query2));     
 

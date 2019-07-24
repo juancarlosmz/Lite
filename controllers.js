@@ -100,11 +100,12 @@ empleadoControllers.controller('EmpleadoLogin', ['$scope','$http', function ($sc
           console.log($scope.loginData);
           console.log(emailjs);
           console.log(contrajs);
-          $scope.alertMsg = true;
-          $scope.alertClass = 'alert-danger';
-          $scope.alertMessage = 'usuario no registrado';
+          
         }, function errorCallback(response) {
-            location.reload();
+            //location.reload();
+            $scope.alertMsg = true;
+            $scope.alertClass = 'alert-danger';
+            $scope.alertMessage = 'usuario no registrado';
         });
 
 
