@@ -15,22 +15,80 @@
       <div id="contleft" class="col-md-2 col-sm-2 col-xs-2">
           <section id="secleft">
             <div class="header">
-              <div class="container contmenuhed">
-                <a class="icohome" href="#/">
-                  <i class="glyphicon glyphicon-home"></i>
-                </a> 
-                <a class="icomenuhome" onclick="myFunctioiconohide();">
-                  <i id="iconoleftright" class="glyphicon glyphicon glyphicon-indent-right"></i>
-                </a>
+            <div class="container contmenuhed2"> 
+              <div class="row colorrow">
+                <div id="cajaicomenutop" class="col-md-6 col-sm-6 col-xs-6 ">
+                  <a href="#/">
+                    <i class="glyphicon glyphicon-home"></i>
+                  </a>    
+                </div>
+                <div id="cajaicomenutop2" class="col-md-5 col-sm-5 col-xs-5 ">
+                  <a onclick="myFunctioiconohide();">
+                    <i id="iconoleftright" class="glyphicon glyphicon glyphicon-indent-right"></i>
+                  </a>
+                </div>
               </div>
+            </div>
+
+
+
+              
               <div class="container contmenuhed2">
                   <ul class="menuleft">
-                    <li><a href=""><i class="glyphicon glyphicon-dashboard">&nbsp; </i>   <span class="hidetextmenu">Dashboard</span></a></li>
-                    <li><a href="#/"><i class="glyphicon glyphicon-home">&nbsp; </i>   <span class="hidetextmenu">Home</span></a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-search">&nbsp; </i>   <span class="hidetextmenu">Search Products</span></a></li>
-                    <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>  <span class="hidetextmenu">Login</span></a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   <span class="hidetextmenu">Register</span></a></li>
-                    <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   <span class="hidetextmenu">FAQ</span></a></li>
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href=""><i class="glyphicon glyphicon-dashboard">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Dashboard</span></a></li>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href="#/"><i class="glyphicon glyphicon-home">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Home</span></a></li>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href=""><i class="glyphicon glyphicon-search">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Search Products</span></a></li>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Login</span></a></li>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Register</span></a></li>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">FAQ</span></a></li>
+                      </div>
+                    </div>
+
                   </ul>
                 </div>
             </div>

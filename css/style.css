@@ -37,6 +37,39 @@
 .hidetextmenu{
   float: left;
 }
+#cajaicomenutop{
+  left: 5px;
+  padding-top: 17.5px;
+  padding-bottom: 17.5px;
+}
+#cajaicomenutop a i{
+  font-size: 28px;
+}
+#cajaicomenutop2 a i{
+  font-size: 28px;
+  float: right;
+}
+#cajaicomenutop2{
+  padding-top: 17.5px;
+  padding-bottom: 17.5px;
+  float: right;
+  padding-right: 5px;
+}
+.cajaicomenu{
+  height: 40px;
+}
+.cajaicomenu2{
+  height: 40px;
+  padding-top: 20px;
+}
+.cajaicomenu2 span {
+  color: #ffffffa6;
+  text-decoration: none;
+  display: block;
+}
+.colorrow{
+  background-color: #6fb717;
+}
 /*logo*/
 .contlogohed{
   background-color: white;
@@ -79,7 +112,7 @@
     font-size: 11pt;
 }
 .menuleft li{
-  padding: 20px 10px 20px 10px;
+  padding: 20px 10px 20px 20px;
 }
 .menuleft li a {
     color: #ffffffa6;

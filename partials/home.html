@@ -5,12 +5,22 @@
                   <h2>Search Products</h2>
 
                   
+                  
+              
 
                   <div class="row">
                     <div style="padding-right: 0px !important;" class="item col-md-3 col-sm-3 col-xs-3">
+
+                      
                         <select class="txtselect" name="" id="">
-                          <option value="" ng-repeat="cat in categories.msg">{{cat.cat_name}}</option>
+                          <option ng-repeat="cat in categories.msg " value="{{cat.parent_id}}">{{cat.cat_name}}</option>
                         </select>
+                      
+                      <!--  
+                        <select class="txtselect" ng-model="categories" ng-options="cat.cat_name group by cat.parent_id for cat in categories.msg">
+                            <option value="" value="">All Categories</option>
+                        </select>  
+                      -->  
                       </div>
                     <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-7">
                         <input placeholder="I'm shopping for..." class="txtsearch" type="text">
