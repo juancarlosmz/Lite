@@ -168,6 +168,19 @@ img{
   top:20px;
  margin-left:-200px;
 }
+/*para la pagina product*/
+#cambioimg2 img{
+  width: 345px;
+  height: 345px;
+  background-color: white;
+}
+.theimgshort{
+  cursor: pointer;
+}
+.item .imgcolor{
+  padding-right: 5px;
+  padding-left: 5px;
+}
 
 /*see Information*/
 .xxkkk {

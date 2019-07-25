@@ -54,9 +54,8 @@ function myFunctioiconohide(){
     menuwidth.style.width = "16.6%";
     clic = 1;
   }
-  
-  
 }
+
 //codigo letras hover
 var colortext = document.getElementsByClassName("colorhide");
   //color imagenes mouse over
@@ -192,6 +191,7 @@ function myFchangeimg1(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg1").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg2(){
   var elmnt = document.getElementById("clonimg2");
@@ -201,6 +201,7 @@ function myFchangeimg2(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg2").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg3(){
   var elmnt = document.getElementById("clonimg3");
@@ -210,6 +211,7 @@ function myFchangeimg3(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg3").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg4(){
   var elmnt = document.getElementById("clonimg4");
@@ -219,6 +221,7 @@ function myFchangeimg4(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg4").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg5(){
   var elmnt = document.getElementById("clonimg5");
@@ -228,6 +231,7 @@ function myFchangeimg5(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg5").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg6(){
   var elmnt = document.getElementById("clonimg6");
@@ -237,6 +241,7 @@ function myFchangeimg6(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg6").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg7(){
   var elmnt = document.getElementById("clonimg7");
@@ -246,6 +251,7 @@ function myFchangeimg7(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg7").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg8(){
   var elmnt = document.getElementById("clonimg8");
@@ -255,6 +261,7 @@ function myFchangeimg8(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg8").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg9(){
   var elmnt = document.getElementById("clonimg9");
@@ -264,6 +271,7 @@ function myFchangeimg9(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg9").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg10(){
   var elmnt = document.getElementById("clonimg10");
@@ -273,6 +281,7 @@ function myFchangeimg10(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg10").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg11(){
   var elmnt = document.getElementById("clonimg11");
@@ -282,6 +291,7 @@ function myFchangeimg11(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg11").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg12(){
   var elmnt = document.getElementById("clonimg12");
@@ -291,6 +301,7 @@ function myFchangeimg12(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg12").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg13(){
   var elmnt = document.getElementById("clonimg13");
@@ -300,6 +311,7 @@ function myFchangeimg13(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg13").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg14(){
   var elmnt = document.getElementById("clonimg14");
@@ -309,6 +321,7 @@ function myFchangeimg14(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg14").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg15(){
   var elmnt = document.getElementById("clonimg15");
@@ -318,6 +331,7 @@ function myFchangeimg15(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg15").setAttribute("id", "cambioimg");
+  
 }
 function myFchangeimg16(){
   var elmnt = document.getElementById("clonimg16");
@@ -328,4 +342,24 @@ function myFchangeimg16(){
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg16").setAttribute("id", "cambioimg");
 }
+
+function myFchangecolor1(){
+  //var elmnt = document.getElementById("cambiaskucolor");
+  //elmnt.setAttribute("ng-if", "$index==1");
+  console.log="color2";
+}
+
+function myFchangecolor2(){
+  //var elmnt = document.getElementById("cambiaskucolor");
+  //elmnt.setAttribute("ng-if", "$index==1");
+  console.log="color2";
+}
+
+function myFchangeimg17(){
+  console.log="testestes";
+}
+
+
+
+
 

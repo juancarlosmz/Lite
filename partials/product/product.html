@@ -4,29 +4,29 @@
     <div class="row">
       <div ng-if="$index==0" class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in product.msg">
           <p id="cambioimg2" class="theimg" ng-repeat="img in prod.original_img">
-              <img id="cambioimg" ng-if="$index==0" class="img-responsive" src="{{img}}">
+              <img id="cambioimg" ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
           </p>
           <br>
 
           
 
           <div style="width: 100%;" class="row">
-            <div class="item col-md-3 col-sm-3 col-xs-3">
+            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                 <p onclick="myFchangeimg1();" class="theimgshort" ng-repeat="img in prod.original_img">
                     <img id="clonimg1" ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3">
+            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                 <p onclick="myFchangeimg2();" class="theimgshort" ng-repeat="img in prod.original_img">
                     <img id="clonimg2" ng-if="$index==1" class="img-responsive" ng-src="{{img}}">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3">
+            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                 <p onclick="myFchangeimg3();" class="theimgshort" ng-repeat="img in prod.original_img">
                     <img id="clonimg3" ng-if="$index==2" class="img-responsive" ng-src="{{img}}">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3">
+            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                 <p onclick="myFchangeimg4();" class="theimgshort" ng-repeat="img in prod.original_img">
                     <img id="clonimg4" ng-if="$index==3" class="img-responsive" ng-src="{{img}}">
                 </p>
@@ -34,22 +34,22 @@
           </div>
 
           <div style="width: 100%;" class="row">
-              <div class="item col-md-3 col-sm-3 col-xs-3">
+              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                   <p onclick="myFchangeimg5();" class="theimgshort" ng-repeat="img in prod.original_img">
                       <img id="clonimg5" ng-if="$index==4" class="img-responsive" ng-src="{{img}}">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3">
+              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                   <p onclick="myFchangeimg6();" class="theimgshort" ng-repeat="img in prod.original_img">
                       <img id="clonimg6" ng-if="$index==5" class="img-responsive" ng-src="{{img}}">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3">
+              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                   <p onclick="myFchangeimg7();" class="theimgshort" ng-repeat="img in prod.original_img">
                       <img id="clonimg7" ng-if="$index==6" class="img-responsive" ng-src="{{img}}">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3">
+              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                   <p onclick="myFchangeimg8();" class="theimgshort" ng-repeat="img in prod.original_img">
                       <img id="clonimg8" ng-if="$index==7" class="img-responsive" ng-src="{{img}}">
                   </p>
@@ -57,22 +57,22 @@
             </div>
 
             <div style="width: 100%;" class="row">
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg9();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg9" ng-if="$index==8" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg10();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg10" ng-if="$index==9" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg11();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg11" ng-if="$index==10" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg12();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg12" ng-if="$index==11" class="img-responsive" ng-src="{{img}}">
                     </p>
@@ -80,22 +80,22 @@
             </div>
 
             <div style="width: 100%;" class="row">
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg13();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg13" ng-if="$index==12" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg14();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg14" ng-if="$index==13" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg15();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg15" ng-if="$index==14" class="img-responsive" ng-src="{{img}}">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3">
+                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
                     <p onclick="myFchangeimg16();" class="theimgshort" ng-repeat="img in prod.original_img">
                         <img id="clonimg16" ng-if="$index==15" class="img-responsive" ng-src="{{img}}">
                     </p>
@@ -127,7 +127,7 @@
       <div class="item col-md-8 col-sm-6 col-xs-12" > 
         
         <div class="row">
-          <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+          <div id="cambiaskucolor" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
               <p >{{ prod.title }}</p>
               <p >sku: {{ prod.sku }}</p>
               <p ><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
@@ -136,87 +136,111 @@
         </div>
 
 <!-- Imagenes con colores hacer un filtro-->
-
+        <p onclick="myFchangeimg17();" >testtest</p>
         <div class="row">
             
             <div class="item col-md-12 col-sm-12 col-xs-12">
                 <p> Color:  </p> 
                 <div class="row">
-                  <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a onclick="myFchangecolor1();"  href="#/products/{{ prod.sku }}">
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>    
                   </div>  
-                  <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a onclick="myFchangecolor2();" href="#/products/{{ prod.sku }}">
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>
                   </div>
-                  <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>
                   </div>
-                  <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>
                   </div>
-                  <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>    
                   </div>
-                  <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                    <p class="colorhide"> {{ prod.color }}</p>
-                    <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
-                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                    </p>
+                  <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a> 
                   </div>
                 </div>  
 
 
                 <div class="row">  
-                  <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
-                      <p class="colorhide"> {{ prod.color }}</p>
-                      <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
-                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                      </p>
+                  <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">
+                        <p class="colorhide"> {{ prod.color }}</p>
+                        <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                    </a>
                   </div>
-                  <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                  <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
                         <p  class="colorhide"> {{ prod.color }}</p>
                         <p onmouseover="mycolorhover8();" onmouseout="mycolorout8();" ng-repeat="img in prod.original_img">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                    </a>        
                   </div>
-                  <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                  <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
                         <p class="colorhide"> {{ prod.color }}</p>
                         <p onmouseover="mycolorhover9();" onmouseout="mycolorout9();" ng-repeat="img in prod.original_img">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                    </a>    
                   </div>
-                  <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                  <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
                         <p class="colorhide" > {{ prod.color }}</p>
                         <p onmouseover="mycolorhover10();" onmouseout="mycolorout10();" ng-repeat="img in prod.original_img">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                    </a>    
                   </div>
-                  <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                  <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">  
                         <p class="colorhide"> {{ prod.color }}</p>
                         <p onmouseover="mycolorhover11();" onmouseout="mycolorout11();" ng-repeat="img in prod.original_img">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                    </a>
                   </div>
-                  <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2" ng-repeat="prod in product.msg">
+                  <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                    <a href="#/products/{{ prod.sku }}">
                         <p class="colorhide"> {{ prod.color }}</p>
                         <p onmouseover="mycolorhover12();" onmouseout="mycolorout12();" onmouseover="mycolorhover();" ng-repeat="img in prod.original_img">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
+                    </a>
                   </div>
                 </div>
             </div>
@@ -247,7 +271,7 @@
       <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
         <h1>Product Information</h1>
         <p >{{ prod.title }}</p>
-        <button onclick="myFunctioninfo()">See details</button>
+        <button class="btn" onclick="myFunctioninfo()">See details</button>
         <input id="inputinfo" type="hidden" value="{{ prod.goods_desc}}">
         <p id="infoprod"></p>
 
