@@ -95,7 +95,7 @@
           </section>
       </div>
       <div id="contright" class="col-md-10 col-sm-10 col-xs-10">
-          <section class="secright">
+          <section id="secright">
               <div class="header contlogohed">
                   
                   <div class="container logow">

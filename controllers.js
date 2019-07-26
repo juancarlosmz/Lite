@@ -167,6 +167,32 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
     categories.list(function(categories) {
         $scope.categories = categories;  
     });
+
+
+    $scope.productis = ["Milk", "Bread", "Cheese"];
+
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.productis.indexOf($scope.addMe) == -1) {
+            $scope.productis.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";    
+        $scope.productis.splice(x, 1);
+    }
+    //para añadir SKU
+    $scope.prodskus = ["D02151D4", "B32S2B55", "3251BTAS"];
+    $scope.addToCard = function () {
+
+
+        if ($scope.prodskus.indexOf($scope.addSKU) == -1) {
+            $scope.prodskus.push($scope.addSKU);
+        }
+    }
     
       
   }]);

@@ -2,9 +2,10 @@
 
 //$goods_sn = '165460401'; //字符串
 //$goods_sn = array('165460401','182079101'); //数组
-$goods_sn = '165460401,182079101,289646001,239432101,PB0110101'; //以英文逗号分隔
+$goods_sn = '165460401,182079101,289646001,239432101,PB0110101,
+448280101,450522101,182075701,132565301,447506501'; //以英文逗号分隔
 $post_data = array(
-'token' => '4f0dd2450c1e401f9437a40339b6c918',
+'token' => '7eeb116ea0472d5d129263049da34eee',
 'goods_sn' => json_encode($goods_sn)
 );
 $api_url="https://gloapi.chinabrands.com/v2/product/index";
