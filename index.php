@@ -62,6 +62,15 @@
                       </div>
                     </div>
 
+                    <div style="display:none;"  class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a id="onClickL" href="#/login2"><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Login</span></a></li>
+                      </div>
+                    </div>
+                    
                     <div class="row">
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
                         <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>   
@@ -71,18 +80,10 @@
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
-                        <span class="hidetextmenu">Register</span></a></li>
-                      </div>
-                    </div>
 
                     <div class="row">
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href=""><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                        <li><a href=""><i class="glyphicon glyphicon-question-sign">&nbsp; </i>   
                       </div>
                       <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
                         <span class="hidetextmenu">FAQ</span></a></li>
@@ -127,14 +128,25 @@
     <script src="https://code.angularjs.org/1.5.9/angular-animate.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-aria.min.js"></script>
 
+    <script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
     
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-
+<!-- -->
     <script src="app.js"></script>
     <script src="controllers.js"></script>
     <script src="services/products.js"></script>
     <script src="js/jsapplite.js"></script>
+<!--login -->    
+    <script src="app-services/authentication.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <!-- Real user service that uses an api -->
+    <!-- <script src="app-services/user.service.js"></script> -->
+
+    <!-- Fake user service for demo that uses local storage -->
+    <script src="app-services/user.service.local-storage.js"></script>
+
+    <script src="register/register.controller.js"></script>
 </body>
 </html>

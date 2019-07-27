@@ -9,7 +9,7 @@ if(isset($_GET['id']) ) {
 
 
     $post_data = array(
-    'token' => '7eeb116ea0472d5d129263049da34eee',
+    'token' => 'c72a2a434c218e27eaae07acde7c8ed4',
     'goods_sn' => json_encode($goods_sn)
     );
     $api_url="https://gloapi.chinabrands.com/v2/product/index";

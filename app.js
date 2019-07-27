@@ -1,8 +1,13 @@
+
+
+
 var app = angular.module('appLite', [
   'ngRoute',
   'empleadoControllers',
-  'ui.bootstrap'
+  'ui.bootstrap', 
+  'ngCookies'
 ]);
+
 
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider,$locationProvider) {
@@ -13,7 +18,7 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'HomeController',
         method: 'GET',
       }).
-      when('/login', {
+      when('/login2', {
         templateUrl: 'partials/login.php',
         controller: 'EmpleadoLogin',
         method: 'GET',
@@ -98,13 +103,80 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'EmpleadoListadoCtrl',
         method: 'GET',
       }).
+      when('/login', {
+        controller: 'LoginController',
+        templateUrl: 'login/login.view.html',
+        controllerAs: 'vm'
+      }).
+      when('/register', {
+        controller: 'RegisterController',
+        templateUrl: 'register/register.view.html',
+        controllerAs: 'vm'
+      }).
       otherwise({
         redirectTo: '/',
         method: 'GET',
       });
+
+
+
+
+
+
+
+      /*para el login*/
+
+      
+      /*el login */
+
+
+
+
+
+
   }]);
+
+
+/*
+  app.run(['$rootScope', '$location', '$cookies', '$http',
+  function($rootScope, $location, $cookies, $http) {
+
+    // keep user logged in after page refresh
+    $rootScope.globals = $cookies.getObject('globals') || {};
+    if ($rootScope.globals.currentUser) {
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+    }
+
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+        // redirect to login page if not logged in and trying to access a restricted page
+        var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+        var loggedIn = $rootScope.globals.currentUser;
+        if (restrictedPage && !loggedIn) {
+            $location.path('/');
+        }
+    });
+
+
+  }]);
+
+  */
+
+
 
 
 app.controller('empleadoControllers', function($scope){
   controllerPrincipal = $scope;
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
