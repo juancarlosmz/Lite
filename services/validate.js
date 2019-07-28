@@ -1,126 +1,120 @@
-﻿
-    app.factory('AuthenticationService',  ['$http', '$cookies', '$rootScope', '$timeout', 'UserService',
-    function($http, $cookies, $rootScope, $timeout, UserService) {
+
+ 
+app.factory('AuthenticationService',
+    ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
+    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
 
-        service.Login = Login;
-        service.SetCredentials = SetCredentials;
-        //service.ClearCredentials = ClearCredentials;
-
-        return service;
-
-        function Login(username, password, callback) {
+        service.Login = function (email, password, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
-                            response = { success: true };
-                        } else {
-                            response = { success: false, message: 'Username or password is incorrect' };
+            $timeout(function(){
+                
+                $http.post('http://localhost:50/Lite/api/?a=Login').then(function successCallback(response) {
+                    var model = response.data;
+                    for(var i = 0; i < model.length; i++){
+                        console.log(model[i].email);
+                        console.log(model[i].contra);
+                        var loginjs = model[i].email;
+                        var contrajs = model[i].contra;
+
+                        var response2 = { success: email === loginjs && password === contrajs };
+                        if(!response2.success) {
+                            response2.message = 'Email or password is incorrect';
                         }
-                        callback(response);
-                    });
+                        callback(response2);
+                    }
+                });
+/*
+                var response = { success: email === 'test@email.com' && password === 'test' };
+                if(!response.success) {
+                    response.message = 'Email or password is incorrect';
+                }
+                callback(response);
+*/
+                
             }, 1000);
+
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            //$http.post('/api/authenticate', { username: username, password: password })
+            //$http.post('/api/authenticate', { email: email, password: password })
             //    .success(function (response) {
             //        callback(response);
             //    });
 
-        }
-
-        function SetCredentials(username, password) {
-            var authdata = Base64.encode(username + ':' + password);
-
+        };
+ 
+        service.SetCredentials = function (email, password) {
+            var authdata = Base64.encode(email + ':' + password);
+ 
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    email: email,
                     authdata: authdata
                 }
             };
-
-            // set default auth header for http requests
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-
-            // store user details in globals cookie that keeps user logged in for 1 week (or until they logout)
-            var cookieExp = new Date();
-            cookieExp.setDate(cookieExp.getDate() + 7);
-            $cookies.putObject('globals', $rootScope.globals, { expires: cookieExp });
-        }
-/*
-        function ClearCredentials() {
+ 
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $cookieStore.put('globals', $rootScope.globals);
+        };
+ 
+        service.ClearCredentials = function () {
             $rootScope.globals = {};
-            $cookies.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic';
-        }
-        */
-    }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Base64 encoding service used by AuthenticationService
-    var Base64 = {
-
-        keyStr: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=',
-
+            $cookieStore.remove('globals');
+            $http.defaults.headers.common.Authorization = 'Basic ';
+        };
+ 
+        return service;
+    }])
+ 
+.factory('Base64', function () {
+    /* jshint ignore:start */
+ 
+    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+ 
+    return {
         encode: function (input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";
             var i = 0;
-
+ 
             do {
                 chr1 = input.charCodeAt(i++);
                 chr2 = input.charCodeAt(i++);
                 chr3 = input.charCodeAt(i++);
-
+ 
                 enc1 = chr1 >> 2;
                 enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
                 enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
                 enc4 = chr3 & 63;
-
+ 
                 if (isNaN(chr2)) {
                     enc3 = enc4 = 64;
                 } else if (isNaN(chr3)) {
                     enc4 = 64;
                 }
-
+ 
                 output = output +
-                    this.keyStr.charAt(enc1) +
-                    this.keyStr.charAt(enc2) +
-                    this.keyStr.charAt(enc3) +
-                    this.keyStr.charAt(enc4);
+                    keyStr.charAt(enc1) +
+                    keyStr.charAt(enc2) +
+                    keyStr.charAt(enc3) +
+                    keyStr.charAt(enc4);
                 chr1 = chr2 = chr3 = "";
                 enc1 = enc2 = enc3 = enc4 = "";
             } while (i < input.length);
-
+ 
             return output;
         },
-
+ 
         decode: function (input) {
             var output = "";
             var chr1, chr2, chr3 = "";
             var enc1, enc2, enc3, enc4 = "";
             var i = 0;
-
+ 
             // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
             var base64test = /[^A-Za-z0-9\+\/\=]/g;
             if (base64test.exec(input)) {
@@ -129,32 +123,34 @@
                     "Expect errors in decoding.");
             }
             input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-
+ 
             do {
-                enc1 = this.keyStr.indexOf(input.charAt(i++));
-                enc2 = this.keyStr.indexOf(input.charAt(i++));
-                enc3 = this.keyStr.indexOf(input.charAt(i++));
-                enc4 = this.keyStr.indexOf(input.charAt(i++));
-
+                enc1 = keyStr.indexOf(input.charAt(i++));
+                enc2 = keyStr.indexOf(input.charAt(i++));
+                enc3 = keyStr.indexOf(input.charAt(i++));
+                enc4 = keyStr.indexOf(input.charAt(i++));
+ 
                 chr1 = (enc1 << 2) | (enc2 >> 4);
                 chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
                 chr3 = ((enc3 & 3) << 6) | enc4;
-
+ 
                 output = output + String.fromCharCode(chr1);
-
+ 
                 if (enc3 != 64) {
                     output = output + String.fromCharCode(chr2);
                 }
                 if (enc4 != 64) {
                     output = output + String.fromCharCode(chr3);
                 }
-
+ 
                 chr1 = chr2 = chr3 = "";
                 enc1 = enc2 = enc3 = enc4 = "";
-
+ 
             } while (i < input.length);
-
+ 
             return output;
         }
     };
-
+ 
+    /* jshint ignore:end */
+});

@@ -18,7 +18,9 @@ class shopify {
         
         $response = curl_exec($session);
         curl_close($session);
-        $result = json_decode($response,true);    
+        
+        $result = json_decode($response,true);   
+        echo $result; 
         return $result;
     }
 }

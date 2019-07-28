@@ -222,93 +222,30 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
     ];
 
   }]);
-
-
-
-  empleadoControllers.controller('LoginController', ['$scope','$location', 'AuthenticationService', 'FlashService',function($scope,AuthenticationService, FlashService) {
-        var vm = this;
-
-        vm.login = login;
-        
 /*
-        (function initController() {
-            // reset login status
-            AuthenticationService.ClearCredentials();
-        })();
-*/
-        function login() {
-            vm.dataLoading = true;
-
-            
-
-            AuthenticationService.Login(vm.username, vm.password) = function (response) {
-                if (response.success) {
-                    AuthenticationService.SetCredentials(vm.username, vm.password);
-                    $location.path('/');
-                } else {
-                    FlashService.Error(response.message);
-                    vm.dataLoading = false;
-                }
-            };
-
-
- 
-
-
-        };
-    }]);
-
-
-/*
-  empleadoControllers.controller('LoginController', ['$rootScope','$location','$cookies', '$http', 'AuthenticationService', 'FlashService', function($rootScope, $location, $cookies, $http, AuthenticationService, FlashService) {
-   
-
-
-
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookies.getObject('globals') || {};
-        if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
-        }
-
-        $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
-            var loggedIn = $rootScope.globals.currentUser;
-            if (restrictedPage && !loggedIn) {
-                $location.path('/login');
-            }
-
-            var vm = this;
-
-            vm.login = login;
-
-            (function initController() {
-                // reset login status
-                AuthenticationService.ClearCredentials();
-            })();
-
-            function login() {
-                vm.dataLoading = true;
-                AuthenticationService.Login(vm.username, vm.password, function (response) {
-                    if (response.success) {
-                        AuthenticationService.SetCredentials(vm.username, vm.password);
-                        $location.path('/');
-                    } else {
-                        FlashService.Error(response.message);
-                        vm.dataLoading = false;
-                    }
-                });
-            };
-
-
-        });
-
-
-
+  empleadoControllers.controller('LoginController', ['$scope','loginlist', function($scope,loginlist) {
+    loginlist.list(function(loginlist) {
+            $scope.loginlist = loginlist;
+    });
 
   }]);
 */
+
+
+empleadoControllers.controller('LoginController', ['$scope','$rootScope','$location', 'AuthenticationService','loginlist',function($scope,$rootScope,$location,AuthenticationService,loginlist) {
+    $scope.login = function () {
+        $scope.dataLoading = true;
+        AuthenticationService.Login($scope.email, $scope.password, function(response) {
+            if(response.success) {
+                AuthenticationService.SetCredentials($scope.email, $scope.password);
+                $location.path('/');
+            } else {
+                $scope.error = response.message;
+                $scope.dataLoading = false;
+            }
+        });
+    };       
+}]);
 
 
 /*
