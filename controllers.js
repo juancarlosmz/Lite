@@ -238,7 +238,7 @@ empleadoControllers.controller('LoginController', ['$scope','$rootScope','$locat
         AuthenticationService.Login($scope.email, $scope.password, function(response) {
             if(response.success) {
                 AuthenticationService.SetCredentials($scope.email, $scope.password);
-                $location.path('/');
+                $location.path('/home');
             } else {
                 $scope.error = response.message;
                 $scope.dataLoading = false;

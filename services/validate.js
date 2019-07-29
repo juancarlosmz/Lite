@@ -25,27 +25,9 @@ app.factory('AuthenticationService',
                         }
                         callback(response2);
                     }
-                });
-/*
-                var response = { success: email === 'test@email.com' && password === 'test' };
-                if(!response.success) {
-                    response.message = 'Email or password is incorrect';
-                }
-                callback(response);
-*/
-                
+                });               
             }, 1000);
 
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
-            //$http.post('/api/authenticate', { email: email, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
-
-        };
- 
         service.SetCredentials = function (email, password) {
             var authdata = Base64.encode(email + ':' + password);
  

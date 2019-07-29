@@ -113,6 +113,10 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'register/register.view.html',
         controllerAs: 'vm'
       }).
+      when('/home', {
+        controller: 'HomeControllerUser',
+        templateUrl: 'home/home.html'
+      }).
       otherwise({
         redirectTo: '/',
         method: 'GET',
