@@ -113,7 +113,7 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'register/register.view.html',
         controllerAs: 'vm'
       }).
-      when('/home', {
+      when('/home:user', {
         controller: 'HomeControllerUser',
         templateUrl: 'home/home.html'
       }).

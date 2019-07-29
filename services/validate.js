@@ -47,10 +47,11 @@ app.factory('AuthenticationService',
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
- 
+    };
         return service;
-    }])
- 
+    
+}])
+
 .factory('Base64', function () {
     /* jshint ignore:start */
  

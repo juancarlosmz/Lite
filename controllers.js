@@ -232,13 +232,20 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
 */
 
 
-empleadoControllers.controller('LoginController', ['$scope','$rootScope','$location', 'AuthenticationService','loginlist',function($scope,$rootScope,$location,AuthenticationService,loginlist) {
+empleadoControllers.controller('LoginController', ['$scope','$rootScope','$location', 'AuthenticationService','UserSesionService','$http',function($scope,$rootScope,$location,AuthenticationService,UserSesionService,$http) {
     $scope.login = function () {
         $scope.dataLoading = true;
         AuthenticationService.Login($scope.email, $scope.password, function(response) {
             if(response.success) {
                 AuthenticationService.SetCredentials($scope.email, $scope.password);
-                $location.path('/home');
+                //console.log($scope.email);
+                $http.get('http://localhost:50/Lite/api/?a=User&email=' + $scope.email).then(function(response){
+                    $scope.model = response.data;
+                    console.log("usuario es ", response.data);
+                    //UserSesionService( response.data);
+                    $location.path('/home:user');
+                }); 
+                
             } else {
                 $scope.error = response.message;
                 $scope.dataLoading = false;
@@ -246,6 +253,17 @@ empleadoControllers.controller('LoginController', ['$scope','$rootScope','$locat
         });
     };       
 }]);
+
+
+empleadoControllers.controller('HomeControllerUser', ['$scope','$rootScope','$routeParams','UserSesionService','$http',function($scope,$rootScope,$routeParams,UserSesionService,$http) {
+/*
+    $scope.user = UserSesionService.session(response.data);;
+    console.log("activo",$scope.user);
+*/
+
+}]);
+
+
 
 
 /*

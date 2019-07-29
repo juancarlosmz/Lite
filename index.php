@@ -94,7 +94,7 @@
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
                         <li><a href=""><i class="glyphicon glyphicon-question-sign">&nbsp; </i>   
                       </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2" ng-controller="HomeControllerUser">
                         <span class="hidetextmenu">{{user.firstName}}</span></a></li>
                       </div>
                     </div>
@@ -147,6 +147,7 @@
     <script src="services/products.js"></script>
     <script src="services/login.js"></script>
     <script src="services/validate.js"></script>
+    <script src="services/usersesion.js"></script>
     <script src="js/jsapplite.js"></script>
 
 

@@ -32,6 +32,10 @@ switch($action) {
         session_start();
         print_r(json_encode(loginlist($fluent)));
         break;   
+    case 'User':
+        header('Content-Type: application/json');
+        print_r(json_encode(obtenerUser($fluent, $_GET['email'])));
+        break;    
     case 'Logout':
         session_start();
         session_destroy();
@@ -74,6 +78,12 @@ function loginlist($fluent){
     return $fluent
          ->from('user')
          ->fetchAll(); 
+}
+function obtenerUser($fluent, $email){
+    return $fluent->from('user')
+         ->select('user.*, user.Nombre as User')
+         ->where('email = ?',$email)
+         ->fetch();
 }
 
    ?>

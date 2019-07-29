@@ -113,6 +113,12 @@ function startlogin($fluent,$email,$contra){
 }
 
 
+$query3 = $fluent->from('user')
+         ->select('user.*, user.Nombre as User')
+         ->where('email = ?','jj@gmail.com')
+         ->fetch();
+
+print_r(json_encode($query3));
 //TESTS
 /*
 $test = $fluent->from('user', 3)
