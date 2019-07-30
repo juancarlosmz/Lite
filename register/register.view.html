@@ -3,36 +3,36 @@
     <div ng-show="error" class="alert alert-danger">{{error}}</div>
     <form name="form" ng-submit="register()" role="form">
         <div class="form-group">
-            <label for="Nombre">First name</label>
+            <label for="Nombre">First Name:</label>
             <input type="text" name="Nombre" id="Nombre" class="form-control" ng-model="Nombre" required />
             <span ng-show="form.Nombre.$dirty && form.Nombre.$error.required" class="help-block">First Name is required</span>
         </div>
         <div class="form-group">
-            <label for="Apellido">Last name</label>
+            <label for="Apellido">Last Name:</label>
             <input type="text" name="Apellido" id="Apellido" class="form-control" ng-model="Apellido" required/>
             <span ng-show="form.Apellido.$dirty && form.Apellido.$error.required" class="help-block">Last name is required</span>
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Your Email:</label>
             <input type="text" name="email" id="email" class="form-control" ng-model="email" required />
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Username is required</span>
         </div>
         <div class="form-group" >
-            <label for="contra">Password</label>
+            <label for="contra">New Password:</label>
             <input type="password"  name="contra" id="contra" class="form-control" ng-model="contra" required />
             <span ng-show="form.contra.$dirty && form.contra.$error.required" class="help-block">Password is required</span>
         </div>
         <div class="form-group">
-            <label for="password">Sex</label>
-            <select  name="sexo" id="sexo" ng-model="sexo" class="form-control">
-                    <option value="1">Hombre</option>
-                    <option value="2">Mujer</option>
+            <label for="sexo">I am:</label>
+            <select name="sexo" id="sexo" ng-model="sexo" class="form-control" >
+                <option value="1">Men</option>
+                <option value="2">Women</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="password">Date</label>
-            <input type="text" name="fnacimiento" id="fnacimiento" class="form-control"  ng-model="fnacimiento" ng-required/>
+            <label for="fnacimiento">Birthday</label>
+            <input type="text" name="fnacimiento" id="fnacimiento" class="form-control"  ng-model="fnacimiento" data-date-format="YYYY DD MMMM" ng-required/>
         </div>
 
         <div class="form-actions">

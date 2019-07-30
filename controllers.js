@@ -255,30 +255,65 @@ empleadoControllers.controller('LoginController', ['$scope','$rootScope','$locat
 }]);
 
 
-empleadoControllers.controller('RegisterController', ['$scope','$http', function($scope,$http){
+empleadoControllers.controller('RegisterController', ['$scope','$location','$http', function($scope,$location,$http){
 
-    $scope.registrar = function(){
+
+    $scope.register = function(){
         $scope.dataLoading = true;
+        $http.post('http://localhost:50/Lite/api/?a=Login').then(function successCallback(response) {
+            var model = response.data;
+            for(var i = 0; i < model.length; i++){
+                var loginjs = model[i].email;
+                if( loginjs === $scope.email){
+                    $scope.error = 'This email is already in use';
+                    $scope.dataLoading = false;
+                    break;     
+                }else{
+                    //user register
+                    var model = {
+                        Nombre: $scope.Nombre,
+                        Apellido: $scope.Apellido,
+                        email: $scope.email,
+                        contra: $scope.contra,
+                        sexo: $scope.sexo,
+                        fnacimiento: $scope.fnacimiento,
+                    };
+                    console.log(model);
+                    $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function successCallback(response) {   
+                        console.log("registrrado");
+            
+                    }, function errorCallback(response) {
+                        $scope.error = 'Usuario no registrado';
+                    });
+                    break;
+                    //end
+                }
+            }
+        });
+
+
+
+
+/*
         var model = {
             Nombre: $scope.Nombre,
             Apellido: $scope.Apellido,
             email: $scope.email,
             contra: $scope.contra,
             sexo: $scope.sexo,
-            fnacimiento: $scope.fnacimiento
+            fnacimiento: $scope.fnacimiento,
         };
-        $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function(response){
-            $scope.Nombre = null,
-            $scope.Apellido = null,
-            $scope.email = null,
-            $scope.contra = null,
-            $scope.sexo = null,
-            $scope.fnacimiento = null,
-            $scope.message = "Usuario registrado",
-            $location.path('/Login')
+        console.log(model);
+        $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function successCallback(response) {   
+            console.log("registrrado");
 
-        });
-    }
+          }, function errorCallback(response) {
+              $scope.error = 'Usuario no registrado';
+          });
+*/
+
+
+    };
 }]);
 
 
