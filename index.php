@@ -151,6 +151,5 @@
     <script src="js/jsapplite.js"></script>
 
 
-    <script src="register/register.controller.js"></script>
 </body>
 </html>

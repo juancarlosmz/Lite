@@ -251,7 +251,34 @@ empleadoControllers.controller('LoginController', ['$scope','$rootScope','$locat
                 $scope.dataLoading = false;
             }
         });
-    };       
+    };   
+}]);
+
+
+empleadoControllers.controller('RegisterController', ['$scope','$http', function($scope,$http){
+
+    $scope.registrar = function(){
+        $scope.dataLoading = true;
+        var model = {
+            Nombre: $scope.Nombre,
+            Apellido: $scope.Apellido,
+            email: $scope.email,
+            contra: $scope.contra,
+            sexo: $scope.sexo,
+            fnacimiento: $scope.fnacimiento
+        };
+        $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function(response){
+            $scope.Nombre = null,
+            $scope.Apellido = null,
+            $scope.email = null,
+            $scope.contra = null,
+            $scope.sexo = null,
+            $scope.fnacimiento = null,
+            $scope.message = "Usuario registrado",
+            $location.path('/Login')
+
+        });
+    }
 }]);
 
 
