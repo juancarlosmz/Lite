@@ -194,10 +194,12 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
     }
     //test session y local storagge
     //link-->https://github.com/gsklee/ngStorage
+    $scope.$storage = $localStorage;
+/*
     $scope.$storage = $localStorage.$default({
         counter: 42
     });
-    
+    */
       
   }]);
 
@@ -281,8 +283,6 @@ empleadoControllers.controller('RegisterController', ['$scope','$location','$htt
                         Apellido: $scope.Apellido,
                         email: $scope.email,
                         contra: $scope.contra,
-                        sexo: $scope.sexo,
-                        fnacimiento: $scope.fnacimiento,
                     };
                     console.log(model);
                     $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function successCallback(response) {   

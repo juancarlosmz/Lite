@@ -92,7 +92,7 @@
 
                     <div class="row">
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href=""><i class="glyphicon glyphicon-question-sign">&nbsp; </i>   
+                        <li><a href="#/FQA"><i class="glyphicon glyphicon-question-sign">&nbsp; </i>   
                       </div>
                       <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
                         <span class="hidetextmenu">FAQ</span></a></li>

@@ -29,7 +29,7 @@ switch($action) {
         break;
     case 'Login':
         header('Content-Type: application/json');
-        session_start();
+        //session_start();
         print_r(json_encode(loginlist($fluent)));
         break;   
     case 'User':
@@ -61,6 +61,7 @@ function eliminar($fluent, $id){
 }
 function registrar($fluent, $data){
     /*$data['FechaRegistro'] = date('Y-m-d');*/
+    $data['rol'] = 2;
     $fluent->insertInto('user', $data)
            ->execute();    
     return true;

@@ -34,16 +34,15 @@ CREATE TABLE `user` (
   `Apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `contra` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `sexo` int(11) NOT NULL,
-  `fnacimiento` date NOT NULL
+  `rol` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `Nombre`, `Apellido`, `email`, `contra`, `sexo`, `fnacimiento`) VALUES
-(2, 'tefi', 'luna', 'hai@gmail.com', '123456', 2, '1999-05-01');
+INSERT INTO `user` (`id`, `Nombre`, `Apellido`, `email`, `contra`, `rol`) VALUES
+(2, 'admin', 'admin', 'admin@gmail.com', '123456', 1);
 
 --
 -- Indexes for dumped tables
@@ -63,9 +62,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+/*user BD Godaddy
+apolo
+apolomultimedia
+
+*/
+
+/*SSH ACCESS PANEL
+KeyName -> cPanelSSHAccess
+KeyPassword -> apolomultimedia
+*/

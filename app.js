@@ -114,7 +114,6 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'register/register.view.html',
         controller: 'RegisterController',
         method: 'GET',
-        
       }).
       when('/home:user', {
         controller: 'HomeControllerUser',

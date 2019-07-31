@@ -22,18 +22,6 @@
             <input type="password"  name="contra" id="contra" class="form-control" ng-model="contra" required />
             <span ng-show="form.contra.$dirty && form.contra.$error.required" class="help-block">Password is required</span>
         </div>
-        <div class="form-group">
-            <label for="sexo">I am:</label>
-            <select name="sexo" id="sexo" ng-model="sexo" class="form-control" >
-                <option value="1">Men</option>
-                <option value="2">Women</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="fnacimiento">Birthday</label>
-            <input type="text" name="fnacimiento" id="fnacimiento" class="form-control"  ng-model="fnacimiento" data-date-format="YYYY DD MMMM" ng-required/>
-        </div>
 
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger">Register</button>
