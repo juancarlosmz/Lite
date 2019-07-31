@@ -5,7 +5,8 @@ var app = angular.module('appLite', [
   'ngRoute',
   'empleadoControllers',
   'ui.bootstrap', 
-  'ngCookies'
+  'ngCookies',
+  'ngStorage'
 ]);
 
 
@@ -104,17 +105,21 @@ app.config(['$routeProvider', '$locationProvider',
         method: 'GET',
       }).
       when('/login', {
+        templateUrl: 'login/login.view.html',
         controller: 'LoginController',
-        templateUrl: 'login/login.view.html'
+        method: 'GET',
+        
       }).
       when('/register', {
-        controller: 'RegisterController',
         templateUrl: 'register/register.view.html',
-        controllerAs: 'vm'
+        controller: 'RegisterController',
+        method: 'GET',
+        
       }).
       when('/home:user', {
         controller: 'HomeControllerUser',
-        templateUrl: 'home/home.html'
+        templateUrl: 'home/home.html',
+        method: 'GET',
       }).
       otherwise({
         redirectTo: '/',

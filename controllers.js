@@ -158,7 +158,7 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
       */     
   }]);
 
-  empleadoControllers.controller('HomeController', ['$scope','products','categories', function($scope,products,categories) {
+  empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage', function($scope,products,categories,$localStorage,$sessionStorage) {
   
     products.list(function(products) {
         $scope.products = products;  
@@ -192,6 +192,11 @@ empleadoControllers.controller('AllProducts', ['$scope','$http','products', func
             $scope.prodskus.push($scope.addSKU);
         }
     }
+    //test session y local storagge
+    //link-->https://github.com/gsklee/ngStorage
+    $scope.$storage = $localStorage.$default({
+        counter: 42
+    });
     
       
   }]);
@@ -248,6 +253,7 @@ empleadoControllers.controller('LoginController', ['$scope','$rootScope','$locat
                 
             } else {
                 $scope.error = response.message;
+                $location.path('/login');
                 $scope.dataLoading = false;
             }
         });
@@ -287,32 +293,9 @@ empleadoControllers.controller('RegisterController', ['$scope','$location','$htt
                     });
                     break;
                     //end
-                }
-            }
+                };
+            };
         });
-
-
-
-
-/*
-        var model = {
-            Nombre: $scope.Nombre,
-            Apellido: $scope.Apellido,
-            email: $scope.email,
-            contra: $scope.contra,
-            sexo: $scope.sexo,
-            fnacimiento: $scope.fnacimiento,
-        };
-        console.log(model);
-        $http.post('http://localhost:50/Lite/api/?a=registrar',model).then(function successCallback(response) {   
-            console.log("registrrado");
-
-          }, function errorCallback(response) {
-              $scope.error = 'Usuario no registrado';
-          });
-*/
-
-
     };
 }]);
 

@@ -80,6 +80,15 @@
                       </div>
                     </div>
 
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a id="onClickL" href="#/register"><i class="glyphicon glyphicon-user">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Register</span></a></li>
+                      </div>
+                    </div>
+
 
                     <div class="row">
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
@@ -137,6 +146,7 @@
     <script src="https://code.angularjs.org/1.5.9/angular-animate.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-aria.min.js"></script>
     <script src="//code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
