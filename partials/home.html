@@ -41,14 +41,18 @@
                         <p class="theimg" ng-repeat="img in prod.original_img">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
-                        <input class="valuesku" type="text" value="{{ prod.sku }}">
+                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                        
                         <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
                         <p class="title">{{ prod.title }}</p>
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
-                        <p class="btnadd3"><button ng-click="addToCard()" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+
+                        <p class="btnadd3"><button id="skuclickvalue"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
                         <br>
                       
+
+
                     </div>
                   </div>
 
@@ -56,33 +60,19 @@
                 </div>
               </div>
 
-<div>PARA TEST</div>
-              <input placeholder="SKU" ng-model="addSKU" >
+
+
+
+
+
+<h1>My SKU's List</h1>
               <ul >
-                <li ng-repeat="skus in prodskus">{{skus}}</li>
+                <li ng-repeat="skus in prodskus">{{skus}}<span ng-click="removeItem($index)" style="cursor:pointer;">×</span></li>
               </ul>
+              <p >{{errortext}}</p>
 
-<div>END TEST</div>
+<div>END</div>
 
-              <div  style="max-width:400px;">
-                <header >
-                  <h3>My Shopping List</h3>
-                </header>
-                <ul >
-                  <li ng-repeat="x in productis">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;">×</span></li>
-                </ul>
-                <div >
-                  <div >
-                    <div >
-                      <input placeholder="Add shopping items here" ng-model="addMe" >
-                    </div>
-                    <div >
-                      <button ng-click="addItem()" >Add</button>
-                    </div>
-                  </div>
-                  <p >{{errortext}}</p>
-                </div>
-              </div>
 
               <button ng-click="$storage.counter = $storage.counter + 1">{{$storage.counter}}</button>
 

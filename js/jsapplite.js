@@ -33,17 +33,6 @@ function FilterValorCombo(){
   }
 }
 
-/*
-var buttonfilter = document.getElementById("filtercoll");
-window.addEventListener("load", function(event){
-    function collectionfilter(){
-      document.getElementById("filtercoll").click();
-    }
-    setTimeout(function() {
-      collectionfilter();
-    }, 10000);
-});
-*/
 
 function myFunctioninfo(){
   var todalainfo = document.getElementById("inputinfo").value;
@@ -369,7 +358,6 @@ function myFchangeimg16(){
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg16").setAttribute("id", "cambioimg");
 }
-
 
 
 

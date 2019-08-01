@@ -4,13 +4,8 @@ app.factory('AuthenticationService',
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
-
         service.Login = function (email, password, callback) {
-
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function(){
-                
+            $timeout(function(){                
                 $http.post('http://localhost:50/Lite/api/?a=Login').then(function successCallback(response) {
                     var model = response.data;
                     for(var i = 0; i < model.length; i++){
@@ -27,21 +22,17 @@ app.factory('AuthenticationService',
                     }
                 });               
             }, 1000);
-
         service.SetCredentials = function (email, password) {
             var authdata = Base64.encode(email + ':' + password);
- 
             $rootScope.globals = {
                 currentUser: {
                     email: email,
                     authdata: authdata
                 }
             };
- 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         };
- 
         service.ClearCredentials = function () {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
@@ -49,7 +40,6 @@ app.factory('AuthenticationService',
         };
     };
         return service;
-    
 }])
 
 .factory('Base64', function () {
