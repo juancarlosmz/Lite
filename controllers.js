@@ -1,13 +1,14 @@
 var empleadoControllers = angular.module('empleadoControllers', []);
 var rute = 'http://localhost:50/Lite/';
 'use strict';
-empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout', function($scope,products,categories,$localStorage,$sessionStorage,$timeout) {
+empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter) {
     //filter products after onload
     $timeout(function(){
         document.getElementById("filtercoll").click();
     }, 3000);     
     products.list(function(products) {
         $scope.products = products;  
+        
     });
     categories.list(function(categories) {
         $scope.categories = categories;  
@@ -52,54 +53,42 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 	$scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
 	localStorage.setItem('todossku', JSON.stringify($scope.todossku));
 
-    $scope.addToCard = function(p) {
 
+    $scope.alert = [];
+    $scope.addToCard = function(p) {
         var resultado = document.getElementsByClassName("valuesku");
         for (var i = 0; i < resultado.length; i++) {
             if (resultado[i].value == p.sku) {
-
                 $scope.todossku.push({
                     textsku: resultado[i].value,
                     donesku: false
                 });
                 localStorage.setItem('todossku', JSON.stringify($scope.todossku));
-
-                
+                /*alert*/
+                $scope.alert.push({
+                    type:'success',
+                    value:'Product added successfully to Import List',
+                    counter:3
+                });
+                var index = $scope.alert.length - 1;
+                $scope.removeFirst(index);   
+                document.getElementById('disable'+p.sku).disabled = 'disabled';
+                //end
             }; 
         };
 
     };
 
     //alert mssage
-    $scope.alert = [];
-    $scope.alertTypes = ['danger','success','info','warning'];
-    $scope.cboAlertType = "";
-    $scope.addAlert = function(){
-    
-        $scope.alert.push(
-        {type:$scope.cboAlertType,value:'Update Complete!',counter:5}
-        );
-        var index = $scope.alert.length - 1;
-        $scope.removeFirst(index);
-    };
-    $scope.close = function(index){
-        $scope.alert.splice(index, 1);
-        $scope.active = false;
-    };
     $scope.removeFirst = function(index){
-	
-        var stopped;
-        $scope.active = true;
+        var stopped; 
         if($scope.alert[index].counter == 0){
             $scope.alert.splice(0, 1);
-              $scope.active = false;
-          }
-          
+        }
         stopped = $timeout(function() {
-         $scope.alert[index].counter--;   
-         $scope.removeFirst(index);   
+            $scope.alert[index].counter--;   
+            $scope.removeFirst(index);   
         }, 1000);
-    
     };
     //end alert
 
@@ -120,11 +109,50 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 		localStorage.setItem('todossku', JSON.stringify($scope.todossku));
 	};
     //
+    //codigo pagination
+    //https://www.youtube.com/watch?v=aZRWysarKXw
 
+    $scope.items = [
+        {nombre: "ajaste",subnombre:"tereta",descripcion:"a15sdasd"},
+        {nombre: "ajaste2",subnombre:"tereta2",descripcion:"a15sdasd2"},
+        {nombre: "ajaste3",subnombre:"tereta3",descripcion:"a15sdasd3"},
+        {nombre: "ajaste4",subnombre:"tereta4",descripcion:"a15sdasd4"}
+    ];
+    $scope.filtroItems = [];
+    $scope.currentPage = 1;
+    $scope.numPerPage = 3;
+    $scope.totalItems = $scope.items.length;
 
+    $scope.hacerPagineo = function(arreglo){
+        var principio = (($scope.currentPage - 1)*$scope.numPerPage);
+        var fin = principio + $scope.numPerPage;
+        //$scope.filtroItems = arreglo.slice(principio, fin);
+    };
 
+    $scope.buscar = function(busqueda){
+        var buscados = $filter('filter', o.prod,function(pro){
+            return (item.nombre.toLowerCase().indexOf(busqueda.toLowerCase()) >= 1 ); //matches, contains
+        });
+        $scope.totalItems = buscados.length;
+        $scope.hacerPagineo(buscados);
+    };
 
+    $scope.inicializar = function(){
+        //si traemos un REST
+        /*
+        $http.get('REST', function(products){
+            $scope.products = products;
+            $scope.hacerPagineo($scope.products);
 
+        });
+        */
+        $scope.hacerPagineo($scope.prod);
+    };
+
+    $scope.inicializar();
+
+    
+//enf pagination
 
 }]);
 
@@ -197,7 +225,7 @@ empleadoControllers.controller('CustomerList', ['$scope','$http','$timeout','$wi
         if(confirm('Esta seguro de realizar esta accion?')){
             $scope.dataLoading = true;
             $http.get(rute+'api/?a=eliminar&id='+ id).then(function(response){
-                //$scope.dataLoading = false;     
+                $location.path('/login');   
             }, function errorCallback(response) {
                 //$scope.error = 'Registered User';
                 $timeout(function(){
@@ -224,7 +252,7 @@ empleadoControllers.controller('RegisterController', ['$scope','$http','$timeout
                     $scope.error = 'This email is already in use';
                 }else{
                     $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
-                        //console.log("Unregistered User");
+                        $location.path('/login');
                     }, function errorCallback(response) {
                         //$scope.error = 'Registered User';
                         //location.reload();

@@ -1,5 +1,13 @@
 
 <div ng-controller="HomeController">  
+
+  <!-- Alert msg-->
+  <div id="alertskus" class="alert alert-success" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+    ng-repeat="a in alert" 
+    type="{{a.type}}">
+    {{a.value}} 
+  </div>
+
         <div class="main">
                 <div class="container">
               
@@ -34,8 +42,10 @@
                   </div>
                   <br>
                   <input type="hidden" id="filtercoll" onclick="myFunctionin();">
-                  <div class="row">
 
+
+
+                  <div class="row">
                     <div class="item col-md-4 col-sm-6 col-xs-12 showsku" ng-repeat="prod in products.msg track by $index">
                       <a class="itemhover" href="#/products/{{ prod.sku }}">
                         <p class="theimg" ng-repeat="img in prod.original_img">
@@ -46,18 +56,41 @@
                         <p class="title">{{ prod.title }}</p>
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
-
-                        <p class="btnadd3"><button id="skuclickvalue"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+                        <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
                         <br>
-                      
-
-
                     </div>
                   </div>
+                  <hr/>
+
+
+
+                  </ul>
+
+
 
                   <a style="width: 35% !important; float: right;" style="width: 20% !important;" href="#/" class="btn btn-default btn-block"> Atras</a>
                 </div>
               </div>
+
+<!-- implementando busqueda-->
+<input type="text" ng-model="busqueda"> <button ng-click="buscar(busqueda)">Buscar</button>
+
+<!-- end busqueda-->
+
+              <div class="row" ng-repeat="item in filtroItems">
+                <div class="col-md-7">
+                  <a href="#">
+                    <img src="http://placehold.it/700x300" alt="">
+                  </a>
+                </div>
+                <div class="col-md-5">
+                  <h3>{{itempag.nombre}}</h3>
+                  <h4>{{itempag.subnombre}}</h4>
+                  <p>{{itempag.descripcion}}</p>
+                </div>
+              </div>
+<!-- pagination-->
+<ul uib-pagination total-items="totalitems" items-per-page="numPerPage" ng-model="currentPage" >
 
 
 
@@ -85,22 +118,7 @@
 
 
 
-  <alert close="close($index)" 
-  ng-repeat="a in alert" 
-  type="{{a.type}}">
-{{a.value}} 
 
-</alert>
-
-<progressbar type="{{a.type}}" ng-repeat="a in alert" class='bar' value="a.counter" 
-          max='10'>
-</progressbar>
-
-<select ng-init="cboAlertType = alertTypes[0]" class="form-control" ng-model='cboAlertType'>
-  <option ng-repeat="x in alertTypes" value='{{x}}'>{{x}}</option>
-</select>
-
-<button class='btn btn-default btn-block' ng-click="addAlert()" ng-disabled="active">Add Alert</button>
 
 
 

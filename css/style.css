@@ -253,6 +253,14 @@ img{
     left: 20%;
 }
 
+/*alert de skus*/
+#alertskus{
+  left: 50%;
+
+  position: fixed;
+  width: 340px;
+  z-index:2; 
+}
 
 /*css responsive*/
 
