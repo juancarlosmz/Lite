@@ -42,7 +42,6 @@
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
-                        
                         <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
                         <p class="title">{{ prod.title }}</p>
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
@@ -74,7 +73,64 @@
 <div>END</div>
 
 
-              <button ng-click="$storage.counter = $storage.counter + 1">{{$storage.counter}}</button>
+<button ng-click="$storage.counter = $storage.counter + 1">
+  {{$storage.counter}}
+</button>
+
+<button ng-click="removeStorage()">
+    Remove
+  </button>
+
+
+
+
+
+  <alert close="close($index)" 
+  ng-repeat="a in alert" 
+  type="{{a.type}}">
+{{a.value}} 
+
+</alert>
+
+<progressbar type="{{a.type}}" ng-repeat="a in alert" class='bar' value="a.counter" 
+          max='10'>
+</progressbar>
+
+<select ng-init="cboAlertType = alertTypes[0]" class="form-control" ng-model='cboAlertType'>
+  <option ng-repeat="x in alertTypes" value='{{x}}'>{{x}}</option>
+</select>
+
+<button class='btn btn-default btn-block' ng-click="addAlert()" ng-disabled="active">Add Alert</button>
+
+
+
+
+
+
+
+    <div class="container">
+        <header class="app-header">
+          <h1 class="app-title">{{ appTitlesku }}</h1>
+        </header>
+      
+        <section class="app-body">
+          <section class="archive-control">
+            <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
+            <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
+          </section>
+      
+          <ul class="unstyled">
+            <li data-ng-repeat="todosku in todossku track by $index">
+              <input type="checkbox" data-ng-model="todosku.donesku">
+              <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
+            </li>
+          </ul>
+
+        </section>
+      </div>
+
+
+
 
 
 

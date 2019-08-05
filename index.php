@@ -53,6 +53,15 @@
                       </div>
                     </div>
 
+                    <div class="row">
+                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                        <li><a href="#/Import-List"><i class="glyphicon glyphicon-home">&nbsp; </i>   
+                      </div>
+                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                        <span class="hidetextmenu">Import List</span></a></li>
+                      </div>
+                    </div>
+
                     <div style="display:none;"  class="row">
                       <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
                         <li><a href=""><i class="glyphicon glyphicon-search">&nbsp; </i>   
@@ -120,6 +129,7 @@
     <script src="https://code.angularjs.org/1.5.9/angular-animate.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-aria.min.js"></script>
     <script src="//code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.9/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -131,7 +141,10 @@
     <script src="services/products.js"></script>
     <script src="services/login.js"></script>
     <script src="services/validate.js"></script>
+    <script src="services/sessionService.js"></script>
     <script src="js/jsapplite.js"></script>
+<!--Directives -->
+
 
 
 </body>

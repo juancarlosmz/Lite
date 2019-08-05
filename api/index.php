@@ -21,31 +21,69 @@ switch($action) {
     case 'registrar':
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
-        print_r(json_encode(registrar($fluent, $data)));
+
+        print_r(json_encode(registro($fluent, $data)));
         break;
     case 'eliminar':
         header('Content-Type: application/json');
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
-        break;
-    case 'Login':
-        header('Content-Type: application/json');
-        //session_start();
-        print_r(json_encode(loginlist($fluent)));
-        break;   
+        break;  
     case 'User':
         header('Content-Type: application/json');
         print_r(json_encode(obtenerUser($fluent, $_GET['email'])));
+        break;  
+    case 'Login':
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        $em = $data['email'];
+        $pass = $data['password'];
+        if(SesionLogin($fluent,$em,$pass)){
+            session_start();
+            $_SESSION['id'] = uniqid('ang_');
+            print_r(json_encode($_SESSION['id'] ));
+        }else{
+            print_r(json_encode(false));
+        }
+        break;
+    case 'valemail':
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        $em = $data['email'];
+        if(ValueEmail($fluent,$em)){
+            print_r(json_encode(true));
+        }else{
+            print_r(json_encode(false));
+        }
         break;    
     case 'Logout':
+        session_id('id');
         session_start();
         session_destroy();
+        session_commit();
         break;     
+}
+
+
+
+function SesionLogin($fluent, $email,$contra){
+    return $fluent->from('user')
+           ->select('user.*') 
+           ->where('email = ? and contra = ?',$email,$contra)
+           ->fetch();
+}
+function ValueEmail($fluent, $email){
+    return $fluent
+           ->from('user')
+           ->select('user.nombre') 
+           ->where('email = ?',$email)
+           ->fetch();
 }
 
 function listar($fluent){
     return $fluent
          ->from('user')
-         ->select('user.nombre, user.apellido, user.email, user.sexo, user.fnacimiento')
+         ->select('user.nombre, user.apellido, user.email')
+         ->where('rol = 2')
          ->orderBy("id DESC")
          ->fetchAll();
 }
@@ -59,8 +97,7 @@ function eliminar($fluent, $id){
              ->execute();   
     return true;
 }
-function registrar($fluent, $data){
-    /*$data['FechaRegistro'] = date('Y-m-d');*/
+function registro($fluent, $data){
     $data['rol'] = 2;
     $fluent->insertInto('user', $data)
            ->execute();    

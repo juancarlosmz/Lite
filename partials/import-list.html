@@ -1,0 +1,30 @@
+<div class="container" ng-controller="HomeController">
+              
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3" ng-controller="LoginController">
+            
+
+                <header class="app-header">
+                  <h1 class="app-title">{{ appTitlesku }}</h1>
+                </header>
+              
+                <section class="app-body">
+                  <section class="archive-control">
+                    <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
+                    <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
+                  </section>
+              
+                  <ul class="unstyled">
+                    <li data-ng-repeat="todosku in todossku track by $index">
+                      <input type="checkbox" data-ng-model="todosku.donesku">
+                      <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
+                    </li>
+                  </ul>
+
+                </section>
+
+        </div>
+
+    </div>
+</div>

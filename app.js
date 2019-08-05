@@ -6,7 +6,8 @@ var app = angular.module('appLite', [
   'empleadoControllers',
   'ui.bootstrap', 
   'ngCookies',
-  'ngStorage'
+  'ngStorage',
+  'ngMessages'
 ]);
 
 
@@ -98,6 +99,11 @@ app.config(['$routeProvider', '$locationProvider',
       when('/home:user', {
         controller: 'HomeControllerUser',
         templateUrl: 'home/homeuser.html',
+        method: 'GET',
+      }).
+      when('/Import-List', {
+        controller: 'ListController',
+        templateUrl: 'partials/import-list.html',
         method: 'GET',
       }).
       otherwise({
