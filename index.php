@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+    
 </head>
 <body data-ng-init='load()'>
 
@@ -131,7 +132,9 @@
     <script src="//code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
-    
+<!-- librerias bootstrap -->   
+    <script type="text/javascript" src="libs/angular-ui-bootstrap/ui-bootstrap-tpls-2.1.2.min.js" ></script>
+<!-- -->
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>

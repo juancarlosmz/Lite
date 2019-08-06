@@ -1,20 +1,104 @@
 var empleadoControllers = angular.module('empleadoControllers', []);
 var rute = 'http://localhost:50/Lite/';
 'use strict';
-empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter) {
+empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http) {
     //filter products after onload
+    $scope.inicializarFiltroskus = function () {
+        var skufilter = document.getElementsByClassName("valuesku");
+        for (var i = 0; i < skufilter.length; i++) {
+            if(skufilter[i].value.substr(7, 8) == "01"){
+                document.getElementsByClassName("showsku")[i].style.display = "block";
+            }else{
+                document.getElementsByClassName("showsku")[i].style.display = "none";
+            }
+        }
+    }; 
     $timeout(function(){
-        document.getElementById("filtercoll").click();
-    }, 3000);     
+        $scope.inicializarFiltroskus();
+    }, 3000);  
+
+
+    $scope.filtroProducts = [];
+    $scope.currentPageProducts = 1;
+    $scope.numPerPageProducts = 8; //es 40
+
+    $scope.hacerPagineoProducts = function (arreglo) {
+        //si no retorna ningun valor
+        if (!arreglo || !arreglo.length) { return; }
+        var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
+        var fin = principio + $scope.numPerPageProducts; //3, 6
+        $scope.filtroProducts = arreglo.slice(principio, fin); // 
+    };
+
+    $scope.buscarProducts = function (busquedaprod) {
+        var buscados = $filter('filter') ($scope.dataProducts, function (prod) {
+            return (prod.sku.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
+        });
+        $scope.totalProducts = buscados.length;
+        $scope.hacerPagineoProducts(buscados);
+        $timeout(function(){
+            $scope.inicializarFiltroskus();
+        }, 500);
+    };
+
+    $scope.$watch('currentPageProducts',function(){
+          $scope.hacerPagineoProducts($scope.dataProducts);
+          $timeout(function(){
+            $scope.inicializarFiltroskus();
+          }, 500); 
+    });
+/*
+    $scope.inicializarProducts = function () {
+        $http.post(rute+"chinabrands/GetProductCollention.php").then(function successCallback(response) {
+            $scope.dataProd = response.data; 
+            $scope.dataProducts = $scope.dataProd.msg;
+            $scope.totalProducts = $scope.dataProducts.length;
+            //console.log($scope.dataProducts);
+            //console.log($scope.totalProducts);
+            $scope.hacerPagineoProducts($scope.dataProducts);
+
+        }, function errorCallback(response) {
+            console.log("error 505");    
+        });
+    };
+    $scope.inicializarProducts();
+*/
+    //aqui ya no es necesario inicializar
+
     products.list(function(products) {
         $scope.products = products;  
+        $scope.dataProducts = $scope.products.msg;
+        $timeout(function(){
+            $scope.inicializarFiltroskus();
+        }, 500);  
+        //para no contar los que terminan en 01
+        var numberSelected = 0;
+        for (var i in $scope.products.msg) {
+            if($scope.products.msg[i]['sku'].substr(7,8) != "01"){
+                //console.log($scope.products.msg[i]['sku']);
+                numberSelected++;
+            }
+        }
+        console.log(numberSelected)
+        $scope.totalProducts = $scope.dataProducts.length;
+        $scope.hacerPagineoProducts($scope.dataProducts);
+        console.log($scope.totalProducts);
+
         
+/*
+        for (var i in $scope.dataProducts) {
+            if($scope.dataProducts[i]['status'] == 1){
+                console.log($scope.dataProducts[i]['status']);
+            }
+        }
+*/
     });
+
     categories.list(function(categories) {
         $scope.categories = categories;  
     });
 
-
+    
     //para añadir SKU
     $scope.prodskus = [];
 /*
@@ -47,7 +131,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
     //otro tutorial
     //https://codepen.io/pibby/pen/DLtaK?editors=1010
-    //implementando mi codigo
+    //implementando mi codigo ya funcional
     $scope.appTitlesku = "My SKU's List:";
 	$scope.savedsku = localStorage.getItem('todossku');
 	$scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
@@ -108,51 +192,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 		});
 		localStorage.setItem('todossku', JSON.stringify($scope.todossku));
 	};
-    //
-    //codigo pagination
-    //https://www.youtube.com/watch?v=aZRWysarKXw
 
-    $scope.items = [
-        {nombre: "ajaste",subnombre:"tereta",descripcion:"a15sdasd"},
-        {nombre: "ajaste2",subnombre:"tereta2",descripcion:"a15sdasd2"},
-        {nombre: "ajaste3",subnombre:"tereta3",descripcion:"a15sdasd3"},
-        {nombre: "ajaste4",subnombre:"tereta4",descripcion:"a15sdasd4"}
-    ];
-    $scope.filtroItems = [];
-    $scope.currentPage = 1;
-    $scope.numPerPage = 3;
-    $scope.totalItems = $scope.items.length;
-
-    $scope.hacerPagineo = function(arreglo){
-        var principio = (($scope.currentPage - 1)*$scope.numPerPage);
-        var fin = principio + $scope.numPerPage;
-        //$scope.filtroItems = arreglo.slice(principio, fin);
-    };
-
-    $scope.buscar = function(busqueda){
-        var buscados = $filter('filter', o.prod,function(pro){
-            return (item.nombre.toLowerCase().indexOf(busqueda.toLowerCase()) >= 1 ); //matches, contains
-        });
-        $scope.totalItems = buscados.length;
-        $scope.hacerPagineo(buscados);
-    };
-
-    $scope.inicializar = function(){
-        //si traemos un REST
-        /*
-        $http.get('REST', function(products){
-            $scope.products = products;
-            $scope.hacerPagineo($scope.products);
-
-        });
-        */
-        $scope.hacerPagineo($scope.prod);
-    };
-
-    $scope.inicializar();
-
-    
-//enf pagination
 
 }]);
 

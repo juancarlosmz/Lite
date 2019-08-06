@@ -255,8 +255,7 @@ img{
 
 /*alert de skus*/
 #alertskus{
-  left: 50%;
-
+  left: 40%;
   position: fixed;
   width: 340px;
   z-index:2; 
