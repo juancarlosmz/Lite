@@ -1,0 +1,129 @@
+
+<div ng-controller="SearchController">  
+
+    <!-- Alert msg-->
+    <div id="alertskus" class="alert alert-success" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+      ng-repeat="a in alert" 
+      type="{{a.type}}">
+      <i class="glyphicon glyphicon-ok">&nbsp; </i>
+      {{a.value}} 
+    </div>
+  
+          <div class="main">
+                  <div class="container">
+                
+                    <h2>Search Products</h2>
+  
+                    
+                    
+                
+  
+                    <div class="row">
+                      <div style="padding-right: 0px !important;" class="item col-md-3 col-sm-3 col-xs-3">
+  
+                        
+                          <select class="txtselect" name="" id="opidselect" onChange="FilterValorCombo()">
+                            <option ng-repeat="cat in categories.msg track by $index" value="{{cat.parent_id}}">{{cat.cat_name}}</option>
+                          </select>
+  
+                          
+                        
+                        <!--  
+                          <select class="txtselect" ng-model="categories" ng-options="cat.cat_name group by cat.parent_id for cat in categories.msg">
+                              <option value="" value="">All Categories</option>
+                          </select>  
+                        -->  
+                        </div>
+                      <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-7">
+                          <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod">
+                      </div>    
+                      <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-2">
+                          <button ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
+                      </div>
+  
+                    </div>
+                    <br>
+  
+                    <div class="row">
+                      <div class="item col-md-4 col-sm-6 col-xs-12 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
+                        <div >
+                        <a  class="itemhover" href="#/products/{{ prod.sku }}">
+                          <p class="theimg" ng-repeat="img in prod.original_img">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                          </p>
+                          <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                          <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+                          <p  class="title">{{ prod.title }}</p>
+                          <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
+                        </a>   
+                          <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+                          <br>
+                        </div>
+  
+                      </div>
+                    </div>
+                    <hr/>
+                    <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+                  </div>
+                </div>
+  
+  
+  <h1>My SKU's List</h1>
+                <ul >
+                  <li ng-repeat="skus in prodskus">{{skus}}<span ng-click="removeItem($index)" style="cursor:pointer;">×</span></li>
+                </ul>
+                <p >{{errortext}}</p>
+  
+  <div>END</div>
+  
+  
+  <button ng-click="$storage.counter = $storage.counter + 1">
+    {{$storage.counter}}
+  </button>
+  
+  <button ng-click="removeStorage()">
+      Remove
+    </button>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="container">
+          <header class="app-header">
+            <h1 class="app-title">{{ appTitlesku }}</h1>
+          </header>
+        
+          <section class="app-body">
+            <section class="archive-control">
+              <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
+              <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
+            </section>
+        
+            <ul class="unstyled">
+              <li data-ng-repeat="todosku in todossku track by $index">
+                <input type="checkbox" data-ng-model="todosku.donesku">
+                <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
+              </li>
+            </ul>
+  
+          </section>
+        </div>
+  
+  
+  
+  
+  
+  
+  
+                
+  </div>  
+  

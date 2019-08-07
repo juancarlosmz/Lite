@@ -196,10 +196,8 @@ img{
 }
 #slides_control {
   position: absolute;
-
-  left:50%;
+  width: 100%;
   top:20px;
- margin-left:-200px;
 }
 /*para la pagina product*/
 #cambioimg2 img{

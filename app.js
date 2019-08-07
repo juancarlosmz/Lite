@@ -20,6 +20,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'HomeController',
         method: 'GET',
       }).
+      when('/Search', {
+        templateUrl: 'partials/search.html',
+        controller: 'SearchController',
+        method: 'GET',
+      }).
       when('/Products', {
         templateUrl: 'partials/Products.html',
         controller: 'AllProducts',

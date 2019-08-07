@@ -36,60 +36,45 @@
               
               <div class="container contmenuhed2">
                   <ul class="menuleft">
-                    <div style="display:none;"   class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href=""><i class="glyphicon glyphicon-dashboard">&nbsp; </i>   
+
+
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
+                        <li><a href="#/"><i class="glyphicon glyphicon-tag">&nbsp; </i>   
                       </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
-                        <span class="hidetextmenu">Dashboard</span></a></li>
+                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
+                        <span class="hidetextmenu">Manage Products</span></a></li>
                       </div>
                     </div>
 
                     <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href="#/"><i class="glyphicon glyphicon-home">&nbsp; </i>   
+                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
+                        <li><a href="#/Search">
                       </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
-                        <span class="hidetextmenu">Home</span></a></li>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href="#/Import-List"><i class="glyphicon glyphicon-th-large">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
-                        <span class="hidetextmenu">Import List</span></a></li>
-                      </div>
-                    </div>
-
-                    <div style="display:none;"  class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href=""><i class="glyphicon glyphicon-search">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
                         <span class="hidetextmenu">Search Products</span></a></li>
                       </div>
                     </div>
 
-                    
                     <div class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
+                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
+                      <li><a href="#/Import-List">
+                      </div>
+                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
+                        <span class="hidetextmenu">Import List</span></a></li>
+                      </div>
+                    </div>
+
+  
+                    <div class="row">
+                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
                         <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>   
                       </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
+                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
                         <span class="hidetextmenu">Login</span></a></li>
                       </div>
                     </div>
 
-                    <div style="display:none;"  class="row">
-                      <div class="col-md-4 col-sm-4 col-xs-4 cajaicomenu">
-                        <li><a href="#/FQA"><i class="glyphicon glyphicon-question-sign">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-8 col-sm-8 col-xs-8 cajaicomenu2">
-                        <span class="hidetextmenu">FAQ</span></a></li>
-                      </div>
-                    </div>
 
 
                   </ul>
@@ -141,12 +126,18 @@
 <!-- -->
     <script src="app.js"></script>
     <script src="controllers.js"></script>
+<!--services -->
     <script src="services/products.js"></script>
     <script src="services/login.js"></script>
     <script src="services/validate.js"></script>
     <script src="services/sessionService.js"></script>
+
+<!--js -->
     <script src="js/jsapplite.js"></script>
-<!--Directives -->
+<!--libs -->
+    <script src="js/carousel.js"></script>
+
+
 
 
 

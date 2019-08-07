@@ -5,6 +5,7 @@
   <div id="alertskus" class="alert alert-success" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
     ng-repeat="a in alert" 
     type="{{a.type}}">
+    <i class="glyphicon glyphicon-ok">&nbsp; </i>
     {{a.value}} 
   </div>
 
@@ -42,10 +43,9 @@
 
                   </div>
                   <br>
-
-                  <div class="row">
-                    <div class="item col-md-4 col-sm-6 col-xs-12 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
-                      <div >
+                  
+                  <div class="row" style="height: 530px;">
+                    <div class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
                       <a  class="itemhover" href="#/products/{{ prod.sku }}">
                         <p class="theimg" ng-repeat="img in prod.original_img">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -57,65 +57,80 @@
                       </a>   
                         <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
                         <br>
-                      </div>
-
                     </div>
                   </div>
+                  
                   <hr/>
+                  <a ng-click="back()"> <i class="glyphicon glyphicon-menu-left" style="float: left"></i> </a>
+                  <a ng-click="next()"> <i class="glyphicon glyphicon-menu-right" style="float: right"></i> </a>
                   <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+
+
+                  <!--Collections-->
+                  <!--
+                  <div class="row">
+                  <div class="carrusel">  
+                      <div id="slides_control">
+                        <div>
+                          <carousel interval="myInterval">
+                            <slide  ng-repeat="prod in filtroProducts track by $index"  ng-if="prod.status == 1" active="slide.active">
+                              <div class="item col-md-4 col-sm-6 col-xs-12">
+                                <a  class="itemhover" href="#/products/{{ prod.sku }}">
+                                  <p class="theimg" ng-repeat="img in prod.original_img">
+                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                  </p>
+                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                                  <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+                                  <p  class="title">{{ prod.title }}</p>
+                                  <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
+                                </a>   
+                                  <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+                                  <br>     
+                              </div>           
+                            </slide> 
+                          </carousel>
+                        </div>
+                      </div>
+                  </div>
+                  </div>
+                -->
+
+
+
+
                 </div>
               </div>
 
 
-<h1>My SKU's List</h1>
-              <ul >
-                <li ng-repeat="skus in prodskus">{{skus}}<span ng-click="removeItem($index)" style="cursor:pointer;">×</span></li>
-              </ul>
-              <p >{{errortext}}</p>
-
-<div>END</div>
 
 
-<button ng-click="$storage.counter = $storage.counter + 1">
-  {{$storage.counter}}
-</button>
+  
 
-<button ng-click="removeStorage()">
-    Remove
-  </button>
+<!-- este es el slider 
+
+    <div class="carrusel">  
+        <div id="slides_control">
+          <div>
+            <carousel interval="myInterval">
+              <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}">
+                <div class="carousel-caption">
+                  <h4>Slide {{$index+1}}</h4>
+                </div>
+              </slide>
+            </carousel>
+          </div>
+        </div>
+    </div>
+  -->   
+ 
+    
+
+  
 
 
 
 
-
-
-
-
-
-
-
-
-
-    <div class="container">
-        <header class="app-header">
-          <h1 class="app-title">{{ appTitlesku }}</h1>
-        </header>
-      
-        <section class="app-body">
-          <section class="archive-control">
-            <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
-            <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
-          </section>
-      
-          <ul class="unstyled">
-            <li data-ng-repeat="todosku in todossku track by $index">
-              <input type="checkbox" data-ng-model="todosku.donesku">
-              <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
-            </li>
-          </ul>
-
-        </section>
-      </div>
 
 
 
