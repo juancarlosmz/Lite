@@ -270,3 +270,7 @@ img{
   
 }
 /**/
+/*ocultar efectos del carrusel*/
+.carousel-indicators{
+  display: none;
+}

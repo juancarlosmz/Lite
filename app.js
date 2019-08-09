@@ -103,7 +103,7 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/home:user', {
         controller: 'HomeControllerUser',
-        templateUrl: 'home/homeuser.html',
+        templateUrl: 'home/homeuser.php',
         method: 'GET',
       }).
       when('/Import-List', {

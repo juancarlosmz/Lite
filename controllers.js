@@ -3,98 +3,13 @@ var rute = 'http://localhost:50/Lite/';
 'use strict';
 empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http) {
     
-
-    $scope.filtroProducts = [];
-    $scope.currentPageProducts = 1;
-    $scope.numPerPageProducts = 3; //es 40
-
-    $scope.hacerPagineoProducts = function (arreglo) {
-        //si no retorna ningun valor
-        if (!arreglo || !arreglo.length) { return; }
-        var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
-        var fin = principio + $scope.numPerPageProducts; //3, 6
-        $scope.filtroProducts = arreglo.slice(principio, fin); // 
-    };
-
     $scope.buscarProducts = function (busquedaprod) {
         var buscados = $filter('filter') ($scope.dataProducts, function (prod) {
             return (prod.sku.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
         });
         $scope.totalProducts = buscados.length;
-        $scope.hacerPagineoProducts(buscados);
+        //$scope.hacerPagineoProducts(buscados);
     };
-
-    $scope.$watch('currentPageProducts',function(){
-          $scope.hacerPagineoProducts($scope.dataProducts); 
-    });
-/*
-    $scope.inicializarProducts = function () {
-        $http.post(rute+"chinabrands/GetProductCollention.php").then(function successCallback(response) {
-            $scope.dataProd = response.data; 
-            $scope.dataProducts = $scope.dataProd.msg;
-            $scope.totalProducts = $scope.dataProducts.length;
-            //console.log($scope.dataProducts);
-            //console.log($scope.totalProducts);
-            $scope.hacerPagineoProducts($scope.dataProducts);
-
-        }, function errorCallback(response) {
-            console.log("error 505");    
-        });
-    };
-    $scope.inicializarProducts();
-*/
-    //aqui ya no es necesario inicializar
-
-    products.list(function(products) {
-        $scope.products = products;  
-        //$scope.dataProducts = $scope.products.msg;
-        //console.log($scope.products.msg);
- 
-        //para no contar los que terminan en 01 y status 0
-
-        var miArray2 = [];
-        var miArray = [];
-        for (var i in $scope.products.msg) {
-            if($scope.products.msg[i]['sku'].substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
-                miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
-                miArray2.push(miArray);
-            }
-        }
-        $scope.dataProducts = miArray2;
-
-        //total de productos
-        $scope.totalProducts = $scope.dataProducts.length;
-        $scope.hacerPagineoProducts($scope.dataProducts);
-
-    });
-
-
-    var clickbotones = document.getElementsByClassName("ng-binding");
-    $scope.back = function() {
-        console.log("back");
-        for (var i = 0; i < clickbotones.length; i++) {
-            
-            if(clickbotones[i].text == "Previous"){
-                clickbotones[i].click;
-                console.log(clickbotones[i].text);
-            }
-        }
-    }
-    $scope.next = function() {
-        console.log("next");
-        for (var i = 0; i < clickbotones.length; i++) {
-            if(clickbotones[i].text == "Next"){
-                
-                $timeout(function(){
-                    clickbotones[i].click();
-                }, 1000); 
-                console.log(clickbotones[i].text);
-            }
-        }
-    }
-
-
-
 
 
 
@@ -199,11 +114,68 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     };
     
     //carrusel de productos
-  
-
-
 
     $scope.myInterval = 3000;
+
+    $scope.inicializarProducts = function () {
+        $http.post(rute+"chinabrands/GetProductCollention.php").then(function successCallback(response) {
+            $scope.dataProd = response.data; 
+
+            var miArray2 = [];
+            var miArray = [];
+            for (var i in $scope.dataProd.msg) {
+                if($scope.dataProd.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd.msg[i]['status'] == 1){
+                    miArray = JSON.parse(JSON.stringify($scope.dataProd.msg[i]));
+                    miArray2.push(miArray);
+                }
+            }
+            $scope.dataProducts2 = miArray2;
+
+
+            //para hacer multi carrusel
+            var first = [],
+            second, third;
+            var many = 1;
+
+            
+            for (var k = 0; k < $scope.dataProducts2.length/3; k++) {
+
+                if(k==0){
+                    second = {
+                        image1: $scope.dataProducts2[k],  
+                        image2: $scope.dataProducts2[k+1],
+                        image3: $scope.dataProducts2[k+2]
+                    }; 
+                }else if(k==1){
+                    second = {
+                        image1: $scope.dataProducts2[k+2],  
+                        image2: $scope.dataProducts2[k+3],
+                        image3: $scope.dataProducts2[k+4]
+                    }; 
+                }else if(k==2){
+                    second = {
+                        image1: $scope.dataProducts2[k+4],  
+                        image2: $scope.dataProducts2[k+5],
+                        image3: $scope.dataProducts2[k+6]
+                    }; 
+                }
+                   
+                first.push(second);
+            }
+            $scope.groupedSlides = first;
+            //end
+
+
+
+
+        }, function errorCallback(response) {
+            console.log("error 505");    
+        });
+    };
+    $scope.inicializarProducts();
+
+
+
 
 
 }]);

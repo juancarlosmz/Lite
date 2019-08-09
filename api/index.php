@@ -39,8 +39,10 @@ switch($action) {
         $pass = $data['password'];
         if(SesionLogin($fluent,$em,$pass)){
             session_start();
+
             $_SESSION['id'] = uniqid('ang_');
             print_r(json_encode($_SESSION['id'] ));
+            //print_r(json_encode(SesionLogin($fluent,$em,$pass)));
         }else{
             print_r(json_encode(false));
         }
