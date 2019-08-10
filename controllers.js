@@ -177,27 +177,12 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
 
 
-
 }]);
 
 
 
 empleadoControllers.controller('SearchController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http) {
     //filter products after onload
-    $scope.inicializarFiltroskus = function () {
-        var skufilter = document.getElementsByClassName("valuesku");
-        for (var i = 0; i < skufilter.length; i++) {
-            if(skufilter[i].value.substr(7, 8) == "01"){
-                document.getElementsByClassName("showsku")[i].style.display = "block";
-            }else{
-                document.getElementsByClassName("showsku")[i].style.display = "none";
-            }
-        }
-    }; 
-    $timeout(function(){
-        $scope.inicializarFiltroskus();
-    }, 3000);  
-
 
     $scope.filtroProducts = [];
     $scope.currentPageProducts = 1;
@@ -217,16 +202,12 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
         });
         $scope.totalProducts = buscados.length;
         $scope.hacerPagineoProducts(buscados);
-        $timeout(function(){
-            $scope.inicializarFiltroskus();
-        }, 500);
+
     };
 
     $scope.$watch('currentPageProducts',function(){
           $scope.hacerPagineoProducts($scope.dataProducts);
-          $timeout(function(){
-            $scope.inicializarFiltroskus();
-          }, 500); 
+
     });
 /*
     $scope.inicializarProducts = function () {
@@ -501,3 +482,57 @@ empleadoControllers.controller('ListController', ['$scope','$location','$http',f
 
 }]);
 
+empleadoControllers.controller('treeController', function($scope) {
+    $scope.callMe = function() {
+      alert("test");
+    };
+    /*
+    $scope.tree = [{
+      name: "Bob",
+      link: "#",
+      subtree: [{
+        name: "Ann",
+        link: "#"
+      }]
+    }, {
+      name: "Jon",
+      link: "#",
+      subtree: [{
+        name: "Mary",
+        link: "#"
+      }]
+    }, {
+      name: "divider",
+      link: "#"
+    }, {
+      name: "Another person",
+      link: "#"
+    }, {
+      name: "divider",
+      link: "#"
+    },{
+      name: "Again another person",
+      link: "#"
+    }];
+    */
+
+    $scope.tree = [{
+        name: "Manage Products",
+        link: "#/",
+        icono: "glyphicon glyphicon-tag"
+    }, {
+        name: "Search Products",
+        link: "#/Search",
+        icono: "glyphicon glyphicon-minus",
+        idoc: "ocultarico"
+    }, {
+        name: "Products Import List",
+        link: "#/Import-List",
+        icono: "glyphicon glyphicon-minus",
+        idoc: "ocultarico"
+    },{
+        name: "Login",
+        link: "#/login",
+        icono: "glyphicon glyphicon-user"
+    }];
+  });

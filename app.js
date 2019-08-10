@@ -121,15 +121,36 @@ app.controller('empleadoControllers', function($scope){
   controllerPrincipal = $scope;
 });
 
+app.directive('tree', function() {
+  return {
+    restrict: "E",
+    replace: true,
+    scope: {
+      tree: '='
+    },
+    templateUrl: 'template-ul.html'
+  };
+});
 
+app.directive('leaf', function($compile) {
+  return {
+    restrict: "E",
+    replace: true,
+    scope: {
+      leaf: "="
+    },
+    templateUrl: 'template-li.html',
+    link: function(scope, element, attrs) {
+      if (angular.isArray(scope.leaf.subtree)) {
+        element.append("<tree tree='leaf.subtree'></tree>");
+        element.addClass('dropdown-submenu');
+        $compile(element.contents())(scope);
+      } else {
+        element.bind('click', function() {
+          console.log(scope.leaf.name);
+        });
 
-
-
-
-
-
-
-
-
-
-
+      }
+    }
+  };
+});

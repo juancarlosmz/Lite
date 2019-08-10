@@ -1,115 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es" ng-app="appLite" >
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
     <title>WooSource</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">   
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
-    
-</head>
-<body data-ng-init='load()'>
-
-
-    <div class="row">
-      <div id="contleft" class="col-md-2 col-sm-2 col-xs-2">
-          <section id="secleft">
-            <div class="header">
-            <div class="container contmenuhed2"> 
-              <div class="row colorrow">
-                <div id="cajaicomenutop" class="col-md-6 col-sm-6 col-xs-6 ">
-                  <a href="#/">
-                    <i class="glyphicon glyphicon-home"></i>
-                  </a>    
-                </div>
-                <div id="cajaicomenutop2" class="col-md-5 col-sm-5 col-xs-5 ">
-                  <a onclick="myFunctioiconohide();">
-                    <i id="iconoleftright" class="glyphicon glyphicon glyphicon-indent-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-
-
-              
-              <div class="container contmenuhed2">
-                  <ul class="menuleft">
-
-
-                    <div class="row">
-                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
-                        <li><a href="#/"><i class="glyphicon glyphicon-tag">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
-                        <span class="hidetextmenu">Manage Products</span></a></li>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
-                        <li><a href="#/Search">
-                      </div>
-                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
-                        <span class="hidetextmenu">Search Products</span></a></li>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
-                      <li><a href="#/Import-List">
-                      </div>
-                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
-                        <span class="hidetextmenu">Import List</span></a></li>
-                      </div>
-                    </div>
-
-  
-                    <div class="row">
-                      <div class="col-md-3 col-sm-3 col-xs-3 cajaicomenu">
-                        <li><a id="onClickL" href="#/login"><i class="glyphicon glyphicon-user">&nbsp; </i>   
-                      </div>
-                      <div class="col-md-9 col-sm-9 col-xs-9 cajaicomenu2">
-                        <span class="hidetextmenu">Login</span></a></li>
-                      </div>
-                    </div>
-
-
-
-                  </ul>
-                </div>
-            </div>
-          </section>
-      </div>
-      <div id="contright" class="col-md-10 col-sm-10 col-xs-10">
-          <section id="secright">
-              <div class="header contlogohed">
-                  
-                  <div class="container logow">
-                    
-                    <div class="logo">
-                      <a href="#/" ><img src="img/logo.jpg" ></a> 
-                    </div>
-                  </div>
-              </div>
-
-              <div class="ng-class">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-xs-12">
-                          <!-- Content body -->
-                          <div class="ng-view"></div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          </section>
-      </div>
-    </div>
-
-
-
+    <!-- Scripts-->
     <script src="https://code.angularjs.org/1.5.9/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-route.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-animate.min.js"></script>
@@ -117,6 +17,8 @@
     <script src="//code.angularjs.org/1.5.9/angular-cookies.min.js"></script>
     <script src="https://code.angularjs.org/1.5.9/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+
+    
 <!-- librerias bootstrap -->   
     <script type="text/javascript" src="libs/angular-ui-bootstrap/ui-bootstrap-tpls-2.1.2.min.js" ></script>
 <!-- -->
@@ -131,11 +33,62 @@
     <script src="services/login.js"></script>
     <script src="services/validate.js"></script>
     <script src="services/sessionService.js"></script>
-
 <!--js -->
     <script src="js/jsapplite.js"></script>
 <!--libs -->
-    <script src="js/carousel.js"></script>
+
+</head>
+<body data-ng-init='load()'>
+
+
+<div class="container webdes">
+  <div class="col-md-3 col-sm-3 col-xs-0 contleft">
+    <div ng-controller="treeController">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+          <div class="logo">
+            <a  href="#/" ><img src="img/logo.jpg" ></a> 
+          </div>
+        </div>
+        
+        <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+        
+        <ul class="nav navbar-nav">
+          <li dropdown class="open">
+            <a style="display:none;" href="#/" dropdown-toggle>
+              <i class="glyphicon glyphicon-home"></i>
+              <b class='caret'></b>
+            </a>
+            <tree tree='tree'></tree>
+          </li>
+        </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+    </div>
+  </div>
+
+      <div class="col-md-9 col-sm-9 col-xs-12 contright">
+          <section >
+          <div class="ng-view"></div>
+             
+          </section>
+      </div>
+
+
+      
+    </div>
+
+
+
+
 
 
 
