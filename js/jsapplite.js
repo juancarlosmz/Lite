@@ -24,7 +24,10 @@ function FilterValorCombo(){
     }
   }
 }
-
+function searchhome(){
+  var clicked = document.getElementById("changeclick");
+  clicked.click();
+}
 
 function myFunctioninfo(){
   var todalainfo = document.getElementById("inputinfo").value;

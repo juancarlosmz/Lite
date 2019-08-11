@@ -40,7 +40,7 @@
                         <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchhome()">
                     </div>    
                     <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
-                        <button ng-click="searchhome()" class="btn btnsearch">Search</button>
+                        <button id="changeclick" ng-click="searchhome()" class="btn btnsearch">Search</button>
                     </div>
 
                   </div>
@@ -49,7 +49,7 @@
  
                   <!--Collections-->
                   <h3>Best-Selling Products</h3>
-                  <div class="row">
+                  <div class="row" id="spacerow">
                   <div class="carrusel">  
                       <div id="slides_control">
                         <div>
@@ -100,6 +100,62 @@
                       </div>
                   </div>
                   </div>
+
+                  <!--Collections-->
+                  <h3>High Potential Profit</h3>
+                  <div class="row" >
+                  <div class="carrusel">  
+                      <div id="slides_control">
+                        <div>
+                          <carousel interval="myInterval">
+                            <slide  ng-repeat="prod in groupedSlides2 track by $index" active="slide.active">
+                              <div class="item col-md-4 col-sm-6 col-xs-10 itemcarrusel">
+
+                                <a  class="itemhover" href="#/products/{{ prod.image1.sku }}">
+                                  <p class="theimg" ng-repeat="img in prod.image1.original_img">
+                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                  </p>
+                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
+                                  <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
+                                  <p class="title">{{ prod.image1.title }}</p>
+                                  <p class="price">$ {{ prod.image1.warehouse_list.YB.price }}</p>
+                                </a>   
+                                  <p class="btnadd3"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                              </div>    
+                              <div class="item col-md-4 col-sm-6 col-xs-10 itemcarrusel">
+
+                                <a  class="itemhover" href="#/products/{{ prod.image2.sku }}">
+                                  <p class="theimg" ng-repeat="img in prod.image2.original_img">
+                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                  </p>
+                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
+                                  <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
+                                  <p class="title">{{ prod.image2.title }}</p>
+                                  <p class="price">$ {{ prod.image2.warehouse_list.YB.price }}</p>
+                                </a>   
+                                  <p class="btnadd3"><button id="disable{{prod.image2.sku}}"  ng-click="addToCard(prod.image2)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                              </div>
+                              <div class="item col-md-4 col-sm-6 col-xs-10 itemcarrusel">
+
+                                <a  class="itemhover" href="#/products/{{ prod.image3.sku }}">
+                                  <p class="theimg" ng-repeat="img in prod.image3.original_img">
+                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                  </p>
+                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
+                                  <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
+                                  <p class="title">{{ prod.image3.title }}</p>
+                                  <p class="price">$ {{ prod.image3.warehouse_list.YB.price }}</p>
+                                </a>   
+                                  <p class="btnadd3"><button id="disable{{prod.image3.sku}}"  ng-click="addToCard(prod.image3)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                              </div>         
+                            </slide> 
+                          </carousel>
+                        </div>
+                      </div>
+                  </div>
+                  </div>
+
+
                 
 
 

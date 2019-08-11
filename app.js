@@ -19,6 +19,7 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/home.html',
         controller: 'HomeController',
         method: 'GET',
+        
       }).
       when('/Search', {
         templateUrl: 'partials/search.html',
@@ -117,6 +118,7 @@ app.config(['$routeProvider', '$locationProvider',
       });
   }]);
 
+
 app.controller('empleadoControllers', function($scope){
   controllerPrincipal = $scope;
 });
@@ -132,12 +134,12 @@ app.directive('tree', function() {
   };
 });
 
-app.directive('leaf', function($compile) {
+app.directive('leaf', function($compile,$timeout,$window) {
   return {
     restrict: "E",
     replace: true,
     scope: {
-      leaf: "="
+      leaf: "=",
     },
     templateUrl: 'template-li.html',
     link: function(scope, element, attrs) {
@@ -148,6 +150,10 @@ app.directive('leaf', function($compile) {
       } else {
         element.bind('click', function() {
           console.log(scope.leaf.name);
+          $timeout(function(){
+            $window.location.reload();
+          }, 50);
+          
         });
 
       }

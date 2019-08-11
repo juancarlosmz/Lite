@@ -1,5 +1,6 @@
 
 var ruteserv = 'http://localhost:50/Lite/';
+
 app.factory('products', ['$http', function($http) { 
     return {
       list: function (callback){
@@ -11,6 +12,7 @@ app.factory('products', ['$http', function($http) {
       }
     };
 }]);
+
 app.factory('categories', ['$http', function($http) { 
   return {
     list: function (callback){

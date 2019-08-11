@@ -1,8 +1,9 @@
 var empleadoControllers = angular.module('empleadoControllers', []);
 var rute = 'http://localhost:50/Lite/';
 'use strict';
-empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http) {
+empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$location', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$location) {
     
+
     $scope.buscarProducts = function (busquedaprod) {
         var buscados = $filter('filter') ($scope.dataProducts, function (prod) {
             return (prod.sku.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
@@ -12,7 +13,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     };
 
     $scope.searchhome = function(){
-        console.log("teclado");
+        $location.path('/Search');
     }
 
     categories.list(function(categories) {
@@ -129,10 +130,10 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     
     //carrusel de productos
 
-    $scope.myInterval = 3000;
+    $scope.myInterval = 10000;
 
     $scope.inicializarProducts = function () {
-        $http.post(rute+"chinabrands/GetProductCollention.php").then(function successCallback(response) {
+        $http.post(rute+"chinabrands/GetBestSellProducts.php").then(function successCallback(response) {
             $scope.dataProd = response.data; 
 
             var miArray2 = [];
@@ -185,6 +186,62 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
         }, function errorCallback(response) {
             console.log("error 505");    
         });
+        //galleria 2
+        $http.post(rute+"chinabrands/GetHighPotential.php").then(function successCallback(response) {
+            $scope.dataProd2 = response.data; 
+
+            var miArray22 = [];
+            var miArray2 = [];
+            for (var i in $scope.dataProd2.msg) {
+                if($scope.dataProd2.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd2.msg[i]['status'] == 1){
+                    miArray2 = JSON.parse(JSON.stringify($scope.dataProd2.msg[i]));
+                    miArray22.push(miArray2);
+                }
+            }
+            $scope.dataProducts22 = miArray22;
+
+
+            //para hacer multi carrusel
+            var first = [],
+            second, third;
+            var many = 1;
+
+            //carrusel de 3 imagenes
+            for (var k = 0; k < $scope.dataProducts22.length/3; k++) {
+
+                if(k==0){
+                    second = {
+                        image1: $scope.dataProducts22[k],  
+                        image2: $scope.dataProducts22[k+1],
+                        image3: $scope.dataProducts22[k+2]
+                    }; 
+                }else if(k==1){
+                    second = {
+                        image1: $scope.dataProducts22[k+2],  
+                        image2: $scope.dataProducts22[k+3],
+                        image3: $scope.dataProducts22[k+4]
+                    }; 
+                }else if(k==2){
+                    second = {
+                        image1: $scope.dataProducts22[k+4],  
+                        image2: $scope.dataProducts22[k+5],
+                        image3: $scope.dataProducts22[k+6]
+                    }; 
+                }
+                   
+                first.push(second);
+            }
+            $scope.groupedSlides2 = first;
+            //end
+
+
+
+
+        }, function errorCallback(response) {
+            console.log("error 505");    
+        });
+
+
     };
     $scope.inicializarProducts();
 
@@ -200,7 +257,7 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
 
     $scope.filtroProducts = [];
     $scope.currentPageProducts = 1;
-    $scope.numPerPageProducts = 8; //es 40
+    $scope.numPerPageProducts = 42; //es 40
 
     $scope.hacerPagineoProducts = function (arreglo) {
         //si no retorna ningun valor
@@ -256,10 +313,12 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
         //$scope.dataProducts = $scope.products.msg;
         //console.log($scope.products.msg);
         //para no contar los que terminan en 01 y status 0
+        
         var miArray2 = [];
         var miArray = [];
         for (var i in $scope.products.msg) {
-            if($scope.products.msg[i]['sku'].substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
+            var skuconhijos = $scope.products.msg[i]['sku'];
+            if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
                 miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
                 miArray2.push(miArray);
             }
@@ -487,13 +546,6 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
 
 
 
-
-
-
-
-
-
-
 empleadoControllers.controller('ListController', ['$scope','$location','$http',function($scope,$location,$http) {
     console.log("list controller");
 
@@ -501,9 +553,7 @@ empleadoControllers.controller('ListController', ['$scope','$location','$http',f
 }]);
 
 empleadoControllers.controller('treeController', function($scope) {
-    $scope.callMe = function() {
-      alert("test");
-    };
+    
     /*
     $scope.tree = [{
       name: "Bob",
@@ -537,20 +587,23 @@ empleadoControllers.controller('treeController', function($scope) {
     $scope.tree = [{
         name: "Manage Products",
         link: "#/",
-        icono: "glyphicon glyphicon-tag"
+        icono: "glyphicon glyphicon-tag",
+        idoc2: "ocultarico"
     }, {
         name: "Search Products",
         link: "#/Search",
         icono: "glyphicon glyphicon-minus",
-        idoc: "ocultarico"
+        idoc: "ocultarico",
+        idoc2: "ocultarico"
     }, {
         name: "Products Import List",
         link: "#/Import-List",
-        icono: "glyphicon glyphicon-minus",
+        icono: "glyphicon glyphicon-list-alt",
         idoc: "ocultarico"
     },{
         name: "Login",
         link: "#/login",
-        icono: "glyphicon glyphicon-user"
+        icono: "glyphicon glyphicon-user",
+        idoc2: "ocultarico"
     }];
   });

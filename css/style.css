@@ -55,16 +55,19 @@
   position: fixed !important;
   height: 100%;
   background-color: #fe924a;
+  z-index:5; 
 }
 .contleft2{
   margin: 0px !important;
   padding: 0px !important;
   background-color: #fe924a;
+  z-index:4; 
 }
 .contright{
   margin: 0px !important;
   padding: 0px !important;
   height: 100% !important;
+  z-index:3; 
 }
 .navbar-collapse {
   margin: 0px !important;
@@ -267,9 +270,12 @@ img{
   left: 55%;
   position: fixed;
   width: 340px;
-  z-index:2; 
+  z-index:50; 
 }
-
+/*space rows*/
+#spacerow{
+  margin-bottom: 700px;
+}
 /*css responsive*/
 
 
@@ -294,7 +300,9 @@ img{
   #alertskus{
     left: 25%;
   }
-  
+  #spacerow{
+    margin-bottom: 2600px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -317,6 +325,9 @@ img{
   #alertskus{
     left: 10%;
     width: 300px;
+  }
+  #spacerow{
+    margin-bottom: 1700px
   }
   
 }
