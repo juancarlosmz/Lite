@@ -52,8 +52,13 @@
 .contleft{
   margin: 0px !important;
   padding: 0px !important;
-  position: static !important;
+  position: fixed !important;
   height: 100%;
+  background-color: #fe924a;
+}
+.contleft2{
+  margin: 0px !important;
+  padding: 0px !important;
   background-color: #fe924a;
 }
 .contright{

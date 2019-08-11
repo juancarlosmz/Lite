@@ -4,7 +4,7 @@
 
   
   <!-- Alert msg-->
-  <div id="alertskus" class="alert alert-success" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+  <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
     ng-repeat="a in alert" 
     type="{{a.type}}">
     <i class="glyphicon glyphicon-ok">&nbsp; </i>
@@ -24,7 +24,7 @@
                     <div style="padding-right: 0px !important;padding-left: 0px !important;margin-bottom: 15px;" class="item col-md-3 col-sm-3 col-xs-11">
 
                       
-                        <select class="txtselect" name="" id="opidselect" onChange="FilterValorCombo()">
+                        <select class="txtselect" name="" id="opidselect" onChange="searchhome()">
                           <option ng-repeat="cat in categories.msg track by $index" value="{{cat.parent_id}}">{{cat.cat_name}}</option>
                         </select>
 
@@ -37,10 +37,10 @@
                       -->  
                       </div>
                     <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
-                        <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod">
+                        <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchhome()">
                     </div>    
                     <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
-                        <button ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
+                        <button ng-click="searchhome()" class="btn btnsearch">Search</button>
                     </div>
 
                   </div>

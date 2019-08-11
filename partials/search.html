@@ -2,7 +2,7 @@
 <div ng-controller="SearchController">  
 
     <!-- Alert msg-->
-    <div id="alertskus" class="alert alert-success" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+    <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
       ng-repeat="a in alert" 
       type="{{a.type}}">
       <i class="glyphicon glyphicon-ok">&nbsp; </i>
@@ -35,7 +35,7 @@
                         -->  
                         </div>
                       <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
-                          <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod">
+                          <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
                       </div>    
                       <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
                           <button ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
@@ -45,7 +45,7 @@
                     <br>
   
                     <div class="row">
-                      <div class="item col-md-4 col-sm-6 col-xs-12 itemcarrusel2" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
+                      <div class="item col-md-4 col-sm-6 col-xs-12 itemcarrusel2 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
                         <div >
                         <a  class="itemhover" href="#/products/{{ prod.sku }}">
                           <p class="theimg" ng-repeat="img in prod.original_img">
