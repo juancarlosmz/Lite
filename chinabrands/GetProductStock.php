@@ -4,11 +4,11 @@ if(isset($_GET['id']) ) {
     $goods_sn = $_GET['id'];
 
     $post_data = array(
-        'token' => 'ba2a239795da4cc1408bf5944803cffd',
+        'token' => '1923f84bd61409f1f234b516e5713dbc',
         'goods_sn' => json_encode($goods_sn),
         'warehouse' => 'YB'
     );
-    $api_url="https://gloapi.chinabrands.com/v2/product/stock";
+    $api_url="https://cnapi.chinabrands.com/v2/product/index";
     $curl = curl_init($api_url);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);

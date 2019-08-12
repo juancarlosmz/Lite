@@ -2,12 +2,12 @@
 
 //$goods_sn = '165460401'; //字符串
 //$goods_sn = array('165460401','182079101'); //数组
-$goods_sn = '455449301 ,454731501 ,453853101 ,453315901 ,453816401 ,453782601 ,454652001 ,437421101  ,451655801 ,447125101 ,451787001 '; //以英文逗号分隔
+$goods_sn = '455449301 ,454731501 ,453853101 ,453315901 ,453816401 ,453782601 ,454652001 ,437421101  ,451655801 ,447125101 ,451787001,282680901  '; //以英文逗号分隔
 $post_data = array(
-'token' => 'ba2a239795da4cc1408bf5944803cffd',
+'token' => '1923f84bd61409f1f234b516e5713dbc',
 'goods_sn' => json_encode($goods_sn)
 );
-$api_url="https://gloapi.chinabrands.com/v2/product/index";
+$api_url="https://cnapi.chinabrands.com/v2/product/index";
 $curl = curl_init($api_url);
 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);

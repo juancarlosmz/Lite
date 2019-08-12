@@ -134,7 +134,7 @@
     text-align: left;
     background-color: #fff;
     margin: 0px;
-    height: 20%;
+    height: 22%;
   }
   p.theimg{
     margin: 0px;
@@ -200,11 +200,49 @@ img{
 }
 .item.itemcarrusel{
   /*border: 0.1px solid;*/
-  height: 650px;
+
+  
+  height: 500px;
+  /*
+  background: #fff;
+  border: 1px solid #e1e8f0;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.02);
+  border-radius: 4px;
+  margin: 0px 11px 0px 11px;
+  width: 23%;
+*/
 }
 .item.itemcarrusel2{
-  height: 650px;
+  height: 500px;
+  /*
+  background: #fff;
+  border: 1px solid #e1e8f0;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.02);
+  border-radius: 4px;
+  margin: 0px 11px 0px 11px;
+  width: 23%;
+  */
 }
+
+
+.carousel-control.left{
+  margin-left: -10% !important;
+  background-image: none !important;
+}
+.carousel-control.right{
+  margin-left: 95% !important;
+  background-image: none !important;
+  right: auto !important;
+}
+
+.carousel-control .icon-next, .carousel-control .icon-prev {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 50px !important;
+  color: black !important;
+}
+
+
 /*para la pagina product*/
 #cambioimg2 img{
   width: 345px;
@@ -274,9 +312,26 @@ img{
 }
 /*space rows*/
 #spacerow{
-  margin-bottom: 700px;
+  margin-bottom: 600px;
 }
 /*css responsive*/
+
+@media (min-width: 4000px) and (max-width: 12000px){
+  p.title {
+    height: 40%;
+  }
+  .item.itemcarrusel{
+    /*border: 0.1px solid;*/
+    height: 650px;
+  }
+  .item.itemcarrusel2{
+    height: 650px;
+  }
+  #spacerow{
+    margin-bottom: 700px;
+  }
+  
+}
 
 
 @media (max-width: 767px) {
@@ -301,7 +356,7 @@ img{
     left: 25%;
   }
   #spacerow{
-    margin-bottom: 2600px;
+    margin-bottom: 3500px;
   }
 }
 
@@ -316,7 +371,7 @@ img{
     height: 550px;
   }
   p.title {
-    height: 10%;
+    height: 20%;
   }
   .btnadd3 {
     height: 10%;
@@ -327,7 +382,7 @@ img{
     width: 300px;
   }
   #spacerow{
-    margin-bottom: 1700px
+    margin-bottom: 2200px;
   }
   
 }

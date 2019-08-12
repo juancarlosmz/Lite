@@ -130,7 +130,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     
     //carrusel de productos
 
-    $scope.myInterval = 10000;
+    $scope.myInterval = 190000;
 
     $scope.inicializarProducts = function () {
         $http.post(rute+"chinabrands/GetBestSellProducts.php").then(function successCallback(response) {
@@ -152,26 +152,29 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
             second, third;
             var many = 1;
 
-            //carrusel de 3 imagenes
-            for (var k = 0; k < $scope.dataProducts2.length/3; k++) {
+            //carrusel de 4 imagenes
+            for (var k = 0; k < $scope.dataProducts2.length/4; k++) {
 
                 if(k==0){
                     second = {
                         image1: $scope.dataProducts2[k],  
                         image2: $scope.dataProducts2[k+1],
-                        image3: $scope.dataProducts2[k+2]
+                        image3: $scope.dataProducts2[k+2],
+                        image4: $scope.dataProducts2[k+3],
                     }; 
                 }else if(k==1){
                     second = {
-                        image1: $scope.dataProducts2[k+2],  
-                        image2: $scope.dataProducts2[k+3],
-                        image3: $scope.dataProducts2[k+4]
+                        image1: $scope.dataProducts2[k+3],  
+                        image2: $scope.dataProducts2[k+4],
+                        image3: $scope.dataProducts2[k+5],
+                        image4: $scope.dataProducts2[k+6],
                     }; 
                 }else if(k==2){
                     second = {
-                        image1: $scope.dataProducts2[k+4],  
-                        image2: $scope.dataProducts2[k+5],
-                        image3: $scope.dataProducts2[k+6]
+                        image1: $scope.dataProducts2[k+6],  
+                        image2: $scope.dataProducts2[k+7],
+                        image3: $scope.dataProducts2[k+8],
+                        image4: $scope.dataProducts2[k+9],
                     }; 
                 }
                    
@@ -207,25 +210,28 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
             var many = 1;
 
             //carrusel de 3 imagenes
-            for (var k = 0; k < $scope.dataProducts22.length/3; k++) {
+            for (var k = 0; k < $scope.dataProducts22.length/4; k++) {
 
                 if(k==0){
                     second = {
                         image1: $scope.dataProducts22[k],  
                         image2: $scope.dataProducts22[k+1],
-                        image3: $scope.dataProducts22[k+2]
+                        image3: $scope.dataProducts22[k+2],
+                        image4: $scope.dataProducts22[k+3],
                     }; 
                 }else if(k==1){
                     second = {
-                        image1: $scope.dataProducts22[k+2],  
-                        image2: $scope.dataProducts22[k+3],
-                        image3: $scope.dataProducts22[k+4]
+                        image1: $scope.dataProducts22[k+3],  
+                        image2: $scope.dataProducts22[k+4],
+                        image3: $scope.dataProducts22[k+5],
+                        image4: $scope.dataProducts22[k+6],
                     }; 
                 }else if(k==2){
                     second = {
-                        image1: $scope.dataProducts22[k+4],  
-                        image2: $scope.dataProducts22[k+5],
-                        image3: $scope.dataProducts22[k+6]
+                        image1: $scope.dataProducts22[k+6],  
+                        image2: $scope.dataProducts22[k+7],
+                        image3: $scope.dataProducts22[k+8],
+                        image4: $scope.dataProducts22[k+9],
                     }; 
                 }
                    
@@ -320,6 +326,14 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
             var skuconhijos = $scope.products.msg[i]['sku'];
             if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
                 miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
+
+                /*
+                v = {
+                    title : p.title
+                    
+                }
+                */
+                console.log(miArray);
                 miArray2.push(miArray);
             }
         }
