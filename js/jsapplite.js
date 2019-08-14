@@ -13,6 +13,20 @@ function myComboFilter() {
   }
 }
 */
+var cantclickmenu=0;
+function menuTemp(){
+  var menuleftson = document.getElementById("menuleftson");
+  if(cantclickmenu == 0){
+    menuleftson.style.display = "block";
+    cantclickmenu++;
+  }else{
+    menuleftson.style.display = "none";
+    cantclickmenu = 0;
+  }
+  
+}
+
+
 function FilterValorCombo(){
   var valorselect = document.getElementById("opidselect");
   var valparentid = document.getElementsByClassName("valuesparentid");
