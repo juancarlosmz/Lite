@@ -16,9 +16,9 @@
                   </section>
               
                   <ul class="unstyled">
-                    <li data-ng-repeat="todosku in todossku track by $index">
-                      <input type="checkbox" data-ng-model="todosku.donesku">
-                      <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
+                    <li data-ng-repeat="skus in todossku track by $index">
+                      <input type="checkbox" data-ng-model="skus.donesku">
+                      <span class="donesku-{{ skus.donesku }}">{{ skus.textsku }}</span>
                     </li>
                   </ul>
 

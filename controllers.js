@@ -61,27 +61,59 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
 
     $scope.alert = [];
-    $scope.addToCard = function(p) {
+
+
+    /*
+    $scope.addToCard = function (p) {
         var resultado = document.getElementsByClassName("valuesku");
         for (var i = 0; i < resultado.length; i++) {
             if (resultado[i].value == p.sku) {
+                console.log(resultado[i].value);
+                if ($scope.prodskus.indexOf(resultado[i].value) == -1) {
+                    $scope.prodskus.push(resultado[i].value);
+                    $scope.errortext = "";
+                } else {
+                    $scope.errortext = "The item is already in your shopping list.";
+                }
+            } 
+        }
+    }
+*/
+
+
+    $scope.addToCard = function(p) {
+        var resultado = document.getElementsByClassName("valuesku");
+        for (var i = 0; i < resultado.length; i++) {
+
+
+            if (resultado[i].value == p.sku) {
+
+/*
+for (var j in $scope.todossku) {
+
+    document.getElementById('disable'+$scope.todossku[j]['textsku']).disabled = "disabled";
+    if(resultado[i].value == $scope.todossku[j]['textsku']){
+        console.log('item en la lista');
+        break;
+    }else{             
+        console.log('agrega');
+    }
+}  
+  */             
                 $scope.todossku.push({
                     textsku: resultado[i].value,
                     donesku: false
                 });
                 localStorage.setItem('todossku', JSON.stringify($scope.todossku));
                 /*alert*/
+                
                 $scope.alert.push({
                     type:'success',
                     value:'Product added successfully to Import List'
                 });
-                /*
-                var index = $scope.alert.length - 1;
-                $scope.removeFirst(index);  
-                */
-               //sku ocultar agregado
-               document.getElementById('disable'+p.sku).disabled = 'disabled';
-               //
+
+                document.getElementById('disable'+p.sku).disabled = "disabled";
+
                 $timeout(function() {
                     var alerta = document.getElementsByClassName('alertskus2');
                     for (var i = 0; i < alerta.length; i++) {
@@ -89,27 +121,16 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
                     }
                 }, 2000);
                 break; 
-                
                 //end
-            }; 
+            }
+
+
+
+            
         };
 
     };
 
-    //alert mssage
-    /*
-    $scope.removeFirst = function(index){
-        var stopped; 
-        if($scope.alert[index].counter == 0){
-            $scope.alert.splice(0, 1);
-        }
-        stopped = $timeout(function() {
-            $scope.alert[index].counter--;   
-            $scope.removeFirst(index);   
-        }, 1000);
-    };
-    */
-    //end alert
 
 	$scope.remainingsku = function() {
 		var countsku = 0;
@@ -125,7 +146,8 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 			if (!todosku.donesku)
 				$scope.todossku.push(todosku);
 		});
-		localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+        console.log($scope.todossku);
     };
     
     //carrusel de productos
@@ -333,7 +355,7 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
                     
                 }
                 */
-                console.log(miArray);
+                //console.log(miArray);
                 miArray2.push(miArray);
             }
         }

@@ -385,9 +385,11 @@ img{
   #menuleftson{
     display: none;
   }
-
-
-  
+}
+@media (max-width: 991px){
+  #spacerow{
+    margin-bottom: 1000px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -395,7 +397,9 @@ img{
   #menuTempid{
     display: none !important;
   }
-
+  #menuleftson{
+    display: block !important;
+  }
 
   .contleft{
     margin: 0px !important;
