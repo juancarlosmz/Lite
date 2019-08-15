@@ -643,3 +643,99 @@ empleadoControllers.controller('treeController', function($scope) {
         idoc2: "ocultarico"
     }];
   });
+
+
+empleadoControllers.controller('SincronizarController', ['$scope','$location','$http',function($scope,$location,$http) {
+
+
+    $http.post(rute+"chinabrands/GetAllProducts.php").then(function successCallback(response) {
+        $scope.Allproducts = response.data;
+        $scope.Resultado = $scope.Allproducts.msg['page_result'];
+        console.log($scope.Resultado);
+        console.log($scope.Allproducts.msg);   
+
+        
+    }, function errorCallback(response) {
+        console.log("error 505");    
+    });
+
+    
+    
+}]);
+
+
+
+empleadoControllers.controller('AllProductsController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    $http.post(rute+"chinabrands/GetSearchInterface.php").then(function successCallback(response) {
+        $scope.Allproducts = response.data;
+        $scope.Resultado = $scope.Allproducts.msg['page_result'];
+        console.log($scope.Allproducts.msg.total_pages);  
+
+        var pagination = [];
+        for (var i = 1; i < $scope.Allproducts.msg.total_pages; i++) {
+            pagination.push(i);
+            
+        }
+        $scope.pagination = pagination;
+        console.log($scope.pagination);
+
+    }, function errorCallback(response) {
+        console.log("error 505");    
+    });
+
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+    });
+
+
+//prograanhdo
+    $http.post(rute+'chinabrands/GetProductInformation.php?page='+ $routeParams.page).then(function successCallback(response) {
+        $scope.Allproducts = response.data;
+        $scope.Resultado = $scope.Allproducts.msg['page_result'];
+        console.log($scope.Allproducts.msg.total_pages);  
+
+        var pagination = [];
+        for (var i = 1; i < $scope.Allproducts.msg.total_pages; i++) {
+            pagination.push(i);
+            
+        }
+        $scope.pagination = pagination;
+        console.log($scope.pagination);
+
+    }, function errorCallback(response) {
+        console.log("error 505");    
+    });
+
+
+
+}]);
+
+
+
+empleadoControllers.controller('AllProductsControllerPages', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    $http.post(rute+"chinabrands/GetSearchInterface.php").then(function successCallback(response) {
+        $scope.Allproducts = response.data;
+        $scope.Resultado = $scope.Allproducts.msg['page_result'];
+        console.log($scope.Allproducts.msg.total_pages);  
+
+        var pagination = [];
+        for (var i = 1; i < $scope.Allproducts.msg.total_pages; i++) {
+            pagination.push(i);
+            
+        }
+        $scope.pagination = pagination;
+        console.log($scope.pagination);
+
+    }, function errorCallback(response) {
+        console.log("error 505");    
+    });
+    
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+    });
+
+
+    
+
+}]);
+

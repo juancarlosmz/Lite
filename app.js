@@ -112,6 +112,21 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/import-list.html',
         method: 'GET',
       }).
+      when('/Sincronizar', {
+        controller: 'SincronizarController',
+        templateUrl: 'partials/Sincronizar.html',
+        method: 'GET',
+      }).
+      when('/Result', {
+        controller: 'AllProductsController',
+        templateUrl: 'partials/AllProducts.html',
+        method: 'GET',
+      }).
+      when('/Result/:page', {
+        templateUrl: 'partials/AllProductsController',
+        controller: 'AllProductsController',
+        method: 'GET',
+      }).
       otherwise({
         redirectTo: '/',
         method: 'GET',

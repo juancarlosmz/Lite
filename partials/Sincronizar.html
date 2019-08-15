@@ -1,0 +1,32 @@
+<div class="main">
+    <div class="container">
+        <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
+            <button ng-click="addToCard(prod)" class="btn btnSync"><span>Sync Up</span></button>
+        </div>
+            
+        <table class="table table-bordered">
+            <tr>
+                <td>page_number</td>
+                <td>per_page</td>
+                <td>total_pages</td>
+            </tr>
+
+            <tr >
+                <td>{{Allproducts.msg.page_number}}</td>
+                <td>{{Allproducts.msg.per_page}}</td>
+                <td>{{Allproducts.msg.total_pages}}</td>
+            </tr>
+        </table>
+
+        <div class="panel panel-heading">
+            <div class="panel-body">
+                SKU's from Import List Chinabrands
+            </div>
+            <table class="table table-bordered">
+                <tr ng-repeat="R in Resultado track by $index" >
+                    <td>{{R.goods_sn}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
