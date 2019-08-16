@@ -123,7 +123,7 @@ app.config(['$routeProvider', '$locationProvider',
         method: 'GET',
       }).
       when('/Result/:page', {
-        templateUrl: 'partials/AllProductsController',
+        templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
         method: 'GET',
       }).
