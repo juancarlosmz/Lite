@@ -117,12 +117,12 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/AllProducts.html',
         method: 'GET',
       }).
-      when('/Result/:page', {
+      when('/Result/category-:category', {
         templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
         method: 'GET',
       }).
-      when('/Result/category-:category', {
+      when('/Result/category-:category/:page', {
         templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
         method: 'GET',

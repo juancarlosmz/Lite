@@ -669,10 +669,10 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
     categories.list(function(categories) {
         $scope.categories = categories;  
     });
-
+    
 
     //cambio de pagina y productos
-    $http.post(rute+'chinabrands/GetSearchInterface.php?page='+ $routeParams.page).then(function successCallback(response) {
+    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ $routeParams.category+'&page='+ $routeParams.page).then(function successCallback(response) {
         $scope.Allproducts = response.data;
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
         var totalpagination = $scope.Allproducts.msg.total_pages;
@@ -685,8 +685,11 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         }
         $scope.pagination = pagination;
 */
-
-
+        /*Capturando la ruta de categoria*/
+        var RutaCompleta = window.location.href;
+        var RutaCategory = RutaCompleta.split("/");
+        console.log(RutaCompleta);
+        console.log(RutaCategory[6]);
         /*iNICIANDO LA PAGINACION */
 
         /* code to pagination*/
@@ -920,9 +923,11 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         template: function(args) {
             // args.pageNumber is required
             if (args.classNames) {
-                return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                /*return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+RutaCategory+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'*/
             } else {
-                return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                /*return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+RutaCategory+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'*/
             }
         },
         events: function() {
@@ -976,7 +981,8 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
     });
 
 
-
+    //testeando
+    /*
     $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ $routeParams.category).then(function successCallback(response) {
         $scope.Allproducts = response.data;
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
@@ -986,13 +992,15 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
     }, function errorCallback(response) {
         console.log("error 505");    
     });
+    */
 
+
+
+
+
+
+    
 
 
 
 }]);
-
-
-
-
-

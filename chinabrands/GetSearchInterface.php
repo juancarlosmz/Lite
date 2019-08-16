@@ -1,17 +1,19 @@
 
 <?php
-$page = '1';    
-$category = '1';
+$page = '1'; 
+$category = '';   
 
-if(isset($_GET['page']) ) {
-    $page = $_GET['page'];
-}  
 if(isset($_GET['category']) ) {
     $category = $_GET['category'];
 }
 
+if(isset($_GET['page']) ) {
+    $page = $_GET['page'];
+}  
+
+
     $post_data = array(
-        'token' => '7ab35dad268d426303a3317c84711276',
+        'token' => '66449af2197e88c1b50a4bb1439734d0',
         'cat_id' => $category,
         'sale_date_start' => '2000-03-12T11:00:00+08:00',
         'sale_date_end' => '2019-08-15T11:00:00+08:00',
