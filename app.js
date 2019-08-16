@@ -112,17 +112,17 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/import-list.html',
         method: 'GET',
       }).
-      when('/Sincronizar', {
-        controller: 'SincronizarController',
-        templateUrl: 'partials/Sincronizar.html',
-        method: 'GET',
-      }).
       when('/Result', {
         controller: 'AllProductsController',
         templateUrl: 'partials/AllProducts.html',
         method: 'GET',
       }).
       when('/Result/:page', {
+        templateUrl: 'partials/AllProducts.html',
+        controller: 'AllProductsController',
+        method: 'GET',
+      }).
+      when('/Result/category-:category', {
         templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
         method: 'GET',
