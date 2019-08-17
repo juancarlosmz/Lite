@@ -690,323 +690,329 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         var RutaCategory = RutaCompleta.split("/");
         var Category = RutaCategory[6];
         var CategorySend = Category.toString();
-        console.log(RutaCompleta);
-        console.log(RutaCategory);
-        console.log(RutaCategory[6]);
+
         /*iNICIANDO LA PAGINACION */
+        console.log(CategorySend);
 
-        /* code to pagination*/
-        window.MTU = {}
+        if (!CategorySend || CategorySend === '' || CategorySend === 'undefined' || CategorySend === undefined) {
+            console.log('Select Category');
+        }else{
+            /* code to pagination*/
+            window.MTU = {}
 
-        function ChangeUrl(page, url) {
-                if (typeof (history.pushState) != "undefined") {
-                    var obj = { Page: page, Url: url };
-                    history.pushState(obj, obj.Page, obj.Url);
+
+
+            function ChangeUrl(page, url) {
+                    if (typeof (history.pushState) != "undefined") {
+                        var obj = { Page: page, Url: url };
+                        history.pushState(obj, obj.Page, obj.Url);
+                    } else {
+                        alert("Browser does not support HTML5.");
+                    }
+                }
+                $(function () {
+                    $("#button1").click(function () {
+                        ChangeUrl('Page1', '/nani');
+                    });
+                    $("#button2").click(function () {
+                        ChangeUrl('Page2', '/nani2');
+                    });
+                    $("#button3").click(function () {
+                        ChangeUrl('Page3', '/nani3');
+                    });
+                });
+
+            MTU.pagination = {
+            init: function(args) {
+                this._defaults = {
+                    itemsTotal: totalpagination,        // total of the items
+                    itemsPerPage: 1,                    // visible items per page
+                    visiblePagination: 5,               // number of visible pagination. if ellipsis is true, this will not include the fist and last page
+                    currentPage: 1,                     // current active pagination
+                    element: '.js-pagination',          // element where the append will happened
+                    gotoFirstText: 'First',             // text of the goto first pagination
+                    gotoLastText: 'Last',               // text of the goto last pagination
+                    gotoNextText: 'Next',               // text of the goto next pagination
+                    gotoPrevText: 'Prev',               // text of the goto prev pagination
+                    ellipsis: false,                    // ellipsis
+                    enableJumpTo: true,                 // enable jump feature
+                    jumpToText: 'Go to page'            // text after the jump input
+                }
+
+                this._constructor = $.extend(this._defaults, args)
+
+                if (!$(this._constructor.element).length) { return }
+
+                this.displayPagination()
+                this.events()
+                
+                if (this._constructor.enableJumpTo) {
+                    this.jump()
+                }
+            },
+            displayPagination: function() {
+                var _self = this
+                var _constructor = _self._constructor
+                // empty the element
+                $(_constructor.element).empty()
+                // get the total pagination
+                this._constructor.paginationsTotal = Math.ceil(_constructor.itemsTotal / _constructor.itemsPerPage)
+                // set the expected last page
+                _constructor.expectedLastPage = _constructor.currentPage + (_constructor.visiblePagination - 1)
+
+                if (_constructor.currentPage + (_constructor.visiblePagination - 1) > _constructor.paginationsTotal || _constructor.currentPage == _constructor.paginationsTotal) {
+                    _constructor.start = _constructor.currentPage - Math.max(0, (_constructor.expectedLastPage - _constructor.paginationsTotal))
+
+                    _constructor.end = (_constructor.start + _constructor.visiblePagination  > _constructor.expectedLastPage) ? _constructor.paginationsTotal : _constructor.start + (_constructor.visiblePagination - 1)
+
+                    if (_constructor.start + _constructor.visiblePagination  > _constructor.expectedLastPage) {
+                        _constructor.start = _constructor.end - (_constructor.visiblePagination - 1)
+                    }
+
                 } else {
-                    alert("Browser does not support HTML5.");
+                    _constructor.start = _constructor.currentPage
+                    _constructor.end = _constructor.start + _constructor.visiblePagination - 1
                 }
-            }
-            $(function () {
-                $("#button1").click(function () {
-                    ChangeUrl('Page1', '/nani');
-                });
-                $("#button2").click(function () {
-                    ChangeUrl('Page2', '/nani2');
-                });
-                $("#button3").click(function () {
-                    ChangeUrl('Page3', '/nani3');
-                });
-            });
-
-        MTU.pagination = {
-        init: function(args) {
-            this._defaults = {
-                itemsTotal: totalpagination,        // total of the items
-                itemsPerPage: 1,                    // visible items per page
-                visiblePagination: 5,               // number of visible pagination. if ellipsis is true, this will not include the fist and last page
-                currentPage: 1,                     // current active pagination
-                element: '.js-pagination',          // element where the append will happened
-                gotoFirstText: 'First',             // text of the goto first pagination
-                gotoLastText: 'Last',               // text of the goto last pagination
-                gotoNextText: 'Next',               // text of the goto next pagination
-                gotoPrevText: 'Prev',               // text of the goto prev pagination
-                ellipsis: false,                    // ellipsis
-                enableJumpTo: true,                 // enable jump feature
-                jumpToText: 'Go to page'            // text after the jump input
-            }
-
-            this._constructor = $.extend(this._defaults, args)
-
-            if (!$(this._constructor.element).length) { return }
-
-            this.displayPagination()
-            this.events()
-            
-            if (this._constructor.enableJumpTo) {
-                this.jump()
-            }
-        },
-        displayPagination: function() {
-            var _self = this
-            var _constructor = _self._constructor
-            // empty the element
-            $(_constructor.element).empty()
-            // get the total pagination
-            this._constructor.paginationsTotal = Math.ceil(_constructor.itemsTotal / _constructor.itemsPerPage)
-            // set the expected last page
-            _constructor.expectedLastPage = _constructor.currentPage + (_constructor.visiblePagination - 1)
-
-            if (_constructor.currentPage + (_constructor.visiblePagination - 1) > _constructor.paginationsTotal || _constructor.currentPage == _constructor.paginationsTotal) {
-                _constructor.start = _constructor.currentPage - Math.max(0, (_constructor.expectedLastPage - _constructor.paginationsTotal))
-
-                _constructor.end = (_constructor.start + _constructor.visiblePagination  > _constructor.expectedLastPage) ? _constructor.paginationsTotal : _constructor.start + (_constructor.visiblePagination - 1)
-
-                if (_constructor.start + _constructor.visiblePagination  > _constructor.expectedLastPage) {
-                    _constructor.start = _constructor.end - (_constructor.visiblePagination - 1)
+                
+                // keep the max of pagination to the total number
+                if (_constructor.currentPage > _constructor.paginationsTotal) {
+                    _constructor.currentPage = _constructor.paginationsTotal
+                    _constructor.start = _constructor.ellipsis ? _constructor.start - 1 : _constructor.start;
                 }
-
-            } else {
-                _constructor.start = _constructor.currentPage
-                _constructor.end = _constructor.start + _constructor.visiblePagination - 1
-            }
-            
-            // keep the max of pagination to the total number
-            if (_constructor.currentPage > _constructor.paginationsTotal) {
-                _constructor.currentPage = _constructor.paginationsTotal
-                _constructor.start = _constructor.ellipsis ? _constructor.start - 1 : _constructor.start;
-            }
-            
-            // keep the min of pagination to the 1
-            if (_constructor.currentPage < 1) { _constructor.currentPage = 1 }
-            
-            
-            // if the ellipsis is true
-            if (_constructor.ellipsis) {
-                if (_constructor.currentPage == 1 && _constructor.paginationsTotal > _constructor.end) {
-                    _constructor.end++
-                }
-                if (_constructor.paginationsTotal == (_constructor.end || _constructor.currentPage)) {
-                    _constructor.start--
-                }
-            }
-            
-            // keep the min of pagination to the 1
-            if (_constructor.start < 1) { _constructor.start = 1 }
-
-            for(var pagination = _constructor.start; pagination <= _constructor.end; pagination++) {
-                // if ellipsis is true
-                // means we dont need to display the first and last page
+                
+                // keep the min of pagination to the 1
+                if (_constructor.currentPage < 1) { _constructor.currentPage = 1 }
+                
+                
+                // if the ellipsis is true
                 if (_constructor.ellipsis) {
-                    if (pagination == 1 || pagination == _constructor.paginationsTotal) {
-                    continue;
+                    if (_constructor.currentPage == 1 && _constructor.paginationsTotal > _constructor.end) {
+                        _constructor.end++
+                    }
+                    if (_constructor.paginationsTotal == (_constructor.end || _constructor.currentPage)) {
+                        _constructor.start--
                     }
                 }
                 
-                if (pagination == _constructor.currentPage) {
-                    $(_constructor.element).append(_self.template({
-                    pageNumber: pagination,
-                    classNames: 'is-active'
+                // keep the min of pagination to the 1
+                if (_constructor.start < 1) { _constructor.start = 1 }
+
+                for(var pagination = _constructor.start; pagination <= _constructor.end; pagination++) {
+                    // if ellipsis is true
+                    // means we dont need to display the first and last page
+                    if (_constructor.ellipsis) {
+                        if (pagination == 1 || pagination == _constructor.paginationsTotal) {
+                        continue;
+                        }
+                    }
+                    
+                    if (pagination == _constructor.currentPage) {
+                        $(_constructor.element).append(_self.template({
+                        pageNumber: pagination,
+                        classNames: 'is-active'
+                        }))
+                    } else {
+                        $(_constructor.element).append(_self.template({
+                        pageNumber: pagination
+                        }))
+                    }
+                }
+
+                this.displayPaginationControls()
+            },
+            displayPaginationControls: function() {
+                var _constructor = this._constructor
+                if (_constructor.ellipsis) {
+                    // insert the ellipsis
+                    $(this._constructor.element).prepend(this.template({
+                        text: "...",
+                        pageNumber: null,
+                        classNames: _constructor.start < 3 ? "is-hidden" : "has-ellipsis"
+                    }))
+                    // insert the first
+                    $(this._constructor.element).prepend(this.template({
+                        text: 1,
+                        pageNumber: 1,
+                    }))
+                    // insert the prev       
+                    $(_constructor.element).prepend(this.template({
+                        text: _constructor.gotoPrevText,
+                        pageNumber: 'prev',
+                        classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
+                    }))
+                    // insert the ellipsis
+                    //son  los segundos puntos suspens
+                    $(this._constructor.element).append(this.template({
+                        text: "...",
+                        pageNumber: null,
+                        classNames: _constructor.end >= _constructor.paginationsTotal - 1 ? "is-hidden" : "has-ellipsis"
+                    }))
+                    if (this._constructor.paginationsTotal > 1) {
+                        // insert the last
+                        $(this._constructor.element).append(this.template({
+                        text: _constructor.paginationsTotal,
+                        pageNumber: _constructor.paginationsTotal,
+                        classNames: _constructor.currentPage == _constructor.paginationsTotal ? "is-active" : null
+                        }))
+                    }
+                    // insert the next
+                    var NextPageRute = window.location.href;
+                    var NextPageRuteSeparet = NextPageRute.split("/");
+                    var NextPage = NextPageRuteSeparet[7];
+                    var NextPageSendString = NextPage.toString();
+                    var NextPageSend = parseInt(NextPageSendString);
+                    
+                    $(this._constructor.element).append(this.template({
+                        text: this._constructor.gotoNextText,
+                        pageNumber: NextPageSend+1,
+                        classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
                     }))
                 } else {
-                    $(_constructor.element).append(_self.template({
-                    pageNumber: pagination
+                    // insert the prev  
+                    var PrevPageRute = window.location.href;
+                    var PrevPageRuteSeparet = PrevPageRute.split("/");
+                    var PrevPage = PrevPageRuteSeparet[7];
+                    var PrevPageSendString = PrevPage.toString();
+                    var PrevPageSend = parseInt(PrevPageSendString);
+                    
+                    $(_constructor.element).prepend(this.template({
+                        text: _constructor.gotoPrevText,
+                        pageNumber: 'prev',
+                        classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
                     }))
-                }
-            }
-
-            this.displayPaginationControls()
-        },
-        displayPaginationControls: function() {
-            var _constructor = this._constructor
-            if (_constructor.ellipsis) {
-                // insert the ellipsis
-                $(this._constructor.element).prepend(this.template({
-                    text: "...",
-                    pageNumber: null,
-                    classNames: _constructor.start < 3 ? "is-hidden" : "has-ellipsis"
-                }))
-                // insert the first
-                $(this._constructor.element).prepend(this.template({
-                    text: 1,
-                    pageNumber: 1,
-                }))
-                // insert the prev       
-                $(_constructor.element).prepend(this.template({
-                    text: _constructor.gotoPrevText,
-                    pageNumber: 'prev',
-                    classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
-                }))
-                // insert the ellipsis
-                //son  los segundos puntos suspens
-                $(this._constructor.element).append(this.template({
-                    text: "...",
-                    pageNumber: null,
-                    classNames: _constructor.end >= _constructor.paginationsTotal - 1 ? "is-hidden" : "has-ellipsis"
-                }))
-                if (this._constructor.paginationsTotal > 1) {
+                    // insert the first
+                    $(this._constructor.element).prepend(this.template({
+                        text: this._constructor.gotoFirstText,
+                        pageNumber: 'first',
+                        classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
+                    }))
+                    // insert the next
+                    $(this._constructor.element).append(this.template({
+                        text: this._constructor.gotoNextText,
+                        pageNumber: 'next',
+                        classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
+                    }))
                     // insert the last
                     $(this._constructor.element).append(this.template({
-                    text: _constructor.paginationsTotal,
-                    pageNumber: _constructor.paginationsTotal,
-                    classNames: _constructor.currentPage == _constructor.paginationsTotal ? "is-active" : null
+                        text: this._constructor.gotoLastText,
+                        pageNumber: 'last',
+                        classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
                     }))
                 }
-                // insert the next
-                $(this._constructor.element).append(this.template({
-                    text: this._constructor.gotoNextText,
-                    pageNumber: 'next',
-                    classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
-                }))
-            } else {
-                // insert the prev       
-                $(_constructor.element).prepend(this.template({
-                    text: _constructor.gotoPrevText,
-                    pageNumber: 'prev',
-                    classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
-                }))
-                // insert the first
-                $(this._constructor.element).prepend(this.template({
-                    text: this._constructor.gotoFirstText,
-                    pageNumber: 'first',
-                    classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
-                }))
-                // insert the next
-                $(this._constructor.element).append(this.template({
-                    text: this._constructor.gotoNextText,
-                    pageNumber: 'next',
-                    classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
-                }))
-                // insert the last
-                $(this._constructor.element).append(this.template({
-                    text: this._constructor.gotoLastText,
-                    pageNumber: 'last',
-                    classNames: _constructor.currentPage >= _constructor.paginationsTotal ? 'is-disabled' : null
-                }))
-            }
-            
-            if (_constructor.enableJumpTo && (_constructor.paginationsTotal > _constructor.visiblePagination + 2)) {
-                let template = `<form>${_constructor.jumpToText}<input type="number" min="1" /><button type="submit"></button></form>`
-            
-                $(this._constructor.element).append(template)
-            }
-        },
-        paginate: function(pagination) {
-            var _constructor = this._constructor
-            var $parent = $(this._constructor.element)
-            var controls = {
-                "prev" : $parent.find('[data-pagination="prev"]'),
-                "next" : $parent.find('[data-pagination="next"]'),
-            }
-            switch (pagination) {
-                case 'prev':
-                    if (_constructor.currentPage > 1) {
-                    _constructor.currentPage--
-                    }
-                    break
-                case 'next':
-                    if (_constructor.currentPage < Math.ceil(_constructor.itemsTotal / _constructor.itemsPerPage)) {
-                    _constructor.currentPage++
-                    }
-                    break
-                default:
-                    if(typeof pagination != 'number') {
-                    pagination = parseInt(pagination)
-                    pagination = pagination < 1 ? 1 : pagination
-                    }
-                    _constructor.currentPage = pagination
-            } 
-
-            if (_constructor.currentPage == _constructor.paginationsTotal) {
-                controls.next.addClass('is-disabled');
-                controls.prev.removeClass('is-disabled');
-             } else if (_constructor.currentPage == 1) {
-                controls.next.removeClass('is-disabled');
-                controls.prev.addClass('is-disabled');
-             } else {
-                controls.next.removeClass('is-disabled');
-                controls.prev.removeClass('is-disabled');
-             }
-
-            // render again if the page is not visible
-            if (_constructor.currentPage < _constructor.start || _constructor.currentPage > _constructor.end) {
-                $(_constructor.element).empty()
-                this.displayPagination()
-            }
-
-        },
-        template: function(args) {
-            // args.pageNumber is required
-            if (args.classNames) {
-                //return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-                return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+CategorySend+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-            } else {
-                //return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-                return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+CategorySend+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-            }
-        },
-        events: function() {
-            var _self = this
-            var _constructor = _self._constructor
-
-            $(_constructor.element).on('click', 'li:not(.is-disabled)', function(){
-                var pagination = $(this).data('pagination')
                 
-                if (pagination != null) {
-                    _self.paginate(pagination)
-                }
-            })
-        },
-
-        jump: function() {
-            const self = this;
-            const _constructor = self._constructor;
-
-            $(_constructor.element).on('submit', 'form', function(e){
-                let value = $(_constructor.element).find('input').val().trim()
-                e.preventDefault()
-
-                if (value > _constructor.paginationsTotal) {
-                    value = _constructor.paginationsTotal
-                }
-
-                if (value != null && value != "" && value != undefined) {
-                    self.paginate(value)
-                }
+                if (_constructor.enableJumpTo && (_constructor.paginationsTotal > _constructor.visiblePagination + 2)) {
+                    let template = `<form>${_constructor.jumpToText}<input type="number" min="1" /><button type="submit"></button></form>`
                 
-                $(_constructor.element).find('input').val(value).focus()
-            })
-        }
-        }
+                    $(this._constructor.element).append(template)
+                }
+            },
+            paginate: function(pagination) {
+                var _constructor = this._constructor
+                var $parent = $(this._constructor.element)
+                var controls = {
+                    "prev" : $parent.find('[data-pagination="prev"]'),
+                    "next" : $parent.find('[data-pagination="next"]'),
+                }
+                switch (pagination) {
+                    case 'prev':
+                        if (_constructor.currentPage > 1) {
+                        _constructor.currentPage--
+                        }
+                        break
+                    case 'next':
+                        if (_constructor.currentPage < Math.ceil(_constructor.itemsTotal / _constructor.itemsPerPage)) {
+                        _constructor.currentPage++
+                        }
+                        break
+                    default:
+                        if(typeof pagination != 'number') {
+                        pagination = parseInt(pagination)
+                        pagination = pagination < 1 ? 1 : pagination
+                        }
+                        _constructor.currentPage = pagination
+                } 
 
-        var yPagination = Object.create(MTU.pagination);
+                if (_constructor.currentPage == _constructor.paginationsTotal) {
+                    controls.next.addClass('is-disabled');
+                    controls.prev.removeClass('is-disabled');
+                } else if (_constructor.currentPage == 1) {
+                    controls.next.removeClass('is-disabled');
+                    controls.prev.addClass('is-disabled');
+                } else {
+                    controls.next.removeClass('is-disabled');
+                    controls.prev.removeClass('is-disabled');
+                }
 
-        yPagination.init({
-        gotoFirstText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-first.png" />',
-        gotoPrevText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-prev.png" /> Prev',
-        gotoNextText: 'Next <img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-next.png" />',
-        gotoLastText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-last.png" />',
-        ellipsis: true,
-        element: '#pagination2'
-        });
-        /*end pagination*/
+                // render again if the page is not visible
+                if (_constructor.currentPage < _constructor.start || _constructor.currentPage > _constructor.end) {
+                    $(_constructor.element).empty()
+                    this.displayPagination()
+                }
+
+            },
+            template: function(args) {
+                // args.pageNumber is required
+                if (args.classNames) {
+                    //return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                    return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+CategorySend+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                } else {
+                    //return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                    return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+CategorySend+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                }
+            },
+            events: function() {
+                var _self = this
+                var _constructor = _self._constructor
+
+                $(_constructor.element).on('click', 'li:not(.is-disabled)', function(){
+                    var pagination = $(this).data('pagination')
+                    
+                    if (pagination != null) {
+                        _self.paginate(pagination)
+                    }
+                })
+            },
+
+            jump: function() {
+                const self = this;
+                const _constructor = self._constructor;
+
+                $(_constructor.element).on('submit', 'form', function(e){
+                    let value = $(_constructor.element).find('input').val().trim()
+                    e.preventDefault()
+
+                    if (value > _constructor.paginationsTotal) {
+                        value = _constructor.paginationsTotal
+                    }
+
+                    if (value != null && value != "" && value != undefined) {
+                        self.paginate(value)
+                    }
+                    
+                    $(_constructor.element).find('input').val(value).focus()
+                })
+            }
+            }
+
+            var yPagination = Object.create(MTU.pagination);
+
+            yPagination.init({
+            gotoFirstText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-first.png" />',
+            gotoPrevText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-prev.png" /> Prev',
+            gotoNextText: 'Next <img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-next.png" />',
+            gotoLastText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-last.png" />',
+            ellipsis: true,
+            element: '#pagination2'
+            });
+            /*end pagination*/
+        }
 
     }, function errorCallback(response) {
         console.log("error 505");    
     });
 
 
-    //testeando
-    /*
-    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ $routeParams.category).then(function successCallback(response) {
-        $scope.Allproducts = response.data;
-        $scope.Resultado = $scope.Allproducts.msg['page_result'];
-        console.log( $scope.Resultado);
-
-
-    }, function errorCallback(response) {
-        console.log("error 505");    
-    });
-    */
+    
 
 
 

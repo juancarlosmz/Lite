@@ -13,7 +13,7 @@ if(isset($_GET['page']) ) {
 
 
     $post_data = array(
-        'token' => 'a5a5ee24a3c1b594cdc6f4de472e406a',
+        'token' => '0c42d6e2d49a93b5db0bacadcf72c919',
         'cat_id' => $category,
         'sale_date_start' => '2000-03-12T11:00:00+08:00',
         'sale_date_end' => '2019-08-15T11:00:00+08:00',
