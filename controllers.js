@@ -916,6 +916,17 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
                     _constructor.currentPage = pagination
             } 
 
+            if (_constructor.currentPage == _constructor.paginationsTotal) {
+                controls.next.addClass('is-disabled');
+                controls.prev.removeClass('is-disabled');
+             } else if (_constructor.currentPage == 1) {
+                controls.next.removeClass('is-disabled');
+                controls.prev.addClass('is-disabled');
+             } else {
+                controls.next.removeClass('is-disabled');
+                controls.prev.removeClass('is-disabled');
+             }
+
             // render again if the page is not visible
             if (_constructor.currentPage < _constructor.start || _constructor.currentPage > _constructor.end) {
                 $(_constructor.element).empty()
