@@ -688,7 +688,10 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         /*Capturando la ruta de categoria*/
         var RutaCompleta = window.location.href;
         var RutaCategory = RutaCompleta.split("/");
+        var Category = RutaCategory[6];
+        var CategorySend = Category.toString();
         console.log(RutaCompleta);
+        console.log(RutaCategory);
         console.log(RutaCategory[6]);
         /*iNICIANDO LA PAGINACION */
 
@@ -923,11 +926,11 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         template: function(args) {
             // args.pageNumber is required
             if (args.classNames) {
-                return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-                /*return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+RutaCategory+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'*/
+                //return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+CategorySend+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
             } else {
-                return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-                /*return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+RutaCategory+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'*/
+                //return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+CategorySend+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
             }
         },
         events: function() {
