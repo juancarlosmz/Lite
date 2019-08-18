@@ -23,7 +23,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     });
     
     //para añadir SKU
-    $scope.prodskus = [];
+    //$scope.prodskus = [];
 /*
     $scope.addToCard = function (p) {
         var resultado = document.getElementsByClassName("valuesku");
@@ -47,22 +47,22 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
     //test session y local storagge
     //link-->https://github.com/gsklee/ngStorage
     $scope.$storage = $localStorage;
-
+/*
     $scope.removeStorage = function () {
         $localStorage.$reset();
     }
-
+ */ 
     //tutorial
     //https://codepen.io/pibby/pen/DLtaK?editors=1010
     //implementando mi codigo ya funcional
     $scope.appTitlesku = "My SKU's List:";
-	$scope.savedsku = localStorage.getItem('todossku');
-	$scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
-	localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+    $scope.savedsku = localStorage.getItem('todossku');
+    $scope.ImportList = JSON.parse($scope.savedsku);
 
+   
 
     $scope.alert = [];
-
+    $scope.todossku = [];
 
     /*
     $scope.addToCard = function (p) {
@@ -88,7 +88,11 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
 
             if (resultado[i].value == p.sku) {
-
+    
+	//$scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+    
+    //localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+                
 /*
 for (var j in $scope.todossku) {
 
@@ -105,9 +109,10 @@ for (var j in $scope.todossku) {
                     textsku: resultado[i].value,
                     donesku: false
                 });
+                resultado[i].value = '';
                 localStorage.setItem('todossku', JSON.stringify($scope.todossku));
                 /*alert*/
-                
+                console.log('add');
                 $scope.alert.push({
                     type:'success',
                     value:'Product added successfully to Import List'
@@ -121,6 +126,9 @@ for (var j in $scope.todossku) {
                         alerta[i].style.display = "none";
                     }
                 }, 2000);
+
+
+                
                 break; 
                 //end
             }
@@ -135,20 +143,20 @@ for (var j in $scope.todossku) {
 
 	$scope.remainingsku = function() {
 		var countsku = 0;
-		angular.forEach($scope.todossku, function(todosku){
+		angular.forEach($scope.ImportList, function(todosku){
 			countsku+= todosku.donesku ? 0 : 1;
 		});
 		return countsku;
 	};
 	$scope.archivesku = function() {
-		var oldTodossku = $scope.todossku;
-		$scope.todossku = [];
-		angular.forEach(oldTodossku, function(todosku){
-			if (!todosku.donesku)
-				$scope.todossku.push(todosku);
+		var oldTodossku = $scope.ImportList;
+		$scope.ImportList = [];
+		angular.forEach(oldTodossku, function(ImportList){
+			if (!ImportList.donesku)
+				$scope.ImportList.push(ImportList);
 		});
-        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
-        console.log($scope.todossku);
+        localStorage.setItem('todossku', JSON.stringify($scope.ImportList));
+        console.log($scope.ImportList);
     };
     
     //carrusel de productos
@@ -525,9 +533,7 @@ empleadoControllers.controller('CustomerList', ['$scope','$http','$timeout','$wi
                 $location.path('/login');   
             }, function errorCallback(response) {
                 //$scope.error = 'Registered User';
-                $timeout(function(){
-                    $window.location.reload();
-                }, 800);
+                
             });
 
         };
@@ -583,8 +589,105 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
 
 
 
-empleadoControllers.controller('ListController', ['$scope','$location','$http',function($scope,$location,$http) {
+empleadoControllers.controller('ListController', ['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout) {
     console.log("list controller");
+
+        /*
+        var indexclass2 = document.getElementsByClassName("indexclass2");
+        
+        for(var i = 0; i < indexclass2.length; i++) {
+            console.log(indexclass2[i]);
+        } 
+        */  
+        /*
+        var indexclass = document.getElementsByClassName("indexclass");
+        for (var i = 0; i < indexclass.length; i++) {
+            
+            if(indexclass[i].value == indexid.value){
+            document.getElementById("indexview").style.display = "block !important";
+            }
+       
+        console.log(indexclass[i]);
+        
+        }
+*/
+
+    $scope.savedsku = localStorage.getItem('todossku');
+    $scope.ImportList = JSON.parse($scope.savedsku);
+    //console.log($scope.ImportList);
+    var ProductsSendphp2 = [];
+    var ProductsSendphp = [];
+    for (var i in $scope.ImportList) {
+        //console.log($scope.ImportList[i].textsku );
+        ProductsSendphp2.push($scope.ImportList[i].textsku);
+        
+    }
+    
+    $scope.remainingsku = function() {
+		var countsku = 0;
+		angular.forEach($scope.ImportList, function(todosku){
+			countsku+= todosku.donesku ? 0 : 1;
+		});
+		return countsku;
+	};
+	$scope.archivesku = function() {
+		var oldTodossku = $scope.ImportList;
+		$scope.ImportList = [];
+		angular.forEach(oldTodossku, function(ImportList){
+			if (!ImportList.donesku)
+				$scope.ImportList.push(ImportList);
+		});
+        localStorage.setItem('todossku', JSON.stringify($scope.ImportList));
+        console.log($scope.ImportList);
+        $timeout(function(){
+            $window.location.reload();
+        }, 100);
+    };
+    ProductsSendphp = 'myData='+JSON.stringify(ProductsSendphp2);
+    //var 
+    //console.log(ProductsSendphp);
+    $http({
+        method : 'POST',
+        url : rute+'chinabrands/GetImportList.php',
+        data: ProductsSendphp,
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+    }).success(function(response){
+        $scope.products = response; 
+
+        $scope.filtroProducts = [];
+        $scope.currentPageProducts = 1;
+        $scope.numPerPageProducts = 42; //es 40
+
+        $scope.hacerPagineoProducts = function (arreglo) {
+            //si no retorna ningun valor
+            if (!arreglo || !arreglo.length) { return; }
+            var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
+            var fin = principio + $scope.numPerPageProducts; //3, 6
+            $scope.filtroProducts = arreglo.slice(principio, fin); // 
+        };
+            
+        
+
+        var miArray2 = [];
+        var miArray = [];
+        for (var i in $scope.products.msg) {
+            var skuconhijos = $scope.products.msg[i]['sku'];
+            if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
+                miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
+                miArray2.push(miArray);
+            }
+        }
+        $scope.dataProducts = miArray2;
+        //total de productos
+        $scope.totalProducts = $scope.dataProducts.length;
+        $scope.hacerPagineoProducts($scope.dataProducts);
+
+        
+
+    }).error(function(error){
+        console.log(error);
+        
+    });
 
 
 }]);
@@ -623,12 +726,12 @@ empleadoControllers.controller('treeController', function($scope) {
 
     $scope.tree = [{
         name: "Manage Products",
-        link: "#/",
+        link: "#/Home",
         icono: "glyphicon glyphicon-tag",
         idoc2: "ocultarico"
     }, {
         name: "Search Products",
-        link: "#/Result/category-6/99",
+        link: "#/Result/category-6/2",
         icono: "glyphicon glyphicon-minus",
         idoc: "ocultarico",
         idoc2: "ocultarico"
@@ -649,10 +752,15 @@ empleadoControllers.controller('treeController', function($scope) {
 
 
 empleadoControllers.controller('AllProductsController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
-    
+$scope.dataLoading = true;   
 
     //cambio de pagina y productos
     $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ $routeParams.category+'&page='+ $routeParams.page).then(function successCallback(response) {
+
+
+$scope.dataLoading = true;        
+$timeout(function(){
+        $scope.dataLoading = false;
         $scope.Allproducts = response.data;
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
         var totalpagination = $scope.Allproducts.msg.total_pages;
@@ -666,6 +774,8 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
 
         }).success(function(response){
+
+            
             $scope.products = response; 
 
             $scope.filtroProducts = [];
@@ -1092,7 +1202,12 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
             element: '#pagination2'
             });
             /*end pagination*/
-        
+    
+//end time to delay
+}, 1000);          
+
+
+
 
     }, function errorCallback(response) {
         console.log("error 505");    

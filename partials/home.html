@@ -25,6 +25,7 @@
 
                       
                         <select class="txtselect" name="" id="opidselect" onChange="searchhome()">
+                          <option value="">--Select Category--</option>
                           <option ng-repeat="cat in categories.msg track by $index" value="{{cat.parent_id}}">{{cat.cat_name}}</option>
                         </select>
 
