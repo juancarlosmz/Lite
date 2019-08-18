@@ -44,92 +44,101 @@
             </table>
     
             <div class="panel panel-heading">
-                <div class="panel-body">
-                    SKU's Category 1
-                </div>
+                <!--
                 <table class="table table-bordered">
                     <tr ng-repeat="R in Resultado track by $index" >
                         <td>{{R}}</td>
                     </tr>
                 </table>
+                -->
 
                 <!--Sin diseño
                 <button ng-repeat="p in pagination track by $index" class="itemhover" > <a href="#/Result/{{p}}"> {{p}} </a></button>
                 -->
-
-                <br>    
-                <div> <label>Load Products from Page: </label> {{Allproducts.msg.page_number}}</div>
-                <ul class="pagination js-pagination" id="pagination2"></ul>
-
             </div>
         </div>
 </div>
 
 
 
-<div ng-controller="SearchController">  
+<div >  
 
-    <!-- Alert msg-->
-    <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
-      ng-repeat="a in alert" 
-      type="{{a.type}}">
-      <i class="glyphicon glyphicon-ok">&nbsp; </i>
-      {{a.value}} 
-    </div>
-  
-          <div class="main">
-                  <div class="container">
+  <!-- Alert msg-->
+  <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+    ng-repeat="a in alert" 
+    type="{{a.type}}">
+    <i class="glyphicon glyphicon-ok">&nbsp; </i>
+    {{a.value}} 
+  </div>
 
-  
-                    <div class="row">
-                      <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel2 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
-                        <div >
-                        <a  class="itemhover" href="#/products/{{ prod.sku }}">
-                          <p class="theimg" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                          </p>
-                          <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
-                          <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
-                          <p  class="title">{{ prod.title }}</p>
-                          <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
-                        </a>   
-                          <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
-                        </div>
+        <div class="main">
+                <div class="container">
+                  <br>
+
+                  <div class="row">
+                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel2 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
+                      <div >
+                      <a  class="itemhover" href="#/products/{{ prod.sku }}">
+                        <p class="theimg" ng-repeat="img in prod.original_img">
+                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                        </p>
+                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                        <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+                        <p  class="title">{{ prod.title }}</p>
+                        <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
+                      </a>   
+                        <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
                       </div>
                     </div>
-                    <hr/>
-
                   </div>
-                </div>
-  
+                  <hr/>
 
-      <div class="container">
-          <header class="app-header">
-            <h1 class="app-title">{{ appTitlesku }}</h1>
-          </header>
-        
-          <section class="app-body">
-            <section class="archive-control">
-              <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
-              <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
-            </section>
-        
-            <ul class="unstyled">
-              <li data-ng-repeat="todosku in todossku track by $index">
-                <input type="checkbox" data-ng-model="todosku.donesku">
-                <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
-              </li>
-            </ul>
-  
+
+                  <div> <label>Load Products from Page: </label> {{Allproducts.msg.page_number}}</div>
+                  <ul class="pagination js-pagination" id="pagination2"></ul>
+
+<!--
+                  <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+-->  
+<!--
+                <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts" previous-text="|<" next-text=">|">
+                </ul>
+-->                
+
+
+
+                </div>
+              </div>
+
+
+
+
+    <div class="container">
+        <header class="app-header">
+          <h1 class="app-title">{{ appTitlesku }}</h1>
+        </header>
+      
+        <section class="app-body">
+          <section class="archive-control">
+            <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
+            <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
           </section>
-        </div>
-  
-  
-  
-  
-  
-  
-  
-                
-  </div>  
-  
+      
+          <ul class="unstyled">
+            <li data-ng-repeat="todosku in todossku track by $index">
+              <input type="checkbox" data-ng-model="todosku.donesku">
+              <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
+            </li>
+          </ul>
+
+        </section>
+      </div>
+
+
+
+
+
+
+
+              
+</div>  

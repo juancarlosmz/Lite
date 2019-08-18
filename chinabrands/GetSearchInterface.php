@@ -13,11 +13,12 @@ if(isset($_GET['page']) ) {
 
 
     $post_data = array(
-        'token' => 'dd66bd4242419170ab27174cd451c0b7',
+        'token' => 'c47c2b61ff5682840ce34eb9f7511424',
         'cat_id' => $category,
         'sale_date_start' => '2000-03-12T11:00:00+08:00',
         'sale_date_end' => '2019-08-15T11:00:00+08:00',
         'page_number' => $page,
+        'per_page' => '100',
     );
     $api_url = "https://gloapi.chinabrands.com/v2/product/search-sku";
     $curl = curl_init($api_url);
