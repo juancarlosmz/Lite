@@ -15,7 +15,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
     //pintar toda la info de los productos
     $scope.searchhome = function(){
-        $location.path('/Result/category-1/1');
+        $location.path('/Result/category-1/99');
     }
 
     categories.list(function(categories) {
@@ -688,19 +688,10 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
                 var skuconhijos = $scope.products.msg[i]['sku'];
                 if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
                     miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
-
-                    /*
-                    v = {
-                        title : p.title
-                        
-                    }
-                    */
-                    //console.log(miArray);
                     miArray2.push(miArray);
                 }
             }
             $scope.dataProducts = miArray2;
-
             //total de productos
             $scope.totalProducts = $scope.dataProducts.length;
             $scope.hacerPagineoProducts($scope.dataProducts);
@@ -714,8 +705,6 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
             $scope.savedsku = localStorage.getItem('todossku');
             $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
             localStorage.setItem('todossku', JSON.stringify($scope.todossku));
-        
-        
             $scope.alert = [];
             $scope.addToCard = function(p) {
                 var resultado = document.getElementsByClassName("valuesku");

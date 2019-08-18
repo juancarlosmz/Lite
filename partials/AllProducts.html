@@ -2,7 +2,7 @@
         <div class="container" >
 
 
-              <input type="button" ng-click="InputProducts()"  value="Mostrar productos">
+              
                 <h3>Search Products</h3>
  
                 <div class="row">
@@ -79,7 +79,7 @@
                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel2 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
                       <div >
                       <a  class="itemhover" href="#/products/{{ prod.sku }}">
-                        <p class="theimg" ng-repeat="img in prod.original_img">
+                        <p class="theimg" ng-repeat="img in prod.original_img track by $index">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                         </p>
                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
