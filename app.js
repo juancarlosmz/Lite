@@ -127,6 +127,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AllProductsController',
         method: 'GET',
       }).
+      when('/Result/category-1/1', {
+        templateUrl: 'partials/AllProducts.html',
+        controller: 'AllProductsController',
+        method: 'GET',
+      }).
       otherwise({
         redirectTo: '/',
         method: 'GET',

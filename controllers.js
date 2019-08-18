@@ -15,7 +15,7 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
     //pintar toda la info de los productos
     $scope.searchhome = function(){
-        $location.path('/Search');
+        $location.path('/Result/category-1/1');
     }
 
     categories.list(function(categories) {
@@ -649,26 +649,6 @@ empleadoControllers.controller('treeController', function($scope) {
 
 
 empleadoControllers.controller('AllProductsController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
-    $http.post(rute+"chinabrands/GetSearchInterface.php").then(function successCallback(response) {
-        $scope.Allproducts = response.data;
-        $scope.Resultado = $scope.Allproducts.msg['page_result'];
-        
-        /*
-        var pagination = [];
-        for (var i = 1; i < $scope.Allproducts.msg.total_pages; i++) {
-            pagination.push(i);
-            
-        }
-        $scope.pagination = pagination;
-        */
-
-    }, function errorCallback(response) {
-        console.log("Error HTTP 505 ");    
-    });
-
-    categories.list(function(categories) {
-        $scope.categories = categories;  
-    });
     
 
     //cambio de pagina y productos
@@ -676,6 +656,25 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         $scope.Allproducts = response.data;
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
         var totalpagination = $scope.Allproducts.msg.total_pages;
+        //Array of Products, from php
+        var ProductsSendphp = JSON.stringify($scope.Resultado);
+        console.log(ProductsSendphp);
+        
+
+        
+        $scope.InputProducts = function(){
+            $http.post(rute+'chinabrands/GetProductCollention.php',ProductsSendphp).then(function successCallback(response) {   
+                console.log('Data Succesfull Sended');
+            }, function errorCallback(response) {
+                console.log('Data Error');
+                /*
+                $timeout(function(){
+                    $window.location.reload();
+                }, 800);
+                */
+            });  
+        };
+
 
         /*
         var pagination = [];
@@ -685,6 +684,11 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         }
         $scope.pagination = pagination;
 */
+        //Categorias
+        categories.list(function(categories) {
+            $scope.categories = categories;  
+        });
+        //
         /*Capturando la ruta de categoria*/
         var RutaCompleta = window.location.href;
         var RutaCategory = RutaCompleta.split("/");
@@ -694,9 +698,6 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
         /*iNICIANDO LA PAGINACION */
         console.log(CategorySend);
 
-        if (!CategorySend || CategorySend === '' || CategorySend === 'undefined' || CategorySend === undefined) {
-            console.log('Select Category');
-        }else{
             /* code to pagination*/
             window.MTU = {}
 
@@ -834,10 +835,16 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
                         text: 1,
                         pageNumber: 1,
                     }))
-                    // insert the prev       
+                    
+                    var PrevPageSendString = '';
+                    var PrevPageRute = window.location.href;
+                    var PrevPageRuteSeparet = PrevPageRute.split("/");
+                    var PrevPage = PrevPageRuteSeparet[7];
+                    var PrevPageSendString = PrevPage.toString();
+                    var PrevPageSend = parseInt(PrevPageSendString);
                     $(_constructor.element).prepend(this.template({
                         text: _constructor.gotoPrevText,
-                        pageNumber: 'prev',
+                        pageNumber: PrevPageSend-1,
                         classNames: _constructor.currentPage == 1 ? 'is-disabled' : null
                     }))
                     // insert the ellipsis
@@ -869,12 +876,6 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
                     }))
                 } else {
                     // insert the prev  
-                    var PrevPageRute = window.location.href;
-                    var PrevPageRuteSeparet = PrevPageRute.split("/");
-                    var PrevPage = PrevPageRuteSeparet[7];
-                    var PrevPageSendString = PrevPage.toString();
-                    var PrevPageSend = parseInt(PrevPageSendString);
-                    
                     $(_constructor.element).prepend(this.template({
                         text: _constructor.gotoPrevText,
                         pageNumber: 'prev',
@@ -954,7 +955,7 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
                 // args.pageNumber is required
                 if (args.classNames) {
                     //return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
-                    return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+CategorySend+'/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
+                    return '<li class="' + args.classNames + '" data-pagination="' + args.pageNumber + '"><a href="#/Result/'+CategorySend+'/'+ args.pageNumber + '  "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
                 } else {
                     //return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+ args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
                     return '<li data-pagination="' + args.pageNumber + '"><a  href="#/Result/'+CategorySend+'/' + args.pageNumber + ' "  >' + (args.text == null ? args.pageNumber : args.text) + '</a></li>'
@@ -1005,7 +1006,7 @@ empleadoControllers.controller('AllProductsController', ['$scope','products','ca
             element: '#pagination2'
             });
             /*end pagination*/
-        }
+        
 
     }, function errorCallback(response) {
         console.log("error 505");    
