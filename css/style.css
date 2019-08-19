@@ -1,3 +1,22 @@
+
+/*menu left*/
+.sidenav {
+  height: 100%;
+  width: 196px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fe924a;
+  overflow-x: hidden;
+}
+
+.main {
+  margin-left: 196px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+  flex: 1;
+}
+
 /*Los iconos*/
 .icohome{
   float: left;
@@ -49,29 +68,7 @@
 
 
 /*contenido*/
-.contleft{
-  margin: 0px !important;
-  padding: 0px !important;
-  position: fixed !important;
-  height: 100%;
-  background-color: #fe924a;
-  z-index:5; 
-  
-}
 
-.contleft2{
-  margin: 0px !important;
-  padding: 0px !important;
-  background-color: #fe924a;
-  z-index:4; 
-}
-
-.contright{
-  margin: 0px !important;
-  padding: 0px !important;
-  height: 100% !important;
-  z-index:3; 
-}
 .navbar-collapse {
   margin: 0px !important;
   padding: 0px !important;
@@ -110,6 +107,9 @@
 /**/
 .dropdown-menu{
   position: static !important;
+}
+.dropdown-menu>li>a {
+  padding: 5px 4px !important;
 }
 /*icono*/
 #ocultarico{
@@ -396,6 +396,73 @@ img{
 /*end css pagination*/
 
 
+
+
+
+/*para las categorias*/
+
+.panel {
+  background: #fff;
+  border: 1px solid #e1e8f0;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.02);
+  border-radius: 4px;
+}
+
+
+.panel.featured-categories {
+  flex-basis: 1;
+  display: inline-flex;
+  margin-top: 16px;
+}
+.featured-categories .panel-body {
+  padding: 0 !important;
+  overflow: visible !important;
+  margin: 0 -1px -1px 0;
+}
+.featured-categories ul.categories-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+.featured-categories li.featured, .featured-categories li.rest {
+  flex: 1 1 220px;
+  border-right: 1px solid #e1e8f0;
+  border-bottom: 1px solid #e1e8f0;
+  transition: all 100ms linear;
+}
+.featured-categories .featured button {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  white-space: pre-wrap;
+  border-radius: 0;
+  color: #202e3c;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+}
+.btn-transparent {
+  background-color: rgba(0,0,0,0);
+  background-image: none;
+  outline: none;
+
+}
+.featured-categories .featured button>svg {
+  flex: 1;
+}
+.icon-lg {
+  height: 40px;
+  width: 40px;
+}
+.featured-categories .featured button span {
+  flex: 3;
+  display: flex;
+  margin-left: 8px;
+}
+
 /*css responsive*/
 
 @media (min-width: 4000px) and (max-width: 12000px){
@@ -415,8 +482,9 @@ img{
   
 }
 
-@media (max-width: 1860px) {
 
+/*
+@media (max-width: 1860px) {
   .contleft{
     margin: 0px !important;
     padding: 0px !important;
@@ -465,11 +533,26 @@ img{
     display: none;
   }
 }
+*/
+
+@media (max-width: 1469px){
+  /*
+  .container.apolo{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+*/
+}
+
+
 @media (max-width: 991px){
   #spacerow{
     margin-bottom: 1000px;
   }
 }
+
 
 @media (max-width: 767px) {
 
@@ -480,14 +563,26 @@ img{
     display: block !important;
   }
 
-  .contleft{
+
+  .sidenav {
     margin: 0px !important;
     padding: 0px !important;
-    position: static !important;
+    /*position: static !important;*/
     height: auto !important;
     background-color: #fe924a;
+    width: 100% !important; 
+    
   }
 
+  .dropdown-menu>li>a {
+    padding: 5px 50px !important;
+    
+  }
+
+  .main {
+    margin-left: 0px !important; 
+    padding-top: 20%;
+  }
   .item.itemcarrusel{
     margin-left: 8%;
     height: 850px;
@@ -502,9 +597,7 @@ img{
   #spacerow{
     margin-bottom: 3500px;
   }
-  .contright{
-    padding-left: 0% !important;
-  }
+
 }
 
 @media (max-width: 500px) {

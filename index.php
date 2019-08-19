@@ -36,14 +36,8 @@
   </head>
   <body data-ng-init='load()'>
 
-
-    <div class="container webdes">
-  
-
-    <div class="col-md-3 col-sm-3 col-xs-0 contleft2">
-    </div>
-      <div class="col-md-3 col-sm-3 col-xs-0 contleft">
-        <div ng-controller="treeController">
+    <div class="sidenav">
+        <div ng-controller="treeController" >
           <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -64,7 +58,7 @@
                 <a  href="#/" ><img src="img/logo.jpg" ></a> 
               </div>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+
           <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
             
             <ul class="nav navbar-nav">
@@ -76,20 +70,19 @@
                 <tree tree='tree'></tree>
               </li>
             </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
           </nav>
         </div>
-      </div>
- 
-      <div class="col-md-9 col-sm-9 col-xs-12 contright">
-          <section >
-          <div class="ng-view"></div>
-             
-          </section>
-      </div>
- 
-
-      
     </div>
+
+    <div class="main">
+
+      <div class="ng-view"></div>
+
+    </div>
+
+
+
+
   </body>
 </html>
