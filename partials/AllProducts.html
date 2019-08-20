@@ -1,19 +1,19 @@
-<div class="main">
-        <div class="container" >
+<div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="container container2prod" >
 
 
               
                 <h3>Search Products</h3>
- 
+
+
+
+              <div class="container container2prod">
                 <div class="row">
                   <div style="padding-right: 0px !important;padding-left: 0px !important;margin-bottom: 15px;" class="item col-md-3 col-sm-3 col-xs-11">
-
-
                       <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
                             <option value="">--Select Category--</option>
                             <option id="categoryid" ng-repeat="cat in categories.msg track by $index" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
                       </select>
-  
                     <!--  
                       <select class="txtselect" ng-model="categories" ng-options="cat.cat_name group by cat.parent_id for cat in categories.msg">
                           <option value="" value="">All Categories</option>
@@ -26,9 +26,11 @@
                   <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
                       <button  ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
                   </div>
-
                 </div>
-            
+              </div>  
+
+
+
             <table class="table table-bordered">
                 <tr>
                     <td>page_number</td>
@@ -42,26 +44,8 @@
                     <td>{{Allproducts.msg.total_pages}}</td>
                 </tr>
             </table>
-    
-            <div class="panel panel-heading">
-                <!--
-                <table class="table table-bordered">
-                    <tr ng-repeat="R in Resultado track by $index" >
-                        <td>{{R}}</td>
-                    </tr>
-                </table>
-                -->
-
-                <!--Sin diseño
-                <button ng-repeat="p in pagination track by $index" class="itemhover" > <a href="#/Result/{{p}}"> {{p}} </a></button>
-                -->
-            </div>
-        </div>
-</div>
 
 
-
-<div >  
 
   <!-- Alert msg-->
   <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
@@ -71,14 +55,13 @@
     {{a.value}} 
   </div>
 
-        <div class="main">
+        <div class="">
             <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                 <div class="container">
                   <br>
 
                   <div class="row">
-                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel2 showsku" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
-                      <div >
+                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel" ng-repeat="prod in filtroProducts track by $index">
                       <a  class="itemhover" href="#/products/{{ prod.sku }}">
                         <p class="theimg" ng-repeat="img in prod.original_img track by $index">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -89,7 +72,6 @@
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
                         <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
-                      </div>
                     </div>
                   </div>
                   <hr/>
@@ -135,11 +117,8 @@
         </section>
       </div>
 
-
-
-
-
-
-
-              
+          
 </div>  
+
+
+</div>

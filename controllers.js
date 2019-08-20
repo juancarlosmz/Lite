@@ -766,7 +766,7 @@ $timeout(function(){
         var totalpagination = $scope.Allproducts.msg.total_pages;
         //Array of Products, from php
         var ProductsSendphp = 'myData='+JSON.stringify($scope.Resultado);
-        console.log(ProductsSendphp);
+    
         $http({
             method : 'POST',
             url : rute+'chinabrands/GetProductCollention.php',
