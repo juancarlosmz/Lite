@@ -479,7 +479,10 @@ img{
   display: flex;
   margin-left: 8px;
 }
-
+/*subcategorias*/
+.subcategories{
+  height: 100% !important;
+}
 /*css responsive*/
 
 @media (min-width: 4000px) and (max-width: 12000px){
@@ -621,6 +624,13 @@ img{
   }
   #spacerow{
     margin-bottom: 3500px;
+  }
+
+  .carousel-control.right{
+    margin-left: 87% !important;
+  }
+  .carousel-control.left{
+    margin-left:-3% !important;
   }
 
 }

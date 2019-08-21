@@ -1,5 +1,5 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="container container2prod" >
+        <div class="" >
 
 
               
@@ -12,13 +12,9 @@
                   <div style="padding-right: 0px !important;padding-left: 0px !important;margin-bottom: 15px;" class="item col-md-3 col-sm-3 col-xs-11">
                       <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
                             <option value="">--Select Category--</option>
-                            <option id="categoryid" ng-repeat="cat in categories.msg track by $index" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+                            <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
                       </select>
-                    <!--  
-                      <select class="txtselect" ng-model="categories" ng-options="cat.cat_name group by cat.parent_id for cat in categories.msg">
-                          <option value="" value="">All Categories</option>
-                      </select>  
-                    -->  
+                    
                     </div>
                   <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
                       <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
@@ -30,7 +26,7 @@
               </div>  
 
 
-
+          <div class="container">
             <table class="table table-bordered">
                 <tr>
                     <td>page_number</td>
@@ -44,7 +40,7 @@
                     <td>{{Allproducts.msg.total_pages}}</td>
                 </tr>
             </table>
-
+          </div>
 
 
   <!-- Alert msg-->
@@ -57,11 +53,21 @@
 
         <div class="">
             <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                <div class="container">
+                <div class="">
                   <br>
 
                   <div class="row">
-                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel" ng-repeat="prod in filtroProducts track by $index">
+
+                    <div class="item col-md-2 col-sm-2 col-xs-0 subcategories">
+                      <ul ng-repeat="cat in categories.msg track by $index">
+                        <li ng-if="cat.parent_id==parentidsubcategoria">
+                          <a href="#/Result/category-{{cat.cat_id}}/1">{{cat.cat_name}}</a>
+                        </li>
+                      </ul>
+                    </div>
+
+
+                    <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel" ng-repeat="prod in dataProducts track by $index">
                       <a  class="itemhover" href="#/products/{{ prod.sku }}">
                         <p class="theimg" ng-repeat="img in prod.original_img track by $index">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">

@@ -751,7 +751,7 @@ empleadoControllers.controller('treeController', function($scope) {
 
 
 
-empleadoControllers.controller('AllProductsController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+empleadoControllers.controller('AllProductsController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
 $scope.dataLoading = true;   
 
     //cambio de pagina y productos
@@ -760,12 +760,13 @@ $scope.dataLoading = true;
 
 $scope.dataLoading = true;        
 $timeout(function(){
-        $scope.dataLoading = false;
+        $scope.dataLoading = true;
         $scope.Allproducts = response.data;
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
         var totalpagination = $scope.Allproducts.msg.total_pages;
         //Array of Products, from php
         var ProductsSendphp = 'myData='+JSON.stringify($scope.Resultado);
+        //console.log( ProductsSendphp);
     
         $http({
             method : 'POST',
@@ -774,30 +775,27 @@ $timeout(function(){
             headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
 
         }).success(function(response){
-
+            $scope.dataLoading = false;
             
             $scope.products = response; 
 
+
+            
             $scope.filtroProducts = [];
             $scope.currentPageProducts = 1;
-            $scope.numPerPageProducts = 42; //es 40
-
+            $scope.numPerPageProducts = 42;
             $scope.hacerPagineoProducts = function (arreglo) {
-                //si no retorna ningun valor
                 if (!arreglo || !arreglo.length) { return; }
                 var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
                 var fin = principio + $scope.numPerPageProducts; //3, 6
                 $scope.filtroProducts = arreglo.slice(principio, fin); // 
             };
-                
-            
 
             var miArray2 = [];
-            var miArray = [];
             for (var i in $scope.products.msg) {
                 var skuconhijos = $scope.products.msg[i]['sku'];
                 if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
-                    miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
+                    var miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
                     miArray2.push(miArray);
                 }
             }
@@ -866,6 +864,7 @@ $timeout(function(){
 
 
         }).error(function(error){
+            $scope.dataLoading = true;
             console.log(error);
             
         });
@@ -880,10 +879,10 @@ $timeout(function(){
         }
         $scope.pagination = pagination;
 */
-        //Categorias
-        categories.list(function(categories) {
-            $scope.categories = categories;  
-        });
+        
+
+        
+
         //
         /*Capturando la ruta de categoria*/
         var RutaCompleta = window.location.href;
@@ -893,7 +892,24 @@ $timeout(function(){
 
         /*iNICIANDO LA PAGINACION */
         console.log(CategorySend);
+        /*la subcategoria*/
+        var subcategoriasepare = CategorySend.split("-");
+        var subcategoria = subcategoriasepare[1];
+        console.log(subcategoria);
+        /* end subcategoria*/
 
+        //Categorias
+        categories.list(function(categories) {
+            $scope.categories = categories;  
+            for(var c in $scope.categories.msg){
+                if($scope.categories.msg[c]['parent_id'] == subcategoria){
+                    //console.log($scope.categories.msg[c]);
+                    $scope.parentidsubcategoria = $scope.categories.msg[c]['parent_id'];
+                }
+                //console.log($scope.categories.msg[c]);
+            }
+        });
+   
             /* code to pagination*/
             window.MTU = {}
 
