@@ -1,5 +1,3 @@
-
-
 /*
 function myComboFilter() {
   var valorselect = document.getElementById("opidselect");
@@ -12,7 +10,7 @@ function myComboFilter() {
     }
   }
 }
-*/
+
 var cantclickmenu=0;
 function menuTemp(){
   var menuleftson = document.getElementById("menuleftson");
@@ -25,8 +23,6 @@ function menuTemp(){
   }
   
 }
-
-
 function FilterValorCombo(){
   var valorselect = document.getElementById("opidselect");
   var valparentid = document.getElementsByClassName("valuesparentid");
@@ -38,15 +34,15 @@ function FilterValorCombo(){
     }
   }
 }
+*/
+
+
 function searchhome(){
   var clicked = document.getElementById("changeclick");
   clicked.click();
 }
 
-function myFunctioninfo(){
-  var todalainfo = document.getElementById("inputinfo").value;
-  document.getElementById("infoprod").innerHTML= todalainfo;
-}
+
 
 
 

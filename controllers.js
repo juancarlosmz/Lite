@@ -477,14 +477,25 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
 
 
 
-empleadoControllers.controller('Productview', ['$scope','product','stock', function($scope,product,stock) {
+empleadoControllers.controller('Productview', ['$scope','product','stock','$timeout', function($scope,product,stock,$timeout) {
+
+
     product.list(function(product) {
-            $scope.product = product;
+        $scope.product = product;
     });
 
     stock.list(function(stock) {
-            $scope.stock = stock;
+        $scope.stock = stock;
     });
+    $timeout(function(){
+        $scope.myFunctioninfo = function(){
+
+            var todalainfo = document.getElementById("inputinfo").value;
+            document.getElementById("infoprod").innerHTML= todalainfo;
+
+        }
+        $scope.myFunctioninfo();
+    }, 2500);   
 
 }]);
 
@@ -592,25 +603,6 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
 empleadoControllers.controller('ListController', ['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout) {
     console.log("list controller");
 
-        /*
-        var indexclass2 = document.getElementsByClassName("indexclass2");
-        
-        for(var i = 0; i < indexclass2.length; i++) {
-            console.log(indexclass2[i]);
-        } 
-        */  
-        /*
-        var indexclass = document.getElementsByClassName("indexclass");
-        for (var i = 0; i < indexclass.length; i++) {
-            
-            if(indexclass[i].value == indexid.value){
-            document.getElementById("indexview").style.display = "block !important";
-            }
-       
-        console.log(indexclass[i]);
-        
-        }
-*/
 
     $scope.savedsku = localStorage.getItem('todossku');
     $scope.ImportList = JSON.parse($scope.savedsku);
@@ -885,6 +877,7 @@ $timeout(function(){
 
         //
         /*Capturando la ruta de categoria*/
+
         var RutaCompleta = window.location.href;
         var RutaCategory = RutaCompleta.split("/");
         var Category = RutaCategory[6];

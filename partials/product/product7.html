@@ -1,7 +1,8 @@
 
 <div class="main">
-  <div class="container">
+  <div class="">
     <div class="row">
+        <br><br>
       <div ng-if="$index==6" class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in product.msg">
           <p id="cambioimg2" class="theimg" ng-repeat="img in prod.original_img">
               <img id="cambioimg" ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -128,7 +129,7 @@
         
         <div class="row">
           <div id="cambiaskucolor" ng-if="$index==6" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
-              <p >{{ prod.title }}</p>
+              <p class="title">{{ prod.title }}</p>
               <p >sku: {{ prod.sku }}</p>
               <p ><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
               <p >Price: $ {{ prod.warehouse_list.YB.price }}</p>
@@ -271,7 +272,7 @@
       <div ng-if="$index==6" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
         <h1>Product Information</h1>
         <p >{{ prod.title }}</p>
-        <button class="btn" onclick="myFunctioninfo()">See details</button>
+        <button style="display: none" class="btn" ng-click="myFunctioninfo()">See details</button>
         <input id="inputinfo" type="hidden" value="{{ prod.goods_desc}}">
         <p id="infoprod"></p>
 

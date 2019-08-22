@@ -1,5 +1,5 @@
 
-<div class="container" >
+<div class="" >
               
     <div class="row">
 
@@ -24,48 +24,31 @@
 
 
 
-<div>  
-          <div class="main">
-                  <div class="container">
-
-                    <div class="row">
-
-                      
-                      <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1">
-                        <div class="row">
-                            {{$index}}
-                            <input class="indexclass" type="text" value="{{$index}}">
-                            <ul class="unstyled">
-                                <li id="indexview" style="display: block"  class="item col-md-1 col-sm-1 col-xs-1" data-ng-repeat="skus in ImportList track by $index">
-                                    {{$index}}
-                                    <input class="indexclass2" type="text" value="{{$index}}">
-                                    <input type="checkbox" data-ng-model="skus.donesku" >
-                                    <span  class="donesku-{{ skus.donesku }}">{{ skus.textsku }}</span>
-                                </li>
-                            </ul>
-                        
-                        <a class="item col-md-3 col-sm-3 col-xs-3"  class="itemhover" href="#/products/{{ prod.sku }}">
-                          <p class="theimg" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                          </p>
-                        </a>   
-                          <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku }}">
-                          <p class="item col-md-4 col-sm-4 col-xs-4"  class="title">{{ prod.title }}</p>
-                          <p class="item col-md-4 col-sm-4 col-xs-4" class="price">$ {{ prod.warehouse_list.YB.price }}</p>
-                          
-                        </div>
-                      </div>
-
-
-
-                      
-                    </div>
-                    <hr/>
-                    <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+    <div>  
+      <div class="main">
+          <div class="">
+            <div class="row" data-ng-repeat="skus in ImportList track by $index">
+                <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1 && skus.textsku == prod.sku ">
+                  <div class="row">
+                    <div class="item col-md-1 col-sm-1 col-xs-1">
+                      <input type="checkbox" data-ng-model="skus.donesku">
+                      <span style="display: none" class="donesku-{{ skus.donesku }}">{{ skus.textsku }}</span>
+                    </div>  
+                    <a class="item col-md-2 col-sm-2 col-xs-3 itemhover imgimportlist" href="#/products/{{ prod.sku }}">
+                      <p ng-repeat="img in prod.original_img">
+                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                      </p>
+                    </a>   
+                    <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku }}">
+                    <p class="item col-md-6 col-sm-6 col-xs-5"  class="title">{{ prod.title }}</p>
+                    <p class="item col-md-3 col-sm-3 col-xs-2" class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                   </div>
                 </div>
-  
-                
-  </div>  
+              </div>
+              <hr/>
+              <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+          </div>
+      </div> 
+    </div>  
   
 
