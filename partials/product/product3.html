@@ -3,6 +3,18 @@
   <div class="">
     <div class="row">
             <br><br>
+
+    <!-- Alert msg-->
+    <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+    ng-repeat="a in alert" 
+    type="{{a.type}}">
+        <i class="glyphicon glyphicon-ok">&nbsp; </i>
+        {{a.value}} 
+    </div>
+
+
+
+
       <div ng-if="$index==2" class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in product.msg">
           <p id="cambioimg2" class="theimg" ng-repeat="img in prod.original_img">
               <img id="cambioimg" ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -109,8 +121,8 @@
         <div class="row">
           <div id="cambiaskucolor" ng-if="$index==2" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
               <p class="title">{{ prod.title }}</p>
-              <p >sku: {{ prod.sku }}</p>
-              <p ><button class="btn"><span>+ | </span><span>Add to Import List</span></button></p>
+              <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+              <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
               <p >Price: $ {{ prod.warehouse_list.YB.price }}</p>
           </div>
         </div>

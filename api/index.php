@@ -35,14 +35,14 @@ switch($action) {
     case 'Login':
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        
         $em = $data['email'];
         $pass = $data['password'];
         if(SesionLogin($fluent,$em,$pass)){
             session_start();
-
-            $_SESSION['id'] = uniqid('ang_');
-            print_r(json_encode($_SESSION['id'] ));
-            //print_r(json_encode(SesionLogin($fluent,$em,$pass)));
+            //$_SESSION['id'] = uniqid('ang_');
+            //print_r(json_encode($_SESSION['id'] ));
+            print_r(json_encode(SesionLogin($fluent,$em,$pass)));
         }else{
             print_r(json_encode(false));
         }

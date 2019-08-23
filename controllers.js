@@ -487,6 +487,44 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
     stock.list(function(stock) {
         $scope.stock = stock;
     });
+
+
+            $scope.savedsku = localStorage.getItem('todossku');
+            $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+            localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+            $scope.alert = [];
+            $scope.addToCard = function(p) {
+                var resultado = document.getElementsByClassName("valuesku");
+                for (var i = 0; i < resultado.length; i++) {
+                    if (resultado[i].value == p.sku) {
+                        $scope.todossku.push({
+                            textsku: resultado[i].value,
+                            donesku: false
+                        });
+                        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+                        /*alert*/
+                        $scope.alert.push({
+                            type:'success',
+                            value:'Product added successfully to Import List'
+                        });
+                        //ocultar el boton x cada sku añadido
+                        document.getElementById('disable'+p.sku).disabled = 'disabled';
+                        //end
+                        //mostrar y ocultar alerta
+                        $timeout(function() {
+                            var alerta = document.getElementsByClassName('alertskus2');
+                            for (var i = 0; i < alerta.length; i++) {
+                                alerta[i].style.display = "none";
+                            }
+                        }, 2000);
+                        break;
+                    }; 
+                };
+            };
+
+
+
+
     $timeout(function(){
         $scope.myFunctioninfo = function(){
 
@@ -495,11 +533,21 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
         }
         $scope.myFunctioninfo();
-    }, 2500);   
+    }, 2600);   
 
 }]);
 
 empleadoControllers.controller('LoginController', ['$scope','$location', 'AuthenticationService','$http','$timeout',function($scope,$location,AuthenticationService,$http,$timeout) {
+
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
+
+    for(var i in $scope.SesionUser){
+        console.log($scope.SesionUser[i]['Nombre']);
+    }
+
+
     $scope.login = function () {
         $scope.dataLoading = true;
         $timeout(function(){
@@ -514,7 +562,11 @@ empleadoControllers.controller('LoginController', ['$scope','$location', 'Authen
                     $scope.error = 'Email or password is incorrect';
                     $scope.dataLoading = false;
                 }else{
-                    console.log(consulta);
+
+                    $scope.saveduser = localStorage.getItem('todosuser');
+                    $scope.todosuser = (localStorage.getItem('todosuser')!==null) ? JSON.parse($scope.saveduser) : [ ];
+                    $scope.todosuser.push(consulta);
+                    localStorage.setItem('todosuser', JSON.stringify($scope.todosuser));
                     $scope.dataLoading = false;
                     $location.path('/home:user');
                 }
@@ -586,14 +638,16 @@ empleadoControllers.controller('RegisterController', ['$scope','$http','$timeout
 
 empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$http',function($scope,$location,$http) {
     console.log("activo");
-
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    console.log("nuevo nuevo",$scope.SesionUser);
     $scope.CloseSession = function(){
-
-            $http.post(rute+'api/?a=Logout').then(function successCallback(response) {
-                $location.path('/login');
-            }, function errorCallback(response) {
-                $scope.error = 'No User';
-            });   
+        localStorage.removeItem('todosuser');
+        $http.post(rute+'api/?a=Logout').then(function successCallback(response) {
+            $location.path('/login');
+        }, function errorCallback(response) {
+            $scope.error = 'No User';
+        });   
     };
 }]);
 
@@ -631,13 +685,34 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
 		});
         localStorage.setItem('todossku', JSON.stringify($scope.ImportList));
         console.log($scope.ImportList);
+        var ProductsSendphp2new = [];
+        var ProductsSendphpnew = [];
+        for (var i in $scope.ImportList) {
+            ProductsSendphp2new.push($scope.ImportList[i].textsku);
+        }
+        ProductsSendphpnew = 'myData='+JSON.stringify(ProductsSendphp2new);
+        console.log(ProductsSendphp2new);
+        $http({
+            method : 'POST',
+            url : rute+'chinabrands/GetImportList.php',
+            data: ProductsSendphpnew,
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+        }).success(function(response){
+            $scope.products = response; 
+            console.log($scope.products);
+    
+        }).error(function(error){
+            console.log(error);
+            
+        });
+        
         $timeout(function(){
-            $window.location.reload();
+            //$window.location.reload();
         }, 100);
     };
     ProductsSendphp = 'myData='+JSON.stringify(ProductsSendphp2);
     //var 
-    //console.log(ProductsSendphp);
+    console.log(ProductsSendphp);
     $http({
         method : 'POST',
         url : rute+'chinabrands/GetImportList.php',
@@ -680,6 +755,40 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
         console.log(error);
         
     });
+
+
+    $scope.saveimportlist = function(){
+        console.log('click import list');
+        var model = {
+            email: $scope.email,
+        };
+        console.log(JSON.stringify($scope.email));
+        
+        console.log(JSON.stringify(ProductsSendphp2));
+        /*
+        var dataof = JSON.stringify(model);
+        $http.post(rute+'api/?a=valemail',dataof).then(function successCallback(response) {
+            var consulta = response.data;
+            if(consulta != false){
+                $scope.error = 'This email is already in use';
+            }else{
+                $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
+                    $location.path('/login');
+                }, function errorCallback(response) {
+                    //$scope.error = 'Registered User';
+                    //location.reload();
+                    $timeout(function(){
+                        $window.location.reload();
+                    }, 800);
+                });
+            }
+        }, function errorCallback(response) {
+            $scope.error = 'Information is incorrect';
+        });   
+    */
+
+    };
+
 
 
 }]);
