@@ -2,7 +2,7 @@
               
     <div class="row">
 
-        <div class="col-md-6 col-md-offset-3" ng-controller="RegisterController">
+        <div class="col-md-6 col-md-offset-3">
             <h2>Register</h2>
             <div ng-show="error" class="alert alert-danger">{{error}}</div>
             <form name="form" ng-submit="register()" role="form">
@@ -38,15 +38,14 @@
 
 </div>
 
-
-<div class="container">
+<div class="container" id="contentlist">
               
     <div class="row">
 
-        <div class="col-md-6 col-md-offset-3" ng-controller="CustomerList">
+        <div class="col-md-6 col-md-offset-3" ng-controller="CustomerList" >
         <h2>Customer List</h2>
 
-        <div class="panel panel-heading">
+        <div class="panel panel-heading" >
   
             <table class="table table-bordered">
                 <tr ng-repeat="m in model">

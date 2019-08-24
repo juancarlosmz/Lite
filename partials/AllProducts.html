@@ -1,5 +1,5 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="" >
+        <div class="container" >
 
 
               
@@ -78,7 +78,8 @@
                         <p  class="title">{{ prod.title }}</p>
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
-                        <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                        <p id="uwelcome" class="btnadd3"><button  ng-click="addToCardlogin()" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                        <p id="ulogin" class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
                     </div>
                   </div>
                   <hr/>
