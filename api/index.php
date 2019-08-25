@@ -24,6 +24,12 @@ switch($action) {
 
         print_r(json_encode(registro($fluent, $data)));
         break;
+    case 'registrarImportList'
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        print_r(json_encode($data));
+        //print_r(json_encode(registroImportList($fluent, $data)));
+        break;
     case 'eliminar':
         header('Content-Type: application/json');
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
@@ -102,6 +108,13 @@ function eliminar($fluent, $id){
 function registro($fluent, $data){
     $data['rol'] = 2;
     $fluent->insertInto('user', $data)
+           ->execute();    
+    return true;
+}
+function registroImportList($fluent, $data){
+    $data['status'] = 1;
+    $data['fecha'] = date('Y-m-d');
+    $fluent->insertInto('ImportList', $data)
            ->execute();    
     return true;
 }

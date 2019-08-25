@@ -37,26 +37,19 @@ CREATE TABLE `user` (
   `rol` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- Dumping data for table `user`
---
+CREATE TABLE `ImportList` (
+  `id` int(11) NOT NULL,
+  `email` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `ImportList` VARCHAR(21000) COLLATE utf8_spanish2_ci NOT NULL,
+  `status` int(2) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
-INSERT INTO `user` (`id`, `Nombre`, `Apellido`, `email`, `contra`, `rol`) VALUES
-(2, 'admin', 'admin', 'admin@gmail.com', '123456', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `user`
---
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+ALTER TABLE `ImportList`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -64,6 +57,16 @@ ALTER TABLE `user`
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
+
+ALTER TABLE `ImportList`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+
+
+INSERT INTO `user` (`id`, `Nombre`, `Apellido`, `email`, `contra`, `rol`) VALUES
+(2, 'admin', 'admin', 'admin@gmail.com', '123456', 1);
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

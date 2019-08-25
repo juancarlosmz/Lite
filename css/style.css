@@ -509,6 +509,19 @@ img{
   opacity: 0;
 }
 
+.uwelcometrue{
+  display: none;
+}
+.uwelcomefalse{
+  display: block;
+}
+.uloginfalse{
+  display: block;
+}
+.ulogintrue{
+  display: none;
+}
+
 /*css responsive*/
 
 @media (min-width: 4000px) and (max-width: 12000px){

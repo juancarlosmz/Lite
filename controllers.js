@@ -4,6 +4,25 @@ var rute = 'http://localhost:50/Lite/';
 empleadoControllers.controller('HomeController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$location', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$location) {
     
 
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
+
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.ulogin = 'ulogintrue';
+        $scope.uwelcome = 'uwelcomefalse';
+    }else{
+        console.log('en all controllers user rol 2');
+        $scope.ulogin = 'uloginfalse';
+        $scope.uwelcome = 'uwelcometrue';
+        console.log($scope.ulogin );
+    }
+
     $scope.buscarProducts = function (busquedaprod) {
         var buscados = $filter('filter') ($scope.dataProducts, function (prod) {
             return (prod.sku.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
@@ -478,7 +497,24 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
 
 
 empleadoControllers.controller('Productview', ['$scope','product','stock','$timeout', function($scope,product,stock,$timeout) {
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
 
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.ulogin = 'ulogintrue';
+        $scope.uwelcome = 'uwelcomefalse';
+    }else{
+        console.log('en all controllers user rol 2');
+        $scope.ulogin = 'uloginfalse';
+        $scope.uwelcome = 'uwelcometrue';
+        console.log($scope.ulogin );
+    }
 
     product.list(function(product) {
         $scope.product = product;
@@ -747,8 +783,17 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
 
 empleadoControllers.controller('ListController', ['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout) {
     console.log("list controller");
+    /*Usuario*/
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
 
-
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    /**/        
     $scope.savedsku = localStorage.getItem('todossku');
     $scope.ImportList = JSON.parse($scope.savedsku);
     //console.log($scope.ImportList);
@@ -803,7 +848,7 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
     };
     ProductsSendphp = 'myData='+JSON.stringify(ProductsSendphp2);
     //var 
-    console.log(ProductsSendphp);
+    //console.log(ProductsSendphp);
     $http({
         method : 'POST',
         url : rute+'chinabrands/GetImportList.php',
@@ -850,12 +895,56 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
 
     $scope.saveimportlist = function(){
         console.log('click import list');
-        var model = {
-            email: $scope.email,
-        };
-        console.log(JSON.stringify($scope.email));
+        $scope.ImportListData = ProductsSendphp2;
         
-        console.log(JSON.stringify(ProductsSendphp2));
+        var model = {
+            email: $scope.Email,
+            ImportList : $scope.ImportListData,
+        };
+
+        //console.log(JSON.stringify(model));
+        dataImportList = JSON.stringify(model);
+        $http.post(rute+'api/?a=registrarImportList',dataImportList).then(function successCallback(response) {   
+            //$location.path('/register_a');
+            var ImportList = response.data;
+            console.log(ImportList);
+            console.log('logrado');
+        }, function errorCallback(response) {
+            //$location.path('/register_a');
+            //$scope.error = 'Error 505';
+            console.log('no logrado');
+        });
+        var data2 = [
+            ['email', $scope.Email],
+            ['ImportList', $scope.ImportListData]
+        ];
+        //console.log(JSON.stringify($scope.email));
+        
+        //console.log(JSON.stringify(ProductsSendphp2));
+
+        
+        console.log(data2);
+        var data = [
+            ['Foo', 'programmer'],
+            ['Bar', 'bus driver'],
+            ['Moo', 'Reindeer Hunter']
+         ];
+   
+        console.log(data);  
+/*
+             var csv = 'Name,Title\n';
+             data.forEach(function(row) {
+                     csv += row.join(',');
+                     csv += "\n";
+             });
+          
+             console.log(csv);
+             var hiddenElement = document.createElement('a');
+             hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+             hiddenElement.target = '_blank';
+             hiddenElement.download = 'people.csv';
+             hiddenElement.click();
+*/
         /*
         var dataof = JSON.stringify(model);
         $http.post(rute+'api/?a=valemail',dataof).then(function successCallback(response) {
@@ -898,17 +987,17 @@ empleadoControllers.controller('treeController', function($scope) {
 
     
     if($scope.Rol == '1' ){
-        //sessionis.style.display  = "none";
         $scope.UserSesion = 'sessionis';
+        $scope.ulogin = 'ulogin';
     }else if($scope.Rol == '2'){
-        //sessionis.style.display  = "none";
         $scope.UserSesion = 'sessionis';
         $scope.UserManage = 'manageis';
+        $scope.ulogin = 'ulogin';
     }else{
-        //iduser.style.display  = "none";
-        //iduser.disabled = true;
         $scope.UserSesionOff = 'sessionoff';
-        console.log('user rol 2');
+        console.log('en el menu user rol 2');
+        $scope.ulogin = 'uwelcome';
+        console.log($scope.ulogin );
     }
     
 
@@ -991,8 +1080,24 @@ empleadoControllers.controller('treeController', function($scope) {
 
 
 empleadoControllers.controller('AllProductsController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
 
-    
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.ulogin = 'ulogintrue';
+        $scope.uwelcome = 'uwelcomefalse';
+    }else{
+        console.log('en all controllers user rol 2');
+        $scope.ulogin = 'uloginfalse';
+        $scope.uwelcome = 'uwelcometrue';
+        console.log($scope.ulogin );
+    }
 
 
 $scope.dataLoading = true;   
@@ -1103,30 +1208,6 @@ $timeout(function(){
                 });
                 localStorage.setItem('todossku', JSON.stringify($scope.todossku));
             };
-
-            $scope.saveduser = localStorage.getItem('todosuser');
-            $scope.SesionUser = JSON.parse($scope.saveduser);
-            //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
-
-            for(var i in $scope.SesionUser){
-                //console.log($scope.SesionUser[i]['email']);
-                $scope.Email = $scope.SesionUser[i]['email'];
-                $scope.Rol = $scope.SesionUser[i]['rol'];
-            }
-            console.log($scope.Rol);
-            var iduser = document.getElementById("uwelcome");
-            var idlogin = document.getElementById("ulogin");
-            if($scope.Rol == '1' || $scope.Rol == '2'){
-                //iduser.style.display  = "block";
-                //idlogin.style.display  = "none";
-                console.log(iduser);
-                console.log(idlogin);
-                console.log('user rol 1');
-            }else{
-                //iduser.style.display  = "none";
-                //iduser.disabled = true;
-                console.log('user rol 2');
-            }
 
         }).error(function(error){
             $scope.dataLoading = true;
