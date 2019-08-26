@@ -118,6 +118,11 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'home/homeuser.php',
         method: 'GET',
       }).
+      when('/verImportList/:email', {
+        controller: 'UserImportListController',
+        templateUrl: 'partials/verUserImportList.html',
+        method: 'GET',
+      }).
       when('/Import-List', {
         controller: 'ListController',
         templateUrl: 'partials/import-list.html',

@@ -4,7 +4,7 @@ if(isset($_GET['id']) ) {
     $goods_sn = $_GET['id'];
 
     $post_data = array(
-        'token' => 'b06152fe2deee9bd643fcb5a53b4aa7d',
+        'token' => 'ba04612a7de889bcdc22ea41a1332afe',
         'goods_sn' => json_encode($goods_sn),
         'warehouse' => 'YB'
     );

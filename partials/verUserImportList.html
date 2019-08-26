@@ -1,0 +1,36 @@
+
+    <div class="container">
+                  
+        <div class="row">
+    
+            <div class="col-md-6 col-md-offset-3" >
+            <h2>User Import List</h2>
+    
+            <div class="panel panel-heading" >
+
+      
+                <table class="table table-bordered">
+                    <tr>
+                      <td>User</td>
+                      <td>Date</td>
+                      <td>Download</td>
+                    </tr>
+                    <tr ng-repeat="m in UserImportList">
+                        <td>{{m.email}}</td>
+                        <td>{{m.fecha}}</td>
+                        <td>
+                            <button class="btn btn-info btn-xs" ng-click="Downloadimportlist()">
+                                <i class="glyphicon glyphicon-download-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>  
+  
+

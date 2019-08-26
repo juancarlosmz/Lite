@@ -18,17 +18,23 @@ switch($action) {
         header('Content-Type: application/json');
         print_r(json_encode(obtener($fluent, $_GET['id'])));
         break;
+    case 'obtenerImportList':
+        header('Content-Type: application/json');
+        //print_r(json_encode($_GET['email']));
+        print_r(json_encode(obtenerImportList($fluent, $_GET['email'])));
+        break;
     case 'registrar':
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
-
         print_r(json_encode(registro($fluent, $data)));
         break;
-    case 'registrarImportList'
+    case 'registrarImportList':
+
+    
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
-        print_r(json_encode($data));
-        //print_r(json_encode(registroImportList($fluent, $data)));
+        //print_r(json_encode($data));
+        print_r(json_encode(registroImportList($fluent, $data)));
         break;
     case 'eliminar':
         header('Content-Type: application/json');
@@ -99,6 +105,12 @@ function obtener($fluent, $id){
     return $fluent->from('user', $id)
                   ->select('user.*, user.Nombre as User')
                   ->fetch();
+}
+function obtenerImportList($fluent, $email){
+    return $fluent->from('ImportList')
+           ->select('ImportList.*') 
+           ->where('email = ?',$email)
+           ->fetchAll();
 }
 function eliminar($fluent, $id){
     $fluent->deleteFrom('user', $id)

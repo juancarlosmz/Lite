@@ -52,6 +52,9 @@
                         <td>{{m.Nombre}}</td>
                         <td>{{m.email}}</td>
                         <td>
+                            <a class="btn btn-default btn-xs" href="#/verImportList/{{m.email}}">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </a>
                             <button class="btn btn-danger btn-xs" ng-click="retirar(m.id)">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>

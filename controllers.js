@@ -17,10 +17,8 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
         $scope.ulogin = 'ulogintrue';
         $scope.uwelcome = 'uwelcomefalse';
     }else{
-        console.log('en all controllers user rol 2');
         $scope.ulogin = 'uloginfalse';
         $scope.uwelcome = 'uwelcometrue';
-        console.log($scope.ulogin );
     }
 
     $scope.buscarProducts = function (busquedaprod) {
@@ -584,17 +582,14 @@ empleadoControllers.controller('LoginController', ['$scope','$location', 'Authen
         $scope.Email = $scope.SesionUser[i]['email'];
         $scope.Rol = $scope.SesionUser[i]['rol'];
     }
-    console.log($scope.Rol);
     var iduser = document.getElementById("welcome");
     var idlogin = document.getElementById("login");
     if($scope.Rol == '1'){
         iduser.style.display  = "block";
         idlogin.style.display  = "none";
-        console.log('user rol 1');
     }else{
         iduser.style.display  = "none";
         iduser.disabled = true;
-        console.log('user rol 2');
     }
 
     $scope.login = function () {
@@ -752,6 +747,8 @@ empleadoControllers.controller('RegisterController_a', ['$scope','$http','$timeo
             });   
     };
 
+    
+
 }]);
 
 
@@ -781,7 +778,7 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
 
 
 
-empleadoControllers.controller('ListController', ['$scope','$window','$http','$timeout',function($scope,$window,$http,$timeout) {
+empleadoControllers.controller('ListController', ['$scope','$window','$http','$timeout','$location',function($scope,$window,$http,$timeout,$location) {
     console.log("list controller");
     /*Usuario*/
     $scope.saveduser = localStorage.getItem('todosuser');
@@ -891,87 +888,80 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
         console.log(error);
         
     });
-
-
     $scope.saveimportlist = function(){
         console.log('click import list');
-        $scope.ImportListData = ProductsSendphp2;
-        
+        $scope.ImportListData = '"'+ProductsSendphp2+'"';
+
         var model = {
             email: $scope.Email,
-            ImportList : $scope.ImportListData,
+            ImportList : $scope.ImportListData ,
         };
 
         //console.log(JSON.stringify(model));
-        dataImportList = JSON.stringify(model);
+        var dataImportList = JSON.stringify(model);
+        //console.log(dataImportList);
+  
         $http.post(rute+'api/?a=registrarImportList',dataImportList).then(function successCallback(response) {   
             //$location.path('/register_a');
-            var ImportList = response.data;
-            console.log(ImportList);
+            localStorage.removeItem('todossku');
+            $location.path('/home');
             console.log('logrado');
         }, function errorCallback(response) {
             //$location.path('/register_a');
             //$scope.error = 'Error 505';
+            localStorage.removeItem('todossku');
+            $location.path('/home');
             console.log('no logrado');
         });
-        var data2 = [
-            ['email', $scope.Email],
-            ['ImportList', $scope.ImportListData]
-        ];
-        //console.log(JSON.stringify($scope.email));
-        
-        //console.log(JSON.stringify(ProductsSendphp2));
-
-        
-        console.log(data2);
-        var data = [
-            ['Foo', 'programmer'],
-            ['Bar', 'bus driver'],
-            ['Moo', 'Reindeer Hunter']
-         ];
-   
-        console.log(data);  
-/*
-             var csv = 'Name,Title\n';
-             data.forEach(function(row) {
-                     csv += row.join(',');
-                     csv += "\n";
-             });
-          
-             console.log(csv);
-             var hiddenElement = document.createElement('a');
-             hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-             hiddenElement.target = '_blank';
-             hiddenElement.download = 'people.csv';
-             hiddenElement.click();
-*/
-        /*
-        var dataof = JSON.stringify(model);
-        $http.post(rute+'api/?a=valemail',dataof).then(function successCallback(response) {
-            var consulta = response.data;
-            if(consulta != false){
-                $scope.error = 'This email is already in use';
-            }else{
-                $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
-                    $location.path('/login');
-                }, function errorCallback(response) {
-                    //$scope.error = 'Registered User';
-                    //location.reload();
-                    $timeout(function(){
-                        $window.location.reload();
-                    }, 800);
-                });
-            }
-        }, function errorCallback(response) {
-            $scope.error = 'Information is incorrect';
-        });   
-    */
-
     };
-
-
-
 }]);
+
+
+empleadoControllers.controller('UserImportListController', ['$scope','$window','$http','$timeout','$location','$routeParams',function($scope,$window,$http,$timeout,$location,$routeParams) {
+    console.log("User import list");
+    /*Usuario*/
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
+
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1'){
+        $http.get(rute+'api/?a=obtenerImportList&email=' + $routeParams.email).then(function successCallback(response) { 
+            $scope.UserImportList = response.data;
+            $scope.paratest = $scope.UserImportList.email;
+            $scope.downloadImpList = $scope.UserImportList.ImportList;
+            $scope.Downloadimportlist = function(){
+            var data = [
+                ['ImportList', $scope.downloadImpList]
+            ];
+                 var csv = '\n';
+                 data.forEach(function(row) {
+                         csv += row.join(',');
+                         csv += "\n";
+                 });
+                 var hiddenElement = document.createElement('a');
+                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                 hiddenElement.target = '_blank';
+                 hiddenElement.download = 'UserImportList.csv';
+                 hiddenElement.click();
+            };
+        }, function errorCallback(response) {
+            console.log('no logrado');
+        }); 
+    }else{
+        console.log("page not found");
+    }
+
+    
+}]);
+
+
+
+
 
 empleadoControllers.controller('treeController', function($scope) {
     
@@ -995,9 +985,7 @@ empleadoControllers.controller('treeController', function($scope) {
         $scope.ulogin = 'ulogin';
     }else{
         $scope.UserSesionOff = 'sessionoff';
-        console.log('en el menu user rol 2');
         $scope.ulogin = 'uwelcome';
-        console.log($scope.ulogin );
     }
     
 
@@ -1093,10 +1081,8 @@ empleadoControllers.controller('AllProductsController', ['$scope','categories','
         $scope.ulogin = 'ulogintrue';
         $scope.uwelcome = 'uwelcomefalse';
     }else{
-        console.log('en all controllers user rol 2');
         $scope.ulogin = 'uloginfalse';
         $scope.uwelcome = 'uwelcometrue';
-        console.log($scope.ulogin );
     }
 
 
@@ -1238,11 +1224,9 @@ $timeout(function(){
         var CategorySend = Category.toString();
 
         /*iNICIANDO LA PAGINACION */
-        console.log(CategorySend);
         /*la subcategoria*/
         var subcategoriasepare = CategorySend.split("-");
         var subcategoria = subcategoriasepare[1];
-        console.log(subcategoria);
         /* end subcategoria*/
 
         //Categorias
