@@ -40,7 +40,7 @@ app.factory('stock', ['$http','$routeParams', function($http,$routeParams) {
       list: function (callback){
         $http({
           method: 'POST',
-          url: ruteserv+'chinabrands/GetProductStock.php?id='+ $routeParams.id,
+          url: ruteserv+'chinabrands/GetProductStock.php?id='+ $routeParams.id+'&wh='+ $routeParams.wh,
           cache: true
         }).success(callback);
       }

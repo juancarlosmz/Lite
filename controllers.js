@@ -508,14 +508,13 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
         $scope.ulogin = 'ulogintrue';
         $scope.uwelcome = 'uwelcomefalse';
     }else{
-        console.log('en all controllers user rol 2');
         $scope.ulogin = 'uloginfalse';
         $scope.uwelcome = 'uwelcometrue';
-        console.log($scope.ulogin );
     }
 
     product.list(function(product) {
         $scope.product = product;
+        console.log($scope.product);
     });
 
     stock.list(function(stock) {

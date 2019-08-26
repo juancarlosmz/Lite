@@ -35,7 +35,7 @@
                       <input type="checkbox" data-ng-model="skus.donesku">
                       <span style="display: none" class="donesku-{{ skus.donesku }}">{{ skus.textsku }}</span>
                     </div>  
-                    <a class="item col-md-2 col-sm-2 col-xs-3 itemhover imgimportlist" href="#/products/{{ prod.sku }}">
+                    <a class="item col-md-2 col-sm-2 col-xs-3 itemhover imgimportlist" href="#/products/{{ prod.sku }}/YB">
                       <p ng-repeat="img in prod.original_img">
                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                       </p>

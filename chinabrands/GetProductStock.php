@@ -2,11 +2,17 @@
 
 if(isset($_GET['id']) ) {
     $goods_sn = $_GET['id'];
+}
+
+if(isset($_GET['wh']) ) {
+    $wh = $_GET['wh'];
+}
+
 
     $post_data = array(
-        'token' => 'ba04612a7de889bcdc22ea41a1332afe',
+        'token' => 'a3f6d40f7c6f834f0119d48c565e3490',
         'goods_sn' => json_encode($goods_sn),
-        'warehouse' => 'YB'
+        'warehouse' => $wh,
     );
     $api_url="https://gloapi.chinabrands.com/v2/product/stock";
     $curl = curl_init($api_url);
@@ -18,5 +24,5 @@ if(isset($_GET['id']) ) {
     $result = curl_exec($curl); //返回结果
     echo $result;
     curl_close($curl);
-}
+
 ?>

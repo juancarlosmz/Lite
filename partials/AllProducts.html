@@ -68,7 +68,7 @@
 
 
                     <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel" ng-repeat="prod in dataProducts track by $index">
-                      <a  class="itemhover" href="#/products/{{ prod.sku }}">
+                      <a  class="itemhover" href="#/products/{{ prod.sku }}/YB">
                         
                         <p class="theimg" ng-repeat="img in prod.original_img track by $index">
                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
