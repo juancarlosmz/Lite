@@ -931,8 +931,11 @@ empleadoControllers.controller('UserImportListController', ['$scope','$window','
     if($scope.Rol == '1'){
         $http.get(rute+'api/?a=obtenerImportList&email=' + $routeParams.email).then(function successCallback(response) { 
             $scope.UserImportList = response.data;
-            $scope.paratest = $scope.UserImportList.email;
-            $scope.downloadImpList = $scope.UserImportList.ImportList;
+            //$scope.downloadImpList = $scope.UserImportList.ImportList;
+
+            for (var i in $scope.UserImportList) {
+                $scope.downloadImpList = $scope.UserImportList[i]['ImportList'];
+            }
             $scope.Downloadimportlist = function(){
             var data = [
                 ['ImportList', $scope.downloadImpList]
@@ -1026,7 +1029,7 @@ empleadoControllers.controller('treeController', function($scope) {
         idoc2: "ocultarico"
     }, {
         name: "Search Products",
-        link: "#/Result/category-6/2",
+        link: "#/Result/category-1/1",
         icono: "glyphicon glyphicon-minus",
         idoc: "ocultarico",
         idoc2: "ocultarico"
@@ -1087,6 +1090,99 @@ empleadoControllers.controller('AllProductsController', ['$scope','categories','
 
 $scope.dataLoading = true;   
 
+//$scope 
+$scope.Sincronizar = function() {
+    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+1+'&page='+ 1).then(function successCallback(response) {    
+        categories.list(function(categories) {
+            $scope.categories = categories; 
+            console.log($scope.categories.msg.length);  
+        });
+
+        $scope.AllproductsOff = response.data;
+        console.log($scope.AllproductsOff.msg.total_pages);
+
+
+        for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+            $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ 1 +'&page='+ i).then(function successCallback(response) {
+                    $scope.AllproductsOficial = response.data;
+
+        
+                    var model = {
+                        ImportList : $scope.AllproductsOficial.msg.page_result,
+                    };
+                    var dataImportList = JSON.stringify(model);
+
+
+
+                    $http.post(rute+'api/?a=registrarAllSKUs',dataImportList).then(function successCallback(response) {   
+                        $scope.dataSKU = response.data;
+                        console.log($scope.dataSKU);
+                        console.log('logrado');
+                    }, function errorCallback(response) {
+                        console.log('no logrado');
+                    });
+
+
+                    //console.log($scope.AllproductsOficial.msg.page_result );
+
+
+
+            }, function errorCallback(response) {
+                console.log("error 505");    
+            });
+        }  
+    }, function errorCallback(response) {
+        console.log("error 505");    
+    });
+}
+
+$scope.VerDescriptions = function() {
+
+    $http.post(rute+'api/?a=listarAllSKUs').then(function successCallback(response) {   
+        $scope.alldescripcionSKU = response.data;
+        //console.log($scope.alldescripcionSKU);
+        console.log('se debe de enviar', $scope.alldescripcionSKU.length);
+
+        var allskusendphp2 = [];
+        for(var i in $scope.alldescripcionSKU){
+            //console.log($scope.alldescripcionSKU[i]['sku']);
+            var allskusendphp = JSON.parse(JSON.stringify($scope.alldescripcionSKU[i]['sku']));
+            allskusendphp2.push(allskusendphp);
+        }
+
+
+        var ProductsSendphp2 = 'myData='+JSON.stringify(allskusendphp2);
+        //
+        
+        /*
+        $http({
+            method : 'POST',
+            url : rute+'chinabrands/GetProductCollention.php',
+            data: ProductsSendphp2,
+            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+        }).success(function(response){
+            $scope.productsdemysql = response; 
+            for(var i in $scope.productsdemysql.msg){
+                if($scope.productsdemysql.msg[i]['status'] == 1){
+                    console.log($scope.productsdemysql.msg[i]['sku']);
+                    console.log($scope.productsdemysql.msg[i]['warehouse_list']);
+                }  
+            }
+        }).error(function(error){
+            $scope.dataLoading = true;
+            console.log(error);  
+        });
+*/
+
+
+        console.log('lista skus');
+    }, function errorCallback(response) {
+        console.log('no logrado');
+    });
+}
+
+
+
 //cambio de pagina y productos
 $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ $routeParams.category+'&page='+ $routeParams.page).then(function successCallback(response) {
 
@@ -1098,8 +1194,11 @@ $timeout(function(){
         $scope.Resultado = $scope.Allproducts.msg['page_result'];
         var totalpagination = $scope.Allproducts.msg.total_pages;
         //Array of Products, from php
+
+        //console.log('se debe de enviar', $scope.Resultado);
+
         var ProductsSendphp = 'myData='+JSON.stringify($scope.Resultado);
-        //console.log( ProductsSendphp);
+        //console.log('se debe de enviar', ProductsSendphp);
     
         $http({
             method : 'POST',

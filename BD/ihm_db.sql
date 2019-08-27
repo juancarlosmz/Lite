@@ -45,10 +45,21 @@ CREATE TABLE `ImportList` (
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+CREATE TABLE `AllSKUs` (
+  `id` int(11),
+  `sku` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `warehouse` varchar(10) COLLATE utf8_spanish2_ci,
+  `idcategoria` int(5) NOT NULL,
+  `status` int(1)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `ImportList`
+  ADD PRIMARY KEY (`id`);
+
+  ALTER TABLE `AllSKUs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -59,6 +70,10 @@ ALTER TABLE `user`
 COMMIT;
 
 ALTER TABLE `ImportList`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
+
+ALTER TABLE `AllSKUs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 COMMIT;
 
@@ -75,12 +90,21 @@ INSERT INTO `user` (`id`, `Nombre`, `Apellido`, `email`, `contra`, `rol`) VALUES
 
 
 /*user BD Godaddy
-apolo
-apolomultimedia
+user ->apolo
+passwors -> apolomultimedia
 
+*/
+/*BASE DE DATOS
+bdwoosource
+ 
 */
 
 /*SSH ACCESS PANEL
 KeyName -> cPanelSSHAccess
 KeyPassword -> apolomultimedia
 */
+
+
+/*user BD SERVER APOLO
+user ->apolo20
+passwors -> apolomultimedia

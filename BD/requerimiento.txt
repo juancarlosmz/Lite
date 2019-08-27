@@ -35,3 +35,6 @@ https://www.apolomultimedia-server1.info:2083/
 apolomultimedias
 
 I,OkOaM+X&2F
+
+
+/*srip css para la descripcion*/

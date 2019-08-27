@@ -8,6 +8,18 @@ $fluent = new FluentPDO($pdo);
 $action = isset($_GET['a']) ? $_GET['a'] : null;
 //
 
+//mi segunda coneccion xd
+//creando nueva coneccion
+$HostName = "localhost"; 
+$UserName = "root"; 
+$Password = ""; 
+$dbname="IHM_DB";     
+// Create connection 
+$connection = new mysqli($HostName, $UserName, $Password, $dbname);      
+// Check connection 
+if ($connection->connect_error){
+    die("Connection failed: " . $connection->connect_error);
+}
 //
 switch($action) {
     case 'listar':
@@ -29,13 +41,33 @@ switch($action) {
         print_r(json_encode(registro($fluent, $data)));
         break;
     case 'registrarImportList':
-
-    
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
         //print_r(json_encode($data));
         print_r(json_encode(registroImportList($fluent, $data)));
         break;
+    case 'registrarAllSKUs':
+        
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        $allsku = $data['ImportList'];
+        $valores = [];
+        for ($i = 1, $l = count($allsku); $i < $l; $i++){
+            $valores[] = "('" . NULL . "', '" . $allsku[$i] . "' , '' , '" . 1 . "' , '')";
+        }
+        $sql = "INSERT INTO AllSKUs (id, sku, warehouse, idcategoria,status)
+        VALUES ".implode(', ', $valores)."";
+        if ($connection->multi_query($sql) === TRUE){
+            print_r(json_encode('New records created successfully'));
+        }else{
+            print_r(json_encode('Error:'. $sql . "<br>" . $connection->error));
+        }
+        $connection->close();
+        break; 
+    case 'listarAllSKUs':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarSKUs($fluent)));
+        break;       
     case 'eliminar':
         header('Content-Type: application/json');
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
@@ -101,6 +133,12 @@ function listar($fluent){
          ->orderBy("id DESC")
          ->fetchAll();
 }
+function listarSKUs($fluent){
+    return $fluent
+         ->from('AllSKUs')
+         ->fetchAll();
+}
+
 function obtener($fluent, $id){
     return $fluent->from('user', $id)
                   ->select('user.*, user.Nombre as User')
@@ -127,6 +165,12 @@ function registroImportList($fluent, $data){
     $data['status'] = 1;
     $data['fecha'] = date('Y-m-d');
     $fluent->insertInto('ImportList', $data)
+           ->execute();    
+    return true;
+}
+
+function registroAllSKUs($fluent, $data){
+    $fluent->insertInto('AllSKUs', $data)
            ->execute();    
     return true;
 }

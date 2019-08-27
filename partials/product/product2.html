@@ -138,7 +138,7 @@
         
         <div class="row">
           <div id="cambiaskucolor" ng-if="$index==1" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
-              <p >{{ prod.title }}</p>
+              <p class="title">{{ prod.title }}</p>
               <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
               <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
               <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>

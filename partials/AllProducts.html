@@ -1,5 +1,6 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="container" >
+
+        <div class="container">
 
 
               
@@ -9,24 +10,31 @@
 
               <div class="container container2prod">
                 <div class="row">
-                  <div style="padding-right: 0px !important;padding-left: 0px !important;margin-bottom: 15px;" class="item col-md-3 col-sm-3 col-xs-11">
+                  <div style="margin-bottom: 15px;" class="item col-md-10 col-sm-10 col-xs-10">
                       <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
                             <option value="">--Select Category--</option>
                             <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
                       </select>
-                    
-                    </div>
+                  </div>
+
+<!-- 
                   <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
                       <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
                   </div>    
                   <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
                       <button  ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
                   </div>
+-->
+
                 </div>
               </div>  
 
 
           <div class="container">
+              <button ng-click="Sincronizar()" class="btn"><span>SINCRONIZAR</span></button>
+
+              <button ng-click="VerDescriptions()" class="btn"><span>Ver Descripcion</span></button>
+              
             <table class="table table-bordered">
                 <tr>
                     <td>page_number</td>
@@ -51,21 +59,38 @@
     {{a.value}} 
   </div>
 
-        <div class="">
+
+        <div class="container contallprod1">
+            <div class="row">
+                <div class="item col-md-12 col-sm-12 col-xs-12 subcategories">
+                    <ul class="list-group" style="margin-bottom: 0px !important;">
+                      <li class="list-group-item list-group-item-action list-group-item-success">
+                          Sub Categories
+                      </li>
+                    </ul>
+                    <ul class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in categories.msg track by $index">
+                      <li style="list-style:none;" ng-if="cat.parent_id==parentidsubcategoria">
+                        <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1">{{cat.cat_name}}</a>
+                      </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="container contallprod2">
             <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
                 <div class="">
                   <br>
 
+
                   <div class="row">
 
-                    <div class="item col-md-2 col-sm-2 col-xs-0 subcategories">
-                      <ul ng-repeat="cat in categories.msg track by $index">
-                        <li ng-if="cat.parent_id==parentidsubcategoria">
-                          <a href="#/Result/category-{{cat.cat_id}}/1">{{cat.cat_name}}</a>
-                        </li>
-                      </ul>
-                    </div>
-
+                      
+                    <!-- aqui va las sub categorias -->
+                    
 
                     <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel" ng-repeat="prod in dataProducts track by $index">
                       <a  class="itemhover" href="#/products/{{ prod.sku }}/YB">
@@ -76,17 +101,124 @@
                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
                         <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
                         <p  class="title">{{ prod.title }}</p>
+
+
+<!--
+                        <div class="row">
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.YB.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.YB.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.ESTJWH.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.ESTJWH.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.ESTJWHFZ.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.ESTJWHFZ.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.FCYWHQ.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.FREDCGC.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.FREDCGC.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.FXHKGCZY.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.FXHKGCZY.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.GBYKDFX2.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.GBYKDFX2.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
+                                  <p >{{ prod.warehouse_list.HKTJWH.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.HKTJWH.goods_number }}</p>                        
+                          </div>
+                        </div>
+-->
+
+
+                        
+                        <div class="row">
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p >{{ prod.warehouse_list.YB.price }}</p>
+                                    <p >{{ prod.warehouse_list.YB.goods_number }}</p>
+
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p >{{ prod.warehouse_list.ZQ01.price }}</p>
+                                    <p >{{ prod.warehouse_list.ZQ01.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p>{{ prod.warehouse_list.ZQDZ01.price }}</p>
+                                    <p >{{ prod.warehouse_list.ZQDZ01.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p >{{ prod.warehouse_list.FCYWHQ.price }}</p>
+                                    <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p > {{ prod.warehouse_list.SZXIAWAN.price }}</p>
+                                    <p >{{ prod.warehouse_list.SZXIAWAN.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p>{{ prod.warehouse_list.B2BREXIAOWH.price }}</p>
+                                    <p >{{ prod.warehouse_list.B2BREXIAOWH.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                
+                                    <p>{{ prod.warehouse_list.FXLAWH.price }}</p>
+                                    <p >{{ prod.warehouse_list.FXLAWH.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                
+                                    <p > {{ prod.warehouse_list.YB.price }}</p>
+                                    <p >{{ prod.warehouse_list.FXLAWH2.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p >{{ prod.warehouse_list.YB.price }}</p>
+                                    <p >{{ prod.warehouse_list.MXTJWH.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p >{{ prod.warehouse_list.YB.price }}</p>
+                                    <p >{{ prod.warehouse_list.FXJFKGC.goods_number }}</p>
+                                
+                            </div>
+                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                    <p > {{ prod.warehouse_list.YB.price }}</p>
+                                    <p >{{ prod.warehouse_list.USZYCB.goods_number }}</p>
+                                
+                            </div>
+                        </div>
+  
+
+
+
+
+
+
+
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
                         <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
                         <p id="" class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
                     </div>
                   </div>
-                  <hr/>
-
-
-                  <div> <label>Load Products from Page: </label> {{Allproducts.msg.page_number}}</div>
+              
+                  <div> <label>Page: </label> {{Allproducts.msg.page_number}}</div>
                   <ul class="pagination js-pagination" id="pagination2"></ul>
+                  <hr/>
 
 <!--
                   <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
@@ -100,32 +232,7 @@
 
                 </div>
               </div>
-
-
-
-
-    <div class="container">
-        <header class="app-header">
-          <h1 class="app-title">{{ appTitlesku }}</h1>
-        </header>
-      
-        <section class="app-body">
-          <section class="archive-control">
-            <span>{{ remainingsku() }} of {{ todossku.length }} remaining</span>
-            <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
-          </section>
-      
-          <ul class="unstyled">
-            <li data-ng-repeat="todosku in todossku track by $index">
-              <input type="checkbox" data-ng-model="todosku.donesku">
-              <span class="donesku-{{ todosku.donesku }}">{{ todosku.textsku }}</span>
-            </li>
-          </ul>
-
-        </section>
-      </div>
-
-          
+        
 </div>  
 
 
