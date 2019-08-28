@@ -1023,21 +1023,27 @@ empleadoControllers.controller('treeController', function($scope) {
    
 
     $scope.tree = [{
-        name: "Manage Products",
+        name: "Search Products",
         link: "#/Home",
-        icono: "glyphicon glyphicon-tag",
+        icono: "glyphicon glyphicon-search",
         idoc2: "ocultarico"
-    }, {
+    }, 
+
+    /*
+    {
         name: "Search Products",
         link: "#/Result/category-1/1",
         icono: "glyphicon glyphicon-minus",
         idoc: "ocultarico",
         idoc2: "ocultarico"
-    }, {
+    }, 
+    */
+    
+    {
         name: "Products Import List",
         link: "#/Import-List",
-        icono: "glyphicon glyphicon-list-alt",
-        idoc: "ocultarico"
+        icono: "glyphicon glyphicon-cog",
+        idoc2: "ocultarico"
     },{
         name: "Login",
         link: "#/login",
@@ -1225,10 +1231,14 @@ $timeout(function(){
 
             var miArray2 = [];
             for (var i in $scope.products.msg) {
+                //console.log($scope.products.msg[i]);
                 var skuconhijos = $scope.products.msg[i]['sku'];
-                if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1){
+                if( skuconhijos.substr(7,8) == "01" && $scope.products.msg[i]['status'] == 1 && $scope.products.msg[i]['warehouse_list']['YB']['goods_number'] >= 5){
+                    //console.log($scope.products.msg[i]['warehouse_list']['YB']['goods_number']);
+                    //console.log($scope.products.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
                     var miArray = JSON.parse(JSON.stringify($scope.products.msg[i]));
                     miArray2.push(miArray);
+                    
                 }
             }
             $scope.dataProducts = miArray2;
@@ -1326,16 +1336,46 @@ $timeout(function(){
         var subcategoriasepare = CategorySend.split("-");
         var subcategoria = subcategoriasepare[1];
         /* end subcategoria*/
-
+        console.log(CategorySend);
+        console.log(subcategoria);
         //Categorias
+
+        //guardando el nombre de la categoria
+        $scope.savedcategoria = localStorage.getItem('todoscategoria');
+        $scope.todoscategoria = (localStorage.getItem('todoscategoria')!==null) ? JSON.parse($scope.savedcategoria) : [ ];
+        //end
         categories.list(function(categories) {
             $scope.categories = categories;  
             for(var c in $scope.categories.msg){
                 if($scope.categories.msg[c]['parent_id'] == subcategoria){
                     //console.log($scope.categories.msg[c]);
                     $scope.parentidsubcategoria = $scope.categories.msg[c]['parent_id'];
+                    
                 }
-                //console.log($scope.categories.msg[c]);
+                if($scope.categories.msg[c]['cat_id'] == subcategoria && $scope.categories.msg[c]['parent_id'] == 0){
+
+                    $scope.namecategoria = $scope.categories.msg[c]['cat_name'];
+/*
+                    $scope.todoscategoria.push($scope.namecategoria);
+                    localStorage.setItem('todoscategoria', JSON.stringify($scope.todoscategoria));
+
+                    $scope.SesionCategoria = JSON.parse($scope.savedcategoria);
+                    $scope.lugaritem = $scope.SesionCategoria.length;
+                    console.log($scope.lugaritem-1);
+                    console.log($scope.SesionCategoria[$scope.lugaritem]);
+                  */
+                    localStorage.removeItem('todoscategoria');
+                }
+
+                if($scope.categories.msg[c]['cat_id'] == subcategoria && $scope.categories.msg[c]['parent_id'] != 0){
+                    $scope.savedcategoria = localStorage.getItem('todoscategoria');
+                    $scope.SesionCategoria = JSON.parse($scope.savedcategoria);
+
+                    $scope.namesubcategoria = $scope.categories.msg[c]['cat_name'];
+                    console.log($scope.namecategoria);
+                }
+
+                
             }
         });
    
@@ -1543,7 +1583,7 @@ $timeout(function(){
                 }
                 
                 if (_constructor.enableJumpTo && (_constructor.paginationsTotal > _constructor.visiblePagination + 2)) {
-                    let template = `<form>${_constructor.jumpToText}<input type="number" min="1" /><button type="submit"></button></form>`
+                    let template = `<form style="color: #555;">${_constructor.jumpToText}<input type="number" min="1" /><button type="submit"></button></form>`
                 
                     $(this._constructor.element).append(template)
                 }
@@ -1640,8 +1680,13 @@ $timeout(function(){
 
             yPagination.init({
             gotoFirstText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-first.png" />',
-            gotoPrevText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-prev.png" /> Prev',
-            gotoNextText: 'Next <img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-next.png" />',
+            /*
+            gotoPrevText: '<i class="glyphicon glyphicon-menu-left"></i>Prev',
+            gotoNextText: 'Next <i style="float:right;" class="glyphicon glyphicon-menu-right"></i>',
+            */
+            gotoPrevText: '< Prev',
+            gotoNextText: 'Next >',
+
             gotoLastText: '<img src="https://prep-community.musictribe.com/html/assets/pagination_arrow-last.png" />',
             ellipsis: true,
             element: '#pagination2'

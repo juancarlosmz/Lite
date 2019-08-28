@@ -15,183 +15,197 @@
 
         
               
-                  <h3>Search Products</h3>
-
-                  
-                  
-              
-
-                  <div class="row">
-                    <div style="margin-bottom: 15px;" class="item col-md-10 col-sm-10 col-xs-10"> 
-                        <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
-                          <option value="">--Select Category--</option>
-                          <option ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
-                        </select>
-                      <!--  
-                        <select class="txtselect" ng-model="categories" ng-options="cat.cat_name group by cat.parent_id for cat in categories.msg">
-                            <option value="" value="">All Categories</option>
-                        </select>  
-                      -->  
-                    </div>
-
-<!--               
-                    <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
-                        <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchhome()">
-                    </div>    
-                    <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
-                        <button id="changeclick" ng-click="searchhome()" class="btn btnsearch">Search</button>
-                    </div>
--->
-
-                  </div>
+             
                   <br>
-                  <div class="row">
-                      <div class="panel featured-categories">
-                          <div class="panel-body">
-                            <ul class="categories-list">
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-826/1'" class="margin btn-transparent"><svg class="icon-lg">
-                                  <img width="50"  src="img/home-garden-icon.png"></svg> <span>Home &amp; Garden</span>
-                                </button>
-                              </li>
+                  <div class="row" >
 
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-469/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/consumerElectronic.svg"></svg><span>Consumer Electronics</span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-774/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/SportsEntertainment.png"></svg> <span>Sports &amp; Entertainment</span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-789/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/watch.svg"></svg> <span>Watches</span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-330/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/MotherandKids.png"></svg> <span>Mother &amp; Kids</span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-162/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/healthandbeauty.jpg"></svg> <span>Beauty &amp; Health</span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-1/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/cocktail-dress.svg"></svg> <span>Women’s Clothing </span>
-                                </button>
-                              </li>
-                              <li class="featured">
-                                <button type="button" onclick="window.location.href='#/Result/category-113/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                    <img width="50"  src="img/pendant.svg"></svg> <span>Jewelry</span>
-                                </button>
-                              </li>
+                    
+                    <div class="item col-md-12 col-sm-12 col-xs-12">
 
-                              <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-1058/1'"  class="margin btn-transparent"><svg class="icon-lg">
-                                      <img width="50"  src="img/toys.png"></svg> <span>Toys &amp; Hobbies</span>
+                        <div class="panel featured-categories">
+                            <div class="panel-body">
+                              <ul class="categories-list">
+
+                      
+
+
+
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-826/1'" class="margin btn-transparent"><svg class="icon-lg">
+                                    <img width="50"  src="img/home-garden-icon.png"></svg> <span>Home &amp; Garden</span>
                                   </button>
-                              </li>
-
-                              <li class="rest featured">
-                                  <button type="button" class="margin btn-transparent"><svg class="icon-lg"><span class="glyphicon glyphicon-option-horizontal"></span></svg>  
-                                      <select name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
-                                        <option value="">More categories</option>
-                                        <option ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0 && cat.cat_id != 826 && cat.cat_id != 469 && cat.cat_id != 774 && cat.cat_id != 789 && cat.cat_id != 330 && cat.cat_id != 162 && cat.cat_id != 1 && cat.cat_id != 113 && cat.cat_id != 1058" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
-                                      </select>
+                                </li>
+  
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-469/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/consumerElectronic.svg"></svg><span>Consumer Electronics</span>
                                   </button>
-                                  
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-774/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/SportsEntertainment.png"></svg> <span>Sports &amp; Entertainment</span>
+                                  </button>
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-789/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/watch.svg"></svg> <span>Watches</span>
+                                  </button>
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-330/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/MotherandKids.png"></svg> <span>Mother &amp; Kids</span>
+                                  </button>
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-162/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/healthandbeauty.jpg"></svg> <span>Beauty &amp; Health</span>
+                                  </button>
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-1/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/cocktail-dress.svg"></svg> <span>Women’s Clothing </span>
+                                  </button>
+                                </li>
+                                <li class="featured">
+                                  <button type="button" onclick="window.location.href='#/Result/category-113/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                      <img width="50"  src="img/pendant.svg"></svg> <span>Jewelry</span>
+                                  </button>
+                                </li>
+  
+                                <li class="featured">
+                                    <button type="button" onclick="window.location.href='#/Result/category-1058/1'"  class="margin btn-transparent"><svg class="icon-lg">
+                                        <img width="50"  src="img/toys.png"></svg> <span>Toys &amp; Hobbies</span>
+                                    </button>
+                                </li>
+  
+                                <li class="rest featured">
+                                    <button type="button" class="margin btn-transparent"><svg class="icon-lg"><span class="glyphicon glyphicon-option-horizontal"></span></svg>  
+                                        <select name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
+                                          <option value="">More categories</option>
+                                          <option ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0 && cat.cat_id != 826 && cat.cat_id != 469 && cat.cat_id != 774 && cat.cat_id != 789 && cat.cat_id != 330 && cat.cat_id != 162 && cat.cat_id != 1 && cat.cat_id != 113 && cat.cat_id != 1058" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+                                        </select>
+                                    </button>
+                                </li>
+  
                                 
-                                
-                              </li>
-                            </ul>
-                          </div>
-                      </div>
+                              </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                      
                   </div>
 
  
                   <!--Collections-->
                   <h3>Best-Selling Products</h3>
                   <div class="row" id="spacerow">
-                  <div class="carrusel">  
-                      <div id="slides_control">
-                        <div>
-                          <carousel interval="myInterval">
-                            <slide  ng-repeat="prod in groupedSlides track by $index" active="slide.active">
 
-                              <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
-                                <a  class="itemhover" href="#/products/{{ prod.image1.sku }}/YB">
-                                  <p class="theimg" ng-repeat="img in prod.image1.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                  </p>
-                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
-                                  <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
-                                  <p class="title">{{ prod.image1.title }}</p>
-                                  <p class="price">$ {{ prod.image1.warehouse_list.YB.price }}</p>
-                                </a>   
-                                  <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
-                                  <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
-                              </div> 
+                    <div class="item col-md-12 col-sm-12 col-xs-12">
 
-                              <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
-                                <a  class="itemhover" href="#/products/{{ prod.image2.sku }}/YB">
-                                  <p class="theimg" ng-repeat="img in prod.image2.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                  </p>
-                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
-                                  <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
-                                  <p class="title">{{ prod.image2.title }}</p>
-                                  <p class="price">$ {{ prod.image2.warehouse_list.YB.price }}</p>
-                                </a>  
-                                  <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
-                                  <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image2.sku}}"  ng-click="addToCard(prod.image2)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
-                                
+                        <div class="carrusel">  
+                            <div id="slides_control">
+                              <div>
+                                <carousel interval="myInterval">
+                                  <slide  ng-repeat="prod in groupedSlides track by $index" active="slide.active">
+      
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a  class="itemhover" href="#/products/{{ prod.image1.sku }}/YB">
+                                        <p class="theimg" ng-repeat="img in prod.image1.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
+                                        <p class="title">{{ prod.image1.title }}</p>
+                                        <p class="price">$ {{ prod.image1.warehouse_list.YB.price }}</p>
+
+                                        <div class="row">
+                                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                                    <img width="30" src="img/bchina.png">
+                                                    <p >{{ prod.image1.warehouse_list.YB.price }}</p>
+                                                    <p >{{ prod.image1.warehouse_list.YB.goods_number }}</p>
+                                            </div>
+                
+                                            <div  class="item col-md-2 col-sm-2 col-xs-2">
+                                                    <p>{{ prod.image1.warehouse_list.FXLAWH.price }}</p>
+                                                    <p >{{ prod.image1.warehouse_list.FXLAWH.goods_number }}</p>
+                                            </div>
+                                        </div>
+                                      </a>   
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                                    </div> 
+      
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a  class="itemhover" href="#/products/{{ prod.image2.sku }}/YB">
+                                        <p class="theimg" ng-repeat="img in prod.image2.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
+                                        <p class="title">{{ prod.image2.title }}</p>
+                                        <p class="price">$ {{ prod.image2.warehouse_list.YB.price }}</p>
+                                      </a>  
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image2.sku}}"  ng-click="addToCard(prod.image2)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
+                                      
+                                    </div>
+      
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a  class="itemhover" href="#/products/{{ prod.image3.sku }}/YB">
+                                        <p class="theimg" ng-repeat="img in prod.image3.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
+                                        <p class="title">{{ prod.image3.title }}</p>
+                                        <p class="price">$ {{ prod.image3.warehouse_list.YB.price }}</p>
+                                      </a>   
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image3.sku}}"  ng-click="addToCard(prod.image3)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                                        
+                                    </div> 
+      
+      
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a  class="itemhover" href="#/products/{{ prod.image4.sku }}/YB">
+                                        <p class="theimg" ng-repeat="img in prod.image4.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
+                                        <p class="title">{{ prod.image4.title }}</p>
+                                        <p class="price">$ {{ prod.image4.warehouse_list.YB.price }}</p>
+                                      </a>  
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image4.sku}}"  ng-click="addToCard(prod.image4)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
+      
+                                    </div>  
+                                  </slide> 
+                                </carousel>
                               </div>
-
-                              <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
-                                <a  class="itemhover" href="#/products/{{ prod.image3.sku }}/YB">
-                                  <p class="theimg" ng-repeat="img in prod.image3.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                  </p>
-                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
-                                  <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
-                                  <p class="title">{{ prod.image3.title }}</p>
-                                  <p class="price">$ {{ prod.image3.warehouse_list.YB.price }}</p>
-                                </a>   
-                                  <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
-                                  <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image3.sku}}"  ng-click="addToCard(prod.image3)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
-                                  
-                              </div> 
-
-
-                              <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
-                                <a  class="itemhover" href="#/products/{{ prod.image4.sku }}/YB">
-                                  <p class="theimg" ng-repeat="img in prod.image4.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                  </p>
-                                  <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
-                                  <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
-                                  <p class="title">{{ prod.image4.title }}</p>
-                                  <p class="price">$ {{ prod.image4.warehouse_list.YB.price }}</p>
-                                </a>  
-                                  <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
-                                  <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image4.sku}}"  ng-click="addToCard(prod.image4)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
-
-                              </div>  
-                            </slide> 
-                          </carousel>
+                            </div>
                         </div>
-                      </div>
-                  </div>
+
+
+
+                    </div>
+
+
+                  
                   </div>
 
                   <!--Collections-->
                   <h3>High Potential Profit</h3>
                   <div class="row" >
+
+                      <div class="item col-md-12 col-sm-12 col-xs-12">
+
+
                   <div class="carrusel">  
                       <div id="slides_control">
                         <div>
@@ -261,6 +275,13 @@
 
                             </slide> 
                           </carousel>
+
+
+                        </div>
+
+
+
+
                         </div>
                       </div>
                   </div>

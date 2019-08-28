@@ -266,56 +266,43 @@
             <div class="row">
                 <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
                     <p >Warehouse:</p>
-                    <div class="row">
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}">
-                                <p >{{ prod.warehouse_list.YB.warehouse }}</p>
-                                <p >{{ prod.warehouse_list.YB.goods_number }}</p>
-                            </a>
+
+                        <div class="row">
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.YB.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.YB.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.ESTJWH.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.ESTJWH.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.ESTJWHFZ.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.ESTJWHFZ.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.FCYWHQ.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.FREDCGC.warehouse }}</p>
+                                  <p >{{ prod.warehouse_list.FREDCGC.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.FXHKGCZY.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.FXHKGCZY.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.GBYKDFX2.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.GBYKDFX2.goods_number }}</p>                        
+                          </div>
+                          <div class="item col-md-2 col-sm-2 col-xs-1">                        
+                                  <p >{{ prod.warehouse_list.HKTJWH.warehouse  }}</p>
+                                  <p >{{ prod.warehouse_list.HKTJWH.goods_number }}</p>                        
+                          </div>
                         </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.ESTJWH.warehouse }}">
-                                <p >{{ prod.warehouse_list.ESTJWH.warehouse  }}</p>
-                                <p >{{ prod.warehouse_list.ESTJWH.goods_number }}</p>
-                            </a>
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.ESTJWHFZ.warehouse }}">
-                                <p >{{ prod.warehouse_list.ESTJWHFZ.warehouse }}</p>
-                                <p >{{ prod.warehouse_list.ESTJWHFZ.goods_number }}</p>
-                            </a>    
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.FCYWHQ.warehouse }}">
-                                <p >{{ prod.warehouse_list.FCYWHQ.warehouse }}</p>
-                                <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>
-                            </a>    
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.FREDCGC.warehouse }}">
-                                <p >{{ prod.warehouse_list.FREDCGC.warehouse }}</p>
-                                <p >{{ prod.warehouse_list.FREDCGC.goods_number }}</p>
-                            </a> 
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.FXHKGCZY.warehouse }}">
-                                <p >{{ prod.warehouse_list.FXHKGCZY.warehouse  }}</p>
-                                <p >{{ prod.warehouse_list.FXHKGCZY.goods_number }}</p>
-                            </a> 
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.GBYKDFX2.warehouse }}">
-                                <p >{{ prod.warehouse_list.GBYKDFX2.warehouse  }}</p>
-                                <p >{{ prod.warehouse_list.GBYKDFX2.goods_number }}</p>
-                            </a>     
-                        </div>
-                        <div class="item col-md-2 col-sm-2 col-xs-2">
-                            <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.HKTJWH.warehouse }}">
-                                <p >{{ prod.warehouse_list.HKTJWH.warehouse  }}</p>
-                                <p >{{ prod.warehouse_list.HKTJWH.goods_number }}</p>
-                            </a>
-                        </div>
-                    </div>
+
+
                 </div>
             </div>
 
@@ -337,7 +324,7 @@
 <!--Informacion  del producto-->
 
     <div class="row">
-      <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
+      <div id="stylemobil" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
         <h1>Product Information</h1>
         <p >{{ prod.title }}</p>
         <button style="display: none" class="btn" ng-click="myFunctioninfo()">See details</button>

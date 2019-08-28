@@ -10,7 +10,7 @@ if(isset($_GET['wh']) ) {
 
 
     $post_data = array(
-        'token' => '6d1dd332dc95791ba29e851a7efab953',
+        'token' => 'ce88a23a1916a3436095b42025c64b11',
         'goods_sn' => json_encode($goods_sn),
         'warehouse' => $wh,
     );
