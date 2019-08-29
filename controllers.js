@@ -1096,6 +1096,7 @@ empleadoControllers.controller('AllProductsController', ['$scope','categories','
 
 $scope.dataLoading = true;   
 
+
 //$scope 
 //$scope.Sincronizar = function() {
     $scope.filtroProductsOtro = [];
@@ -1180,7 +1181,7 @@ $timeout(function(){
                                     });
     
     
-                                    console.log(buscados.length);
+                                    console.log(buscados);
                                     $scope.hacerPagineoProductsOtros(buscados);
 
                                     /*
@@ -1190,9 +1191,33 @@ $timeout(function(){
                                     
                                 }
 
-                                $scope.searchship = function(busquedaship){
-                                    console.log('searchship on');
+                                $scope.searchshipchina = function(){
+                                    console.log('searchship FOR CHINA');
+                                    var buscados = $filter('filter') ($scope.dataProductsotro, function (prod) {
+                                        var textobusqueda = prod.warehouse_list.YB;
+                                        return textobusqueda;
+                                    });
+                                    console.log(buscados);
+/*
+                                    console.log(buscados.length);
+                                    */
+                                    $scope.hacerPagineoProductsOtros(buscados);
+                                    
                                 }
+                                $scope.searchshipus = function(){
+                                    console.log('searchship FOR US');
+                                    var buscados = $filter('filter') ($scope.dataProductsotro, function (prod) {
+                                        var textobusqueda = prod.warehouse_list.FXLAWH;
+                                        return textobusqueda;
+                                    });
+                                    console.log(buscados);
+/*
+                                    console.log(buscados.length);
+                                    */
+                                    $scope.hacerPagineoProductsOtros(buscados);
+                                    
+                                }
+                                
 
                                 
                                 $scope.$watch('currentPageProductsOtro',function(){

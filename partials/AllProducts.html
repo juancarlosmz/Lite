@@ -18,11 +18,15 @@
                   </div>   
                   
                   <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-4">
-                    <select ng-model="busquedaship" ng-change="searchship(busquedaship);">
-                      <option >Ship From</option>
-                      <option value="YB">China</option>
-                      <option value="FXLAWH">UNITED STATES</option>
-                    </select>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle chinausfilter" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ship From <i class="glyphicon glyphicon-triangle-bottom"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                          <a class="dropdown-item" ><input readonly ng-click="searchshipchina();" value="China"></a>
+                          <a class="dropdown-item" ><input readonly ng-click="searchshipus();" value="US"></a>
+                      </div>
+                    </div>
                   </div>
 
                   <!--
