@@ -1097,6 +1097,8 @@ empleadoControllers.controller('AllProductsController', ['$scope','categories','
 $scope.dataLoading = true;   
 
 
+
+
 //$scope 
 //$scope.Sincronizar = function() {
     $scope.filtroProductsOtro = [];
@@ -1217,6 +1219,8 @@ $timeout(function(){
                                     $scope.hacerPagineoProductsOtros(buscados);
                                     
                                 }
+
+                                
                                 
 
                                 
@@ -1226,8 +1230,7 @@ $timeout(function(){
                                 $scope.totalProductsOtro = $scope.dataProductsotro.length;
                                 $scope.hacerPagineoProductsOtros($scope.dataProductsotro);
                                 console.log('los del fliltro',$scope.filtroProductsOtro);
-                                
-                                
+             
                             }, 1000);
                         }
                    

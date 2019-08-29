@@ -9,7 +9,7 @@ if(isset($_GET['id']) ) {
 
 
     $post_data = array(
-    'token' => '610aea8dee27becafcd9cadb180e4781',
+    'token' => 'e5cc65bafbee444ff85d07c244004a1e',
     'goods_sn' => json_encode($goods_sn)
     );
     $api_url="https://cnapi.chinabrands.com/v2/product/index";
