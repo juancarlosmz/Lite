@@ -1098,7 +1098,9 @@ $scope.dataLoading = true;
 
 //$scope 
 $scope.Sincronizar = function() {
-    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+1+'&page='+ 1).then(function successCallback(response) {    
+
+    var arrayProtuctstatus1 = [];
+    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category+'&page='+ 1).then(function successCallback(response) {    
         categories.list(function(categories) {
             $scope.categories = categories; 
             console.log($scope.categories.msg.length);  
@@ -1107,8 +1109,103 @@ $scope.Sincronizar = function() {
         $scope.AllproductsOff = response.data;
         console.log($scope.AllproductsOff.msg.total_pages);
 
-
+        var miArray2otro = [];
         for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+
+            //console.log(i);
+
+
+                $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
+                   
+
+
+                   
+
+
+                    $scope.AllproductsOtro = response.data;
+                    $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+
+                    //Array of Products, from php
+
+                    //console.log('se debe de enviar', $scope.Resultado);
+
+                    var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+
+
+
+                    $http({
+                        method : 'POST',
+                        url : rute+'chinabrands/GetProductCollention.php',
+                        data: ProductsSendphpOtro,
+                        headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+            
+                    }).success(function(response){
+
+                        console.log('consulta descripciones');
+                        $scope.productsotro = response;
+                        //console.log($scope.productsotro);
+                        /*
+                        $scope.dataLoading = false;                  
+                         
+                        $scope.filtroProducts = [];
+                        $scope.currentPageProducts = 1;
+                        $scope.numPerPageProducts = 42;
+                        $scope.hacerPagineoProducts = function (arreglo) {
+                            if (!arreglo || !arreglo.length) { return; }
+                            var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
+                            var fin = principio + $scope.numPerPageProducts; //3, 6
+                            $scope.filtroProducts = arreglo.slice(principio, fin); // 
+                        };
+            */
+           
+                        //var miArray2otro = [];
+                        for (var i in $scope.productsotro.msg) {
+                            //console.log($scope.products.msg[i]);
+                            var skuconhijos = $scope.productsotro.msg[i]['sku'];
+                            if( skuconhijos.substr(7,8) == "01" && $scope.productsotro.msg[i]['status'] == 1){
+                                //console.log($scope.products.msg[i]['warehouse_list']['YB']['goods_number']);
+                                //console.log($scope.products.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
+                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                miArray2otro.push(miArrayotro);
+                                
+                            }
+                        }
+                        
+                        //$scope.dataProductsotro = miArray2otro;
+
+
+                        //test trae todos duplicados la misma cantidad de paginas
+                        //arrayProtuctstatus1.push($scope.dataProductsotro);
+
+
+
+                        //console.log($scope.dataProductsotro);
+                        //total de productos
+                        /*
+                        $scope.totalProducts = $scope.dataProducts.length;
+                        $scope.hacerPagineoProducts($scope.dataProducts);
+  */
+            
+
+            
+                    }).error(function(error){
+                        $scope.dataLoading = true;
+                        console.log(error);
+                        
+                    });
+
+
+
+                }, function errorCallback(response) {
+                    console.log("error 505");    
+                });
+/*
+            if(i == 1){
+                break;
+            }    
+*/
+
+/*PARA REGISTRO A PHP
             $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ 1 +'&page='+ i).then(function successCallback(response) {
                     $scope.AllproductsOficial = response.data;
 
@@ -1117,9 +1214,11 @@ $scope.Sincronizar = function() {
                         ImportList : $scope.AllproductsOficial.msg.page_result,
                     };
                     var dataImportList = JSON.stringify(model);
+                    console.log(dataImportList.length);
+*/
 
-
-
+                    //console.log(dataImportList);
+                    /*
                     $http.post(rute+'api/?a=registrarAllSKUs',dataImportList).then(function successCallback(response) {   
                         $scope.dataSKU = response.data;
                         console.log($scope.dataSKU);
@@ -1127,16 +1226,23 @@ $scope.Sincronizar = function() {
                     }, function errorCallback(response) {
                         console.log('no logrado');
                     });
-
-
+*/
                     //console.log($scope.AllproductsOficial.msg.page_result );
-
-
-
+/*
             }, function errorCallback(response) {
                 console.log("error 505");    
             });
+*/
+           // console.log(arrayProtuctstatus1);
+
         }  
+
+
+
+        $scope.dataProductsotro = miArray2otro;
+        console.log($scope.dataProductsotro);
+
+
     }, function errorCallback(response) {
         console.log("error 505");    
     });
