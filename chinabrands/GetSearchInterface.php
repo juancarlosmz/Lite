@@ -13,9 +13,9 @@ if(isset($_GET['page']) ) {
 
 
     $post_data = array(
-        'token' => 'dcd84d98b70c06165267089dc18d25f7',
+        'token' => '08883598669a0f1a24e80ce5d62925db',
         'cat_id' => $category,
-        'sale_date_start' => '2010-01-01T11:00:00+08:00',
+        'sale_date_start' => '2017-01-01T11:00:00+08:00',
         'sale_date_end' => '2019-08-15T11:00:00+08:00',
         'page_number' => $page,
         'per_page' => '100',

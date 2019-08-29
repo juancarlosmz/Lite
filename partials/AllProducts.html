@@ -3,7 +3,7 @@
 
               <div class="container container2prod">
                 <div class="row">
-                  <div style="margin-bottom: 15px; padding-left: 0px !important;" class="item col-md-6 col-sm-6 col-xs-12">
+                  <div style="margin-bottom: 15px; padding-left: 0px !important;" class="item col-md-3 col-sm-3 col-xs-12">
                      <div class="comboallprod">
                         <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
                                 <option value="">in All Categories</option>
@@ -12,16 +12,45 @@
                      </div>
                   </div>
 
-<!-- 
-                  <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-9">
+
+                  <div style="padding-right: 0px !important;padding-left: 0px !important;" class="item col-md-7 col-sm-7 col-xs-8">
                       <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
-                  </div>    
+                  </div>   
+                  
+                  <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-4">
+                    <select ng-model="busquedaship" ng-change="searchship(busquedaship);">
+                      <option >Ship From</option>
+                      <option value="YB">China</option>
+                      <option value="FXLAWH">UNITED STATES</option>
+                    </select>
+                  </div>
+
+                  <!--
                   <div style="padding-left: 0px !important;" class="item col-md-2 col-sm-2 col-xs-3">
                       <button  ng-click="buscarProducts(busquedaprod);" class="btn btnsearch">Search</button>
                   </div>
 -->
 
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               </div>  
 
 
@@ -86,13 +115,8 @@
                 <div class="">
                   <br>
 
-
+<!--
                   <div class="row">
-
-                      
-                    <!-- aqui va las sub categorias -->
-                    
-
                     <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in dataProducts track by $index">
                       <a  class="itemhover" href="#/products/{{ prod.sku }}/YB">
                         
@@ -101,48 +125,7 @@
                         </p>
                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
                         <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
-                        <p  class="title">{{ prod.title }}</p>
-
-
-<!--
-                        <div class="row">
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.YB.warehouse }}</p>
-                                  <p >{{ prod.warehouse_list.YB.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.ESTJWH.warehouse  }}</p>
-                                  <p >{{ prod.warehouse_list.ESTJWH.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.ESTJWHFZ.warehouse }}</p>
-                                  <p >{{ prod.warehouse_list.ESTJWHFZ.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.FCYWHQ.warehouse }}</p>
-                                  <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.FREDCGC.warehouse }}</p>
-                                  <p >{{ prod.warehouse_list.FREDCGC.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.FXHKGCZY.warehouse  }}</p>
-                                  <p >{{ prod.warehouse_list.FXHKGCZY.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.GBYKDFX2.warehouse  }}</p>
-                                  <p >{{ prod.warehouse_list.GBYKDFX2.goods_number }}</p>                        
-                          </div>
-                          <div class="item col-md-2 col-sm-2 col-xs-2">                        
-                                  <p >{{ prod.warehouse_list.HKTJWH.warehouse  }}</p>
-                                  <p >{{ prod.warehouse_list.HKTJWH.goods_number }}</p>                        
-                          </div>
-                        </div>
--->
-
-
-                        
+                        <p  class="title">{{ prod.title }}</p> 
                         <div class="row">
                             <div  class="item col-md-6 col-sm-6 col-xs-6">
                                     <img width="30" src="img/bchina.png">
@@ -155,32 +138,80 @@
                                     <p >{{ prod.warehouse_list.FXLAWH.goods_number }}</p>
                             </div>
                         </div>
-  
-
-
-
-
-
-
-
                         <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
                       </a>   
                         <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
                         <p id="" class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
                     </div>
                   </div>
+-->
+
+                  <!--
               
                   <div style="color: #555;margin-top: 20px;"> <label>Page: </label> {{Allproducts.msg.page_number}}</div>
                   <ul class="pagination js-pagination" id="pagination2"></ul>
                   <hr/>
 
-<!--
-                  <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
--->  
-<!--
-                <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts" previous-text="|<" next-text=">|">
-                </ul>
--->                
+                  -->
+              
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index" ng-if="prod.status == 1">
+    <div >
+    <a  class="itemhover" href="#/products/{{ prod.sku }}/YB">
+      <p class="theimg" ng-repeat="img in prod.original_img">
+        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+      </p>
+      <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+      <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+      <p  class="title">{{ prod.title }}</p>
+      <div class="row">
+        <div  class="item col-md-6 col-sm-6 col-xs-6">
+                <img width="30" src="img/bchina.png">
+                <p >{{ prod.warehouse_list.YB.price }}</p>
+                <p >{{ prod.warehouse_list.YB.goods_number }}</p>
+        </div>
+
+        <div  class="item col-md-6 col-sm-6 col-xs-6">
+                <p>{{ prod.warehouse_list.FXLAWH.price }}</p>
+                <p >{{ prod.warehouse_list.FXLAWH.goods_number }}</p>
+        </div>
+      </div>
+      <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
+    </a>   
+      <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+    </div>
+  </div>
+</div>
+<hr/>
+<ul pagination total-items="totalProductsOtro"  items-per-page="numPerPageProductsOtro" page="currentPageProductsOtro"></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
