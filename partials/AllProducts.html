@@ -1,9 +1,11 @@
+
+
 <div class="col-md-12 col-sm-12 col-xs-12">
+<div class="container" style="margin: 0px !important; padding: 0px !important;">
 
-
-              <div class="container container2prod">
-                <div class="row" style="padding-left: 15px !important;">
-                  <div style="margin-bottom: 15px; padding-left: 0px !important;" class="item col-md-4 col-sm-4 col-xs-12">
+              <div class="container contallprod1">
+                <div class="row">
+                  <div class="item col-md-12 col-sm-12 col-xs-12">
                      <div class="comboallprod">
                         <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
                                 <option value="">in All Categories</option>
@@ -11,11 +13,33 @@
                         </select>
                      </div>
                   </div>
+                </div>
+              </div>   
 
 
-                   
-                  
 
+                <div class="container contallprod2">
+                  <div class="row" style="padding-right: 0px !important;padding-left: 0px !important;">
+
+
+                    <div class="item col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+                        <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
+                    </div>  
+              
+                    <div class="item col-md-6 col-sm-6 col-xs-12" >
+                        <div class="row">
+                          <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                              <button style="height: 40px" type="button" ng-click="searchshipus();" class="btn btn-outline-secondary">U.S. Inventory</button>  
+                          </div>
+                          <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                              <button style="height: 40px" type="button" ng-click="searchshipchina();" class="btn btn-outline-secondary">China Inventory</button>
+                          </div>
+                          <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                              <button style="height: 40px" type="button" ng-click="searchallp();" class="btn btn-outline-secondary">All Inventory</button>  
+                          </div>
+                        </div> 
+                    </div>
+                  </div>
                 </div>
 
 
@@ -31,11 +55,9 @@
 
 
 
+               
 
-
-              </div>  
-
-
+<!--
           <div class="container">
               <button ng-click="Sincronizar()" class="btn"><span>SINCRONIZAR</span></button>
 
@@ -55,7 +77,7 @@
                 </tr>
             </table>
           </div>
-
+-->
 
   <!-- Alert msg-->
   <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
@@ -86,7 +108,7 @@
 -->
                     <ul class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in categories.msg track by $index">
                       <li style="list-style:none;" ng-if="cat.parent_id==parentidsubcategoria">
-                        <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1">{{cat.cat_name}}</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1" ng-click="Downloadstop();">{{cat.cat_name}}</a>
                       </li>
                     </ul>
                 </div>
@@ -97,8 +119,8 @@
 
 
         <div class="container contallprod2">
-            <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-                <div class="">
+            
+                <div class="styleproducts">
                   <br>
 
 <!--
@@ -142,6 +164,25 @@
               
 
 
+                  
+                  <div class="row">
+                      <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index">
+                        <a  class="itemhover" href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                          
+                          <p class="theimg" ng-repeat="img in prod.original_img track by $index">
+                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                          </p>
+                          <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                          <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+                          <p  class="title titleshort">{{ prod.title }}</p> 
+                          <p class="price">$ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
+
+                          
+                        </a>   
+                          <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                          <p id="" class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                      </div>
+                    </div>
 
 
 
@@ -149,30 +190,15 @@
 
 
 
+
+<!--
 
 <div class="row">
 
-    <div class="row" style="padding-right: 0px !important;padding-left: 0px !important;">
-      <div style="padding-right: 0px !important;padding-left: 3.5% !important; margin-bottom: 5% !important;" class="item col-md-9 col-sm-9 col-xs-9">
-          <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
-      </div>  
-
-      <div class="item col-md-3 col-sm-3 col-xs-3">
-          <div class="row">
-            <div class="item col-md-6 col-sm-6 col-xs-6" style="text-align: center !important;">
-                <img width="60" height="40" ng-click="searchshipchina();" src="img/bchina.png">
-                
-            </div>
-            <div class="item col-md-6 col-sm-6 col-xs-6" style="text-align: center !important;">
-                <img width="60" height="40" ng-click="searchshipus();" src="img/busa.png">
-                
-            </div>
-          </div> 
-      </div>
-    </div>
+    
 
 
-  <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index" ng-if="prod.status == 1">
+  <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index" ng-if="prod.status == 1">
     <div >
     <a  class="itemhover" href="#/products/{{ prod.sku }}/YB">
       <p class="theimg" ng-repeat="img in prod.original_img">
@@ -181,23 +207,21 @@
       <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
       <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
       <p  class="title titleshort">{{ prod.title }}</p>
-      <div class="row">
-        <div  class="item col-md-6 col-sm-6 col-xs-6">
-                <img width="30" src="img/bchina.png">
-                <p >{{ prod.warehouse_list.YB.price }}</p>
-                <p >{{ prod.warehouse_list.YB.goods_number }}</p>
-        </div>
-
-        <div  class="item col-md-6 col-sm-6 col-xs-6">
-                <p>{{ prod.warehouse_list.FXLAWH.price }}</p>
-                <p >{{ prod.warehouse_list.FXLAWH.goods_number }}</p>
-        </div>
-      </div>
       <p class="price">$ {{ prod.warehouse_list.YB.price }}</p>
     </a>   
-      <p class="btnadd3"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+    <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+    <p id="" class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
     </div>
   </div>
+</div>
+
+
+-->
+
+<div class="row">
+  <div style="text-align: center;" class="item col-md-12 col-sm-12 col-xs-12">
+    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+  </div>  
 </div>
 <hr/>
 <ul pagination total-items="totalProductsOtro"  items-per-page="numPerPageProductsOtro" page="currentPageProductsOtro"></ul>
@@ -205,27 +229,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-              </div>
-        
-</div>  
-
-
+      </div>
+    </div> 
+  </div>  
 </div>

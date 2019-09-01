@@ -181,55 +181,53 @@ for (var j in $scope.todossku) {
     $scope.myInterval = 190000;
 
     $scope.inicializarProducts = function () {
+        $scope.dataLoading = true;
         $http.post(rute+"chinabrands/GetBestSellProducts.php").then(function successCallback(response) {
-            $scope.dataProd = response.data; 
-
-            var miArray2 = [];
-            var miArray = [];
-            for (var i in $scope.dataProd.msg) {
-                if($scope.dataProd.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd.msg[i]['status'] == 1){
-                    miArray = JSON.parse(JSON.stringify($scope.dataProd.msg[i]));
-                    miArray2.push(miArray);
+            $scope.dataLoading = true;
+            $timeout(function(){
+                $scope.dataLoading = false;
+                $scope.dataProd = response.data; 
+                var miArray2 = [];
+                var miArray = [];
+                for (var i in $scope.dataProd.msg) {
+                    if($scope.dataProd.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd.msg[i]['status'] == 1){
+                        miArray = JSON.parse(JSON.stringify($scope.dataProd.msg[i]));
+                        miArray2.push(miArray);
+                    }
                 }
-            }
-            $scope.dataProducts2 = miArray2;
-
-
-            //para hacer multi carrusel
-            var first = [],
-            second, third;
-            var many = 1;
-
-            //carrusel de 4 imagenes
-            for (var k = 0; k < $scope.dataProducts2.length/4; k++) {
-
-                if(k==0){
-                    second = {
-                        image1: $scope.dataProducts2[k],  
-                        image2: $scope.dataProducts2[k+1],
-                        image3: $scope.dataProducts2[k+2],
-                        image4: $scope.dataProducts2[k+3],
-                    }; 
-                }else if(k==1){
-                    second = {
-                        image1: $scope.dataProducts2[k+3],  
-                        image2: $scope.dataProducts2[k+4],
-                        image3: $scope.dataProducts2[k+5],
-                        image4: $scope.dataProducts2[k+6],
-                    }; 
-                }else if(k==2){
-                    second = {
-                        image1: $scope.dataProducts2[k+6],  
-                        image2: $scope.dataProducts2[k+7],
-                        image3: $scope.dataProducts2[k+8],
-                        image4: $scope.dataProducts2[k+9],
-                    }; 
+                $scope.dataProducts2 = miArray2;
+                //para hacer multi carrusel
+                var first = [],second;
+                //carrusel de 4 imagenes
+                for (var k = 0; k < $scope.dataProducts2.length/4; k++) {
+                    if(k==0){
+                        second = {
+                            image1: $scope.dataProducts2[k],  
+                            image2: $scope.dataProducts2[k+1],
+                            image3: $scope.dataProducts2[k+2],
+                            image4: $scope.dataProducts2[k+3],
+                        }; 
+                    }else if(k==1){
+                        second = {
+                            image1: $scope.dataProducts2[k+3],  
+                            image2: $scope.dataProducts2[k+4],
+                            image3: $scope.dataProducts2[k+5],
+                            image4: $scope.dataProducts2[k+6],
+                        }; 
+                    }else if(k==2){
+                        second = {
+                            image1: $scope.dataProducts2[k+6],  
+                            image2: $scope.dataProducts2[k+7],
+                            image3: $scope.dataProducts2[k+8],
+                            image4: $scope.dataProducts2[k+9],
+                        }; 
+                    }   
+                    first.push(second);
                 }
-                   
-                first.push(second);
-            }
-            $scope.groupedSlides = first;
-            //end
+                $scope.groupedSlides = first;
+                //end
+            }, 100);
+            
 
 
 
@@ -238,58 +236,61 @@ for (var j in $scope.todossku) {
             console.log("error 505");    
         });
         //galleria 2
+        $scope.dataLoading2 = true;
         $http.post(rute+"chinabrands/GetHighPotential.php").then(function successCallback(response) {
-            $scope.dataProd2 = response.data; 
+            $scope.dataLoading2 = true;
+            $timeout(function(){
+                $scope.dataLoading2 = false;
+                $scope.dataProd2 = response.data; 
 
-            var miArray22 = [];
-            var miArray2 = [];
-            for (var i in $scope.dataProd2.msg) {
-                if($scope.dataProd2.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd2.msg[i]['status'] == 1){
-                    miArray2 = JSON.parse(JSON.stringify($scope.dataProd2.msg[i]));
-                    miArray22.push(miArray2);
+                var miArray22 = [];
+                var miArray2 = [];
+                for (var i in $scope.dataProd2.msg) {
+                    if($scope.dataProd2.msg[i]['sku'].substr(7,8) == "01" && $scope.dataProd2.msg[i]['status'] == 1){
+                        miArray2 = JSON.parse(JSON.stringify($scope.dataProd2.msg[i]));
+                        miArray22.push(miArray2);
+                    }
                 }
-            }
-            $scope.dataProducts22 = miArray22;
+                $scope.dataProducts22 = miArray22;
 
 
-            //para hacer multi carrusel
-            var first = [],
-            second, third;
-            var many = 1;
+                //para hacer multi carrusel
+                var first = [],
+                second, third;
+                var many = 1;
 
-            //carrusel de 3 imagenes
-            for (var k = 0; k < $scope.dataProducts22.length/4; k++) {
+                //carrusel de 3 imagenes
+                for (var k = 0; k < $scope.dataProducts22.length/4; k++) {
 
-                if(k==0){
-                    second = {
-                        image1: $scope.dataProducts22[k],  
-                        image2: $scope.dataProducts22[k+1],
-                        image3: $scope.dataProducts22[k+2],
-                        image4: $scope.dataProducts22[k+3],
-                    }; 
-                }else if(k==1){
-                    second = {
-                        image1: $scope.dataProducts22[k+3],  
-                        image2: $scope.dataProducts22[k+4],
-                        image3: $scope.dataProducts22[k+5],
-                        image4: $scope.dataProducts22[k+6],
-                    }; 
-                }else if(k==2){
-                    second = {
-                        image1: $scope.dataProducts22[k+6],  
-                        image2: $scope.dataProducts22[k+7],
-                        image3: $scope.dataProducts22[k+8],
-                        image4: $scope.dataProducts22[k+9],
-                    }; 
+                    if(k==0){
+                        second = {
+                            image1: $scope.dataProducts22[k],  
+                            image2: $scope.dataProducts22[k+1],
+                            image3: $scope.dataProducts22[k+2],
+                            image4: $scope.dataProducts22[k+3],
+                        }; 
+                    }else if(k==1){
+                        second = {
+                            image1: $scope.dataProducts22[k+3],  
+                            image2: $scope.dataProducts22[k+4],
+                            image3: $scope.dataProducts22[k+5],
+                            image4: $scope.dataProducts22[k+6],
+                        }; 
+                    }else if(k==2){
+                        second = {
+                            image1: $scope.dataProducts22[k+6],  
+                            image2: $scope.dataProducts22[k+7],
+                            image3: $scope.dataProducts22[k+8],
+                            image4: $scope.dataProducts22[k+9],
+                        }; 
+                    }
+                    
+                    first.push(second);
                 }
-                   
-                first.push(second);
-            }
-            $scope.groupedSlides2 = first;
-            //end
+                $scope.groupedSlides2 = first;
+                //end
 
-
-
+            }, 100);
 
         }, function errorCallback(response) {
             console.log("error 505");    
@@ -494,7 +495,7 @@ empleadoControllers.controller('SearchController', ['$scope','products','categor
 
 
 
-empleadoControllers.controller('Productview', ['$scope','product','stock','$timeout', function($scope,product,stock,$timeout) {
+empleadoControllers.controller('Productview', ['$scope','product','stock','$timeout','$routeParams','$http', function($scope,product,stock,$timeout,$routeParams,$http) {
     $scope.saveduser = localStorage.getItem('todosuser');
     $scope.SesionUser = JSON.parse($scope.saveduser);
     //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
@@ -514,7 +515,224 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
     product.list(function(product) {
         $scope.product = product;
-        console.log($scope.product);
+        
+        for(var i in $scope.product.msg){
+            $scope.prodSKU = $scope.product.msg[i]['sku'];
+            console.log($scope.product.msg[i]['warehouse_list']);
+            //console.log($scope.product.msg[i]['warehouse_list']['MXTJWH']);
+
+
+
+
+            if(($scope.product.msg[i]['warehouse_list']['YB'] || $scope.product.msg[i]['warehouse_list']['ZQ01'] || $scope.product.msg[i]['warehouse_list']['ZQDZ01'] || $scope.product.msg[i]['warehouse_list']['FCYWHQ'] || $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.product.msg[i]['warehouse_list']['FXLAWH'] || $scope.product.msg[i]['warehouse_list']['FXLAWH2'] || $scope.product.msg[i]['warehouse_list']['MXTJWH'] || $scope.product.msg[i]['warehouse_list']['FXJFKGC'] || $scope.product.msg[i]['warehouse_list']['USZYCB']   )   ){
+                
+                if( $scope.product.msg[i]['warehouse_list']['YB'] ){
+                    var country = 'US';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-1 :';
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['ZQ01']  ){
+                    var country = 'US';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country  ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-5 :';
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['ZQDZ01']  ){
+                    var country = 'US';  
+                      
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country  ).then(function successCallback(response) {
+                        
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-7 :';
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['FCYWHQ'] ){
+                    var country = 'US';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-8 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                    var country = 'US';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-9 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                    var country = 'US';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'China';
+                        $scope.warehousename = 'CN-11 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['FXLAWH'] ){
+                    var country = 'CN';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'UNITED STATES';
+                        $scope.warehousename = 'US-1 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['FXLAWH2'] ){
+                    var country = 'CN';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'UNITED STATES';
+                        $scope.warehousename = 'US-2 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['MXTJWH'] ){
+                    var country = 'CN';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'UNITED STATES';
+                        $scope.warehousename = 'US-3 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['FXJFKGC'] ){
+                    var country = 'CN';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country  ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'UNITED STATES';
+                        $scope.warehousename = 'US-4 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }else if( $scope.product.msg[i]['warehouse_list']['USZYCB'] ){
+                    var country = 'CN';
+                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
+                    $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country ).then(function successCallback(response) {
+                        $scope.shippingmodel = response.data;
+                        $scope.Place = 'UNITED STATES';
+                        $scope.warehousename = 'US-5 :'; 
+                        $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                        $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                        $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                        console.log($scope.precioenvio);
+                        console.log('la data es',$scope.shippingmodel);
+                    }, function errorCallback(response) {
+                        $scope.error = 'Information not found';
+                        $scope.dataLoading = false;
+                    });
+
+                }
+
+            }
+
+            
+            
+        }
+        $timeout(function(){
+            $scope.myFunctioninfo = function(){
+    
+                var todalainfo = document.getElementById("inputinfo").value;
+                document.getElementById("infoprod").innerHTML= todalainfo;
+    
+            }
+            $scope.myFunctioninfo();
+        }, 1000);  
+        
+ 
     });
 
     stock.list(function(stock) {
@@ -554,19 +772,6 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     }; 
                 };
             };
-
-
-
-
-    $timeout(function(){
-        $scope.myFunctioninfo = function(){
-
-            var todalainfo = document.getElementById("inputinfo").value;
-            document.getElementById("infoprod").innerHTML= todalainfo;
-
-        }
-        $scope.myFunctioninfo();
-    }, 2600);   
 
 }]);
 
@@ -626,7 +831,11 @@ empleadoControllers.controller('CustomerList', ['$scope','$http','$timeout','$wi
     $scope.dataLoading = true;
 
     $http.post(rute+'api/?a=listar').then(function successCallback(response) {
+        $scope.dataLoading = true; 
+        $timeout(function(){ 
+            $scope.dataLoading = false;   
             $scope.model = response.data;
+        }, 100);
             
     }, function errorCallback(response) {
         $scope.error = 'Error 808';
@@ -637,9 +846,16 @@ empleadoControllers.controller('CustomerList', ['$scope','$http','$timeout','$wi
         if(confirm('Esta seguro de realizar esta accion?')){
             $scope.dataLoading = true;
             $http.get(rute+'api/?a=eliminar&id='+ id).then(function(response){
-                $location.path('/login');   
+                $scope.dataLoading = true;
+                $timeout(function(){
+                    location.reload();
+                    $scope.dataLoading = false;
+                }, 50);  
             }, function errorCallback(response) {
-                //$scope.error = 'Registered User';
+                $timeout(function(){
+                    location.reload();
+                    $scope.dataLoading = false;
+                }, 50);
                 
             });
 
@@ -659,15 +875,15 @@ empleadoControllers.controller('RegisterController', ['$scope','$http','$timeout
         $scope.Rol = $scope.SesionUser[i]['rol'];
     }
     console.log($scope.Rol);
-    var iduser = document.getElementById("contentlist");
-    $scope.rutaroluser = '';
+
+    var iduser = document.getElementById("welcome");
+    var idlogin = document.getElementById("login");
     if($scope.Rol == '1'){
         iduser.style.display  = "block";
-        console.log('user rol 1');
+        idlogin.style.display  = "none";
     }else{
         iduser.style.display  = "none";
         iduser.disabled = true;
-        console.log('user rol 2');
     }
 
     $scope.register = function(){
@@ -684,10 +900,22 @@ empleadoControllers.controller('RegisterController', ['$scope','$http','$timeout
                     $scope.error = 'This email is already in use';
                 }else{
                     $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
-                        $location.path('/login');
+                        $scope.dataLoading = true;
+                        $timeout(function(){
+                            $location.path('/login');
+                            $scope.dataLoading = false;
+                        }, 500);
+
+                        
+                        
                     }, function errorCallback(response) {
-                        $location.path('/login');
-                        $scope.error = 'Error 505';
+                        $scope.dataLoading = true;
+                        $timeout(function(){
+                            $location.path('/login');
+                            $scope.error = 'Error 505';
+                            $scope.dataLoading = false;
+                        }, 500);
+                        
                     });
                 }
             }, function errorCallback(response) {
@@ -722,6 +950,7 @@ empleadoControllers.controller('RegisterController_a', ['$scope','$http','$timeo
     }
 
     $scope.register = function(){
+        $scope.dataLoading = true;
             var model = {
                 Nombre: $scope.Nombre,
                 Apellido: $scope.Apellido,
@@ -735,10 +964,18 @@ empleadoControllers.controller('RegisterController_a', ['$scope','$http','$timeo
                     $scope.error = 'This email is already in use';
                 }else{
                     $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
-                        $location.path('/register_a');
+                        $scope.dataLoading = true;
+                        $timeout(function(){
+                            location.reload();
+                            $scope.dataLoading = false;
+                        }, 50);
+                        
                     }, function errorCallback(response) {
-                        $location.path('/register_a');
-                        //$scope.error = 'Error 505';
+
+                        $timeout(function(){
+                            location.reload();
+                            $scope.dataLoading = false;
+                        }, 50);
                     });
                 }
             }, function errorCallback(response) {
@@ -1093,6 +1330,11 @@ empleadoControllers.controller('AllProductsController', ['$scope','categories','
         $scope.uwelcome = 'uwelcometrue';
     }
 
+    $scope.Downloadstop = function() {
+        $timeout(function(){
+            location.reload();
+        }, 100);
+    }
 
 $scope.dataLoading = true;   
 
@@ -1103,7 +1345,7 @@ $scope.dataLoading = true;
 //$scope.Sincronizar = function() {
     $scope.filtroProductsOtro = [];
     $scope.currentPageProductsOtro = 1;
-    $scope.numPerPageProductsOtro = 42;
+    $scope.numPerPageProductsOtro = 40;
     $scope.hacerPagineoProductsOtros = function (arreglo) {
     if (!arreglo || !arreglo.length) { return; }
         var principio = (($scope.currentPageProductsOtro - 1) * $scope.numPerPageProductsOtro); //0, 3
@@ -1143,16 +1385,112 @@ $timeout(function(){
                         $scope.productsotro = response;
                         for (var i in $scope.productsotro.msg) {
                             var skuconhijos = $scope.productsotro.msg[i]['sku'];
-                            if( skuconhijos.substr(7,8) == "01" && $scope.productsotro.msg[i]['status'] == 1){
-                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                miArray2otro.push(miArrayotro);  
+                            if( skuconhijos.substr(7,8) == "01" && $scope.productsotro.msg[i]['status'] == 1 ){
+
+                                if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                    //console.log('otro filtro',$scope.productsotro.msg[i]['warehouse_list'] );
+                                    if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock YB',$scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number']);
+                                        }
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                        //console.log('del stock ZQ01',$scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number']);
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock YB',$scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number']);
+                                        }
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock ZQDZ01',$scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number']);
+                                        }
+                                        //console.log('del stock ZQDZ01',$scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock FCYWHQ',$scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number']);
+                                        }
+                                        //console.log('del stock FCYWHQ',$scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock SZXIAWAN',$scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number']);
+                                        }
+                                        //console.log('del stock SZXIAWAN',$scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock B2BREXIAOWH',$scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number']);
+                                        }
+                                        //console.log('del stock B2BREXIAOWH',$scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock FXLAWH',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
+                                        }
+                                        //console.log('del stock FXLAWH',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock FXLAWH2',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number']);
+                                        }
+                                        //console.log('del stock FXLAWH2',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock MXTJWH',$scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number']);
+                                        }
+                                        //console.log('del stock MXTJWH',$scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock FXJFKGC',$scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number']);
+                                        }
+                                        //console.log('del stock FXJFKGC',$scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number']);
+                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                        if($scope.stockvar > 5){
+                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                            miArray2otro.push(miArrayotro);
+                                            console.log('del stock USZYCB',$scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number']);
+                                        }
+                                        //console.log('del stock USZYCB',$scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number']);
+                                    }
+/*
+                                    var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                    miArray2otro.push(miArrayotro);
+*/
+                                }
+                                
+
+                                 
                             }
                         }    
 
                         console.log( miArray2otro.length);
                         if(miArray2otro.length >= '1'){
                             $scope.dataLoading = false;
-                            console.log('la bandera en false');
                             $scope.dataProductsotro = miArray2otro;
                             console.log($scope.dataProductsotro);
 
@@ -1196,7 +1534,7 @@ $timeout(function(){
                                 $scope.searchshipchina = function(){
                                     console.log('searchship FOR CHINA');
                                     var buscados = $filter('filter') ($scope.dataProductsotro, function (prod) {
-                                        var textobusqueda = prod.warehouse_list.YB;
+                                        var textobusqueda = prod.warehouse_list.YB+prod.warehouse_list.ZQ01+prod.warehouse_list.ZQDZ01+prod.warehouse_list.FCYWHQ+prod.warehouse_list.SZXIAWAN+prod.warehouse_list.B2BREXIAOWH;
                                         return textobusqueda;
                                     });
                                     console.log(buscados);
@@ -1209,15 +1547,20 @@ $timeout(function(){
                                 $scope.searchshipus = function(){
                                     console.log('searchship FOR US');
                                     var buscados = $filter('filter') ($scope.dataProductsotro, function (prod) {
-                                        var textobusqueda = prod.warehouse_list.FXLAWH;
+                                        var textobusqueda = prod.warehouse_list.FXLAWH+prod.warehouse_list.FXLAWH2+prod.warehouse_list.MXTJWH+prod.warehouse_list.FXJFKGC+prod.warehouse_list.USZYCB;
                                         return textobusqueda;
                                     });
                                     console.log(buscados);
-/*
-                                    console.log(buscados.length);
-                                    */
                                     $scope.hacerPagineoProductsOtros(buscados);
-                                    
+                                }
+                                $scope.searchallp = function(){
+                                    console.log('searchship all');
+                                    var buscados = $filter('filter') ($scope.dataProductsotro, function (prod) {
+                                        var textobusqueda = prod.warehouse_list.FXLAWH+prod.warehouse_list.FXLAWH2+prod.warehouse_list.MXTJWH+prod.warehouse_list.FXJFKGC+prod.warehouse_list.USZYCB+prod.warehouse_list.YB+prod.warehouse_list.ZQ01+prod.warehouse_list.ZQDZ01+prod.warehouse_list.FCYWHQ+prod.warehouse_list.SZXIAWAN+prod.warehouse_list.B2BREXIAOWH;
+                                        return textobusqueda;
+                                    });
+                                    console.log(buscados);
+                                    $scope.hacerPagineoProductsOtros(buscados);
                                 }
 
                                 

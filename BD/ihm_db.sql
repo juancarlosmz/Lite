@@ -98,6 +98,13 @@ passwors -> apolomultimedia
 bdwoosource
  
 */
+/*BASE DE DATOS hostgator
+BD -> apolo_bdwoosource
+
+user -> apolo
+passwors -> apolomultimedia
+ 
+*/
 
 /*SSH ACCESS PANEL
 KeyName -> cPanelSSHAccess
