@@ -114,23 +114,7 @@
                 </div>
             </div>
 
-          <!-- este es el slider -->
-<!--
-    <div class="carrusel">  
-        <div id="slides_control">
-          <div>
-            <carousel interval="myInterval">
-              <slide ng-repeat="slide in slides" active="slide.active">
-                <img ng-src="{{slide.image}}">
-                <div class="carousel-caption">
-                  <h4>Slide {{$index+1}}</h4>
-                </div>
-              </slide>
-            </carousel>
-          </div>
-        </div>
-    </div>
--->
+
       </div> 
 
 
@@ -144,120 +128,138 @@
               <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
               <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
               <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
-              <p >Price: $ {{ prod.warehouse_list.YB.price }}</p>
           </div>
         </div>
+
+
+        <div class="row">
+                <div ng-if="$index==5" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
+                    <div class="row">
+                        <div class="item col-md-2 col-sm-3 col-xs-4">
+                            <p >Price:</p>
+                        </div>
+                        <div class="item col-md-10 col-sm-9 col-xs-8">                        
+                            <p > $ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 <!-- Imagenes con colores hacer un filtro-->
 
         <div class="row">
             
-            <div class="item col-md-12 col-sm-12 col-xs-12">
-                <p> Color:  </p> 
-                <div class="row">
-                  <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products/{{ prod.sku }}/YB">
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>    
-                  </div>  
-                  <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products2/{{ prod.sku }}/YB">
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                  <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products3/{{ prod.sku }}/YB">  
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                  <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products4/{{ prod.sku }}/YB">
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                  <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products5/{{ prod.sku }}/YB">  
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>    
-                  </div>
-                  <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products6/{{ prod.sku }}/YB">  
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a> 
-                  </div>
-                </div>  
-
-
-                <div class="row">  
-                  <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products7/{{ prod.sku }}/YB">
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                  <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products8/{{ prod.sku }}/YB">  
-                        <p  class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover8();" onmouseout="mycolorout8();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>        
-                  </div>
-                  <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products9/{{ prod.sku }}/YB">  
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover9();" onmouseout="mycolorout9();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>    
-                  </div>
-                  <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products10/{{ prod.sku }}/YB">  
-                        <p class="colorhide" > {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover10();" onmouseout="mycolorout10();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>    
-                  </div>
-                  <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products11/{{ prod.sku }}/YB">  
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover11();" onmouseout="mycolorout11();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                  <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
-                    <a href="#/products12/{{ prod.sku }}/YB">
-                        <p class="colorhide"> {{ prod.color }}</p>
-                        <p onmouseover="mycolorhover12();" onmouseout="mycolorout12();" onmouseover="mycolorhover();" ng-repeat="img in prod.original_img">
-                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                        </p>
-                    </a>
-                  </div>
-                </div>
-            </div>
-          </div>
+                <div class="item col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-3 col-xs-4">
+                                <p> Color:  </p> 
+                            </div>
+                            <div class="item col-md-10 col-sm-9 col-xs-8">  
+                                <div class="row">
+                                    <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>    
+                                    </div>  
+                                    <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products2/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products3/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products4/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products5/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>    
+                                    </div>
+                                    <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products6/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a> 
+                                    </div>
+                                </div>  
+                                <div class="row">  
+                                    <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products7/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products8/{{ prod.sku }}/{{warehouse}}">
+                                            <p  class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover8();" onmouseout="mycolorout8();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>        
+                                    </div>
+                                    <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products9/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover9();" onmouseout="mycolorout9();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>    
+                                    </div>
+                                    <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products10/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide" > {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover10();" onmouseout="mycolorout10();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>    
+                                    </div>
+                                    <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products11/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover11();" onmouseout="mycolorout11();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                    <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg">
+                                        <a href="#/products12/{{ prod.sku }}/{{warehouse}}">
+                                            <p class="colorhide"> {{ prod.color }}</p>
+                                            <p onmouseover="mycolorhover12();" onmouseout="mycolorout12();" onmouseover="mycolorhover();" ng-repeat="img in prod.original_img">
+                                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div> 
+            
+        </div>
 
 
 
@@ -265,65 +267,50 @@
 <!-- Info que se cambiara con el filtro-->
 
     <div class="row">
-        <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
-            <p >Warehouse:</p>
-            <div class="row">
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}">
-                        <p >{{ prod.warehouse_list.YB.warehouse }}</p>
-                        <p >{{ prod.warehouse_list.YB.goods_number }}</p>
-                    </a>
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.ESTJWH.warehouse }}">
-                        <p >{{ prod.warehouse_list.ESTJWH.warehouse  }}</p>
-                        <p >{{ prod.warehouse_list.ESTJWH.goods_number }}</p>
-                    </a>
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.ESTJWHFZ.warehouse }}">
-                        <p >{{ prod.warehouse_list.ESTJWHFZ.warehouse }}</p>
-                        <p >{{ prod.warehouse_list.ESTJWHFZ.goods_number }}</p>
-                    </a>    
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.FCYWHQ.warehouse }}">
-                        <p >{{ prod.warehouse_list.FCYWHQ.warehouse }}</p>
-                        <p >{{ prod.warehouse_list.FCYWHQ.goods_number }}</p>
-                    </a>    
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.FREDCGC.warehouse }}">
-                        <p >{{ prod.warehouse_list.FREDCGC.warehouse }}</p>
-                        <p >{{ prod.warehouse_list.FREDCGC.goods_number }}</p>
-                    </a> 
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.FXHKGCZY.warehouse }}">
-                        <p >{{ prod.warehouse_list.FXHKGCZY.warehouse  }}</p>
-                        <p >{{ prod.warehouse_list.FXHKGCZY.goods_number }}</p>
-                    </a> 
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.GBYKDFX2.warehouse }}">
-                        <p >{{ prod.warehouse_list.GBYKDFX2.warehouse  }}</p>
-                        <p >{{ prod.warehouse_list.GBYKDFX2.goods_number }}</p>
-                    </a>     
-                </div>
-                <div class="item col-md-2 col-sm-2 col-xs-2">
-                    <a href="#/products6/{{ prod.sku }}/{{ prod.warehouse_list.HKTJWH.warehouse }}">
-                        <p >{{ prod.warehouse_list.HKTJWH.warehouse  }}</p>
-                        <p >{{ prod.warehouse_list.HKTJWH.goods_number }}</p>
-                    </a>
+        
+            <div ng-if="$index==5" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
+                    <div class="row">
+                                <div class="item col-md-2 col-sm-3 col-xs-4">
+                                    <p >Warehouse:</p>
+                                </div>
+                                <div class="item col-md-10 col-sm-9 col-xs-8"> 
+                                        <!--
+                                        <a href="#/products5/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                                        </a>
+                                        -->
+                                    <p > {{warehousename}} {{ prod.warehouse_list.YB.warehouse }} {{ prod.warehouse_list.ZQ01.warehouse  }} {{ prod.warehouse_list.ZQDZ01.warehouse }} {{ prod.warehouse_list.FCYWHQ.warehouse }} {{ prod.warehouse_list.SZXIAWAN.warehouse }} {{ prod.warehouse_list.B2BREXIAOWH.warehouse  }} {{ prod.warehouse_list.FXLAWH.warehouse  }} {{ prod.warehouse_list.FXLAWH2.warehouse  }} {{ prod.warehouse_list.MXTJWH.warehouse  }} {{ prod.warehouse_list.FXJFKGC.warehouse  }} {{ prod.warehouse_list.USZYCB.warehouse  }}</p>
+                                    <p >Stock: {{ prod.warehouse_list.YB.goods_number }} {{ prod.warehouse_list.ZQ01.goods_number }} {{ prod.warehouse_list.ZQDZ01.goods_number }} {{ prod.warehouse_list.FCYWHQ.goods_number }} {{ prod.warehouse_list.SZXIAWAN.goods_number }} {{ prod.warehouse_list.B2BREXIAOWH.goods_number }} {{ prod.warehouse_list.FXLAWH.goods_number }} {{ prod.warehouse_list.FXLAWH2.goods_number }} {{ prod.warehouse_list.MXTJWH.goods_number  }} {{ prod.warehouse_list.FXJFKGC.goods_number  }} {{ prod.warehouse_list.USZYCB.goods_number  }}</p>
+                                </div> 
+                    </div>
+            </div>
+
+    </div>
+        <div class="row">
+            <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="stk in stock.msg.page_result">
+                <div class="row">
+                        <div class="item col-md-2 col-sm-3 col-xs-4">
+                            <p >Available Stock:</p>
+                        </div>
+                    <div class="item col-md-10 col-sm-9 col-xs-8">                        
+                        <p >{{ stk.goods_number }}</p>                          
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-          <div class="row">
-              <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="stk in stock.msg.page_result">
-                  <p >Available Stock:  {{ stk.goods_number }}</p>
-              </div>
-              </di>
+        <br>
+            <div class="row">
+                <div ng-if="$index==5" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg"> 
+                    <div class="row">
+                        <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                            <img src="img/ShippingCost.png" width="40" alt="">
+                        </div>
+                        <div class="item col-md-10 col-sm-10 col-xs-10" >
+                            <h3> <strong> Shipping cost </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                            <p>Ships from {{Place}}: <strong style="color: red;"> $ {{precioenvio}} </strong> to {{nameenvio}}</p>       
+                            <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvio}} days</label></p>
+                        </div>
+                    </div>  
+                </div>
             </div>
 
 

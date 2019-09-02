@@ -1,6 +1,6 @@
 <?php
     $post_data = array(
-    'token' => 'd2ac55c8f1515e4ec34c9177d4e6bd86',
+    'token' => '37ec81c7c15c59b7525b09225cb1ba4d',
     );
     $api_url = "https://cnapi.chinabrands.com/v2/category/index";
     $curl = curl_init($api_url);
