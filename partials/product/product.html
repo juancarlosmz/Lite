@@ -113,23 +113,7 @@
                 </div>
             </div>
 
-          <!-- este es el slider -->
-<!--
-    <div class="carrusel">  
-        <div id="slides_control">
-          <div>
-            <carousel interval="myInterval">
-              <slide ng-repeat="slide in slides" active="slide.active">
-                <img ng-src="{{slide.image}}">
-                <div class="carousel-caption">
-                  <h4>Slide {{$index+1}}</h4>
-                </div>
-              </slide>
-            </carousel>
-          </div>
-        </div>
-    </div>
--->
+
       </div> 
 
 
@@ -153,7 +137,7 @@
                         <p >Price:</p>
                     </div>
                     <div class="item col-md-10 col-sm-9 col-xs-8">                        
-                        <p > $ {{priceone}}</p>
+                        <p > $ {{priceone}} </p>
                     </div>
                 </div>
             </div>
@@ -170,7 +154,7 @@
                         <!--Color-->
                         <div class="row">
                             <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a   href="#/products/{{ prod.sku }}/{{warehouse}}">
+                                <a   href="#/products/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -178,7 +162,7 @@
                                 </a>    
                             </div>  
                             <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products2/{{ prod.sku }}/{{warehouse}}">
+                                <a href="#/products2/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -186,7 +170,7 @@
                                 </a>
                             </div>
                             <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products3/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products3/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -194,7 +178,7 @@
                                 </a>
                             </div>
                             <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products4/{{ prod.sku }}/{{warehouse}}">
+                                <a href="#/products4/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -202,7 +186,7 @@
                                 </a>
                             </div>
                             <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products5/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products5/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -210,7 +194,7 @@
                                 </a>    
                             </div>
                             <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products6/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products6/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -222,7 +206,7 @@
 
                             <div class="row">  
                             <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products7/{{ prod.sku }}/{{warehouse}}">
+                                <a href="#/products7/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -230,7 +214,7 @@
                                 </a>
                             </div>
                             <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products8/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products8/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p  class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover8();" onmouseout="mycolorout8();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -238,7 +222,7 @@
                                 </a>        
                             </div>
                             <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products9/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products9/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover9();" onmouseout="mycolorout9();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -246,7 +230,7 @@
                                 </a>    
                             </div>
                             <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products10/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products10/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide" > {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover10();" onmouseout="mycolorout10();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -254,7 +238,7 @@
                                 </a>    
                             </div>
                             <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products11/{{ prod.sku }}/{{warehouse}}">  
+                                <a href="#/products11/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">  
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover11();" onmouseout="mycolorout11();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -262,7 +246,7 @@
                                 </a>
                             </div>
                             <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                                <a href="#/products12/{{ prod.sku }}/{{warehouse}}">
+                                <a href="#/products12/{{ prod.sku }}/{{warehouse}}{{warehouse1}}{{warehouse2}}{{warehouse3}}{{warehouse4}}{{warehouse5}}{{warehouse6}}{{warehouse7}}{{warehouse8}}{{warehouse9}}{{warehouse10}}">
                                     <p class="colorhide"> {{ prod.color }}</p>
                                     <p onmouseover="mycolorhover12();" onmouseout="mycolorout12();" onmouseover="mycolorhover();" ng-repeat="img in prod.original_img">
                                         <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
@@ -271,8 +255,6 @@
                             </div>
                         </div>
                         <!--Color--> 
-
-
                     </div>
                 </div>   
             </div>

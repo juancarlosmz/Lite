@@ -20,6 +20,8 @@
         'country' => $country,
         'warehouse' => $warehouse,
         'goods' => json_encode($goods),
+        'shipping' => 'USPSEXPWHW',
+        'zip_code' => '98004',
         'platform_id' => 1
     );
     $api_url="https://cnapi.chinabrands.com/v2/shipping/cost";

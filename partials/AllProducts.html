@@ -8,7 +8,7 @@
                   <div class="item col-md-12 col-sm-12 col-xs-12">
                      <div class="comboallprod">
                         <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
-                                <option value="">in All Categories</option>
+                                <option value="">All Categories</option>
                                 <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
                         </select>
                      </div>
@@ -23,7 +23,7 @@
 
 
                     <div class="item col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
-                        <input placeholder="I'm shopping for..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
+                        <input placeholder="Enter keywords here after products finish loading..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
                     </div>  
               
                     <div class="item col-md-6 col-sm-6 col-xs-12" >
@@ -97,7 +97,7 @@
                 <div class="item col-md-12 col-sm-12 col-xs-12 subcategories">
 
                     <div class="ruteallprod">
-                        <h3> <a href="#/Home">Home </a> > {{namecategoria}} > {{namesubcategoria}}</h3>  
+                        <h3> Home > {{namecategoria}} > {{namesubcategoria}}</h3>  
                     </div>
 <!-- 
                     <ul class="list-group" style="margin-bottom: 0px !important;">
@@ -108,7 +108,7 @@
 -->
                     <ul class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in categories.msg track by $index">
                       <li style="list-style:none;" ng-if="cat.parent_id==parentidsubcategoria">
-                        <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1" ng-click="Downloadstop();">{{cat.cat_name}}</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1" ng-click="Downloadstop();" target="_blank">{{cat.cat_name}}</a>
                       </li>
                     </ul>
                 </div>
@@ -220,7 +220,12 @@
 
 <div class="row">
   <div style="text-align: center;" class="item col-md-12 col-sm-12 col-xs-12">
-    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+    <img width="30" ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+    <label ng-if="dataLoadingText">Please wait while products are loading…</label>
+    <div ng-if="dataNoResults">
+      <img src="img/NoResults.png">
+      <label>This subcategory currently does not have products. Please check back for updates.</label>
+    </div>
   </div>  
 </div>
 <hr/>

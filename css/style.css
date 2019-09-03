@@ -176,6 +176,7 @@ a{
   }
   p.theimg img{
     /*height: 230px !important;*/
+    /*max-height: 260px;*/
   }
   p.price{
     color: red;
