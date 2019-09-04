@@ -114,13 +114,13 @@
                                   <slide  ng-repeat="prod in groupedSlides track by $index" active="slide.active">
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank"  class="itemhover" href="#/products/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank"  class="itemhover" href="#/product/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image1.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
                                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
                                         <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
-                                        <p class="title titleshort">{{ prod.image1.title }}</p>
+                                        <p class="block-with-text">{{ prod.image1.title }}</p>
                                         <p class="price">$ {{ prod.image1.warehouse_list.YB.price }} {{ prod.image1.warehouse_list.ZQ01.price }} {{ prod.image1.warehouse_list.ZQDZ01.price }} {{ prod.image1.warehouse_list.FCYWHQ.price }} {{ prod.image1.warehouse_list.SZXIAWAN.price }} {{ prod.image1.warehouse_list.B2BREXIAOWH.price }} {{ prod.image1.warehouse_list.FXLAWH.price }} {{ prod.image1.warehouse_list.FXLAWH2.price }} {{ prod.image1.warehouse_list.MXTJWH.price }} {{ prod.image1.warehouse_list.FXJFKGC.price }} {{ prod.image1.warehouse_list.USZYCB.price }}</p>
 
 
@@ -146,13 +146,13 @@
                                     </div> 
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank"  class="itemhover" href="#/products/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank"  class="itemhover" href="#/product/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image2.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
                                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
                                         <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
-                                        <p class="title titleshort">{{ prod.image2.title }}</p>
+                                        <p class="block-with-text">{{ prod.image2.title }}</p>
                                         <p class="price">$  {{ prod.image2.warehouse_list.YB.price }} {{ prod.image2.warehouse_list.ZQ01.price }} {{ prod.image2.warehouse_list.ZQDZ01.price }} {{ prod.image2.warehouse_list.FCYWHQ.price }} {{ prod.image2.warehouse_list.SZXIAWAN.price }} {{ prod.image2.warehouse_list.B2BREXIAOWH.price }} {{ prod.image2.warehouse_list.FXLAWH.price }} {{ prod.image2.warehouse_list.FXLAWH2.price }} {{ prod.image2.warehouse_list.MXTJWH.price }} {{ prod.image2.warehouse_list.FXJFKGC.price }} {{ prod.image2.warehouse_list.USZYCB.price }}</p>
                                       </a>  
                                         <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -161,13 +161,13 @@
                                     </div>
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a  target="_blank" class="itemhover" href="#/products/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                      <a  target="_blank" class="itemhover" href="#/product/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image3.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
                                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
                                         <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
-                                        <p class="title titleshort">{{ prod.image3.title }}</p>
+                                        <p class="block-with-text">{{ prod.image3.title }}</p>
                                         <p class="price">$ {{ prod.image3.warehouse_list.YB.price }} {{ prod.image3.warehouse_list.ZQ01.price }} {{ prod.image3.warehouse_list.ZQDZ01.price }} {{ prod.image3.warehouse_list.FCYWHQ.price }} {{ prod.image3.warehouse_list.SZXIAWAN.price }} {{ prod.image3.warehouse_list.B2BREXIAOWH.price }} {{ prod.image3.warehouse_list.FXLAWH.price }} {{ prod.image3.warehouse_list.FXLAWH2.price }} {{ prod.image3.warehouse_list.MXTJWH.price }} {{ prod.image3.warehouse_list.FXJFKGC.price }} {{ prod.image3.warehouse_list.USZYCB.price }}</p>
                                       </a>   
                                         <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -177,13 +177,13 @@
       
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank" class="itemhover" href="#/products/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank" class="itemhover" href="#/product/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image4.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
                                         <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
                                         <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
-                                        <p class="title titleshort">{{ prod.image4.title }}</p>
+                                        <p class="block-with-text">{{ prod.image4.title }}</p>
                                         <p class="price">$ {{ prod.image4.warehouse_list.YB.price }} {{ prod.image4.warehouse_list.ZQ01.price }} {{ prod.image4.warehouse_list.ZQDZ01.price }} {{ prod.image4.warehouse_list.FCYWHQ.price }} {{ prod.image4.warehouse_list.SZXIAWAN.price }} {{ prod.image4.warehouse_list.B2BREXIAOWH.price }} {{ prod.image4.warehouse_list.FXLAWH.price }} {{ prod.image4.warehouse_list.FXLAWH2.price }} {{ prod.image4.warehouse_list.MXTJWH.price }} {{ prod.image4.warehouse_list.FXJFKGC.price }} {{ prod.image4.warehouse_list.USZYCB.price }}</p>
                                       </a>  
                                         <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -218,13 +218,13 @@
                             <slide  ng-repeat="prod in groupedSlides2 track by $index" active="slide.active">
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/products/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image1.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
                                   <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
                                   <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
-                                  <p class="title titleshort">{{ prod.image1.title }}</p>
+                                  <p class="block-with-text">{{ prod.image1.title }}</p>
                                   <p class="price">$ {{ prod.image1.warehouse_list.YB.price }} {{ prod.image1.warehouse_list.ZQ01.price }} {{ prod.image1.warehouse_list.ZQDZ01.price }} {{ prod.image1.warehouse_list.FCYWHQ.price }} {{ prod.image1.warehouse_list.SZXIAWAN.price }} {{ prod.image1.warehouse_list.B2BREXIAOWH.price }} {{ prod.image1.warehouse_list.FXLAWH.price }} {{ prod.image1.warehouse_list.FXLAWH2.price }} {{ prod.image1.warehouse_list.MXTJWH.price }} {{ prod.image1.warehouse_list.FXJFKGC.price }} {{ prod.image1.warehouse_list.USZYCB.price }}</p>
                                 </a> 
                                   <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -233,13 +233,13 @@
                               </div>    
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/products/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image2.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
                                   <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
                                   <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
-                                  <p class="title titleshort">{{ prod.image2.title }}</p>
+                                  <p class="block-with-text">{{ prod.image2.title }}</p>
                                   <p class="price">$ {{ prod.image2.warehouse_list.YB.price }} {{ prod.image2.warehouse_list.ZQ01.price }} {{ prod.image2.warehouse_list.ZQDZ01.price }} {{ prod.image2.warehouse_list.FCYWHQ.price }} {{ prod.image2.warehouse_list.SZXIAWAN.price }} {{ prod.image2.warehouse_list.B2BREXIAOWH.price }} {{ prod.image2.warehouse_list.FXLAWH.price }} {{ prod.image2.warehouse_list.FXLAWH2.price }} {{ prod.image2.warehouse_list.MXTJWH.price }} {{ prod.image2.warehouse_list.FXJFKGC.price }} {{ prod.image2.warehouse_list.USZYCB.price }}</p>
                                 </a>  
                                   <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -248,13 +248,13 @@
                               </div>
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/products/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image3.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
                                   <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
                                   <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
-                                  <p class="title titleshort">{{ prod.image3.title }}</p>
+                                  <p class="block-with-text">{{ prod.image3.title }}</p>
                                   <p class="price">$ {{ prod.image3.warehouse_list.YB.price }} {{ prod.image3.warehouse_list.ZQ01.price }} {{ prod.image3.warehouse_list.ZQDZ01.price }} {{ prod.image3.warehouse_list.FCYWHQ.price }} {{ prod.image3.warehouse_list.SZXIAWAN.price }} {{ prod.image3.warehouse_list.B2BREXIAOWH.price }} {{ prod.image3.warehouse_list.FXLAWH.price }} {{ prod.image3.warehouse_list.FXLAWH2.price }} {{ prod.image3.warehouse_list.MXTJWH.price }} {{ prod.image3.warehouse_list.FXJFKGC.price }} {{ prod.image3.warehouse_list.USZYCB.price }}</p>
                                 </a>   
                                   <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
@@ -264,13 +264,13 @@
                               
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                  <a target="_blank" class="itemhover" href="#/products/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                  <a target="_blank" class="itemhover" href="#/product/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
                                     <p class="theimg" ng-repeat="img in prod.image4.original_img">
                                       <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                     </p>
                                     <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
                                     <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
-                                    <p class="title titleshort">{{ prod.image4.title }}</p>
+                                    <p class="block-with-text">{{ prod.image4.title }}</p>
                                     <p class="price">$ {{ prod.image4.warehouse_list.YB.price }} {{ prod.image4.warehouse_list.ZQ01.price }} {{ prod.image4.warehouse_list.ZQDZ01.price }} {{ prod.image4.warehouse_list.FCYWHQ.price }} {{ prod.image4.warehouse_list.SZXIAWAN.price }} {{ prod.image4.warehouse_list.B2BREXIAOWH.price }} {{ prod.image4.warehouse_list.FXLAWH.price }} {{ prod.image4.warehouse_list.FXLAWH2.price }} {{ prod.image4.warehouse_list.MXTJWH.price }} {{ prod.image4.warehouse_list.FXJFKGC.price }} {{ prod.image4.warehouse_list.USZYCB.price }}</p>
                                   </a>   
                                     <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>

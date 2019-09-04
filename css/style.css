@@ -165,12 +165,53 @@ a{
     margin: 0px;
     /*height: 22%;*/
     font-size: 1em;
-    font-weight: bold;
+    max-height: 3.6em;
+    /*font-weight: bold;*/
 /*
     white-space:nowrap;
     text-overflow: ellipsis;
 */
   }
+/*TEST*/
+/* mixin for multiline */
+
+.block-with-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 2.2em; 
+  text-align: left;
+  margin-right: -1em;
+  padding-right: 1em;
+  
+}
+
+.block-with-text:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: transparent;
+}
+
+.block-with-text:before {
+    content: '...';
+    position: absolute;
+    right: 8px;
+    bottom: 0;
+    background: transparent;
+}
+
+
+
+
+
+
+
+
+
   p.theimg{
     margin: 0px;
   }
@@ -342,6 +383,18 @@ img{
 }
 /*Estilos para el color de los prod*/
 .colorhide{
+  display: none;
+  position: absolute;
+    background-color: #00000073;
+    color: white;
+    border-radius: 5px;
+    bottom: 100%;
+    padding: 0px 5px 0px 5px;
+    font-size: 0.7em;
+    text-align: center;
+    left: 20%;
+}
+.colorhide2{
   display: none;
   position: absolute;
     background-color: #00000073;

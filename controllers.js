@@ -524,284 +524,367 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
             var RutaSKU = RutaCompletaSku.split("/");
             var SKU = RutaSKU[2];
-            console.log(SKU);
 
+
+            console.log('Los skus son',$scope.product.msg[i]['sku']);
+
+            //color imagenes mouse over
+            $scope.nameofcolorhover = function(p){
+
+                var elcolor = document.getElementById('block'+p.color);
+                elcolor.style.display = 'block';
+                console.log(p.color);
+
+                console.log(elcolor);
+            }
+            $scope.nameofcolorout = function(p){
+                var elcolor = document.getElementById('block'+p.color);
+                elcolor.style.display = 'none';
+                console.log(p.color);
+
+                console.log(elcolor);
+            }
+
+           
             if($scope.product.msg[i]['status'] == 1 && $scope.product.msg[i]['sku'] == SKU){
-
-
                 $scope.prodSKU = $scope.product.msg[i]['sku'];
-                console.log($scope.prodSKU);
-                console.log($scope.product.msg[i]['warehouse_list']);
-
+                
+                
+                
                 if( $scope.product.msg[i]['warehouse_list']['YB'] ){
-                    var country = 'US';
-                    $scope.warehouse = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['YB']['price'];
-                    $scope.stockone0 = $scope.product.msg[i]['warehouse_list']['YB']['goods_number'];
-                    console.log($scope.stockone0);
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename = 'CN-1 :';
-                            $scope.stock0 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['YB']['goods_number'] > 5){
+                        console.log('CN-1');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
+                        $scope.warehouse = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['YB']['price'];
+                        $scope.stockone0 = $scope.product.msg[i]['warehouse_list']['YB']['goods_number'];
+                        console.log($scope.stockone0);
+                        
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country).then(function successCallback(response) {
+                                console.log('Shipping cost CN-1');
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename = 'CN-1 :';
+                                $scope.stock0 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse YB',$scope.shippingmodel);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);    
+                    }
                 }
                 if( $scope.product.msg[i]['warehouse_list']['ZQ01']  ){
-                    var country = 'US';
-                    $scope.warehouse1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQ01']['price'];
-                    $scope.stockone1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse1+'&country='+country  ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel1 = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename1 = 'CN-5 :';
-                            $scope.stock1 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel1);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'] > 5){
+                        console.log('CN-5');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
+                        $scope.warehouse1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQ01']['price'];
+                        $scope.stockone1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse1+'&country='+country  ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel1 = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename1 = 'CN-5 :';
+                                $scope.stock1 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse ZQ01',$scope.shippingmodel1);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);    
+                    }
                 }
                 if( $scope.product.msg[i]['warehouse_list']['ZQDZ01']  ){
-                    var country = 'US';  
-                    $scope.warehouse2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['price'];
-                    $scope.stockone2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse2+'&country='+country  ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel2 = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename2 = 'CN-7 :';
-                            $scope.stock2 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel2);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'] > 5){
+                        console.log('CN-7');
+                        var country = 'US';  
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
+                        $scope.warehouse2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['price'];
+                        $scope.stockone2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse2+'&country='+country  ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel2 = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename2 = 'CN-7 :';
+                                $scope.stock2 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse ZQDZ01',$scope.shippingmodel2);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);   
+                    }
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FCYWHQ'] ){
-                    var country = 'US';
-                    $scope.warehouse3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['price'];
-                    $scope.stockone3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
-                    $scope.dataLoading = true;
-                    console.log($scope.warehouse3);
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse3+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel3 = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename3 = 'CN-8 :'; 
-                            $scope.stock3 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.warehousename3);
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel3);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'] > 5){
+                        console.log('CN-8');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
+                        $scope.warehouse3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['price'];
+                        $scope.stockone3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                        $scope.dataLoading = true;
+                        console.log($scope.warehouse3);
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse3+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel3 = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename3 = 'CN-8 :'; 
+                                $scope.stock3 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.warehousename3);
+                                console.log($scope.precioenvio);
+                                console.log('warehouse FCYWHQ',$scope.shippingmodel3);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);
+                    }    
                 }
                 if( $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] ){
-                    var country = 'US';
-                    $scope.warehouse4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['price'];
-                    $scope.stockone4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse4+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel4 = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename4 = 'CN-9 :'; 
-                            $scope.stock4 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel4);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'] > 5){
+                        console.log('CN-9');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
+                        $scope.warehouse4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['price'];
+                        $scope.stockone4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse4+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel4 = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename4 = 'CN-9 :'; 
+                                $scope.stock4 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse SZXIAWAN',$scope.shippingmodel4);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);   
+                    }
                 }
                 if( $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
-                    var country = 'US';
-                    $scope.warehouse5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['price'];
-                    $scope.stockone5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse5+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel5 = response.data;
-                            $scope.Place = 'China';
-                            $scope.warehousename5 = 'CN-11 :'; 
-                            $scope.stock5 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel5);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'] > 5){
+                        console.log('CN-11');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
+                        $scope.warehouse5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['price'];
+                        $scope.stockone5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse5+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel5 = response.data;
+                                $scope.Place = 'China';
+                                $scope.warehousename5 = 'CN-11 :'; 
+                                $scope.stock5 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse B2BREXIAOWH',$scope.shippingmodel5);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400); 
+                    }   
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXLAWH'] ){
-                    var country = 'US';
-                    $scope.warehouse6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH']['price'];
-                    $scope.stockone6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel6 = response.data;
-                            $scope.Place = 'UNITED STATES';
-                            $scope.warehousename6 = 'US-1 :';
-                            $scope.stock6 = 'Stock :'; 
-                            $scope.precioenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel6);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'] > 5){
+                        console.log('US-1 ');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
+                        $scope.warehouse6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH']['price'];
+                        $scope.stockone6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                        $scope.dataLoading = true;
+                        console.log($scope.stockone6);
+                        console.log($scope.product.msg[i]['original_img'][0]);
+                        $scope.prodImg = $scope.product.msg[i]['original_img'][0];
+                        $scope.prodColor = $scope.product.msg[i]['color'];
+                        console.log($scope.stockone6);
+                    
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country ).then(function successCallback(response) {
+                                console.log('Shipping cost US-1 ');
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel6 = response.data;
+                                $scope.Place = 'UNITED STATES';
+                                $scope.warehousename6 = 'US-1 :';
+                                $scope.stock6 = 'Stock :'; 
+                                $scope.precioenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse FXLAWH',$scope.shippingmodel6);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);
+                    }
+                        
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXLAWH2'] ){
-                    var country = 'US';
-                    $scope.warehouse7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
-                    $scope.stockone7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel7 = response.data;
-                            $scope.Place = 'UNITED STATES';
-                            $scope.warehousename7 = 'US-2 :'; 
-                            $scope.stock7 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel7);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'] > 5){
+                        console.log('US-2');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
+                        $scope.warehouse7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
+                        $scope.stockone7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel7 = response.data;
+                                $scope.Place = 'UNITED STATES';
+                                $scope.warehousename7 = 'US-2 :'; 
+                                $scope.stock7 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse FXLAWH2',$scope.shippingmodel7);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);  
+                    }  
                 }
                 if( $scope.product.msg[i]['warehouse_list']['MXTJWH'] ){
-                    var country = 'US';
-                    $scope.envwarehouse = 'MXTJWH'
-                    $scope.warehouse8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['MXTJWH']['price'];
+                    if($scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'] > 5){
+                        console.log('US');
+                        var country = 'US';
+                        $scope.envwarehouse = 'MXTJWH'
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
+                        $scope.warehouse8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['MXTJWH']['price'];
 
-                    $scope.stockone8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel8 = response.data;
-                            $scope.Place = 'UNITED STATES';
-                            $scope.warehousename8 = 'US-3 :'; 
-                            $scope.stock8 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel8);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);
+                        $scope.stockone8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel8 = response.data;
+                                $scope.Place = 'UNITED STATES';
+                                $scope.warehousename8 = 'US-3 :'; 
+                                $scope.stock8 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse MXTJWH',$scope.shippingmodel8);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);
+                    }
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXJFKGC'] ){
-                    var country = 'US';
-                    $scope.warehouse9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
-                    $scope.stockone9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country  ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel9 = response.data;
-                            $scope.Place = 'UNITED STATES';
-                            $scope.warehousename9 = 'US-4 :'; 
-                            $scope.stock9 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel9);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'] > 5){
+                        console.log('US-4');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
+                        $scope.warehouse9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
+                        $scope.stockone9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country  ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel9 = response.data;
+                                $scope.Place = 'UNITED STATES';
+                                $scope.warehousename9 = 'US-4 :'; 
+                                $scope.stock9 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse FXJFKGC',$scope.shippingmodel9);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);   
+                    } 
                 }
                 if( $scope.product.msg[i]['warehouse_list']['USZYCB'] ){
-                    var country = 'US';
-                    $scope.warehouse10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
-                    $scope.priceone = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
-                    $scope.stockone10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'];
-                    $scope.dataLoading = true;
-                    $timeout(function() {
-                        $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country ).then(function successCallback(response) {
-                            $scope.dataLoading = false;
-                            $scope.shippingmodel10 = response.data;
-                            $scope.Place = 'UNITED STATES';
-                            $scope.warehousename10 = 'US-5 :'; 
-                            $scope.stock10 = 'Stock :';
-                            $scope.precioenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_fee'];
-                            $scope.nameenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_name'];
-                            $scope.timeenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_time'];
-                            console.log($scope.precioenvio);
-                            console.log('la data es',$scope.shippingmodel10);
-                        }, function errorCallback(response) {
-                            $scope.error = 'Information not found';
-                            $scope.dataLoading = false;
-                        });
-                    }, 400);    
+                    if($scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'] > 5){
+                        console.log('US-5');
+                        var country = 'US';
+                        $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
+                        $scope.warehouse10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
+                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
+                        $scope.stockone10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                        $scope.dataLoading = true;
+                        $timeout(function() {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country ).then(function successCallback(response) {
+                                $scope.dataLoading = false;
+                                $scope.shippingmodel10 = response.data;
+                                $scope.Place = 'UNITED STATES';
+                                $scope.warehousename10 = 'US-5 :'; 
+                                $scope.stock10 = 'Stock :';
+                                $scope.precioenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvio);
+                                console.log('warehouse USZYCB',$scope.shippingmodel10);
+                            }, function errorCallback(response) {
+                                $scope.error = 'Information not found';
+                                $scope.dataLoading = false;
+                            });
+                        }, 400);   
+                    }    
                 }
+                if($scope.product.msg[i]['warehouse_list']['YB'] == undefined && $scope.product.msg[i]['warehouse_list']['ZQ01'] == undefined && $scope.product.msg[i]['warehouse_list']['ZQDZ01'] == undefined && $scope.product.msg[i]['warehouse_list']['FCYWHQ'] == undefined && $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] == undefined && $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXLAWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXLAWH2'] == undefined && $scope.product.msg[i]['warehouse_list']['MXTJWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXJFKGC'] == undefined && $scope.product.msg[i]['warehouse_list']['USZYCB'] == undefined){
+                    
+                    console.log('Out of Stock, please back');
+                }
+                var detectawarehouse = $scope.product.msg[i]['warehouse_list']['YB'];
+                var detectacolor = $scope.product.msg[i]['color'];
+                var detectasize = $scope.product.msg[i]['size'];
+                console.log('este es el color -> ',detectacolor);
+                console.log('este es el tamaño -> ',detectasize);
+
+                
             }
 
 
@@ -820,6 +903,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
             }
             $scope.myFunctioninfo();
         }, 1000);  
+
+
+        
         
  
     });
