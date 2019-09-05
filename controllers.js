@@ -526,7 +526,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
             var SKU = RutaSKU[2];
 
 
-            console.log('Los skus son',$scope.product.msg[i]['sku']);
+            //console.log('Los skus son',$scope.product.msg[i]['sku']);
 
             //color imagenes mouse over
             $scope.nameofcolorhover = function(p){
@@ -581,6 +581,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                             });
                         }, 400);    
                     }
+                    
                 }
                 if( $scope.product.msg[i]['warehouse_list']['ZQ01']  ){
                     if($scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'] > 5){
@@ -894,15 +895,19 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
             
         
         $timeout(function(){
+            $scope.goodsnumber = document.getElementById("goodsnumber").value;
+            
+            if($scope.goodsnumber <= 5){
+                $scope.sendRuteStock = 'YB';
+                console.log('Stock NO valido');
+            }
             
             $scope.myFunctioninfo = function(){
-    
                 var todalainfo = document.getElementById("inputinfo").value;
                 document.getElementById("infoprod").innerHTML= todalainfo;
-    
             }
             $scope.myFunctioninfo();
-        }, 1000);  
+        }, 8000);  
 
 
         
@@ -963,7 +968,7 @@ empleadoControllers.controller('LoginController', ['$scope','$location', 'Authen
     }
     var iduser = document.getElementById("welcome");
     var idlogin = document.getElementById("login");
-    if($scope.Rol == '1'){
+    if($scope.Rol == '1' || $scope.Rol == '2'){
         iduser.style.display  = "block";
         idlogin.style.display  = "none";
     }else{
@@ -990,8 +995,12 @@ empleadoControllers.controller('LoginController', ['$scope','$location', 'Authen
                     $scope.todosuser = (localStorage.getItem('todosuser')!==null) ? JSON.parse($scope.saveduser) : [ ];
                     $scope.todosuser.push(consulta);
                     localStorage.setItem('todosuser', JSON.stringify($scope.todosuser));
-                    $scope.dataLoading = false;
-                    $location.path('/Home');
+                    
+                    $timeout(function(){
+                        $scope.dataLoading = false;
+                        location.reload();
+                    }, 50);
+                    
                 }
             }, function errorCallback(response) {
                 $scope.error = 'Email or password is incorrect';
@@ -1174,8 +1183,10 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
         $timeout(function(){
             localStorage.removeItem('todosuser');
             $http.post(rute+'api/?a=Logout').then(function successCallback(response) {
-                $scope.dataLoading = true;
-                $location.path('/Home');      
+                $timeout(function(){
+                    $scope.dataLoading = false;
+                    location.reload();
+                }, 50);     
             }, function errorCallback(response) {
                 $scope.dataLoading = true;
                 $scope.error = 'No User';
@@ -1267,7 +1278,7 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
 
         $scope.filtroProducts = [];
         $scope.currentPageProducts = 1;
-        $scope.numPerPageProducts = 42; //es 40
+        $scope.numPerPageProducts = 10; //es 40
 
         $scope.hacerPagineoProducts = function (arreglo) {
             //si no retorna ningun valor
@@ -1277,7 +1288,10 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
             $scope.filtroProducts = arreglo.slice(principio, fin); // 
         };
             
-        
+        $scope.$watch('currentPageProducts',function(){
+            $scope.hacerPagineoProducts($scope.dataProducts);
+    
+        }); 
 
         var miArray2 = [];
         var miArray = [];
@@ -1293,7 +1307,6 @@ empleadoControllers.controller('ListController', ['$scope','$window','$http','$t
         $scope.totalProducts = $scope.dataProducts.length;
         $scope.hacerPagineoProducts($scope.dataProducts);
 
-        
 
     }).error(function(error){
         console.log(error);

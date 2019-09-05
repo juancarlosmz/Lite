@@ -1,22 +1,24 @@
 
 <?php
-$page = '1'; 
-$category = '';  
+    session_start(); 
+    $page = '1'; 
+    $category = '';  
 
-$todayis = date('Y-m-d\TH:i:sP');
-$lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 3 month"));
+    $todayis = date('Y-m-d\TH:i:sP');
+    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 3 month"));
 
-if(isset($_GET['category']) ) {
-    $category = $_GET['category'];
-}
+    if(isset($_GET['category']) ) {
+        $category = $_GET['category'];
+    }
 
-if(isset($_GET['page']) ) {
-    $page = $_GET['page'];
-}  
+    if(isset($_GET['page']) ) {
+        $page = $_GET['page'];
+    }  
 
 
     $post_data = array(
-        'token' => '3a0062a2c81ebe9d1101d4144beb166e',
+        //'token' => 'b519738173bec5630f0f1cdf15a77e87',
+        'token' => $_SESSION['eltoken'], 
         'cat_id' => $category,
         'sale_date_start' => $lastdateis,//'2019-05-01T11:00:00+08:00',
         'sale_date_end' => $todayis,//'2019-08-15T11:00:00+08:00',

@@ -1,7 +1,10 @@
 
 <?php
+    session_start(); 
+    
     $post_data = array(
-        'token' => '3a0062a2c81ebe9d1101d4144beb166e',
+        //'token' => 'b519738173bec5630f0f1cdf15a77e87',
+        'token' => $_SESSION['eltoken'], 
         'type' => 0,
         'per_page' => 100,
         'page_number' => 1,

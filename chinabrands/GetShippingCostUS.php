@@ -1,5 +1,5 @@
 <?php
-
+    session_start(); 
     if(isset($_GET['sku']) ) {
         $sku = $_GET['sku'];
     }
@@ -16,7 +16,8 @@
         ),
     );
     $post_data = array(
-        'token' => '3a0062a2c81ebe9d1101d4144beb166e',
+        //'token' => 'b519738173bec5630f0f1cdf15a77e87',
+        'token' => $_SESSION['eltoken'], 
         'country' => $country,
         'warehouse' => $warehouse,
         'goods' => json_encode($goods),

@@ -1,22 +1,29 @@
 
 <div class="" >
-  <div class="container" >            
-    <div class="row">
+  <div class="container" >  
 
-        <div class="col-md-6 col-md-offset-3" >
-            
 
-              
-                <section class="app-body">
-                  <section class="archive-control">
-                    <span>{{ remainingsku() }} of {{ ImportList.length }} remaining</span>
-                    <p>[ <a href="" data-ng-click="archivesku()">Remove Completed Items</a> ]</p>
-                  </section>
-              
-                  
-
+      <div class="row">
+          <div class="col-md-6 col-md-offset-3" style="background-color: antiquewhite;" >
+              <section class="app-body">
+                <section class="archive-control">
+                  <span>How to Edit and Save Import List:</span>
+                  <p>1. To remove unwanted products, click the select box next to the products, and click “Remove Selected Items.”</p>
+                  <p>2. When finished editing, click the “Save Import List” button at bottom of page.</p>
                 </section>
+              </section>
+          </div>
+  
+      </div>
 
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" >
+            <section class="app-body">
+              <section class="archive-control">
+                <span>{{ remainingsku() }} of {{ ImportList.length }} remaining</span>
+                <p>[ <a href="" data-ng-click="archivesku()">Remove Selected Items</a> ]</p>
+              </section>
+            </section>
         </div>
 
     </div>
@@ -29,7 +36,7 @@
       <div class="">
           <div class="container">
             <div class="row" data-ng-repeat="skus in ImportList track by $index">
-                <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1 && skus.textsku == prod.sku ">
+                <div class="item col-md-6 col-md-offset-3" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1 && skus.textsku == prod.sku ">
                   <div class="row">
                     <div class="item col-md-1 col-sm-1 col-xs-1">
                       <input type="checkbox" data-ng-model="skus.donesku">
@@ -42,22 +49,27 @@
                     </a>   
                     <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku }}">
                     <p class="item col-md-6 col-sm-6 col-xs-5"  class="title">{{ prod.title }}</p>
-                    <p class="item col-md-3 col-sm-3 col-xs-2" class="price">$ {{ prod.warehouse_list.YB.price }}</p>
+                    <p class="item col-md-3 col-sm-3 col-xs-2" class="price">$ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
                   </div>
                 </div>
               </div>
-              <hr/>
-              <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+              
+
+
+
+              <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <hr/>
+                    <ul pagination total-items="totalProducts"  items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+                    <form name="form" ng-submit="saveimportlist()" role="form" >  
+                      <button type="submit"  class="btn btn-outline-secondary">Save Import List</button>
+                    </from> 
+                  
+                </div>
+              </div>
+              
           </div>
 
-
-        <div class="container">   
-          <form name="form" ng-submit="saveimportlist()" role="form" >  
-
-                <button type="submit"  class="btn btn-outline-secondary">Save Import List</button>
-
-          </from>  
-        </div>  
 
 
       </div> 
