@@ -22,6 +22,10 @@ if ($connection->connect_error){
 }
 //
 switch($action) {
+    case 'conexiontoken':
+        header('Content-Type: application/json');
+        print_r(json_encode(conntoken($fluent)));
+        break;
     case 'listar':
         header('Content-Type: application/json');
         print_r(json_encode(listar($fluent)));

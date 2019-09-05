@@ -2,7 +2,7 @@
 <?php
 $goods_sn = json_decode($_POST['myData']);
 $post_data = array(
-'token' => '1d6a4f8f6846153a8d06d49eec6591e9',
+'token' => '3a0062a2c81ebe9d1101d4144beb166e',
 'goods_sn' => json_encode($goods_sn)
 );
 $api_url="https://cnapi.chinabrands.com/v2/product/index";

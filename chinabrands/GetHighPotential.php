@@ -4,7 +4,7 @@
 //$goods_sn = array('165460401','182079101'); //数组
 $goods_sn = '455449301 ,454731501 ,453853101 ,453315901 ,453816401 ,453782601 ,454652001 ,186648801   ,451655801 ,447125101 ,451787001,282680901,450522101 '; //以英文逗号分隔
 $post_data = array(
-'token' => '1d6a4f8f6846153a8d06d49eec6591e9',
+'token' => '3a0062a2c81ebe9d1101d4144beb166e',
 'goods_sn' => json_encode($goods_sn)
 );
 $api_url="https://cnapi.chinabrands.com/v2/product/index";

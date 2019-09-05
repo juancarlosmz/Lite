@@ -1,7 +1,10 @@
 
 <?php
 $page = '1'; 
-$category = '';   
+$category = '';  
+
+$todayis = date('Y-m-d\TH:i:sP');
+$lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 3 month"));
 
 if(isset($_GET['category']) ) {
     $category = $_GET['category'];
@@ -13,10 +16,10 @@ if(isset($_GET['page']) ) {
 
 
     $post_data = array(
-        'token' => '1d6a4f8f6846153a8d06d49eec6591e9',
+        'token' => '3a0062a2c81ebe9d1101d4144beb166e',
         'cat_id' => $category,
-        'sale_date_start' => '2017-01-01T11:00:00+08:00',
-        'sale_date_end' => '2019-08-15T11:00:00+08:00',
+        'sale_date_start' => $lastdateis,//'2019-05-01T11:00:00+08:00',
+        'sale_date_end' => $todayis,//'2019-08-15T11:00:00+08:00',
         'page_number' => $page,
         'per_page' => '100',
     );
