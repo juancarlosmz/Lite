@@ -121,6 +121,7 @@
         <div class="row">
           <div id="cambiaskucolor" ng-if="$index==2" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
               <p class="title">{{ prod.title }}</p>
+              <br>
               <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
               <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
               <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
@@ -134,7 +135,7 @@
                         <p >Price:</p>
                     </div>
                     <div class="item col-md-10 col-sm-9 col-xs-8">                        
-                        <p > $ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
+                        <p > $ {{priceone}} </p>
                     </div>
                 </div>
             </div>
@@ -142,179 +143,292 @@
 
 <!-- Imagenes con colores hacer un filtro-->
 
-<div class="row">
-            
-
-    <div class="item col-md-12 col-sm-12 col-xs-12">
             <div class="row">
-                <div class="item col-md-2 col-sm-3 col-xs-4">
-                    <p> Color:  </p> 
+                <div class="item col-md-12 col-sm-12 col-xs-12" >                                    
+                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-3 col-xs-4">
+                                    <p >Color: </p>
+                            </div>
+                            <div class="item col-md-10 col-sm-9 col-xs-8">  
+                            <!--
+                                <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                                </a>     
+                            -->  
+                                <div class="row">
+                                    <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
+                                            <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
+                                                <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
+                                                <p ng-mouseover="nameofcolorhover(prod)" ng-mouseleave="nameofcolorout(prod)" ng-repeat="img in prod.original_img">
+                                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                                </p>
+                                            </a>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
                 </div>
-                <div class="item col-md-10 col-sm-9 col-xs-8">    
-                    <!--Color-->
-                    <div class="row">
-                        <div ng-if="$index==0" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a   href="#/products/{{ prod.sku }}/{{warehousesolo}}">
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p  onmouseover="mycolorhover1();" onmouseout="mycolorout1();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>    
-                        </div>  
-                        <div ng-if="$index==1" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products2/{{ prod.sku }}/{{warehousesolo}}">
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover2();" onmouseout="mycolorout2();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                        <div ng-if="$index==2" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products3/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover3();" onmouseout="mycolorout3();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                        <div ng-if="$index==3" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products4/{{ prod.sku }}/{{warehousesolo}}">
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover4();" onmouseout="mycolorout4();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                        <div ng-if="$index==4" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products5/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover5();" onmouseout="mycolorout5();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>    
-                        </div>
-                        <div ng-if="$index==5" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products6/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover6();" onmouseout="mycolorout6();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a> 
-                        </div>
-                        </div>  
-
-
-                        <div class="row">  
-                        <div ng-if="$index==6" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products7/{{ prod.sku }}/{{warehousesolo}}">
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover7();" onmouseout="mycolorout7();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                        <div ng-if="$index==7" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products8/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p  class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover8();" onmouseout="mycolorout8();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>        
-                        </div>
-                        <div ng-if="$index==8" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products9/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover9();" onmouseout="mycolorout9();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>    
-                        </div>
-                        <div ng-if="$index==9" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products10/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide" > {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover10();" onmouseout="mycolorout10();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>    
-                        </div>
-                        <div ng-if="$index==10" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products11/{{ prod.sku }}/{{warehousesolo}}">  
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover11();" onmouseout="mycolorout11();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                        <div ng-if="$index==11" class="item col-md-2 col-sm-2 col-xs-2 imgcolor" ng-repeat="prod in product.msg" ng-if="prod.status == 1">
-                            <a href="#/products12/{{ prod.sku }}/{{warehousesolo}}">
-                                <p class="colorhide"> {{ prod.color }}</p>
-                                <p onmouseover="mycolorhover12();" onmouseout="mycolorout12();" onmouseover="mycolorhover();" ng-repeat="img in prod.original_img">
-                                    <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                    <!--Color--> 
-                </div>   
             </div>
-        </div> 
-
-
-
-
-</div>
-
 
 
 
 
 <!-- Info que se cambiara con el filtro-->
-    <div class="row">
-        <div ng-if="$index==2" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
             <div class="row">
-                        <div class="item col-md-2 col-sm-3 col-xs-4">
-                            <p >Warehouse:</p>
+                <div class="item col-md-12 col-sm-12 col-xs-12" >                                    
+                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-3 col-xs-4">
+                                    <p >Size: </p>
+                            </div>
+                            <div class="item col-md-10 col-sm-9 col-xs-8">  
+                            <!--
+                                <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                                </a>     
+                            -->  
+                                <div class="row">
+                                    <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
+                                        <a   href="#/product3/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
+                                            <p> {{ prod.size }}</p>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                         </div>
-                        <div class="item col-md-10 col-sm-9 col-xs-8"> 
-                                <!--
-                                <a href="#/products3/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
-                                </a>
-                                -->
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div ng-if="$index==2" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
+                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-3 col-xs-4">
+                                    <p >Warehouse:</p>
+                            </div>
+                            <div class="item col-md-10 col-sm-9 col-xs-8">  
+                            <!--
+                                <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                                </a>     
+                            -->    
+                                
                                 <p >{{warehousename}} {{warehouse}} {{warehousename1}} {{warehouse1}} {{warehousename2}} {{warehouse2}} {{warehousename3}} {{warehouse3}} {{warehousename4}} {{warehouse4}} {{warehousename5}} {{warehouse5}} {{warehousename6}} {{warehouse6}} {{warehousename7}} {{warehouse7}} {{warehousename8}} {{warehouse8}} {{warehousename9}} {{warehouse9}} {{warehousename10}} {{warehouse10}}</p>
                                 <p >{{stock0}} {{stockone0}} {{stock1}} {{stockone1}} {{stock2}} {{stockone2}} {{stock3}} {{stockone3}} {{stock4}} {{stockone4}} {{stock5}} {{stockone5}} {{stock6}} {{stockone6}} {{stock7}} {{stockone7}} {{stock8}} {{stockone8}} {{stock9}} {{stockone9}} {{stock10}} {{stockone10}}</p>                          
-                        </div> 
+                            </div>
+                        </div>
+                </div>
             </div>
-        </div>
-    </div>
 
 
             <div class="row">
-                <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="stk in stock.msg.page_result">
-                    <div class="row">
-                            <div class="item col-md-2 col-sm-3 col-xs-4">
-                                <p >Available Stock:</p>
-                            </div>
-                        <div class="item col-md-10 col-sm-9 col-xs-8">                        
-                            <p >{{ stk.goods_number }}</p>                          
+              <div class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="stk in stock.msg.page_result">
+                  <div class="row">
+                        <div class="item col-md-2 col-sm-3 col-xs-4">
+                            <p >Available Stock:</p>
                         </div>
+                      <div class="item col-md-10 col-sm-9 col-xs-8">                        
+                            <p >{{ stk.goods_number }}</p>   
+                            <input id="goodsnumber" type="text" value="{{stk.goods_number}}"/>                      
+                      </div>
+                    </div>
+              </div>
+            </div>
+
+
+
+            <br>
+            <div class="row" ng-if="shipcn1" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                            
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-1</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn1}}: <strong style="color: red;"> $ {{precioenviocn1}} </strong> to {{nameenviocn1}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn1}} days</label></p>
+                            </div>
+                        </div>
+                            
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div ng-if="$index==2" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg"> 
-                    <div class="row">
-                        <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
-                            <img src="img/ShippingCost.png" width="40" alt="">
+    
+                <div class="row" ng-if="shipcn5" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-5</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn5}}: <strong style="color: red;"> $ {{precioenviocn5}} </strong> to {{nameenviocn5}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn5}} days</label></p>
+                            </div>
                         </div>
-                        <div class="item col-md-10 col-sm-10 col-xs-10" >
-                            <h3> <strong> Shipping cost </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
-                            <p>Ships from {{Place}}: <strong style="color: red;"> $ {{precioenvio}} </strong> to {{nameenvio}}</p>       
-                            <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvio}} days</label></p>
-                        </div>
-                    </div>  
+                                
+                    </div>
                 </div>
-            </div>
+    
+                <div class="row" ng-if="shipcn7" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-7</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn7}}: <strong style="color: red;"> $ {{precioenviocn7}} </strong> to {{nameenviocn7}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn7}} days</label></p>
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipcn8" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-8</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn8}}: <strong style="color: red;"> $ {{precioenviocn8}} </strong> to {{nameenviocn8}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn8}} days</label></p>
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipcn9" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                                
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-9</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn9}}: <strong style="color: red;"> $ {{precioenviocn9}} </strong> to {{nameenviocn9}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn9}} days</label></p>
+                            </div>
+                        </div>
+                                
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipcn11" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                        
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost CN-11</strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placecn11}}: <strong style="color: red;"> $ {{precioenviocn11}} </strong> to {{nameenviocn11}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenviocn11}} days</label></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipus1" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                        
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost US-1 </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placeus1}}: <strong style="color: red;"> $ {{precioenvious1}} </strong> to {{nameenvious1}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvious1}} days</label></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipus2" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                        
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost US-2 </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placeus2}}: <strong style="color: red;"> $ {{precioenvious2}} </strong> to {{nameenvious2}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvious2}} days</label></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipus3" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                        
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost US-3 </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placeus3}}: <strong style="color: red;"> $ {{precioenvious3}} </strong> to {{nameenvious3}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvious3}} days</label></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipus4" style="border-top: solid 1px #f9e4ca;">
+                    <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                        
+                        <div class="row">
+                            <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                <img src="img/ShippingCost.png" width="40" alt="">
+                            </div>
+                            <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                <h3> <strong> Shipping cost US-4 </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                <p>Ships from {{Placeus4}}: <strong style="color: red;"> $ {{precioenvious4}} </strong> to {{nameenvious4}}</p>       
+                                <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvious4}} days</label></p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <div class="row" ng-if="shipus5" style="border-top: solid 1px #f9e4ca;">
+                        <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
+                            
+                            <div class="row">
+                                <div class="item col-md-2 col-sm-2 col-xs-2" style="padding: 35px 3%;">
+                                    <img src="img/ShippingCost.png" width="40" alt="">
+                                </div>
+                                <div class="item col-md-10 col-sm-10 col-xs-10" >
+                                    <h3> <strong> Shipping cost US-5 </strong> <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                                    <p>Ships from {{Placeus5}}: <strong style="color: red;"> $ {{precioenvious5}} </strong> to {{nameenvious5}}</p>       
+                                    <p>Delivery Time Estimate(Business Days): <label style="color: red;">{{timeenvious5}} days</label></p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                </div>
 
       </div>
 

@@ -183,7 +183,8 @@ a{
   text-align: left;
   margin-right: -1em;
   padding-right: 1em;
-  
+  height: 40px;
+  margin: 10px 0 0;
 }
 
 .block-with-text:after {
@@ -216,8 +217,10 @@ a{
     margin: 0px;
   }
   p.theimg img{
-    /*height: 230px !important;*/
-    /*max-height: 260px;*/
+    /*
+    max-height: 260px;
+    min-height: 216px;
+    */
   }
   p.price{
     color: red;

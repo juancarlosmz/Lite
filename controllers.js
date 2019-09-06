@@ -37,7 +37,9 @@ empleadoControllers.controller('HomeController', ['$scope','products','categorie
 
     categories.list(function(categories) {
         $scope.categories = categories;  
+        //console.log($scope.categories);
     });
+    console.log('Este controlador se repite en todos los controllers');
     
     //para añadir SKU
     //$scope.prodskus = [];
@@ -178,7 +180,7 @@ for (var j in $scope.todossku) {
     
     //carrusel de productos
 
-    $scope.myInterval = 190000;
+    $scope.myInterval = 10000;
 
     $scope.inicializarProducts = function () {
         $scope.dataLoading = true;
@@ -555,6 +557,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['YB']['goods_number'] > 5){
                         console.log('CN-1');
                         var country = 'US';
+                        $scope.shipcn1 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
                         $scope.warehouse = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['YB']['price'];
@@ -565,15 +568,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country).then(function successCallback(response) {
                                 console.log('Shipping cost CN-1');
+                                $scope.shipcn1 = true;
                                 $scope.dataLoading = false;
                                 $scope.shippingmodel = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn1 = 'China';
                                 $scope.warehousename = 'CN-1 :';
                                 $scope.stock0 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenviocn1);
                                 console.log('warehouse YB',$scope.shippingmodel);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -587,6 +591,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'] > 5){
                         console.log('CN-5');
                         var country = 'US';
+                        $scope.shipcn5 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
                         $scope.warehouse1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQ01']['price'];
@@ -595,14 +600,15 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse1+'&country='+country  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipcn5 = true;
                                 $scope.shippingmodel1 = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn5 = 'China';
                                 $scope.warehousename1 = 'CN-5 :';
                                 $scope.stock1 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenviocn5);
                                 console.log('warehouse ZQ01',$scope.shippingmodel1);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -615,6 +621,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'] > 5){
                         console.log('CN-7');
                         var country = 'US';  
+                        $scope.shipcn7 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
                         $scope.warehouse2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['price'];
@@ -623,14 +630,15 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse2+'&country='+country  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipcn7 = true;
                                 $scope.shippingmodel2 = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn7 = 'China';
                                 $scope.warehousename2 = 'CN-7 :';
                                 $scope.stock2 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenviocn7);
                                 console.log('warehouse ZQDZ01',$scope.shippingmodel2);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -643,6 +651,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'] > 5){
                         console.log('CN-8');
                         var country = 'US';
+                        $scope.shipcn8 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
                         $scope.warehouse3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['price'];
@@ -652,15 +661,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse3+'&country='+country ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipcn8 = true;
                                 $scope.shippingmodel3 = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn8 = 'China';
                                 $scope.warehousename3 = 'CN-8 :'; 
                                 $scope.stock3 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
                                 console.log($scope.warehousename3);
-                                console.log($scope.precioenvio);
+                                console.log($scope.precioenviocn8);
                                 console.log('warehouse FCYWHQ',$scope.shippingmodel3);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -673,6 +683,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'] > 5){
                         console.log('CN-9');
                         var country = 'US';
+                        $scope.shipcn9 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
                         $scope.warehouse4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['price'];
@@ -681,14 +692,15 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse4+'&country='+country ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipcn9 = true;
                                 $scope.shippingmodel4 = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn9 = 'China';
                                 $scope.warehousename4 = 'CN-9 :'; 
                                 $scope.stock4 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenviocn9);
                                 console.log('warehouse SZXIAWAN',$scope.shippingmodel4);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -701,6 +713,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'] > 5){
                         console.log('CN-11');
                         var country = 'US';
+                        $scope.shipcn11 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
                         $scope.warehouse5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['price'];
@@ -709,14 +722,15 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $timeout(function() {
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse5+'&country='+country ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipcn11 = true;
                                 $scope.shippingmodel5 = response.data;
-                                $scope.Place = 'China';
+                                $scope.Placecn11 = 'China';
                                 $scope.warehousename5 = 'CN-11 :'; 
                                 $scope.stock5 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
+                                $scope.nameenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
+                                $scope.timeenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
+                                console.log($scope.precioenviocn11);
                                 console.log('warehouse B2BREXIAOWH',$scope.shippingmodel5);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -729,6 +743,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'] > 5){
                         console.log('US-1 ');
                         var country = 'US';
+                        $scope.shipus1 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
                         $scope.warehouse6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH']['price'];
@@ -739,19 +754,20 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $scope.prodImg = $scope.product.msg[i]['original_img'][0];
                         $scope.prodColor = $scope.product.msg[i]['color'];
                         console.log($scope.stockone6);
-                    
+                        $scope.zipcode = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country+'&zipcode='+$scope.zipcode ).then(function successCallback(response) {
                                 console.log('Shipping cost US-1 ');
                                 $scope.dataLoading = false;
+                                $scope.shipus1 = true;
                                 $scope.shippingmodel6 = response.data;
-                                $scope.Place = 'UNITED STATES';
+                                $scope.Placeus1 = 'UNITED STATES';
                                 $scope.warehousename6 = 'US-1 :';
                                 $scope.stock6 = 'Stock :'; 
-                                $scope.precioenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenvious1 = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvious1 = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvious1 = $scope.shippingmodel6.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvious1);
                                 console.log('warehouse FXLAWH',$scope.shippingmodel6);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -765,22 +781,25 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'] > 5){
                         console.log('US-2');
                         var country = 'US';
+                        $scope.shipus2 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
                         $scope.warehouse7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
                         $scope.stockone7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
                         $scope.dataLoading = true;
+                        $scope.zipcode = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipus2 = true;
                                 $scope.shippingmodel7 = response.data;
-                                $scope.Place = 'UNITED STATES';
+                                $scope.Placeus2 = 'UNITED STATES';
                                 $scope.warehousename7 = 'US-2 :'; 
                                 $scope.stock7 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenvious2 = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvious2 = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvious2 = $scope.shippingmodel7.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvious2);
                                 console.log('warehouse FXLAWH2',$scope.shippingmodel7);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -791,8 +810,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                 }
                 if( $scope.product.msg[i]['warehouse_list']['MXTJWH'] ){
                     if($scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'] > 5){
-                        console.log('US');
+                        console.log('US-3');
                         var country = 'US';
+                        $scope.shipus3 = false;
                         $scope.envwarehouse = 'MXTJWH'
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
                         $scope.warehouse8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
@@ -800,17 +820,19 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
                         $scope.stockone8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
                         $scope.dataLoading = true;
+                        $scope.zipcode = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipus3 = true;
                                 $scope.shippingmodel8 = response.data;
-                                $scope.Place = 'UNITED STATES';
+                                $scope.Placeus3 = 'UNITED STATES';
                                 $scope.warehousename8 = 'US-3 :'; 
                                 $scope.stock8 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenvious3 = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvious3 = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvious3 = $scope.shippingmodel8.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvious3);
                                 console.log('warehouse MXTJWH',$scope.shippingmodel8);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -823,22 +845,25 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'] > 5){
                         console.log('US-4');
                         var country = 'US';
+                        $scope.shipus4 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
                         $scope.warehouse9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
                         $scope.stockone9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
                         $scope.dataLoading = true;
+                        $scope.zipcode = '10001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country  ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country+'&zipcode='+$scope.zipcode   ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipus4 = true;
                                 $scope.shippingmodel9 = response.data;
-                                $scope.Place = 'UNITED STATES';
+                                $scope.Placeus4 = 'UNITED STATES';
                                 $scope.warehousename9 = 'US-4 :'; 
                                 $scope.stock9 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenvious4 = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvious4 = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvious4 = $scope.shippingmodel9.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvious4);
                                 console.log('warehouse FXJFKGC',$scope.shippingmodel9);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -851,22 +876,25 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     if($scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'] > 5){
                         console.log('US-5');
                         var country = 'US';
+                        $scope.shipus5 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
                         $scope.warehouse10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
                         $scope.stockone10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'];
                         $scope.dataLoading = true;
+                        $scope.zipcode = '07039';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
+                                $scope.shipus5 = true;
                                 $scope.shippingmodel10 = response.data;
-                                $scope.Place = 'UNITED STATES';
+                                $scope.Placeus5 = 'UNITED STATES';
                                 $scope.warehousename10 = 'US-5 :'; 
                                 $scope.stock10 = 'Stock :';
-                                $scope.precioenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_fee'];
-                                $scope.nameenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_name'];
-                                $scope.timeenvio = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_time'];
-                                console.log($scope.precioenvio);
+                                $scope.precioenvious5 = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_fee'];
+                                $scope.nameenvious5 = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_name'];
+                                $scope.timeenvious5 = $scope.shippingmodel10.msg['USPSEXPWHW']['shipping_time'];
+                                console.log($scope.precioenvious5);
                                 console.log('warehouse USZYCB',$scope.shippingmodel10);
                             }, function errorCallback(response) {
                                 $scope.error = 'Information not found';
@@ -897,7 +925,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
         $timeout(function(){
             $scope.goodsnumber = document.getElementById("goodsnumber").value;
             
-            if($scope.goodsnumber <= 5){
+            if($scope.goodsnumber <= 5 || $scope.goodsnumber == null){
                 $scope.sendRuteStock = 'YB';
                 console.log('Stock NO valido');
             }
@@ -907,7 +935,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                 document.getElementById("infoprod").innerHTML= todalainfo;
             }
             $scope.myFunctioninfo();
-        }, 8000);  
+        }, 1000);  
 
 
         
@@ -2045,6 +2073,7 @@ $timeout(function(){
         //end
         categories.list(function(categories) {
             $scope.categories = categories;  
+            
             for(var c in $scope.categories.msg){
                 if($scope.categories.msg[c]['parent_id'] == subcategoria){
                     //console.log($scope.categories.msg[c]);

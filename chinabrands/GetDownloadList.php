@@ -1,10 +1,18 @@
 
 <?php
-    session_start(); 
-    
+    include 'connbd.php';
+    $sql = "SELECT tokenserial FROM tokentable where compare=1";
+    $result = $connection->query($sql);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $eltoken =  $row["tokenserial"];
+        }
+    } else {
+        echo "0 results";
+    }
+    //api
     $post_data = array(
-        //'token' => 'b519738173bec5630f0f1cdf15a77e87',
-        'token' => $_SESSION['eltoken'], 
+        'token' => $eltoken,
         'type' => 0,
         'per_page' => 100,
         'page_number' => 1,
@@ -17,6 +25,7 @@
     curl_setopt($curl, CURLOPT_POST, 1);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
     $result = curl_exec($curl); //返回结果
-    curl_close($curl);
     echo $result;
+    curl_close($curl); 
+    $connection->close(); 
 ?>

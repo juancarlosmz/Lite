@@ -47,21 +47,23 @@
 
 
                
-
 <!--
-          <div class="container">
-              <button ng-click="Sincronizar()" class="btn"><span>SINCRONIZAR</span></button>
 
-              <button ng-click="VerDescriptions()" class="btn"><span>Ver Descripcion</span></button>
+          <div class="container">
+              <button ng-click="Sincronizar()" class="btn"><span>SYNC UP</span></button>
+
+              <button ng-click="VerDescriptions()" class="btn"><span>See description</span></button>
               
             <table class="table table-bordered">
                 <tr>
+                    <td>Total SKU's</td>
                     <td>page_number</td>
                     <td>per_page</td>
                     <td>total_pages</td>
                 </tr>
     
                 <tr >
+                    <td>{{Allproducts.msg.total_records}}</td>
                     <td>{{Allproducts.msg.page_number}}</td>
                     <td>{{Allproducts.msg.per_page}}</td>
                     <td>{{Allproducts.msg.total_pages}}</td>
@@ -110,7 +112,7 @@
 
         <div class="container contallprod2">
             <div class="item col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px !important;margin-bottom: 10px;">
-                <p style="color: #989797;">We are in the process of adding new products to the catalog. Please check back soon for updates.</p>
+                <p style="color: #989797;">We are in the process of adding more products to the catalog. Please check back soon for updates.</p>
             </div>
                 <div class="styleproducts">
                   <br>
@@ -118,7 +120,7 @@
                   
                   <div class="row">
                       <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index">
-                        <a target="_blank"  class="itemhover" href="#/product/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                        <a target="_blank"  class="itemhover" href="#/product1/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
                           
                           <p class="theimg" ng-repeat="img in prod.original_img track by $index">
                             <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">

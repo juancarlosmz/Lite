@@ -1,24 +1,28 @@
 
 <?php
-    session_start(); 
+    include 'connbd.php';
+    $sql = "SELECT tokenserial FROM tokentable where compare=1";
+    $result = $connection->query($sql);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $eltoken =  $row["tokenserial"];
+        }
+    } else {
+        echo "0 results";
+    }
+    //api
     $page = '1'; 
     $category = '';  
-
     $todayis = date('Y-m-d\TH:i:sP');
-    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 3 month"));
-
+    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 1 month"));
     if(isset($_GET['category']) ) {
         $category = $_GET['category'];
     }
-
     if(isset($_GET['page']) ) {
         $page = $_GET['page'];
     }  
-
-
     $post_data = array(
-        //'token' => 'b519738173bec5630f0f1cdf15a77e87',
-        'token' => $_SESSION['eltoken'], 
+        'token' => $eltoken ,
         'cat_id' => $category,
         'sale_date_start' => $lastdateis,//'2019-05-01T11:00:00+08:00',
         'sale_date_end' => $todayis,//'2019-08-15T11:00:00+08:00',
@@ -35,6 +39,10 @@
     $result = curl_exec($curl); //返回结果
     curl_close($curl);
     echo $result;
+    $connection->close();
+
+
+    
 
    
 ?>

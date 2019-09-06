@@ -53,13 +53,22 @@ CREATE TABLE `AllSKUs` (
   `status` int(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+CREATE TABLE `tokentable` (
+  `id` int(11),
+  `compare` int(11) NOT NULL,
+  `tokenserial` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `ImportList`
   ADD PRIMARY KEY (`id`);
 
-  ALTER TABLE `AllSKUs`
+ALTER TABLE `AllSKUs`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `tokentable`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -74,6 +83,9 @@ ALTER TABLE `ImportList`
 
 
 ALTER TABLE `AllSKUs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `tokentable`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 

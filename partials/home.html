@@ -100,7 +100,7 @@
                       
                   </div>
                   <!--Message-->
-                  <p style="color: #989797;">We are in the process of adding new products to the catalog. Please check back soon for updates.</p>
+                  <p style="color: #989797;">We are in the process of adding more products to the catalog. Please check back soon for updates.</p>
  
                   <!--Collections-->
                   <h3>Best-Selling Products <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
@@ -115,7 +115,7 @@
                                   <slide  ng-repeat="prod in groupedSlides track by $index" active="slide.active">
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank"  class="itemhover" href="#/product/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank"  class="itemhover" href="#/product1/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image1.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
@@ -147,7 +147,7 @@
                                     </div> 
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank"  class="itemhover" href="#/product/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank"  class="itemhover" href="#/product1/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image2.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
@@ -162,7 +162,7 @@
                                     </div>
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a  target="_blank" class="itemhover" href="#/product/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                      <a  target="_blank" class="itemhover" href="#/product1/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image3.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
@@ -178,7 +178,7 @@
       
       
                                     <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
-                                      <a target="_blank" class="itemhover" href="#/product/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                      <a target="_blank" class="itemhover" href="#/product1/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
                                         <p class="theimg" ng-repeat="img in prod.image4.original_img">
                                           <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                         </p>
@@ -219,7 +219,7 @@
                             <slide  ng-repeat="prod in groupedSlides2 track by $index" active="slide.active">
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product1/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image1.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
@@ -234,7 +234,7 @@
                               </div>    
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product1/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image2.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
@@ -249,7 +249,7 @@
                               </div>
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                <a target="_blank" class="itemhover" href="#/product/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                <a target="_blank" class="itemhover" href="#/product1/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
                                   <p class="theimg" ng-repeat="img in prod.image3.original_img">
                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                   </p>
@@ -265,7 +265,7 @@
                               
                               <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
 
-                                  <a target="_blank" class="itemhover" href="#/product/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                  <a target="_blank" class="itemhover" href="#/product1/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
                                     <p class="theimg" ng-repeat="img in prod.image4.original_img">
                                       <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                     </p>

@@ -37,57 +37,57 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AllProducts',
         method: 'GET',
       }).
-      when('/product/:id/:wh', {
+      when('/product1/:id/:wh', {
         templateUrl: 'partials/product/product.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products2/:id/:wh', {
+      when('/product2/:id/:wh', {
         templateUrl: 'partials/product/product2.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products3/:id/:wh', {
+      when('/product3/:id/:wh', {
         templateUrl: 'partials/product/product3.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products4/:id/:wh', {
+      when('/product4/:id/:wh', {
         templateUrl: 'partials/product/product4.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products5/:id/:wh', {
+      when('/product5/:id/:wh', {
         templateUrl: 'partials/product/product5.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products6/:id/:wh', {
+      when('/product6/:id/:wh', {
         templateUrl: 'partials/product/product6.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products7/:id/:wh', {
+      when('/product7/:id/:wh', {
         templateUrl: 'partials/product/product7.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products8/:id/:wh', {
+      when('/product8/:id/:wh', {
         templateUrl: 'partials/product/product8.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products9/:id/:wh', {
+      when('/product9/:id/:wh', {
         templateUrl: 'partials/product/product9.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products10/:id/:wh', {
+      when('/product10/:id/:wh', {
         templateUrl: 'partials/product/product10.html',
         controller: 'Productview',
         method: 'GET',
       }).
-      when('/products11/:id/:wh', {
+      when('/product11/:id/:wh', {
         templateUrl: 'partials/product/product11.html',
         controller: 'Productview',
         method: 'GET',
