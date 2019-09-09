@@ -754,9 +754,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $scope.prodImg = $scope.product.msg[i]['original_img'][0];
                         $scope.prodColor = $scope.product.msg[i]['color'];
                         console.log($scope.stockone6);
-                        $scope.zipcode = '90001';
+                        $scope.zipcode1 = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country+'&zipcode='+$scope.zipcode ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse6+'&country='+country+'&zipcode='+$scope.zipcode1 ).then(function successCallback(response) {
                                 console.log('Shipping cost US-1 ');
                                 $scope.dataLoading = false;
                                 $scope.shipus1 = true;
@@ -787,9 +787,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
                         $scope.stockone7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
                         $scope.dataLoading = true;
-                        $scope.zipcode = '90001';
+                        $scope.zipcode2 = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse7+'&country='+country+'&zipcode='+$scope.zipcode2  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
                                 $scope.shipus2 = true;
                                 $scope.shippingmodel7 = response.data;
@@ -820,9 +820,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
                         $scope.stockone8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
                         $scope.dataLoading = true;
-                        $scope.zipcode = '90001';
+                        $scope.zipcode3 = '90001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse8+'&country='+country+'&zipcode='+$scope.zipcode3  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
                                 $scope.shipus3 = true;
                                 $scope.shippingmodel8 = response.data;
@@ -851,9 +851,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
                         $scope.stockone9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
                         $scope.dataLoading = true;
-                        $scope.zipcode = '10001';
+                        $scope.zipcode4 = '10001';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country+'&zipcode='+$scope.zipcode   ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse9+'&country='+country+'&zipcode='+$scope.zipcode4   ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
                                 $scope.shipus4 = true;
                                 $scope.shippingmodel9 = response.data;
@@ -882,9 +882,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         $scope.priceone = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
                         $scope.stockone10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'];
                         $scope.dataLoading = true;
-                        $scope.zipcode = '07039';
+                        $scope.zipcode5 = '07039';
                         $timeout(function() {
-                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country+'&zipcode='+$scope.zipcode  ).then(function successCallback(response) {
+                            $http.post(rute+'chinabrands/GetShippingCostUS.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse10+'&country='+country+'&zipcode='+$scope.zipcode5  ).then(function successCallback(response) {
                                 $scope.dataLoading = false;
                                 $scope.shipus5 = true;
                                 $scope.shippingmodel10 = response.data;
@@ -910,6 +910,10 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                 var detectawarehouse = $scope.product.msg[i]['warehouse_list']['YB'];
                 var detectacolor = $scope.product.msg[i]['color'];
                 var detectasize = $scope.product.msg[i]['size'];
+                $scope.seesize = false;
+                if($scope.product.msg[i]['size']){
+                    $scope.seesize = true;
+                }
                 console.log('este es el color -> ',detectacolor);
                 console.log('este es el tamaño -> ',detectasize);
 
@@ -925,7 +929,10 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
         $timeout(function(){
             $scope.goodsnumber = document.getElementById("goodsnumber").value;
             
-            if($scope.goodsnumber <= 5 || $scope.goodsnumber == null){
+            if($scope.goodsnumber <= 5){
+                $scope.sendRuteStock = 'YB';
+                console.log('Stock NO valido');
+            }else if($scope.goodsnumber == null){
                 $scope.sendRuteStock = 'YB';
                 console.log('Stock NO valido');
             }
@@ -935,6 +942,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                 document.getElementById("infoprod").innerHTML= todalainfo;
             }
             $scope.myFunctioninfo();
+
+
+
         }, 1000);  
 
 

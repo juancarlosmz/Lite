@@ -173,6 +173,7 @@ var colortext = document.getElementsByClassName("colorhide");
   }
 
 //CAMBIAR LA IMAGEN PRINCIPAL AL DAR CLICK EN LAS PEQUEÑAS
+
  
 function myFchangeimg1(){ 
   var elmnt = document.getElementById("clonimg1");
@@ -181,6 +182,9 @@ function myFchangeimg1(){
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg1").setAttribute("id", "cambioimg");
+  elmnt.style.border = "1px solid #fdcaa87d";
+  elmnt.style.borderRadius = "1px";
+  console.log('icono 01 es: ',elmnt);
   
 }
 function myFchangeimg2(){
