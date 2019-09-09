@@ -1,0 +1,28 @@
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="container">
+      <div class="row">
+        <div class="item col-md-12 col-sm-12 col-xs-12" >
+          <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
+            <option value="">All Categories</option>
+            <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Syncup/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+          </select>
+          <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+        </div>
+      </div>
+
+      <br><br>
+      <div class="row">
+        <div class="item col-md-12 col-sm-12 col-xs-12" >
+          <div class="row">
+            <div class="item col-md-6 col-sm-6 col-xs-6" style="text-align: center !important;">
+              <button type="button" ng-click="saveallp();" class="btn btn-outline-secondary">SYNC UP</button>  
+            </div>
+            <div class="item col-md-6 col-sm-6 col-xs-6" style="text-align: center !important;">
+              <button ng-click="VerDescriptions()" class="btn"><span>See description</span></button>
+            </div>
+            </div> 
+        </div>
+      </div>
+    </div>
+</div>

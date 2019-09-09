@@ -68,6 +68,25 @@ switch($action) {
         }
         $connection->close();
         break; 
+    case 'registrarProductosPHP':    
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        $allsku = $data['Mysku'];
+        $alltitle = $data['Mytitle'];
+        $allcolor = $data['Mycolor'];
+        $alloriginal_img = $data['Myoriginal_img'];
+        $allparent_id = $data['Myparent_id'];
+        $allsize = $data['Mysize'];
+        $allwarehouse_list = $data['Mywarehouse_list'];
+/*
+        $valores = [];
+        for ($i = 1, $l = count($allsku); $i < $l; $i++){
+            $valores[] = "('" . $allsku[$i] . "')";
+        }
+*/
+        print_r(json_encode($allsku.' | '.$alltitle.' | '.$allcolor.' | '.$allparent_id.' | '.$allsize));
+        //print_r(json_encode($alloriginal_img));
+        break;
     case 'listarAllSKUs':
         header('Content-Type: application/json');
         print_r(json_encode(listarSKUs($fluent)));
