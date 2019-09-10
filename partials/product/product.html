@@ -158,19 +158,17 @@
                                     <p >Color: </p>
                             </div>
                             <div class="item col-md-10 col-sm-9 col-xs-8">  
-                            <!--
-                                <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
-                                </a>     
-                            -->  
                                 <div class="row">
                                     <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
-                                            <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
-                                                <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
-                                                
+                                        <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
+                                            <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
+                                            <input type="text" class="idiconocolor" value="{{ prod.color }}">
+                                            <div class="compararxtext" id="{{ prod.color }}{{$index}}">
                                                 <p ng-mouseover="nameofcolorhover(prod)" ng-mouseleave="nameofcolorout(prod)" ng-repeat="img in prod.original_img">
                                                     <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
                                                 </p>
-                                            </a>
+                                            </div>    
+                                        </a>
                                     </div>
 
                                 </div>

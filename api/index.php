@@ -72,20 +72,29 @@ switch($action) {
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
         $allsku = $data['Mysku'];
+        $allencrypted_sku = $data['Myencrypted_sku'];
         $alltitle = $data['Mytitle'];
         $allcolor = $data['Mycolor'];
         $alloriginal_img = $data['Myoriginal_img'];
+        $allcat_id = $data['Mycat_id'];
         $allparent_id = $data['Myparent_id'];
         $allsize = $data['Mysize'];
-        $allwarehouse_list = $data['Mywarehouse_list'];
-/*
-        $valores = [];
-        for ($i = 1, $l = count($allsku); $i < $l; $i++){
-            $valores[] = "('" . $allsku[$i] . "')";
+
+        //$valores = "('" . $allsku . "', '" . $allencrypted_sku . "' , '" . $alltitle . "' , '" . $allcolor . "' , '" . $alloriginal_img ."' , '". $allcat_id . "' , '" . $allparent_id . "' , '". $allsize ."' )";
+        $valores = '("' . $allsku . '", "' . $allencrypted_sku . '" , "' . $alltitle . '" , "' . $allcolor . '" , "' . $alloriginal_img .'" , "'. $allcat_id . '" , "' . $allparent_id . '" , "'. $allsize .'" )';
+
+        $sql = "INSERT INTO product (sku, encrypted_sku, title, color,original_img,cat_id,parent_id,size)
+        VALUES $valores";
+        if ($connection->multi_query($sql) === TRUE){
+            print_r(json_encode('New records created successfully'));
+        }else{
+            print_r(json_encode('Error:'. $sql . "<br>" . $connection->error));
         }
-*/
-        print_r(json_encode($allsku.' | '.$alltitle.' | '.$allcolor.' | '.$allparent_id.' | '.$allsize));
-        //print_r(json_encode($alloriginal_img));
+        $connection->close();
+
+        //print_r(json_encode($valores));
+        //print_r(json_encode($allsku.' | '.$allencrypted_sku.' | '.$alltitle.' | '.$allcolor.' | '.$alloriginal_img.' | '.$allcat_id.' | '.$allparent_id.' | '.$allsize));
+        
         break;
     case 'listarAllSKUs':
         header('Content-Type: application/json');

@@ -37,6 +37,9 @@ function FilterValorCombo(){
 */
 
 
+
+
+
 function searchhome(){
   var clicked = document.getElementById("changeclick");
   clicked.click();
@@ -177,164 +180,726 @@ var colortext = document.getElementsByClassName("colorhide");
  
 function myFchangeimg1(){ 
   var elmnt = document.getElementById("clonimg1");
+  var elmnt2 = document.getElementById("clonimg2");
+  var elmnt3 = document.getElementById("clonimg3");
+  var elmnt4 = document.getElementById("clonimg4");
+  var elmnt5 = document.getElementById("clonimg5");
+  var elmnt6 = document.getElementById("clonimg6");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg1").setAttribute("id", "cambioimg");
-  elmnt.style.border = "1px solid #fdcaa87d";
-  elmnt.style.borderRadius = "1px";
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
+
   console.log('icono 01 es: ',elmnt);
   
 }
 function myFchangeimg2(){
   var elmnt = document.getElementById("clonimg2");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg3");
+  var elmnt4 = document.getElementById("clonimg4");
+  var elmnt5 = document.getElementById("clonimg5");
+  var elmnt6 = document.getElementById("clonimg6");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg2").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
+  
   
 }
 function myFchangeimg3(){
   var elmnt = document.getElementById("clonimg3");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg4");
+  var elmnt5 = document.getElementById("clonimg5");
+  var elmnt6 = document.getElementById("clonimg6");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg3").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg4(){
   var elmnt = document.getElementById("clonimg4");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg5");
+  var elmnt6 = document.getElementById("clonimg6");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg4").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg5(){
   var elmnt = document.getElementById("clonimg5");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg6");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg5").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg6(){
   var elmnt = document.getElementById("clonimg6");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg7");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg6").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg7(){
   var elmnt = document.getElementById("clonimg7");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg8");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg7").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg8(){
   var elmnt = document.getElementById("clonimg8");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg9");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg8").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg9(){
   var elmnt = document.getElementById("clonimg9");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg10");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg9").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg10(){
   var elmnt = document.getElementById("clonimg10");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg11");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg10").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg11(){
   var elmnt = document.getElementById("clonimg11");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg12");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg11").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg12(){
   var elmnt = document.getElementById("clonimg12");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg11");
+  var elmnt13 = document.getElementById("clonimg13");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg12").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg13(){
   var elmnt = document.getElementById("clonimg13");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg11");
+  var elmnt13 = document.getElementById("clonimg12");
+  var elmnt14 = document.getElementById("clonimg14");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg13").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg14(){
   var elmnt = document.getElementById("clonimg14");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg11");
+  var elmnt13 = document.getElementById("clonimg12");
+  var elmnt14 = document.getElementById("clonimg13");
+  var elmnt15 = document.getElementById("clonimg15");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg14").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg15(){
   var elmnt = document.getElementById("clonimg15");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg11");
+  var elmnt13 = document.getElementById("clonimg12");
+  var elmnt14 = document.getElementById("clonimg13");
+  var elmnt15 = document.getElementById("clonimg14");
+  var elmnt16 = document.getElementById("clonimg16");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg15").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
   
 }
 function myFchangeimg16(){
   var elmnt = document.getElementById("clonimg16");
+
+  var elmnt2 = document.getElementById("clonimg1");
+  var elmnt3 = document.getElementById("clonimg2");
+  var elmnt4 = document.getElementById("clonimg3");
+  var elmnt5 = document.getElementById("clonimg4");
+  var elmnt6 = document.getElementById("clonimg5");
+  var elmnt7 = document.getElementById("clonimg6");
+  var elmnt8 = document.getElementById("clonimg7");
+  var elmnt9 = document.getElementById("clonimg8");
+  var elmnt10 = document.getElementById("clonimg9");
+  var elmnt11 = document.getElementById("clonimg10");
+  var elmnt12 = document.getElementById("clonimg11");
+  var elmnt13 = document.getElementById("clonimg12");
+  var elmnt14 = document.getElementById("clonimg13");
+  var elmnt15 = document.getElementById("clonimg14");
+  var elmnt16 = document.getElementById("clonimg15");
+
   var cln = elmnt.cloneNode(true);
   var cajaprincipal = document.getElementById("cambioimg2");
   //la imagen a cambiar   
   var imgprincipal = document.getElementById("cambioimg");
   cajaprincipal.replaceChild(cln,imgprincipal);
   document.getElementById("clonimg16").setAttribute("id", "cambioimg");
+
+  elmnt.style.border = "1px solid #6fb717";
+
+  elmnt2.style.border = "1px solid #fdcaa87d";
+  elmnt3.style.border = "1px solid #fdcaa87d";
+  elmnt4.style.border = "1px solid #fdcaa87d";
+  elmnt5.style.border = "1px solid #fdcaa87d";
+  elmnt6.style.border = "1px solid #fdcaa87d";
+  elmnt7.style.border = "1px solid #fdcaa87d";
+  elmnt8.style.border = "1px solid #fdcaa87d";
+  elmnt9.style.border = "1px solid #fdcaa87d";
+  elmnt10.style.border = "1px solid #fdcaa87d";
+  elmnt11.style.border = "1px solid #fdcaa87d";
+  elmnt12.style.border = "1px solid #fdcaa87d";
+  elmnt13.style.border = "1px solid #fdcaa87d";
+  elmnt14.style.border = "1px solid #fdcaa87d";
+  elmnt15.style.border = "1px solid #fdcaa87d";
+  elmnt16.style.border = "1px solid #fdcaa87d";
 }
 
 

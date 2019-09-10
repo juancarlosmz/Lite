@@ -159,9 +159,12 @@
                                           <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
                                                   <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
                                                       <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
-                                                      <p ng-mouseover="nameofcolorhover(prod)" ng-mouseleave="nameofcolorout(prod)" ng-repeat="img in prod.original_img">
-                                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
-                                                      </p>
+                                                      <input type="hidden" class="idiconocolor" value="{{ prod.color }}">
+                                                    <div class="compararxtext" id="{{ prod.color }}{{$index}}">
+                                                        <p ng-mouseover="nameofcolorhover(prod)" ng-mouseleave="nameofcolorout(prod)" ng-repeat="img in prod.original_img">
+                                                            <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                                        </p>
+                                                    </div> 
                                                   </a>
                                           </div>
       

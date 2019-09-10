@@ -531,6 +531,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
             //console.log('Los skus son',$scope.product.msg[i]['sku']);
 
             //color imagenes mouse over
+            var idiconocolor;
             $scope.nameofcolorhover = function(p){
 
                 var elcolor = document.getElementById('block'+p.color);
@@ -546,11 +547,12 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
 
                 console.log(elcolor);
             }
-
+            
            
             if($scope.product.msg[i]['status'] == 1 && $scope.product.msg[i]['sku'] == SKU){
                 $scope.prodSKU = $scope.product.msg[i]['sku'];
-                
+
+                console.log("El producto",$scope.product.msg[i]);
                 
                 
                 if( $scope.product.msg[i]['warehouse_list']['YB'] ){
@@ -908,14 +910,43 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                     console.log('Out of Stock, please back');
                 }
                 var detectawarehouse = $scope.product.msg[i]['warehouse_list']['YB'];
-                var detectacolor = $scope.product.msg[i]['color'];
+                
                 var detectasize = $scope.product.msg[i]['size'];
                 $scope.seesize = false;
                 if($scope.product.msg[i]['size']){
                     $scope.seesize = true;
                 }
-                console.log('este es el color -> ',detectacolor);
-                console.log('este es el tamaño -> ',detectasize);
+
+
+                console.log($scope.product.msg[i]['color'].length);
+                for(var k=0; k <= $scope.product.msg[i]['color'].length; k++){
+                    /*
+                    $scope.detectacolor = $scope.product.msg[k]['color'];
+                    $scope.enviarimg = $scope.product.msg[k]['original_img'][0];
+                    console.log('este es el color -> ',$scope.detectacolor);
+                    console.log('este es la imagen -> ',$scope.enviarimg);              
+                    */
+                }
+                $timeout(function(){
+                    var compararxtext = document.getElementsByClassName("compararxtext");
+                    var idiconocolor = document.getElementsByClassName("idiconocolor");
+                    for (var i = 0; i < compararxtext.length; i++) {
+                        console.log('sale siempre null',idiconocolor[i].value);
+                        if(typeof(idiconocolor[i].value) === undefined){
+                            console.log('no se repitens');
+                        }
+                        if( idiconocolor[i].value == idiconocolor[i+1].value){
+                            compararxtext[i+1].style.display = "none";
+                            document.getElementById(i).style.display = "none";
+                            console.log('en el otro js es',compararxtext[i]);
+                            console.log('id a evaluar',idiconocolor[i].value);
+                        }else{
+                            console.log('no se repitens');
+                        }
+
+                    }
+                }, 50);
+
 
                 
             }
@@ -2306,25 +2337,27 @@ $timeout(function(){
                         console.log(miArray2otro.length);
                         if(miArray2otro.length >= '1'){
                             $scope.dataProductsotro = miArray2otro;
-                            console.log($scope.dataProductsotro);
+                            console.log('Total products: ',$scope.dataProductsotro);
+                            console.log('Total products: ',$scope.dataProductsotro.length);
                             $scope.dataLoading = true;
                             $timeout(function(){
                                 $scope.dataLoading = false;
                                 $scope.saveallp = function(){
                                     console.log('searchship all');
-                                    console.log($scope.dataProductsotro);
                                     for(var i in $scope.dataProductsotro){
                                         var modelsend = {
                                             Mysku : $scope.dataProductsotro[i]['sku'],
+                                            Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
                                             Mytitle : $scope.dataProductsotro[i]['title'],
                                             Mycolor : $scope.dataProductsotro[i]['color'],
-                                            Myoriginal_img : $scope.dataProductsotro[i]['original_img'],
+                                            Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                            Mycat_id : $scope.dataProductsotro[i]['cat_id'],
                                             Myparent_id : $scope.dataProductsotro[i]['parent_id'],
                                             Mysize : $scope.dataProductsotro[i]['size'],
-                                            Mywarehouse_list : $scope.dataProductsotro[i]['warehouse_list'],
                                         }
                                         var dataSaveProductsPHP = JSON.stringify(modelsend);
-                                        console.log(dataSaveProductsPHP);
+                                        console.log('',dataSaveProductsPHP);
+                                        
                                         $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
                                             $scope.dataSKU = response.data;
                                             console.log($scope.dataSKU);
@@ -2332,6 +2365,7 @@ $timeout(function(){
                                         }, function errorCallback(response) {
                                             console.log('no logrado');
                                         });
+                                        
                                     }
                                 }
                             }, 2000);
