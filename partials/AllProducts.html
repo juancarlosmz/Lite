@@ -129,9 +129,21 @@
                           <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
                           <!-- clase para title 1 linea class="title titleshort" -->
                           <p  class="block-with-text">{{ prod.title }}</p> 
-                          <p>{{elSKU}}</p>
-                          <p class="price">$ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
-
+                          <!--
+                          <p ng-if="prod.warehouse_list.YB.price" class="price">$ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
+                          -->  
+                          <label ng-if="prod.warehouse_list.YB.price" class="price"> <p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.YB.price }}</p> <p class="wareallp" > CN-1</p> </label>
+                          <label ng-if="prod.warehouse_list.ZQ01.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.ZQ01.price }}</p> <p class="wareallp" > CN-5</p> </label>
+                          <label ng-if="prod.warehouse_list.ZQDZ01.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.ZQDZ01.price }}</p> <p class="wareallp" > CN-7</p> </label>
+                          <label ng-if="prod.warehouse_list.FCYWHQ.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FCYWHQ.price }}</p> <p class="wareallp" > CN-8</p> </label>
+                          <label ng-if="prod.warehouse_list.SZXIAWAN.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.SZXIAWAN.price }}</p> <p class="wareallp" > CN-9</p> </label>
+                          <label ng-if="prod.warehouse_list.B2BREXIAOWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.B2BREXIAOWH.price }}</p> <p class="wareallp" > CN-11</p> </label>
+                          <label ng-if="prod.warehouse_list.FXLAWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXLAWH.price }}</p> <p class="wareallp" > US-1</p> </label>
+                          <label ng-if="prod.warehouse_list.FXLAWH2.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXLAWH2.price }}</p> <p class="wareallp" > US-2</p> </label>
+                          <label ng-if="prod.warehouse_list.MXTJWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.MXTJWH.price }}</p> <p class="wareallp" > US-3</p> </label>
+                          <label ng-if="prod.warehouse_list.FXJFKGC.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXJFKGC.price }}</p> <p class="wareallp" > US-4</p> </label>
+                          <label ng-if="prod.warehouse_list.USZYCB.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.USZYCB.price }}</p> <p class="wareallp" > US-5</p> </label>
+                          
                           
                         </a>   
                           <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>

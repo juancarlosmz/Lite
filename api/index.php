@@ -104,6 +104,10 @@ switch($action) {
         header('Content-Type: application/json');
         print_r(json_encode(eliminar($fluent, $_GET['id'])));
         break;  
+    case 'eliminarUserList':
+        header('Content-Type: application/json');
+        print_r(json_encode(eliminarUList($fluent, $_GET['id'])));
+        break;     
     case 'User':
         header('Content-Type: application/json');
         print_r(json_encode(obtenerUser($fluent, $_GET['email'])));
@@ -179,7 +183,7 @@ function obtener($fluent, $id){
 function obtenerImportList($fluent, $email){
     return $fluent->from('ImportList')
            ->select('ImportList.*') 
-           ->where('email = ?',$email)
+           ->where('email = ? and status = 1',$email)
            ->fetchAll();
 }
 function eliminar($fluent, $id){
@@ -187,6 +191,15 @@ function eliminar($fluent, $id){
              ->execute();   
     return true;
 }
+function eliminarUList($fluent, $id){
+    $values = array('status' => '0');
+    $fluent ->update('ImportList')
+            ->set($values)
+            ->where('id = ?',$id)
+            ->execute();   
+    return true;
+}
+
 function registro($fluent, $data){
     $data['rol'] = 2;
     $fluent->insertInto('user', $data)

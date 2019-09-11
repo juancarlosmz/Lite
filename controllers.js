@@ -937,13 +937,12 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                         }
                         if( idiconocolor[i].value == idiconocolor[i+1].value){
                             compararxtext[i+1].style.display = "none";
-                            document.getElementById(i).style.display = "none";
+                            //document.getElementById(i).style.display = "none";
                             console.log('en el otro js es',compararxtext[i]);
                             console.log('id a evaluar',idiconocolor[i].value);
                         }else{
                             console.log('no se repitens');
                         }
-
                     }
                 }, 50);
 
@@ -1038,11 +1037,14 @@ empleadoControllers.controller('LoginController', ['$scope','$location', 'Authen
     var iduser = document.getElementById("welcome");
     var idlogin = document.getElementById("login");
     if($scope.Rol == '1' || $scope.Rol == '2'){
-        iduser.style.display  = "block";
-        idlogin.style.display  = "none";
+        
+        $scope.logged = false;
+        $scope.unlogged = true;
+        
     }else{
-        iduser.style.display  = "none";
-        iduser.disabled = true;
+        
+        $scope.logged = true;
+        $scope.unlogged = false;
     }
 
     $scope.login = function () {
@@ -1131,12 +1133,12 @@ empleadoControllers.controller('RegisterController', ['$scope','$http','$timeout
 
     var iduser = document.getElementById("welcome");
     var idlogin = document.getElementById("login");
-    if($scope.Rol == '1'){
-        iduser.style.display  = "block";
-        idlogin.style.display  = "none";
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.logged = false;
+        $scope.unlogged = true;
     }else{
-        iduser.style.display  = "none";
-        iduser.disabled = true;
+        $scope.logged = true;
+        $scope.unlogged = false;
     }
 
     $scope.register = function(){
@@ -1194,47 +1196,46 @@ empleadoControllers.controller('RegisterController_a', ['$scope','$http','$timeo
     var iduser = document.getElementById("contentlist");
     $scope.rutaroluser = '';
     if($scope.Rol == '1'){
-        iduser.style.display  = "block";
         console.log('user rol 1');
+        $scope.seetoadmin = true;
     }else{
-        iduser.style.display  = "none";
-        iduser.disabled = true;
         console.log('user rol 2');
+        $scope.seetoadmin = false;
     }
 
-    $scope.register = function(){
-        $scope.dataLoading = true;
-            var model = {
-                Nombre: $scope.Nombre,
-                Apellido: $scope.Apellido,
-                email: $scope.email,
-                contra: $scope.contra,
-            };
-            var dataof = JSON.stringify(model);
-            $http.post(rute+'api/?a=valemail',dataof).then(function successCallback(response) {
-                var consulta = response.data;
-                if(consulta != false){
-                    $scope.error = 'This email is already in use';
-                }else{
-                    $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
-                        $scope.dataLoading = true;
-                        $timeout(function(){
-                            location.reload();
-                            $scope.dataLoading = false;
-                        }, 50);
-                        
-                    }, function errorCallback(response) {
+        $scope.register = function(){
+            $scope.dataLoading = true;
+                var model = {
+                    Nombre: $scope.Nombre,
+                    Apellido: $scope.Apellido,
+                    email: $scope.email,
+                    contra: $scope.contra,
+                };
+                var dataof = JSON.stringify(model);
+                $http.post(rute+'api/?a=valemail',dataof).then(function successCallback(response) {
+                    var consulta = response.data;
+                    if(consulta != false){
+                        $scope.error = 'This email is already in use';
+                    }else{
+                        $http.post(rute+'api/?a=registrar',dataof).then(function successCallback(response) {   
+                            $scope.dataLoading = true;
+                            $timeout(function(){
+                                location.reload();
+                                $scope.dataLoading = false;
+                            }, 50);
+                            
+                        }, function errorCallback(response) {
 
-                        $timeout(function(){
-                            location.reload();
-                            $scope.dataLoading = false;
-                        }, 50);
-                    });
-                }
-            }, function errorCallback(response) {
-                $scope.error = 'Information is incorrect';
-            });   
-    };
+                            $timeout(function(){
+                                location.reload();
+                                $scope.dataLoading = false;
+                            }, 50);
+                        });
+                    }
+                }, function errorCallback(response) {
+                    $scope.error = 'Information is incorrect';
+                });   
+        };
 
     
 
@@ -1246,6 +1247,20 @@ empleadoControllers.controller('HomeControllerUser', ['$scope','$location','$htt
     $scope.saveduser = localStorage.getItem('todosuser');
     $scope.SesionUser = JSON.parse($scope.saveduser);
     console.log("nuevo nuevo",$scope.SesionUser);
+
+    for(var i in $scope.SesionUser){
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    console.log($scope.Rol);
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.logged = false;
+        $scope.unlogged = true;
+    }else{
+        $scope.logged = true;
+        $scope.unlogged = false;
+    }
+
     $scope.CloseSession = function(){
 
         $scope.dataLoading = true;
@@ -1423,32 +1438,56 @@ empleadoControllers.controller('UserImportListController', ['$scope','$window','
         $scope.Rol = $scope.SesionUser[i]['rol'];
     }
     if($scope.Rol == '1'){
+        $scope.seetoadmin = true;
         $http.get(rute+'api/?a=obtenerImportList&email=' + $routeParams.email).then(function successCallback(response) { 
             $scope.UserImportList = response.data;
             //$scope.downloadImpList = $scope.UserImportList.ImportList;
-
             for (var i in $scope.UserImportList) {
                 $scope.downloadImpList = $scope.UserImportList[i]['ImportList'];
             }
+            var Lista1 = JSON.parse($scope.downloadImpList);
+            var Lista2 = Lista1.split(",");
+
             $scope.Downloadimportlist = function(){
-            var data = [
-                ['ImportList', $scope.downloadImpList]
-            ];
-                 var csv = '\n';
-                 data.forEach(function(row) {
-                         csv += row.join(',');
-                         csv += "\n";
-                 });
-                 var hiddenElement = document.createElement('a');
-                 hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-                 hiddenElement.target = '_blank';
-                 hiddenElement.download = 'UserImportList.csv';
-                 hiddenElement.click();
-            };
+                var data = ['SKU', Lista2.join('\n')];
+                var csv = '';
+                data.forEach(function(row) {
+                    csv += row;
+                    csv += "\n";
+                });
+                console.log(csv);
+                var hiddenElement = document.createElement('a');
+                hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                hiddenElement.target = '_blank';
+                hiddenElement.download = 'UserImportList.csv';
+                hiddenElement.click();
+            };   
         }, function errorCallback(response) {
             console.log('no logrado');
         }); 
+
+        $scope.retirar = function(id){
+            if(confirm('Esta seguro de realizar esta accion?')){
+                $scope.dataLoading = true;
+                $http.get(rute+'api/?a=eliminarUserList&id='+ id).then(function(response){
+                    $scope.dataLoading = true;
+                    $timeout(function(){
+                        location.reload();
+                        $scope.dataLoading = false;
+                    }, 50);  
+                }, function errorCallback(response) {
+                    $timeout(function(){
+                        location.reload();
+                        $scope.dataLoading = false;
+                    }, 50);
+                    
+                });
+    
+            };
+        };
+
     }else{
+        $scope.seetoadmin = false;
         console.log("page not found");
     }
 

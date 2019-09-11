@@ -2,8 +2,8 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3" >
     
-    <div class="login-page" id="login">
-        <div class="form">
+    <div class="login-page" id="login" ng-if="logged">
+        <div class="form" ng-controller="LoginController">
             <div ng-show="error" class="alert alert-danger"> <i class="glyphicon glyphicon-alert"> </i> {{error}}</div>
           <form class="login-form"  name="form" ng-submit="login()" role="form">
 
@@ -31,8 +31,8 @@
 
 
 
-    <div class="login-page" id="welcome">
-        <div class="form">
+    <div class="login-page" id="welcome" ng-if="unlogged" >
+        <div class="form" ng-controller="LoginController">
                 <h2>Go Home</h2>
                 <a href="#/Home" class="btn btn-link">Go</a>
         </div>
