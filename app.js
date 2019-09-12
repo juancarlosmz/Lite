@@ -153,6 +153,12 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AllProductsController',
         method: 'GET',
       }).
+      when('/cifradorcesar', {
+        templateUrl: 'partials/cifradorcesar.html',
+        controller: 'cifradorcesarController',
+        method: 'GET',
+      }).
+      
       otherwise({
         redirectTo: '/',
         method: 'GET',

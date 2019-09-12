@@ -118,6 +118,8 @@ switch($action) {
         
         $em = $data['email'];
         $pass = $data['password'];
+
+
         if(SesionLogin($fluent,$em,$pass)){
             session_start();
             //$_SESSION['id'] = uniqid('ang_');
@@ -136,7 +138,83 @@ switch($action) {
         }else{
             print_r(json_encode(false));
         }
-        break;    
+        break;   
+    case 'cifradorcesar':
+        //$mensaje=$_POST['mensaje'];
+        //$n=$_POST['n'];
+
+        $mensaje='mensajeacifrarlaqueespee';
+        $n='4';
+        $julio=array(
+            "a"=>"0",
+            "b"=>"1",
+            "c"=>"2",
+            "d"=>"3",
+            "e"=>"4",
+            "f"=>"5",
+            "g"=>"6",
+            "h"=>"7",
+            "i"=>"8",
+            "j"=>"9",
+            "k"=>"10",
+            "l"=>"11",
+            "m"=>"12",
+            "n"=>"13",
+            "ñ"=>"14",
+            "o"=>"15",
+            "p"=>"16",
+            "q"=>"17",
+            "r"=>"18",
+            "s"=>"19",
+            "t"=>"20",
+            "u"=>"21",
+            "v"=>"22",
+            "w"=>"23",
+            "x"=>"25",
+            "y"=>"25",
+            "z"=>"26" 
+        );
+        $cesar=array_flip($julio);
+        echo "\nEl conversor\n";
+        print_r( $cesar );
+        echo "tamaño del mensaje\n";
+        echo strlen($mensaje);
+        echo "\n";
+        echo "Mensaje original: ".$mensaje."\n";
+        echo "Mensaje codificado: \n";
+        echo "\n Sin codificar 0: \n";
+        echo "asdasd".strlen("LNAENNEIEDRSUERAODEAAUEUAOSEPDENAPOAQTTDDIDMSROELRQITXM");
+        echo "\n";
+        for($i=0;$i<strlen($mensaje);$i++){
+            echo $mensaje[$i];
+            echo " ";
+        }
+        echo "\n Sin codificar 1: \n";
+        for($i=0;$i<strlen($mensaje);$i++){
+            echo $julio[$mensaje[$i]];
+            echo " ";
+        }
+        echo "\n Sin codificar 2: \n";
+        for($i=0;$i<strlen($mensaje);$i++){
+            echo $julio[$mensaje[$i]]+$n;
+            echo " ";
+        }
+        echo "\n";
+        echo "codificado: \n";
+        for($i=0;$i<strlen($mensaje);$i++){
+            $cifrado=($julio[$mensaje[$i]] + $n);
+            echo $cifrado;
+            echo " ";
+        }
+        echo "\n";
+        echo "Mensaje codificado en texto: \n";
+        for($i=0;$i<strlen($mensaje);$i++){
+            $cifrado=($julio[$mensaje[$i]] + $n)%27;
+            echo $cesar[$cifrado];
+            echo " ";
+        }
+        break;
+
     case 'Logout':
         session_id('id');
         session_start();

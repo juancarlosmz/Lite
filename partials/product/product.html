@@ -131,15 +131,20 @@
               <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>    
           </div>
         </div>
-
+<!-- Price-->
         <div class="row">
             <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
                 <div class="row">
                     <div class="item col-md-2 col-sm-3 col-xs-4">
                         <p >Price:</p>
                     </div>
-                    <div class="item col-md-10 col-sm-9 col-xs-8">                        
-                        <p > $ {{priceone}}</p>
+                    <div class="item col-md-10 col-sm-9 col-xs-8"> 
+
+                        <label ng-if="prod.warehouse_list.YB.price || prod.warehouse_list.ZQ01.price || prod.warehouse_list.ZQDZ01.price || prod.warehouse_list.FCYWHQ.price ||  prod.warehouse_list.SZXIAWAN.price || prod.warehouse_list.B2BREXIAOWH.price" class="price"> <p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceonecn}}</p> <p class="wareallp" > CN</p> </label>
+
+                        <label ng-if="prod.warehouse_list.FXLAWH.price || prod.warehouse_list.FXLAWH2.price || prod.warehouse_list.MXTJWH.price || prod.warehouse_list.FXJFKGC.price || prod.warehouse_list.USZYCB.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceoneus}}</p> <p class="wareallp" > US</p> </label>
+
+                          
                     </div>
                 </div>
             </div>
@@ -160,7 +165,7 @@
                             <div class="item col-md-10 col-sm-9 col-xs-8">  
                                 <div class="row">
                                     <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
-                                        <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}{{sendRuteStock}}">
+                                        <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}">
                                             <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
                                             <input type="text" class="idiconocolor" value="{{ prod.color }}">
                                             <div class="compararxtext" id="{{ prod.color }}{{$index}}">
@@ -215,13 +220,20 @@
                                     <p >Warehouse:</p>
                             </div>
                             <div class="item col-md-10 col-sm-9 col-xs-8">  
-                            <!--
-                                <a href="#/products/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
-                                </a>     
-                            -->    
+ 
+                                <label class="wareallp2" ng-if="prod.warehouse_list.YB" > <a href="#/product1/{{ prod.sku }}/{{warehouse}}"> <p id="{{warehouse}}"> {{warehousename}} <img width="20" height="11" src="img/bchina.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock0 }} {{stockone0}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.ZQ01" > <a href="#/product1/{{ prod.sku }}/{{warehouse1}}">  <p id="{{warehouse1}}"> {{warehousename1}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock1 }} {{stockone1}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.ZQDZ01" > <a href="#/product1/{{ prod.sku }}/{{warehouse2}}">  <p id="{{warehouse2}}"> {{warehousename2}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock2 }} {{stockone2}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.FCYWHQ" > <a href="#/product1/{{ prod.sku }}/{{warehouse3}}">  <p id="{{warehouse3}}"> {{warehousename3}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock3 }} {{stockone3}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.SZXIAWAN" > <a href="#/product1/{{ prod.sku }}/{{warehouse4}}">  <p id="{{warehouse4}}"> {{warehousename4}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock4 }} {{stockone4}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.B2BREXIAOWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse5}}">  <p id="{{warehouse5}}"> {{warehousename5}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock5 }} {{stockone5}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.FXLAWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse6}}">  <p id="{{warehouse6}}"> {{warehousename6}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock6 }} {{stockone6}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.FXLAWH2" > <a href="#/product1/{{ prod.sku }}/{{warehouse7}}">  <p id="{{warehouse7}}"> {{warehousename7}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock7 }} {{stockone7}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.MXTJWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse8}}">  <p id="{{warehouse8}}"> {{warehousename8}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock8 }} {{stockone8}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.FXJFKGC" > <a href="#/product1/{{ prod.sku }}/{{warehouse9}}">  <p id="{{warehouse9}}"> {{warehousename9}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock9 }} {{stockone9}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="prod.warehouse_list.USZYCB" > <a href="#/product1/{{ prod.sku }}/{{warehouse10}}">  <p id="{{warehouse10}}"> {{warehousename10}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock10 }} {{stockone10}}</p> </a> </label>
                                 
-                                <p >{{warehousename}} {{warehouse}} {{warehousename1}} {{warehouse1}} {{warehousename2}} {{warehouse2}} {{warehousename3}} {{warehouse3}} {{warehousename4}} {{warehouse4}} {{warehousename5}} {{warehouse5}} {{warehousename6}} {{warehouse6}} {{warehousename7}} {{warehouse7}} {{warehousename8}} {{warehouse8}} {{warehousename9}} {{warehouse9}} {{warehousename10}} {{warehouse10}}</p>
-                                <p >{{stock0}} {{stockone0}} {{stock1}} {{stockone1}} {{stock2}} {{stockone2}} {{stock3}} {{stockone3}} {{stock4}} {{stockone4}} {{stock5}} {{stockone5}} {{stock6}} {{stockone6}} {{stock7}} {{stockone7}} {{stock8}} {{stockone8}} {{stock9}} {{stockone9}} {{stock10}} {{stockone10}}</p>                          
+                                                        
                             </div>
                         </div>
                 </div>

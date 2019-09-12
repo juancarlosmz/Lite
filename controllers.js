@@ -556,13 +556,13 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                 
                 
                 if( $scope.product.msg[i]['warehouse_list']['YB'] ){
-                    if($scope.product.msg[i]['warehouse_list']['YB']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['YB']['goods_number'] > 5){
                         console.log('CN-1');
                         var country = 'US';
                         $scope.shipcn1 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
                         $scope.warehouse = $scope.product.msg[i]['warehouse_list']['YB']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['YB']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['YB']['price'];
                         $scope.stockone0 = $scope.product.msg[i]['warehouse_list']['YB']['goods_number'];
                         console.log($scope.stockone0);
                         
@@ -586,17 +586,17 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);    
-                    }
+                    //}
                     
                 }
                 if( $scope.product.msg[i]['warehouse_list']['ZQ01']  ){
-                    if($scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'] > 5){
                         console.log('CN-5');
                         var country = 'US';
                         $scope.shipcn5 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
                         $scope.warehouse1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQ01']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['ZQ01']['price'];
                         $scope.stockone1 = $scope.product.msg[i]['warehouse_list']['ZQ01']['goods_number'];
                         $scope.dataLoading = true;
                         $timeout(function() {
@@ -617,16 +617,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);    
-                    }
+                    //}
                 }
                 if( $scope.product.msg[i]['warehouse_list']['ZQDZ01']  ){
-                    if($scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'] > 5){
                         console.log('CN-7');
                         var country = 'US';  
                         $scope.shipcn7 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
                         $scope.warehouse2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['price'];
                         $scope.stockone2 = $scope.product.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
                         $scope.dataLoading = true;
                         $timeout(function() {
@@ -647,16 +647,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);   
-                    }
+                    //}
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FCYWHQ'] ){
-                    if($scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'] > 5){
                         console.log('CN-8');
                         var country = 'US';
                         $scope.shipcn8 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
                         $scope.warehouse3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['price'];
                         $scope.stockone3 = $scope.product.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
                         $scope.dataLoading = true;
                         console.log($scope.warehouse3);
@@ -679,16 +679,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);
-                    }    
+                    //}    
                 }
                 if( $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] ){
-                    if($scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'] > 5){
                         console.log('CN-9');
                         var country = 'US';
                         $scope.shipcn9 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
                         $scope.warehouse4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['price'];
                         $scope.stockone4 = $scope.product.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
                         $scope.dataLoading = true;
                         $timeout(function() {
@@ -709,16 +709,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);   
-                    }
+                    //}
                 }
                 if( $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
-                    if($scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'] > 5){
                         console.log('CN-11');
                         var country = 'US';
                         $scope.shipcn11 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
                         $scope.warehouse5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['price'];
+                        $scope.priceonecn = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['price'];
                         $scope.stockone5 = $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
                         $scope.dataLoading = true;
                         $timeout(function() {
@@ -739,16 +739,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400); 
-                    }   
+                    //}   
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXLAWH'] ){
-                    if($scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'] > 5){
                         console.log('US-1 ');
                         var country = 'US';
                         $scope.shipus1 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
                         $scope.warehouse6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH']['price'];
+                        $scope.priceoneus = $scope.product.msg[i]['warehouse_list']['FXLAWH']['price'];
                         $scope.stockone6 = $scope.product.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
                         $scope.dataLoading = true;
                         console.log($scope.stockone6);
@@ -776,17 +776,17 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);
-                    }
+                    //}
                         
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXLAWH2'] ){
-                    if($scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'] > 5){
                         console.log('US-2');
                         var country = 'US';
                         $scope.shipus2 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
                         $scope.warehouse7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
+                        $scope.priceoneus = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['price'];
                         $scope.stockone7 = $scope.product.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
                         $scope.dataLoading = true;
                         $scope.zipcode2 = '90001';
@@ -808,17 +808,17 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);  
-                    }  
+                    //}  
                 }
                 if( $scope.product.msg[i]['warehouse_list']['MXTJWH'] ){
-                    if($scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'] > 5){
                         console.log('US-3');
                         var country = 'US';
                         $scope.shipus3 = false;
                         $scope.envwarehouse = 'MXTJWH'
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
                         $scope.warehouse8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['MXTJWH']['price'];
+                        $scope.priceoneus = $scope.product.msg[i]['warehouse_list']['MXTJWH']['price'];
 
                         $scope.stockone8 = $scope.product.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
                         $scope.dataLoading = true;
@@ -841,16 +841,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);
-                    }
+                    //}
                 }
                 if( $scope.product.msg[i]['warehouse_list']['FXJFKGC'] ){
-                    if($scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'] > 5){
                         console.log('US-4');
                         var country = 'US';
                         $scope.shipus4 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
                         $scope.warehouse9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
+                        $scope.priceoneus = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['price'];
                         $scope.stockone9 = $scope.product.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
                         $scope.dataLoading = true;
                         $scope.zipcode4 = '10001';
@@ -872,16 +872,16 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);   
-                    } 
+                    //} 
                 }
                 if( $scope.product.msg[i]['warehouse_list']['USZYCB'] ){
-                    if($scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'] > 5){
+                    //if($scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'] > 5){
                         console.log('US-5');
                         var country = 'US';
                         $scope.shipus5 = false;
                         $scope.warehousesolo = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
                         $scope.warehouse10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['warehouse'];
-                        $scope.priceone = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
+                        $scope.priceoneus = $scope.product.msg[i]['warehouse_list']['USZYCB']['price'];
                         $scope.stockone10 = $scope.product.msg[i]['warehouse_list']['USZYCB']['goods_number'];
                         $scope.dataLoading = true;
                         $scope.zipcode5 = '07039';
@@ -903,7 +903,7 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.dataLoading = false;
                             });
                         }, 400);   
-                    }    
+                    //}    
                 }
                 if($scope.product.msg[i]['warehouse_list']['YB'] == undefined && $scope.product.msg[i]['warehouse_list']['ZQ01'] == undefined && $scope.product.msg[i]['warehouse_list']['ZQDZ01'] == undefined && $scope.product.msg[i]['warehouse_list']['FCYWHQ'] == undefined && $scope.product.msg[i]['warehouse_list']['SZXIAWAN'] == undefined && $scope.product.msg[i]['warehouse_list']['B2BREXIAOWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXLAWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXLAWH2'] == undefined && $scope.product.msg[i]['warehouse_list']['MXTJWH'] == undefined && $scope.product.msg[i]['warehouse_list']['FXJFKGC'] == undefined && $scope.product.msg[i]['warehouse_list']['USZYCB'] == undefined){
                     
@@ -2505,3 +2505,25 @@ $timeout(function(){
         });
     }
 }]);
+
+
+
+
+
+
+empleadoControllers.controller('cifradorcesarController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    $http.post(rute+'api/?a=cifradorcesar').then(function successCallback(response) {   
+        $scope.cifradorcesar = response.data;
+        
+        console.log(' cifradorcesar respuesta',$scope.cifradorcesar);
+    }, function errorCallback(response) {
+        console.log('no logrado');
+    });
+
+}]);
+
+
+
+
+
+
