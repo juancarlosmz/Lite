@@ -1,15 +1,178 @@
 
 
-<div class="products">
-  <div class="container">
-
-    <h2>Recent Photos</h2>
-    <label >{{ products.date}}</label>
-    <div class="row">
-      <div class="item col-md-4" ng-repeat="prod in products">
-          <p class="title">by {{ prod.title }}</p>
-      </div>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="container" style="margin: 0px !important; padding: 0px !important;">
+  
+                <div class="container contallprod1">
+                  <div class="row">
+                    <div class="item col-md-12 col-sm-12 col-xs-12">
+                       <div class="comboallprod">
+                          <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
+                                  <option value="">All Categories</option>
+                                  <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+                          </select>
+                       </div>
+                    </div>
+                  </div>
+                </div>   
+  
+  
+  
+                  <div class="container contallprod2">
+                    <div class="row" style="padding-right: 0px !important;padding-left: 0px !important;">
+  
+  
+                      <div class="item col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 10px;">
+                          <input placeholder="Enter keywords here after products finish loading..." class="txtsearch" type="text" ng-model="busquedaprod" ng-keyup="searchtxt(busquedaprod)">
+                      </div>  
+                
+                      <div class="item col-md-6 col-sm-6 col-xs-12" >
+                          <div class="row">
+                            <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                                <button style="height: 40px" type="button" ng-click="searchshipus();" class="btn btn-outline-secondary">U.S. Inventory</button>  
+                            </div>
+                            <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                                <button style="height: 40px" type="button" ng-click="searchshipchina();" class="btn btn-outline-secondary">China Inventory</button>
+                            </div>
+                            <div class="item col-md-4 col-sm-4 col-xs-4" style="text-align: center !important;">
+                                <button style="height: 40px" type="button" ng-click="searchallp();" class="btn btn-outline-secondary">All Inventory</button>  
+                            </div>
+                          </div> 
+                      </div>
+                    </div>
+                  </div>
+  
+                  
+  
+  
+  
+                 
+  <!--
+  
+            <div class="container">
+                <button ng-click="Sincronizar()" class="btn"><span>SYNC UP</span></button>
+  
+                <button ng-click="VerDescriptions()" class="btn"><span>See description</span></button>
+                
+              <table class="table table-bordered">
+                  <tr>
+                      <td>Total SKU's</td>
+                      <td>page_number</td>
+                      <td>per_page</td>
+                      <td>total_pages</td>
+                  </tr>
+      
+                  <tr >
+                      <td>{{Allproducts.msg.total_records}}</td>
+                      <td>{{Allproducts.msg.page_number}}</td>
+                      <td>{{Allproducts.msg.per_page}}</td>
+                      <td>{{Allproducts.msg.total_pages}}</td>
+                  </tr>
+              </table>
+            </div>
+  -->
+  
+    <!-- Alert msg-->
+    <div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+      ng-repeat="a in alert" 
+      type="{{a.type}}">
+      <i class="glyphicon glyphicon-ok">&nbsp; </i>
+      {{a.value}} 
     </div>
-    <a style="width: 35% !important; float: right;" style="width: 20% !important;" href="#/" class="btn btn-default btn-block"> Atras</a>
+  
+  
+          <div class="container contallprod1">
+              <div class="row">
+  
+                  
+  
+  
+                  <div class="item col-md-12 col-sm-12 col-xs-12 subcategories">
+  
+                      <div class="ruteallprod">
+                          <h3> Home > {{namecategoria}} > {{namesubcategoria}}</h3>  
+                      </div>
+  <!-- 
+                      <ul class="list-group" style="margin-bottom: 0px !important;">
+                        <li class="list-group-item list-group-item-action list-group-item-success">
+                            Sub Categories
+                        </li>
+                      </ul>
+  -->
+                      <ul class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in categories.msg track by $index">
+                        <li style="list-style:none;" ng-if="cat.parent_id==parentidsubcategoria">
+                          <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1" ng-click="Downloadstop();" target="_blank">{{cat.cat_name}}</a>
+                        </li>
+                      </ul>
+                  </div>
+  
+              </div>
+          </div>
+  
+  
+          <div class="container contallprod2">
+              <div class="item col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px !important;margin-bottom: 10px;">
+                  <p style="color: #989797;">We are in the process of adding more products to the catalog. Please check back soon for updates.</p>
+              </div>
+                  <div class="styleproducts">
+                    <br>
+  
+                    
+                    <div class="row">
+                        <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProductsOtro track by $index">
+                          <a target="_blank"  class="itemhover" href="#/product1/{{ prod.sku }}/{{ prod.warehouse_list.YB.warehouse }}{{ prod.warehouse_list.ZQ01.warehouse }}{{ prod.warehouse_list.ZQDZ01.warehouse }}{{ prod.warehouse_list.FCYWHQ.warehouse }}{{ prod.warehouse_list.SZXIAWAN.warehouse }}{{ prod.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.warehouse_list.FXLAWH.warehouse }}{{ prod.warehouse_list.FXLAWH2.warehouse }}{{ prod.warehouse_list.MXTJWH.warehouse }}{{ prod.warehouse_list.FXJFKGC.warehouse }}{{ prod.warehouse_list.USZYCB.warehouse }}">
+                            
+                            <p class="theimg" ng-repeat="img in prod.original_img track by $index">
+                              
+                                <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                              
+                            </p>
+                            <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                            <input class="valuesparentid" type="hidden" value="{{ prod.parent_id }}">
+                            <!-- clase para title 1 linea class="title titleshort" -->
+                            <p  class="block-with-text">{{ prod.title }}</p> 
+                            <!--
+                            <p ng-if="prod.warehouse_list.YB.price" class="price">$ {{ prod.warehouse_list.YB.price }} {{ prod.warehouse_list.ZQ01.price }} {{ prod.warehouse_list.ZQDZ01.price }} {{ prod.warehouse_list.FCYWHQ.price }} {{ prod.warehouse_list.SZXIAWAN.price }} {{ prod.warehouse_list.B2BREXIAOWH.price }} {{ prod.warehouse_list.FXLAWH.price }} {{ prod.warehouse_list.FXLAWH2.price }} {{ prod.warehouse_list.MXTJWH.price }} {{ prod.warehouse_list.FXJFKGC.price }} {{ prod.warehouse_list.USZYCB.price }}</p>
+                            -->  
+                            <label ng-if="prod.warehouse_list.YB.price" class="price"> <p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.YB.price }}</p> <p class="wareallp" > CN-1</p> </label>
+                            <label ng-if="prod.warehouse_list.ZQ01.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.ZQ01.price }}</p> <p class="wareallp" > CN-5</p> </label>
+                            <label ng-if="prod.warehouse_list.ZQDZ01.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.ZQDZ01.price }}</p> <p class="wareallp" > CN-7</p> </label>
+                            <label ng-if="prod.warehouse_list.FCYWHQ.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FCYWHQ.price }}</p> <p class="wareallp" > CN-8</p> </label>
+                            <label ng-if="prod.warehouse_list.SZXIAWAN.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.SZXIAWAN.price }}</p> <p class="wareallp" > CN-9</p> </label>
+                            <label ng-if="prod.warehouse_list.B2BREXIAOWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.B2BREXIAOWH.price }}</p> <p class="wareallp" > CN-11</p> </label>
+                            <label ng-if="prod.warehouse_list.FXLAWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXLAWH.price }}</p> <p class="wareallp" > US-1</p> </label>
+                            <label ng-if="prod.warehouse_list.FXLAWH2.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXLAWH2.price }}</p> <p class="wareallp" > US-2</p> </label>
+                            <label ng-if="prod.warehouse_list.MXTJWH.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.MXTJWH.price }}</p> <p class="wareallp" > US-3</p> </label>
+                            <label ng-if="prod.warehouse_list.FXJFKGC.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.FXJFKGC.price }}</p> <p class="wareallp" > US-4</p> </label>
+                            <label ng-if="prod.warehouse_list.USZYCB.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{ prod.warehouse_list.USZYCB.price }}</p> <p class="wareallp" > US-5</p> </label>
+                            
+                            
+                          </a>   
+                            <p id="" class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                            <p id="" class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                        </div>
+                      </div>
+  
+  
+  
+  <div class="row">
+    <div style="text-align: center;" class="item col-md-12 col-sm-12 col-xs-12">
+      <img width="30" ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+      <label ng-if="dataLoadingText">Please wait while products are loading…</label>
+      <div ng-if="dataNoResults">
+        <img src="img/NoResults.png">
+        <label>This subcategory currently does not have products. Please check back for updates.</label>
+      </div>
+    </div>  
   </div>
-</div>
+  <hr/>
+  <ul pagination total-items="totalProductsOtro"  items-per-page="numPerPageProductsOtro" page="currentPageProductsOtro"></ul>
+  
+  
+  
+  
+        </div>
+      </div> 
+    </div>  
+  </div>
+  

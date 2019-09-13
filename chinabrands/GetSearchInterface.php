@@ -14,7 +14,7 @@
     $page = '1'; 
     $category = '';  
     $todayis = date('Y-m-d\TH:i:sP');
-    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 12 month"));
+    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 200 month"));
     if(isset($_GET['category']) ) {
         $category = $_GET['category'];
     }

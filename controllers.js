@@ -2259,7 +2259,12 @@ $timeout(function(){
         $scope.AllproductsOff = response.data;
         console.log($scope.AllproductsOff.msg.total_pages);
         var miArray2otro = [];
+        //$timeout(function(){
+
         for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+
+                
+
                 $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
                     $scope.AllproductsOtro = response.data;
                     $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
@@ -2443,7 +2448,10 @@ $timeout(function(){
             });
 */
            // console.log(arrayProtuctstatus1);
+            
         }  
+
+    //}, 1000);
 
 /*ya funciona
         $scope.dataProductsotro = miArray2otro;

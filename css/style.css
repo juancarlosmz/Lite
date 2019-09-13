@@ -248,9 +248,8 @@ a{
     margin: 0px;
   }
   p.theimg img{
-    
-    max-height: 260px;
-    min-height: 216px;
+    max-height: 250px;
+    min-height: 250px;
 
   }
   p.price{
@@ -864,6 +863,10 @@ h3 {
   #spacerow{
     margin-bottom: 65%;
   }
+  p.theimg img{
+    max-height: 200px;
+    min-height: 200px;
+  }
 }
 
 
@@ -889,6 +892,10 @@ h3 {
   #spacerow{
     margin-bottom: 170%;
   }
+  p.theimg img{
+    max-height: 200px;
+    min-height: 200px;
+  }
 
 }
 
@@ -900,6 +907,10 @@ h3 {
 }
 
 @media (max-width: 767px) {
+  p.theimg img{
+    max-height: none  !important;
+    min-height: none  !important;
+  }
   /*cointainer*/
   .container.container2prod{
     padding: 0px !important;

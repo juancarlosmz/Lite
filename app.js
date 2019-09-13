@@ -148,6 +148,11 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'SyncupController',
         method: 'GET',
       }).
+      when('/Results/allProducts', {
+        templateUrl: 'partials/AllProducts.html',
+        controller: 'AllProductsController',
+        method: 'GET',
+      }).
       when('/Result/category-1/1', {
         templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
