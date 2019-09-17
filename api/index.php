@@ -68,6 +68,10 @@ switch($action) {
         }
         $connection->close();
         break; 
+    case 'listProducts':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarProductos($fluent)));
+        break;
     case 'registrarProductosPHP':    
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
@@ -79,12 +83,12 @@ switch($action) {
         $allcat_id = $data['Mycat_id'];
         $allparent_id = $data['Myparent_id'];
         $allsize = $data['Mysize'];
+        $allwarehouse = addslashes($data['Mywarehouse']);
 
         //$valores = "('" . $allsku . "', '" . $allencrypted_sku . "' , '" . $alltitle . "' , '" . $allcolor . "' , '" . $alloriginal_img ."' , '". $allcat_id . "' , '" . $allparent_id . "' , '". $allsize ."' )";
-        $valores = '("' . $allsku . '", "' . $allencrypted_sku . '" , "' . $alltitle . '" , "' . $allcolor . '" , "' . $alloriginal_img .'" , "'. $allcat_id . '" , "' . $allparent_id . '" , "'. $allsize .'" )';
+        $valores = '("' . $allsku . '", "' . $allencrypted_sku . '" , "' . $alltitle . '" , "' . $allcolor . '" , "' . $alloriginal_img .'" , "'. $allcat_id . '" , "' . $allparent_id . '" , "'. $allsize .'" , "'. $allwarehouse .'" )';
 
-        $sql = "INSERT INTO product (sku, encrypted_sku, title, color,original_img,cat_id,parent_id,size)
-        VALUES $valores";
+        $sql = "INSERT INTO product (sku, encrypted_sku, title, color,original_img,cat_id,parent_id,size,warehouse) VALUES $valores";
         if ($connection->multi_query($sql) === TRUE){
             print_r(json_encode('New records created successfully'));
         }else{
@@ -246,6 +250,12 @@ function listar($fluent){
          ->where('rol = 2')
          ->orderBy("id DESC")
          ->fetchAll();
+}
+function listarProductos($fluent){
+    return $fluent
+        ->from('product')
+        ->fetchAll();
+
 }
 function listarSKUs($fluent){
     return $fluent

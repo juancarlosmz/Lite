@@ -2226,8 +2226,6 @@ $timeout(function(){
 empleadoControllers.controller('SyncupController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
     $scope.saveduser = localStorage.getItem('todosuser');
     $scope.SesionUser = JSON.parse($scope.saveduser);
-    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
-
     for(var i in $scope.SesionUser){
         //console.log($scope.SesionUser[i]['email']);
         $scope.Email = $scope.SesionUser[i]['email'];
@@ -2240,18 +2238,12 @@ empleadoControllers.controller('SyncupController', ['$scope','categories','$loca
         $scope.ulogin = 'uloginfalse';
         $scope.uwelcome = 'uwelcometrue';
     }
-/*
-    $scope.Downloadstop = function() {
-        $timeout(function(){
-            location.reload();
-        }, 100);
-    }
-*/
+
     categories.list(function(categories) {
         $scope.categories = categories;  
         
     });
-//$scope.Sincronizar = function() {
+
     $scope.dataLoading = true;
 $timeout(function(){
     $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category+'&page='+ 1).then(function successCallback(response) {    
@@ -2259,11 +2251,7 @@ $timeout(function(){
         $scope.AllproductsOff = response.data;
         console.log($scope.AllproductsOff.msg.total_pages);
         var miArray2otro = [];
-        //$timeout(function(){
-
         for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
-
-                
 
                 $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
                     $scope.AllproductsOtro = response.data;
@@ -2371,10 +2359,7 @@ $timeout(function(){
                                         }
                                         //console.log('del stock USZYCB',$scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number']);
                                     }
-/*
-                                    var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                    miArray2otro.push(miArrayotro);
-*/
+
                                 }    
                             }
                         }    
@@ -2398,6 +2383,7 @@ $timeout(function(){
                                             Mycat_id : $scope.dataProductsotro[i]['cat_id'],
                                             Myparent_id : $scope.dataProductsotro[i]['parent_id'],
                                             Mysize : $scope.dataProductsotro[i]['size'],
+                                            Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
                                         }
                                         var dataSaveProductsPHP = JSON.stringify(modelsend);
                                         console.log('',dataSaveProductsPHP);
@@ -2409,6 +2395,7 @@ $timeout(function(){
                                         }, function errorCallback(response) {
                                             console.log('no logrado');
                                         });
+                                        
                                         
                                     }
                                 }
@@ -2426,46 +2413,8 @@ $timeout(function(){
                 }, function errorCallback(response) {
                     console.log("error 505");    
                 });
-/*PARA REGISTRO A PHP
-            $http.post(rute+'chinabrands/GetSearchInterface.php?category='+ 1 +'&page='+ i).then(function successCallback(response) {
-                    $scope.AllproductsOficial = response.data;
-                    var model = {
-                        ImportList : $scope.AllproductsOficial.msg.page_result,
-                    };
-                    var dataImportList = JSON.stringify(model);
-                    console.log(dataImportList.length);
-                    //console.log(dataImportList);
-                    $http.post(rute+'api/?a=registrarAllSKUs',dataImportList).then(function successCallback(response) {   
-                        $scope.dataSKU = response.data;
-                        console.log($scope.dataSKU);
-                        console.log('logrado');
-                    }, function errorCallback(response) {
-                        console.log('no logrado');
-                    });
-                    //console.log($scope.AllproductsOficial.msg.page_result );
-            }, function errorCallback(response) {
-                console.log("error 505");    
-            });
-*/
-           // console.log(arrayProtuctstatus1);
-            
         }  
 
-    //}, 1000);
-
-/*ya funciona
-        $scope.dataProductsotro = miArray2otro;
-        console.log($scope.dataProductsotro)
-$timeout(function(){
-        $scope.$watch('currentPageProductsOtro',function(){
-            $scope.hacerPagineoProductsOtros($scope.dataProductsotro);
-        });
-        $scope.totalProductsOtro = $scope.dataProductsotro.length;
-        $scope.hacerPagineoProductsOtros($scope.dataProductsotro);
-        console.log('los del fliltro',$scope.filtroProductsOtro);
-}, 40000);
-
-*/
     }, function errorCallback(response) {
         console.log("error 505");    
     });
@@ -2474,48 +2423,143 @@ $timeout(function(){
 
 
 
-//}
-
-
-
-    $scope.VerDescriptions = function() {
-        $http.post(rute+'api/?a=listarAllSKUs').then(function successCallback(response) {   
-            $scope.alldescripcionSKU = response.data;
-            console.log('se debe de enviar', $scope.alldescripcionSKU.length);
-            var allskusendphp2 = [];
-            for(var i in $scope.alldescripcionSKU){
-                var allskusendphp = JSON.parse(JSON.stringify($scope.alldescripcionSKU[i]['sku']));
-                allskusendphp2.push(allskusendphp);
-            }
-            var ProductsSendphp2 = 'myData='+JSON.stringify(allskusendphp2);
-            /*
-            $http({
-                method : 'POST',
-                url : rute+'chinabrands/GetProductCollention.php',
-                data: ProductsSendphp2,
-                headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
-            }).success(function(response){
-                $scope.productsdemysql = response; 
-                for(var i in $scope.productsdemysql.msg){
-                    if($scope.productsdemysql.msg[i]['status'] == 1){
-                        console.log($scope.productsdemysql.msg[i]['sku']);
-                        console.log($scope.productsdemysql.msg[i]['warehouse_list']);
-                    }  
-                }
-            }).error(function(error){
-                $scope.dataLoading = true;
-                console.log(error);  
-            });
-            */
-            console.log('lista skus');
-        }, function errorCallback(response) {
-            console.log('no logrado');
-        });
-    }
 }]);
 
 
+empleadoControllers.controller('ProductsController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
 
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.ulogin = 'ulogintrue';
+        $scope.uwelcome = 'uwelcomefalse';
+    }else{
+        $scope.ulogin = 'uloginfalse';
+        $scope.uwelcome = 'uwelcometrue';
+    }
+    
+    $scope.dataLoading = true;
+    $scope.dataLoadingText = true;
+    
+    $http.post(rute+'api/?a=listProducts').then(function successCallback(response) {   
+
+        $scope.dataLoading = false;
+        $scope.dataLoadingText = false;
+
+        $scope.filtroProducts = [];
+        $scope.currentPageProducts = 1;
+        $scope.numPerPageProducts = 40; //es 40
+        $scope.maxSize = 8;
+
+        $scope.hacerPagineoProducts = function (arreglo) {
+            //si no retorna ningun valor
+            if (!arreglo || !arreglo.length) { return; }
+            var principio = (($scope.currentPageProducts - 1) * $scope.numPerPageProducts); //0, 3
+            var fin = principio + $scope.numPerPageProducts; //3, 6
+            $scope.filtroProducts = arreglo.slice(principio, fin); // 
+        };
+
+        $scope.buscarProducts = function (busquedaprod) {
+            var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
+                var textobusqueda = prod.Viewtitle+prod.Viewsku;
+                return (textobusqueda.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
+            });
+            $scope.totalProducts = buscados.length;
+            $scope.hacerPagineoProducts(buscados);
+
+        };
+
+        $scope.searchtxt = function(busquedaprod){
+            var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
+                var textobusqueda = prod.Viewtitle+prod.Viewsku;
+                return (textobusqueda.toLowerCase().indexOf(busquedaprod.toLowerCase()) !== -1); // matches, contains
+            });
+            $scope.totalProducts = buscados.length;
+            $scope.hacerPagineoProducts(buscados);
+        }
+
+        $scope.searchshipchina = function(){
+            console.log('searchship FOR CHINA');
+            var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
+                var textobusqueda = prod.Viewwarehouse.YB+prod.Viewwarehouse.ZQ01+prod.Viewwarehouse.ZQDZ01+prod.Viewwarehouse.FCYWHQ+prod.Viewwarehouse.SZXIAWAN+prod.Viewwarehouse.B2BREXIAOWH;
+                return textobusqueda;
+            });
+            console.log(buscados);
+            $scope.totalProducts = buscados.length;
+            $scope.hacerPagineoProducts(buscados);
+            
+        }
+        $scope.searchshipus = function(){
+            console.log('searchship FOR US');
+            var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
+                var textobusqueda = prod.Viewwarehouse.FXLAWH+prod.Viewwarehouse.FXLAWH2+prod.Viewwarehouse.MXTJWH+prod.Viewwarehouse.FXJFKGC+prod.Viewwarehouse.USZYCB;
+                return textobusqueda;
+            });
+            console.log(buscados);
+            $scope.totalProducts = buscados.length;
+            $scope.hacerPagineoProducts(buscados);
+        }
+        $scope.searchallp = function(){
+            console.log('searchship all');
+            var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
+                var textobusqueda = prod.Viewwarehouse.FXLAWH+prod.Viewwarehouse.FXLAWH2+prod.Viewwarehouse.MXTJWH+prod.Viewwarehouse.FXJFKGC+prod.Viewwarehouse.USZYCB+prod.Viewwarehouse.YB+prod.Viewwarehouse.ZQ01+prod.Viewwarehouse.ZQDZ01+prod.Viewwarehouse.FCYWHQ+prod.Viewwarehouse.SZXIAWAN+prod.Viewwarehouse.B2BREXIAOWH;
+                return textobusqueda;
+            });
+            console.log(buscados);
+            $scope.totalProducts = buscados.length;
+            $scope.hacerPagineoProducts(buscados);
+        }
+/*
+        $scope.numPages = function () {
+            return Math.ceil($scope.filtroProducts.length / $scope.numPerPageProducts);
+        };
+*/
+        $scope.$watch('currentPageProducts',function(){
+            $scope.hacerPagineoProducts($scope.ListAllProducts2);
+
+        });
+
+
+
+        $scope.ListAllProducts = response.data;
+
+        //total de productos
+ 
+        
+        var modelview2=[];
+        for(var i in $scope.ListAllProducts){
+            var modelview = {
+                Viewsku : $scope.ListAllProducts[i].sku,
+                Viewencrypted_sku : $scope.ListAllProducts[i].encrypted_sku,
+                Viewtitle : $scope.ListAllProducts[i].title,
+                Viewcolor : $scope.ListAllProducts[i].color,
+                Vieworiginal_img : $scope.ListAllProducts[i].original_img,
+                Viewcat_id : $scope.ListAllProducts[i].cat_id,
+                Viewparent_id : $scope.ListAllProducts[i].parent_id,
+                Viewsize : $scope.ListAllProducts[i].size,
+                Viewwarehouse : JSON.parse($scope.ListAllProducts[i].warehouse),
+            }
+            modelview2.push(modelview);
+        }
+        $scope.ListAllProducts2 = modelview2;
+        //$scope.ListAllProducts = $scope.ListAllProducts2;
+        $scope.totalProducts = $scope.ListAllProducts2.length;
+        $scope.hacerPagineoProducts($scope.ListAllProducts2);
+
+        console.log('la data nueva',$scope.filtroProducts);
+
+        
+    }, function errorCallback(response) {
+        console.log('no logrado');
+    });
+
+}]);
 
 
 

@@ -32,11 +32,6 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'SearchController',
         method: 'GET',
       }).
-      when('/Products', {
-        templateUrl: 'partials/Products.html',
-        controller: 'AllProducts',
-        method: 'GET',
-      }).
       when('/product1/:id/:wh', {
         templateUrl: 'partials/product/product.html',
         controller: 'Productview',
@@ -128,16 +123,6 @@ app.config(['$routeProvider', '$locationProvider',
         templateUrl: 'partials/import-list.html',
         method: 'GET',
       }).
-      when('/Result', {
-        controller: 'AllProductsController',
-        templateUrl: 'partials/AllProducts.html',
-        method: 'GET',
-      }).
-      when('/Result/category-:category', {
-        templateUrl: 'partials/AllProducts.html',
-        controller: 'AllProductsController',
-        method: 'GET',
-      }).
       when('/Result/category-:category/:page', {
         templateUrl: 'partials/AllProducts.html',
         controller: 'AllProductsController',
@@ -149,13 +134,8 @@ app.config(['$routeProvider', '$locationProvider',
         method: 'GET',
       }).
       when('/Results/allProducts', {
-        templateUrl: 'partials/AllProducts.html',
-        controller: 'AllProductsController',
-        method: 'GET',
-      }).
-      when('/Result/category-1/1', {
-        templateUrl: 'partials/AllProducts.html',
-        controller: 'AllProductsController',
+        templateUrl: 'partials/Products.html',
+        controller: 'ProductsController',
         method: 'GET',
       }).
       when('/cifradorcesar', {

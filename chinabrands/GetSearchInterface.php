@@ -1,6 +1,7 @@
 
 <?php
     include 'connbd.php';
+    usleep(1799999);
     $sql = "SELECT tokenserial FROM tokentable where compare=1";
     $result = $connection->query($sql);
     if ($result->num_rows > 0) {
@@ -14,7 +15,7 @@
     $page = '1'; 
     $category = '';  
     $todayis = date('Y-m-d\TH:i:sP');
-    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 200 month"));
+    $lastdateis = date("Y-m-d\TH:i:sP",strtotime($todayis."- 12 month"));
     if(isset($_GET['category']) ) {
         $category = $_GET['category'];
     }

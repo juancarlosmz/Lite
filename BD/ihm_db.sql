@@ -67,7 +67,8 @@ CREATE TABLE `product` (
   `original_img` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `cat_id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL,
-  `size` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
+  `size` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `warehouse` varchar(2000) COLLATE utf8_spanish2_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 ALTER TABLE `user`
