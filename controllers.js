@@ -2246,14 +2246,14 @@ empleadoControllers.controller('SyncupController', ['$scope','categories','$loca
 
     $scope.dataLoading = true;
 $timeout(function(){
-    $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category+'&page='+ 1).then(function successCallback(response) {    
+    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$routeParams.category+'&page='+ 1).then(function successCallback(response) {    
         $scope.dataLoading = true;
         $scope.AllproductsOff = response.data;
         console.log($scope.AllproductsOff.msg.total_pages);
         var miArray2otro = [];
         for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
 
-                $http.post(rute+'chinabrands/GetSearchInterface.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
+                $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
                     $scope.AllproductsOtro = response.data;
                     $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
                     //Array of Products, from php

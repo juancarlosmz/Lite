@@ -62,13 +62,13 @@ CREATE TABLE `tokentable` (
 CREATE TABLE `product` (
   `sku` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `encrypted_sku` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `title` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `title` varchar(700) COLLATE utf8_spanish2_ci NOT NULL,
   `color` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `original_img` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
   `cat_id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL,
   `size` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `warehouse` varchar(2000) COLLATE utf8_spanish2_ci
+  `warehouse` varchar(3000) COLLATE utf8_spanish2_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 ALTER TABLE `user`

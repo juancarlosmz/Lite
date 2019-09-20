@@ -24,7 +24,7 @@
 
     $sendtokenbd=$datos['msg']['token'];
 */
-    $sendtokenbd='4adcecd0405c004491579493a64f341b';
+    $sendtokenbd='f3cde250d27eb832fd9820388883f76b';
     
     //$sql = "INSERT INTO tokentable (id,compare, tokenserial) VALUES (null,'1','$sendtokenbd')";
     $sql = "UPDATE tokentable SET tokenserial='$sendtokenbd' where compare=1 ";
