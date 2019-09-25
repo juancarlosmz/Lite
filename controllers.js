@@ -2224,205 +2224,3523 @@ $timeout(function(){
 
 
 empleadoControllers.controller('SyncupController', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
-    $scope.saveduser = localStorage.getItem('todosuser');
-    $scope.SesionUser = JSON.parse($scope.saveduser);
-    for(var i in $scope.SesionUser){
-        //console.log($scope.SesionUser[i]['email']);
-        $scope.Email = $scope.SesionUser[i]['email'];
-        $scope.Rol = $scope.SesionUser[i]['rol'];
-    }
-    if($scope.Rol == '1' || $scope.Rol == '2'){
-        $scope.ulogin = 'ulogintrue';
-        $scope.uwelcome = 'uwelcomefalse';
-    }else{
-        $scope.ulogin = 'uloginfalse';
-        $scope.uwelcome = 'uwelcometrue';
-    }
-
     categories.list(function(categories) {
         $scope.categories = categories;  
-        
-    });
-
-    $scope.dataLoading = true;
-$timeout(function(){
-    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$routeParams.category+'&page='+ 1).then(function successCallback(response) {    
-        $scope.dataLoading = true;
-        $scope.AllproductsOff = response.data;
-        console.log($scope.AllproductsOff.msg.total_pages);
-        var miArray2otro = [];
-        for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
-
-                $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$routeParams.category +'&page='+ i).then(function successCallback(response) {
-                    $scope.AllproductsOtro = response.data;
-                    $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
-                    //Array of Products, from php
-                    //console.log('se debe de enviar', $scope.Resultado);
-                    var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
-                    $http({
-                        method : 'POST',
-                        url : rute+'chinabrands/GetProductCollention.php',
-                        data: ProductsSendphpOtro,
-                        headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
-                    }).success(function(response){
-                        $scope.productsotro = response;
-                        for (var i in $scope.productsotro.msg) {
-                            var skuconhijos = $scope.productsotro.msg[i]['sku'];
-                            if( skuconhijos.substr(7,8) == "01" && $scope.productsotro.msg[i]['status'] == 1 ){
-                                if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
-                                    //console.log('otro filtro',$scope.productsotro.msg[i]['warehouse_list'] );
-                                    if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock YB',$scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number']);
-                                        }
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
-                                        //console.log('del stock ZQ01',$scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number']);
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock YB',$scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number']);
-                                        }
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock ZQDZ01',$scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number']);
-                                        }
-                                        //console.log('del stock ZQDZ01',$scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock FCYWHQ',$scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number']);
-                                        }
-                                        //console.log('del stock FCYWHQ',$scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock SZXIAWAN',$scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number']);
-                                        }
-                                        //console.log('del stock SZXIAWAN',$scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock B2BREXIAOWH',$scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number']);
-                                        }
-                                        //console.log('del stock B2BREXIAOWH',$scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock FXLAWH',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
-                                        }
-                                        //console.log('del stock FXLAWH',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock FXLAWH2',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number']);
-                                        }
-                                        //console.log('del stock FXLAWH2',$scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock MXTJWH',$scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number']);
-                                        }
-                                        //console.log('del stock MXTJWH',$scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock FXJFKGC',$scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number']);
-                                        }
-                                        //console.log('del stock FXJFKGC',$scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number']);
-                                    }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
-                                        $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
-                                        if($scope.stockvar > 5){
-                                            var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
-                                            miArray2otro.push(miArrayotro);
-                                            console.log('del stock USZYCB',$scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number']);
-                                        }
-                                        //console.log('del stock USZYCB',$scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number']);
-                                    }
-
-                                }    
-                            }
-                        }    
-                        console.log(miArray2otro.length);
-                        if(miArray2otro.length >= '1'){
-                            $scope.dataProductsotro = miArray2otro;
-                            console.log('Total products: ',$scope.dataProductsotro);
-                            console.log('Total products: ',$scope.dataProductsotro.length);
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 0){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
                             $scope.dataLoading = true;
-                            $timeout(function(){
-                                $scope.dataLoading = false;
-                                $scope.saveallp = function(){
-                                    console.log('searchship all');
-                                    for(var i in $scope.dataProductsotro){
-                                        var modelsend = {
-                                            Mysku : $scope.dataProductsotro[i]['sku'],
-                                            Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
-                                            Mytitle : $scope.dataProductsotro[i]['title'],
-                                            Mycolor : $scope.dataProductsotro[i]['color'],
-                                            Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
-                                            Mycat_id : $scope.dataProductsotro[i]['cat_id'],
-                                            Myparent_id : $scope.dataProductsotro[i]['parent_id'],
-                                            Mysize : $scope.dataProductsotro[i]['size'],
-                                            Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
-                                        }
-                                        var dataSaveProductsPHP = JSON.stringify(modelsend);
-                                        console.log('',dataSaveProductsPHP);
-                                        
-                                        $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
-                                            $scope.dataSKU = response.data;
-                                            console.log($scope.dataSKU);
-                                            console.log('logrado');
-                                        }, function errorCallback(response) {
-                                            console.log('no logrado');
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
                                         });
-                                        
-                                        
-                                    }
-                                }
-                            }, 2000);
-                        }else if(miArray2otro.length = '0'){
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
                             $timeout(function(){
-                                $scope.dataNoResults = true;
-                            }, 500);
-                            console.log('This subcategory currently does not have products. Please check back for updates.');
-                        }
-                    }).error(function(error){
-                        $scope.dataLoading = true;
-                        console.log(error); 
-                    });
-                }, function errorCallback(response) {
-                    console.log("error 505");    
-                });
-        }  
-
-    }, function errorCallback(response) {
-        console.log("error 505");    
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 10);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
     });
+}]);
 
-}, 1000);
+empleadoControllers.controller('SyncupController1', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 1){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 5);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController2', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 10){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController3', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 21){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController4', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 22){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController5', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 23){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 3);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
 
 
 
+empleadoControllers.controller('SyncupController6', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 56){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 4);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController7', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 100){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController8', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 160){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 3);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController9', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 161){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 4);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController10', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 163){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 3);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController11', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 299){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 4);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController12', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 302){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 4);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController13', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 317){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 6);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController14', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 451){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 4);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController15', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 662){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 5);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+empleadoControllers.controller('SyncupController16', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 726){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 3);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController17', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 1392){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
+}]);
+
+
+
+empleadoControllers.controller('SyncupController18', ['$scope','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$routeParams', function($scope,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$routeParams) {
+    categories.list(function(categories) {
+        $scope.categories = categories;  
+        for(var i in $scope.categories.msg){
+            if($scope.categories.msg[i]['parent_id'] == 0){
+                if(i == 1489){
+                    $scope.enviocategoria =  $scope.categories.msg[i]['cat_id'];
+                    $scope.dataLoading = true;
+                        $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria +'&page='+ 1).then(function successCallback(response) {    
+                            $scope.dataLoading = true;
+                            $scope.AllproductsOff = response.data;
+                            var miArray2otro = [];
+                            for(var i=1 ; i <= $scope.AllproductsOff.msg.total_pages; i++){
+                                    $http.post(rute+'chinabrands/GetSearchInterface2.php?category='+$scope.enviocategoria  +'&page='+ i).then(function successCallback(response) {
+                                        $scope.AllproductsOtro = response.data;
+                                        $scope.ResultadoOtro = $scope.AllproductsOtro.msg['page_result'];
+                                        var ProductsSendphpOtro = 'myData='+JSON.stringify($scope.ResultadoOtro);
+                                        $http({
+                                            method : 'POST',
+                                            url : rute+'chinabrands/GetProductCollention.php',
+                                            data: ProductsSendphpOtro,
+                                            headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                        }).success(function(response){
+                                            $scope.productsotro = response;
+                                            for (var i in $scope.productsotro.msg) {
+                                                if( $scope.productsotro.msg[i]['status'] == 1 ){
+                                                    if(($scope.productsotro.msg[i]['warehouse_list']['YB'] || $scope.productsotro.msg[i]['warehouse_list']['ZQ01'] || $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01'] || $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] || $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] || $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ) || ($scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] || $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] || $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] || $scope.productsotro.msg[i]['warehouse_list']['USZYCB']   )   ){
+                                                        if( $scope.productsotro.msg[i]['warehouse_list']['YB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['YB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']  ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['ZQDZ01']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FCYWHQ']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['SZXIAWAN']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['B2BREXIAOWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXLAWH2']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['MXTJWH'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['MXTJWH']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['FXJFKGC']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }else if( $scope.productsotro.msg[i]['warehouse_list']['USZYCB'] ){
+                                                            $scope.stockvar = $scope.productsotro.msg[i]['warehouse_list']['USZYCB']['goods_number'];
+                                                            if($scope.stockvar > 3){
+                                                                var miArrayotro = JSON.parse(JSON.stringify($scope.productsotro.msg[i]));
+                                                                miArray2otro.push(miArrayotro);
+                                                            }
+                                                        }
+                                                    }    
+                                                }
+                                            }    
+                                            if(miArray2otro.length >= '1'){
+                                                $scope.dataProductsotro = miArray2otro;
+                                                $scope.dataLoading = true;
+                                            }else if(miArray2otro.length = '0'){
+                                                console.log('This subcategory currently does not have products. Please check back for updates.');
+                                            }
+                                        }).error(function(error){
+                                            $scope.dataLoading = true;
+                                            console.log(error); 
+                                        });
+                                    }, function errorCallback(response) {
+                                        console.log("error 505");    
+                                    });
+                            }  
+                            $timeout(function(){
+                                $scope.dataLoading = true;
+                                //para eliminar y registrar
+                                $http.get(rute+'api/?a=eliminarParaSicronizar&cat='+ $scope.enviocategoria ).then(function(response){
+                                    console.log('all deleted');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                }, function errorCallback(response) {
+                                    console.log('datos no eliminados');
+                                    $timeout(function(){
+                                            for(var i in $scope.dataProductsotro){
+                                                var modelsend = {
+                                                    Mysku : $scope.dataProductsotro[i]['sku'],
+                                                    Mycategory : $scope.enviocategoria ,
+                                                    Myencrypted_sku : $scope.dataProductsotro[i]['encrypted_sku'],
+                                                    Mytitle : $scope.dataProductsotro[i]['title'],
+                                                    Mycolor : $scope.dataProductsotro[i]['color'],
+                                                    Myoriginal_img : $scope.dataProductsotro[i]['original_img'][0],
+                                                    Mycat_id : $scope.dataProductsotro[i]['cat_id'],
+                                                    Myparent_id : $scope.dataProductsotro[i]['parent_id'],
+                                                    Mysize : $scope.dataProductsotro[i]['size'],
+                                                    Mywarehouse : JSON.stringify($scope.dataProductsotro[i]['warehouse_list']),
+                                                }
+                                                var dataSaveProductsPHP = JSON.stringify(modelsend);
+                                                console.log('',dataSaveProductsPHP);
+                                                
+                                                $http.post(rute+'api/?a=registrarProductosPHP',dataSaveProductsPHP).then(function successCallback(response) {   
+                                                    $scope.dataSKU = response.data;
+                                                    $scope.dataLoading = false;
+                                                    console.log($scope.dataSKU);
+                                                    console.log('logrado');
+                                                }, function errorCallback(response) {
+                                                    console.log('no logrado');
+                                                });   
+                                            }
+                                    }, 2000);    
+                                });
+                                //end elimina y registra
+                            }, 1000 * 60 * 2);
+                            //}, 1000 * 60 * 10); 
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }  
+                //end category 0
+            } 
+        } 
+    });
 }]);
 
 
@@ -2535,6 +5853,7 @@ empleadoControllers.controller('ProductsController', ['$scope','categories','$lo
         var modelview2=[];
         for(var i in $scope.ListAllProducts){
             var modelview = {
+                Viewcategory : $scope.ListAllProducts[i].category,
                 Viewsku : $scope.ListAllProducts[i].sku,
                 Viewencrypted_sku : $scope.ListAllProducts[i].encrypted_sku,
                 Viewtitle : $scope.ListAllProducts[i].title,
@@ -2544,7 +5863,7 @@ empleadoControllers.controller('ProductsController', ['$scope','categories','$lo
                 Viewparent_id : $scope.ListAllProducts[i].parent_id,
                 Viewsize : $scope.ListAllProducts[i].size,
                 Viewwarehouse : JSON.parse($scope.ListAllProducts[i].warehouse),
-            }
+            };
             modelview2.push(modelview);
         }
         $scope.ListAllProducts2 = modelview2;

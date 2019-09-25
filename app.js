@@ -128,9 +128,99 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AllProductsController',
         method: 'GET',
       }).
-      when('/Syncup/category-:category/:page', {
+      when('/Syncup/category0', {
         templateUrl: 'partials/Syncup.html',
         controller: 'SyncupController',
+        method: 'GET',
+      }).
+      when('/Syncup/category1', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController1',
+        method: 'GET',
+      }).
+      when('/Syncup/category2', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController2',
+        method: 'GET',
+      }).
+      when('/Syncup/category3', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController3',
+        method: 'GET',
+      }).
+      when('/Syncup/category4', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController4',
+        method: 'GET',
+      }).
+      when('/Syncup/category5', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController5',
+        method: 'GET',
+      }).
+      when('/Syncup/category6', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController6',
+        method: 'GET',
+      }).
+      when('/Syncup/category7', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController7',
+        method: 'GET',
+      }).
+      when('/Syncup/category8', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController8',
+        method: 'GET',
+      }).
+      when('/Syncup/category9', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController9',
+        method: 'GET',
+      }).
+      when('/Syncup/category10', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController10',
+        method: 'GET',
+      }).
+      when('/Syncup/category11', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController11',
+        method: 'GET',
+      }).
+      when('/Syncup/category12', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController12',
+        method: 'GET',
+      }).
+      when('/Syncup/category13', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController13',
+        method: 'GET',
+      }).
+      when('/Syncup/category14', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController14',
+        method: 'GET',
+      }).
+      when('/Syncup/category15', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController15',
+        method: 'GET',
+      }).
+      when('/Syncup/category16', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController16',
+        method: 'GET',
+      }).
+      when('/Syncup/category17', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController17',
+        method: 'GET',
+      }).
+      when('/Syncup/category18', {
+        templateUrl: 'partials/Syncup.html',
+        controller: 'SyncupController18',
         method: 'GET',
       }).
       when('/Results/allProducts', {

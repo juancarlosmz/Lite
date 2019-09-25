@@ -75,7 +75,9 @@ switch($action) {
     case 'registrarProductosPHP':    
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        
         $allsku = $data['Mysku'];
+        $allcategory = $data['Mycategory'];
         $allencrypted_sku = $data['Myencrypted_sku'];
         $alltitle = $data['Mytitle'];
         $allcolor = $data['Mycolor'];
@@ -86,9 +88,9 @@ switch($action) {
         $allwarehouse = addslashes($data['Mywarehouse']);
 
         //$valores = "('" . $allsku . "', '" . $allencrypted_sku . "' , '" . $alltitle . "' , '" . $allcolor . "' , '" . $alloriginal_img ."' , '". $allcat_id . "' , '" . $allparent_id . "' , '". $allsize ."' )";
-        $valores = '("' . $allsku . '", "' . $allencrypted_sku . '" , "' . $alltitle . '" , "' . $allcolor . '" , "' . $alloriginal_img .'" , "'. $allcat_id . '" , "' . $allparent_id . '" , "'. $allsize .'" , "'. $allwarehouse .'" )';
+        $valores = '("' . $allsku . '", "' . $allcategory . '", "' . $allencrypted_sku . '" , "' . $alltitle . '" , "' . $allcolor . '" , "' . $alloriginal_img .'" , "'. $allcat_id . '" , "' . $allparent_id . '" , "'. $allsize .'" , "'. $allwarehouse .'" )';
 
-        $sql = "INSERT INTO product (sku, encrypted_sku, title, color,original_img,cat_id,parent_id,size,warehouse) VALUES $valores";
+        $sql = "INSERT INTO product (sku,category, encrypted_sku, title, color,original_img,cat_id,parent_id,size,warehouse) VALUES $valores";
         if ($connection->multi_query($sql) === TRUE){
             print_r(json_encode('New records created successfully'));
         }else{
@@ -100,6 +102,10 @@ switch($action) {
         //print_r(json_encode($allsku.' | '.$allencrypted_sku.' | '.$alltitle.' | '.$allcolor.' | '.$alloriginal_img.' | '.$allcat_id.' | '.$allparent_id.' | '.$allsize));
         
         break;
+    case 'eliminarParaSicronizar':
+        header('Content-Type: application/json');
+        print_r(json_encode(eliminarSicronizar($fluent, $_GET['cat'])));
+        break; 
     case 'listarAllSKUs':
         header('Content-Type: application/json');
         print_r(json_encode(listarSKUs($fluent)));
@@ -279,6 +285,14 @@ function eliminar($fluent, $id){
              ->execute();   
     return true;
 }
+
+function eliminarSicronizar($fluent, $cat){
+    $fluent ->deleteFrom('product')
+            ->where('category = ?',$cat)
+            ->execute();   
+    return true;
+}
+
 function eliminarUList($fluent, $id){
     $values = array('status' => '0');
     $fluent ->update('ImportList')
