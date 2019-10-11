@@ -10,10 +10,10 @@
         echo "0 results";
     }
     //api
-    $goods_sn = '448280101 ,452550401 ,457680301   ,270482201,285556702 ,217027701 ,212232401  ,270364901,405247701,226998001,449161701,437677201,189036101   ';
-            $post_data = array(
+    $goods_sn = json_decode($_POST['myDataBestSell']);
+
+    $post_data = array(
             'token' => $eltoken,
-            //'token' => $_SESSION['eltoken'], 
             'goods_sn' => json_encode($goods_sn)
     );
             $api_url="https://cnapi.chinabrands.com/v2/product/index";

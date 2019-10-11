@@ -31,58 +31,58 @@
 
 
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-826/1'" class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/826'" class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/home-garden-icon.png"></svg> <span>Home &amp; Garden</span>
                                   </button>
                                 </li>
   
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-469/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/469'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/consumerElectronic.svg"></svg><span>Consumer Electronics</span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-774/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/774'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/SportsEntertainment.png"></svg> <span>Sports &amp; Entertainment</span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-789/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/789'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/watch.svg"></svg> <span>Watches</span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-330/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/330'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/MotherandKids.png"></svg> <span>Mother &amp; Kids</span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-162/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/162'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/healthandbeauty.jpg"></svg> <span>Beauty &amp; Health</span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-1/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/1'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/cocktail-dress.svg"></svg> <span>Women’s Clothing </span>
                                   </button>
                                 </li>
                                 <li class="featured">
-                                  <button type="button" onclick="window.location.href='#/Result/category-113/1'"  class="margin btn-transparent">
+                                  <button type="button" onclick="window.location.href='#/Results/allProducts/113'"  class="margin btn-transparent">
                                     <svg class="icon-lg"><img width="50"  src="img/pendant.svg"></svg> <span>Jewelry</span>
                                   </button>
                                 </li>
   
                                 <li class="featured">
-                                    <button type="button" onclick="window.location.href='#/Result/category-1058/1'"  class="margin btn-transparent">
+                                    <button type="button" onclick="window.location.href='#/Results/allProducts/1058'"  class="margin btn-transparent">
                                       <svg class="icon-lg"><img width="50"  src="img/toys.png"></svg> <span>Toys &amp; Hobbies</span>
                                     </button>
                                 </li>
   
                                 <li class="rest featured">
                                     <button type="button" class="margin btn-transparent"><svg class="icon-lg"><span class="glyphicon glyphicon-option-horizontal"></span></svg>  
-                                        <select name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
+                                        <select name="" id="opidselect" ng-change="filterCategory(myValue);" ng-model="myValue">
                                           <option value="">More categories</option>
-                                          <option ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0 && cat.cat_id != 826 && cat.cat_id != 469 && cat.cat_id != 774 && cat.cat_id != 789 && cat.cat_id != 330 && cat.cat_id != 162 && cat.cat_id != 1 && cat.cat_id != 113 && cat.cat_id != 1058" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+                                          <option ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0 && cat.cat_id != 826 && cat.cat_id != 469 && cat.cat_id != 774 && cat.cat_id != 789 && cat.cat_id != 330 && cat.cat_id != 162 && cat.cat_id != 1 && cat.cat_id != 113 && cat.cat_id != 1058" value="{{cat.cat_id}}"> {{cat.cat_name}}</option>
                                         </select>
                                     </button>
                                 </li>
@@ -100,8 +100,78 @@
                       
                   </div>
                   <!--Message-->
-                  <p style="color: #989797;">We are in the process of updating the catalog with more products and faster page loading speed.</p>
- 
+
+                  <!--CARRUSEL ADMINISTRABLE-->
+                  <h3>New Arrivals <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                  <div class="row" id="spacerow">
+                    <div class="item col-md-12 col-sm-12 col-xs-12">
+                        <div class="carrusel">  
+                            <div id="slides_control">
+                              <div>
+                                <carousel interval="myInterval">
+                                  <slide  ng-repeat="prod in groupedSlides3 track by $index" active="slide.active">
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a target="_blank"  class="itemhover" href="#/product1/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                        <p class="theimg" ng-repeat="img in prod.image1.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
+                                        <p class="block-with-text">{{ prod.image1.title }}</p>
+                                        <p class="price">$ {{ prod.image1.warehouse_list.YB.price }} {{ prod.image1.warehouse_list.ZQ01.price }} {{ prod.image1.warehouse_list.ZQDZ01.price }} {{ prod.image1.warehouse_list.FCYWHQ.price }} {{ prod.image1.warehouse_list.SZXIAWAN.price }} {{ prod.image1.warehouse_list.B2BREXIAOWH.price }} {{ prod.image1.warehouse_list.FXLAWH.price }} {{ prod.image1.warehouse_list.FXLAWH2.price }} {{ prod.image1.warehouse_list.MXTJWH.price }} {{ prod.image1.warehouse_list.FXJFKGC.price }} {{ prod.image1.warehouse_list.USZYCB.price }}</p>
+                                      </a>   
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                                    </div> 
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a target="_blank"  class="itemhover" href="#/product1/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                        <p class="theimg" ng-repeat="img in prod.image2.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
+                                        <p class="block-with-text">{{ prod.image2.title }}</p>
+                                        <p class="price">$  {{ prod.image2.warehouse_list.YB.price }} {{ prod.image2.warehouse_list.ZQ01.price }} {{ prod.image2.warehouse_list.ZQDZ01.price }} {{ prod.image2.warehouse_list.FCYWHQ.price }} {{ prod.image2.warehouse_list.SZXIAWAN.price }} {{ prod.image2.warehouse_list.B2BREXIAOWH.price }} {{ prod.image2.warehouse_list.FXLAWH.price }} {{ prod.image2.warehouse_list.FXLAWH2.price }} {{ prod.image2.warehouse_list.MXTJWH.price }} {{ prod.image2.warehouse_list.FXJFKGC.price }} {{ prod.image2.warehouse_list.USZYCB.price }}</p>
+                                      </a>  
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image2.sku}}"  ng-click="addToCard(prod.image2)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
+                                    </div>
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a  target="_blank" class="itemhover" href="#/product1/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                        <p class="theimg" ng-repeat="img in prod.image3.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
+                                        <p class="block-with-text">{{ prod.image3.title }}</p>
+                                        <p class="price">$ {{ prod.image3.warehouse_list.YB.price }} {{ prod.image3.warehouse_list.ZQ01.price }} {{ prod.image3.warehouse_list.ZQDZ01.price }} {{ prod.image3.warehouse_list.FCYWHQ.price }} {{ prod.image3.warehouse_list.SZXIAWAN.price }} {{ prod.image3.warehouse_list.B2BREXIAOWH.price }} {{ prod.image3.warehouse_list.FXLAWH.price }} {{ prod.image3.warehouse_list.FXLAWH2.price }} {{ prod.image3.warehouse_list.MXTJWH.price }} {{ prod.image3.warehouse_list.FXJFKGC.price }} {{ prod.image3.warehouse_list.USZYCB.price }}</p>
+                                      </a>   
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image3.sku}}"  ng-click="addToCard(prod.image3)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>  
+                                    </div> 
+                                    <div class="item col-md-3 col-sm-4 col-xs-12 itemcarrusel leftmove">
+                                      <a target="_blank" class="itemhover" href="#/product1/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                        <p class="theimg" ng-repeat="img in prod.image4.original_img">
+                                          <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                        </p>
+                                        <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
+                                        <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
+                                        <p class="block-with-text">{{ prod.image4.title }}</p>
+                                        <p class="price">$ {{ prod.image4.warehouse_list.YB.price }} {{ prod.image4.warehouse_list.ZQ01.price }} {{ prod.image4.warehouse_list.ZQDZ01.price }} {{ prod.image4.warehouse_list.FCYWHQ.price }} {{ prod.image4.warehouse_list.SZXIAWAN.price }} {{ prod.image4.warehouse_list.B2BREXIAOWH.price }} {{ prod.image4.warehouse_list.FXLAWH.price }} {{ prod.image4.warehouse_list.FXLAWH2.price }} {{ prod.image4.warehouse_list.MXTJWH.price }} {{ prod.image4.warehouse_list.FXJFKGC.price }} {{ prod.image4.warehouse_list.USZYCB.price }}</p>
+                                      </a>  
+                                        <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                        <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image4.sku}}"  ng-click="addToCard(prod.image4)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
+                                    </div>  
+                                  </slide> 
+                                </carousel>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <!--END CARRUSEL ADMINISTRABLE-->
+
+
                   <!--Collections-->
                   <h3>Best-Selling Products <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
                   <div class="row" id="spacerow">
@@ -123,24 +193,6 @@
                                         <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
                                         <p class="block-with-text">{{ prod.image1.title }}</p>
                                         <p class="price">$ {{ prod.image1.warehouse_list.YB.price }} {{ prod.image1.warehouse_list.ZQ01.price }} {{ prod.image1.warehouse_list.ZQDZ01.price }} {{ prod.image1.warehouse_list.FCYWHQ.price }} {{ prod.image1.warehouse_list.SZXIAWAN.price }} {{ prod.image1.warehouse_list.B2BREXIAOWH.price }} {{ prod.image1.warehouse_list.FXLAWH.price }} {{ prod.image1.warehouse_list.FXLAWH2.price }} {{ prod.image1.warehouse_list.MXTJWH.price }} {{ prod.image1.warehouse_list.FXJFKGC.price }} {{ prod.image1.warehouse_list.USZYCB.price }}</p>
-
-
-                                        <!--
-                                        <div class="row">
-                                            <div  class="item col-md-2 col-sm-2 col-xs-2">
-                                                    <img width="30" src="img/bchina.png">
-                                                    <p >{{ prod.image1.warehouse_list.YB.price }}</p>
-                                                    <p >{{ prod.image1.warehouse_list.YB.goods_number }}</p>
-                                            </div>
-                
-                                            <div  class="item col-md-2 col-sm-2 col-xs-2">
-                                                    <p>{{ prod.image1.warehouse_list.FXLAWH.price }}</p>
-                                                    <p >{{ prod.image1.warehouse_list.FXLAWH.goods_number }}</p>
-                                            </div>
-                                        </div>
-
--->
-
                                       </a>   
                                         <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
                                         <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>

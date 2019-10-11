@@ -472,7 +472,7 @@ img{
 }
 /*space rows*/
 #spacerow{
-  margin-bottom: 32%;
+  margin-bottom: 20%;
 }
 
 /*Para la paginacion*/
@@ -846,7 +846,7 @@ h3 {
 
 @media (max-width: 2150px){
   #spacerow{
-    margin-bottom: 40%;
+    margin-bottom: 30%;
   }
 }
 
@@ -888,7 +888,6 @@ h3 {
   #spacerow{
     margin-bottom: 160%;
   }
-
 }
 
 @media (max-width: 890px){
@@ -1143,3 +1142,4 @@ h3 {
     width: 150px;
   }
 }
+

@@ -118,13 +118,13 @@
                     
             </div> 
       
-            <div class="item col-md-8 col-sm-6 col-xs-12" > 
+            <div class="item col-md-8 col-sm-6 col-xs-12"  > 
               
-              <div class="row">
+              <div class="row" style="border-bottom: solid 1px #f9e4ca;">
                 <div id="cambiaskucolor" ng-if="$index==3" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
                     <p class="title">{{ prod.title }}</p>
-                    <br>
-                    <input id="valueskuid" class="valuesku" type="text" value="{{ prod.sku }}">
+                    <br><br><br><br>
+                    <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku }}">
                     <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
                     <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
                 </div>
@@ -162,7 +162,7 @@
                                       </a>     
                                   -->  
                                       <div class="row">
-                                          <div class="item col-md-3 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
+                                          <div class="item col-md-2 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
                                                   <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}">
                                                       <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
                                                       <input type="hidden" class="idiconocolor" value="{{ prod.color }}">
@@ -248,7 +248,7 @@
                               </div>
                             <div class="item col-md-10 col-sm-9 col-xs-8">                        
                                   <p >{{ stk.goods_number }}</p>   
-                                  <input id="goodsnumber" type="text" value="{{stk.goods_number}}"/>                      
+                                  <input id="goodsnumber" type="hidden" value="{{stk.goods_number}}"/>                      
                             </div>
                           </div>
                     </div>
@@ -452,20 +452,18 @@
       
       
       <!--Informacion  del producto-->
-      
+      <br>
       <div class="row pageproductcont1">
-        <div id="stylemobil" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
-          <h3>Product Information</h3>
-        </div>
+            <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
+              <h3>Product Information</h3>
+            </div>
     </div>
-
+    
     <div class="row pageproductcont1">
-      <div id="stylemobil" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
-        <p class="productinfo">{{ prod.title }}</p>
-        <button style="display: none" class="btn" ng-click="myFunctioninfo()">See details</button>
-        <input id="inputinfo" type="hidden" value="{{ prod.goods_desc}}">
-        <p id="infoprod"></p>
-      </div>
+            <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
+                <p class="productinfo">{{ Tituloproducto}}</p>
+                <p id="infoprod2"></p>
+            </div>
     </div>
       
         </div>  

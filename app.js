@@ -13,13 +13,28 @@ var app = angular.module('appLite', [
 
 app.config(['$routeProvider', '$locationProvider',
   function($routeProvider,$locationProvider) {
+    /*
     $locationProvider.hashPrefix('');
+    
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    }).hashPrefix('');
+    */
+/*
+    $locationProvider.hashPrefix('').html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+*/
+    //$locationProvider.hashPrefix('').html5Mode(true);
+    $locationProvider.hashPrefix('');
+
     $routeProvider.
       when('/', {
         templateUrl: 'partials/home.html',
         controller: 'HomeController',
-        method: 'GET',
-        
+        method: 'GET',  
       }).
       when('/Home', {
         templateUrl: 'partials/home.html',
@@ -30,6 +45,11 @@ app.config(['$routeProvider', '$locationProvider',
       when('/Search', {
         templateUrl: 'partials/search.html',
         controller: 'SearchController',
+        method: 'GET',
+      }).
+      when('/product/:id/:wh', {
+        templateUrl: 'partials/Product.html',
+        controller: 'ProductviewController',
         method: 'GET',
       }).
       when('/product1/:id/:wh', {
@@ -226,6 +246,26 @@ app.config(['$routeProvider', '$locationProvider',
       when('/Results/allProducts', {
         templateUrl: 'partials/Products.html',
         controller: 'ProductsController',
+        method: 'GET',
+      }).
+      when('/Results/allProducts/:category', {
+        templateUrl: 'partials/Products.html',
+        controller: 'ProductsControllerCategory',
+        method: 'GET',
+      }).
+      when('/Results/allProducts/:category/:subcategory', {
+        templateUrl: 'partials/Products.html',
+        controller: 'ProductsControllersubCategory',
+        method: 'GET',
+      }).
+      when('/Results/allProducts/:category/:subcategory/:subsubcategory', {
+        templateUrl: 'partials/Products.html',
+        controller: 'ProductsControllersubsubCategory',
+        method: 'GET',
+      }).
+      when('/Results/allProducts/:category/:subcategory/:subsubcategory/:subsubsubcategory', {
+        templateUrl: 'partials/Products.html',
+        controller: 'ProductsControllersubsubsubCategory',
         method: 'GET',
       }).
       when('/cifradorcesar', {

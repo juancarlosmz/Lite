@@ -72,6 +72,22 @@ switch($action) {
         header('Content-Type: application/json');
         print_r(json_encode(listarProductos($fluent)));
         break;
+    case 'listProductsCat':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarProductosCat($fluent, $_GET['category'])));
+        break;
+    case 'listProductssubCat':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarProductossubCat($fluent, $_GET['category'], $_GET['subcategory'])));
+        break;  
+    case 'listProductssubsubCat':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarProductossubsubCat($fluent, $_GET['category'], $_GET['subcategory'], $_GET['subsubcategory'])));
+        break;  
+    case 'listProductssubsubsubCat':
+        header('Content-Type: application/json');
+        print_r(json_encode(listarProductossubsubsubCat($fluent, $_GET['category'], $_GET['subcategory'], $_GET['subsubcategory'], $_GET['subsubsubcategory'])));
+        break;            
     case 'registrarProductosPHP':    
         header('Content-Type: application/json');
         $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
@@ -263,6 +279,35 @@ function listarProductos($fluent){
         ->fetchAll();
 
 }
+
+function listarProductosCat($fluent, $category){
+    return $fluent->from('product')
+           ->select('product.*') 
+           ->where('category = ?',$category)
+           ->fetchAll();
+}
+
+function listarProductossubCat($fluent, $category, $subcategory){
+    return $fluent->from('product')
+           ->select('product.*') 
+           ->where('parent_id = ?',$subcategory)
+           ->fetchAll();
+}
+
+function listarProductossubsubCat($fluent, $category, $subcategory, $subsubcategory){
+    return $fluent->from('product')
+           ->select('product.*') 
+           ->where('parent_id = ?',$subsubcategory)
+           ->fetchAll();
+}
+
+function listarProductossubsubsubCat($fluent, $category, $subcategory, $subsubcategory, $subsubsubcategory){
+    return $fluent->from('product')
+           ->select('product.*') 
+           ->where('parent_id = ?',$subsubsubcategory)
+           ->fetchAll();
+}
+
 function listarSKUs($fluent){
     return $fluent
          ->from('AllSKUs')

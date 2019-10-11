@@ -7,9 +7,10 @@
                   <div class="row">
                     <div class="item col-md-12 col-sm-12 col-xs-12">
                        <div class="comboallprod">
-                          <select class="txtselect" name="" id="opidselect" onchange="window.location=this.options[this.selectedIndex].value">
-                                  <option value="">All Categories</option>
-                                  <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="#/Result/category-{{cat.cat_id}}/1"> {{cat.cat_name}}</option>
+                          <select class="txtselect" name="" id="opidselect" ng-change="filterCategory(myValue);" ng-model="myValue">
+                                <option value="">--Select Category--</option>    
+                                <option value="allcategories">All Categories</option>
+                                <option id="categoryid" ng-repeat="cat in categories.msg track by $index" ng-if="cat.parent_id==0" value="{{cat.cat_id}}"> {{cat.cat_name}}</option>
                           </select>
                        </div>
                     </div>
@@ -90,7 +91,7 @@
                   <div class="item col-md-12 col-sm-12 col-xs-12 subcategories">
   
                       <div class="ruteallprod">
-                          <h3> Home > {{namecategoria}} > {{namesubcategoria}}</h3>  
+                          <h3><a href="#/" >  Home </a> > <a href="#/Results/allProducts/{{categorieviewID}}" > {{categorieview}}</a> {{categorieview2separate}} <a href="#/Results/allProducts/{{categorieviewID}}/{{categorieview2ID}}" > {{categorieview2}} </a> {{categorieview3separate}} <a href="#/Results/allProducts/{{categorieviewID}}/{{categorieview2ID}}/{{categorieview3ID}}" > {{categorieview3}} </a> {{categorieview4separate}} <a href="#/Results/allProducts/{{categorieviewID}}/{{categorieview2ID}}/{{categorieview3ID}}/{{categorieview4ID}}" > {{categorieview4}} </a>  </h3>  
                       </div>
   <!-- 
                       <ul class="list-group" style="margin-bottom: 0px !important;">
@@ -99,11 +100,24 @@
                         </li>
                       </ul>
   -->
-                      <ul class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in categories.msg track by $index">
-                        <li style="list-style:none;" ng-if="cat.parent_id==parentidsubcategoria">
-                          <a class="list-group-item list-group-item-action list-group-item-light" href="#/Result/category-{{cat.cat_id}}/1" ng-click="Downloadstop();" target="_blank">{{cat.cat_name}}</a>
+                      <ul ng-if="datasubcategory" class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat in subcategories1 track by $index">
+                        <li style="list-style:none;">
+                          <a class="list-group-item list-group-item-action list-group-item-light" href="#/Results/allProducts/{{categorieviewID}}/{{cat.cat_id}}">{{cat.cat_name}}</a>
                         </li>
                       </ul>
+
+                      <ul ng-if="datasubsubcategory" class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat2 in subcategories2 track by $index">
+                        <li style="list-style:none;">
+                          <a class="list-group-item list-group-item-action list-group-item-light" href="#/Results/allProducts/{{categorieviewID}}/{{NameSubcategory}}/{{cat2.cat_id}}" >{{cat2.cat_name}}</a>
+                        </li>
+                      </ul>
+                      
+                      <ul ng-if="datasubsubsubcategory" class="list-group" style="margin-bottom: 0px !important;" ng-repeat="cat2 in subcategories2 track by $index">
+                        <li style="list-style:none;">
+                          <a class="list-group-item list-group-item-action list-group-item-light" href="#/Results/allProducts/{{categorieviewID}}/{{NameSubcategory}}/{{NameSubcategory2}}/{{cat2.cat_id}}" >{{cat2.cat_name}}</a>
+                        </li>
+                      </ul>
+
                   </div>
   
               </div>
@@ -116,10 +130,15 @@
                     <br>
   
                     
-                    <div class="row">
+                    <div class="row" ng-if="dataResults">
                         <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel forwidth" ng-repeat="prod in filtroProducts track by $index">
-                          <a target="_blank"  class="itemhover" href="#/product1/{{ prod.Viewsku }}/{{ prod.Viewwarehouse.YB.warehouse }}{{ prod.Viewwarehouse.ZQ01.warehouse }}{{ prod.Viewwarehouse.ZQDZ01.warehouse }}{{ prod.Viewwarehouse.FCYWHQ.warehouse }}{{ prod.Viewwarehouse.SZXIAWAN.warehouse }}{{ prod.Viewwarehouse.B2BREXIAOWH.warehouse }}{{ prod.Viewwarehouse.FXLAWH.warehouse }}{{ prod.Viewwarehouse.FXLAWH2.warehouse }}{{ prod.Viewwarehouse.MXTJWH.warehouse }}{{ prod.Viewwarehouse.FXJFKGC.warehouse }}{{ prod.Viewwarehouse.USZYCB.warehouse }}">
-                            
+                          
+                          <a target="_blank"  class="itemhover" href="#/product/{{ prod.Viewsku }}/{{ prod.Viewwarehouse.YB.warehouse }}{{ prod.Viewwarehouse.ZQ01.warehouse }}{{ prod.Viewwarehouse.ZQDZ01.warehouse }}{{ prod.Viewwarehouse.FCYWHQ.warehouse }}{{ prod.Viewwarehouse.SZXIAWAN.warehouse }}{{ prod.Viewwarehouse.B2BREXIAOWH.warehouse }}{{ prod.Viewwarehouse.FXLAWH.warehouse }}{{ prod.Viewwarehouse.FXLAWH2.warehouse }}{{ prod.Viewwarehouse.MXTJWH.warehouse }}{{ prod.Viewwarehouse.FXJFKGC.warehouse }}{{ prod.Viewwarehouse.USZYCB.warehouse }}">
+                            <!--
+                          <a target="_blank"  class="itemhover" href="#/product/{{sendwarehouseall}}">
+                           -->
+                           
+                           
                             <p class="theimg" >
                               
                                 <img class="img-responsive" ng-src="{{prod.Vieworiginal_img}}">
@@ -127,7 +146,7 @@
                               
                             </p>
 
-                            <input id="valueskuid" class="valuesku" type="text" value="{{ prod.Viewsku }}">
+                            <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.Viewsku }}">
                             <input class="valuesparentid" type="hidden" value="{{ prod.Viewparent_id }}">
                             <!-- clase para title 1 linea class="title titleshort" -->
                             <p  class="block-with-text">{{ prod.Viewtitle }}</p> 
@@ -167,7 +186,7 @@
     </div>  
   </div>
   <hr/>
-  <ul pagination total-items="totalProducts" max-size="maxSize"   items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
+  <ul  pagination total-items="totalProducts" max-size="maxSize"   items-per-page="numPerPageProducts" page="currentPageProducts"></ul>
 
   
         </div>

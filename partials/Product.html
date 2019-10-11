@@ -1,6 +1,6 @@
 
 <div class="pageproduct">
-  <div class="container">
+  <div ng-if="viewoutofstock" class="container">
     <div class="row pageproductcont1">
         <br>
 
@@ -13,102 +13,102 @@
     </div>
 
 
-      <div ng-if="$index==0" class="item col-md-4 col-sm-6 col-xs-12" ng-repeat="prod in product.msg">
-          <p id="cambioimg2" class="theimg" ng-repeat="img in prod.original_img">
-              <img id="cambioimg" ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+      <div class="item col-md-4 col-sm-6 col-xs-12">
+          <p id="cambioimg2" class="theimg">
+              <img id="cambioimg" class="img-responsive" ng-src="{{ImagenOriginal1}}">
           </p>
           <br>
 
           
 
           <div style="width: 100%;" class="row">
-            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                <p onclick="myFchangeimg1();" class="theimgshort" ng-repeat="img in prod.original_img">
-                    <img id="clonimg1" ng-if="$index==0" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+            <div ng-if="ImagenOriginal1" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                <p onclick="myFchangeimg1();" class="theimgshort">
+                    <img id="clonimg1"  class="img-responsive" ng-src="{{ImagenOriginal1}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                <p onclick="myFchangeimg2();" class="theimgshort" ng-repeat="img in prod.original_img">
-                    <img id="clonimg2" ng-if="$index==1" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+            <div ng-if="ImagenOriginal2" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                <p onclick="myFchangeimg2();" class="theimgshort">
+                    <img id="clonimg2"  class="img-responsive" ng-src="{{ImagenOriginal2}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                <p onclick="myFchangeimg3();" class="theimgshort" ng-repeat="img in prod.original_img">
-                    <img id="clonimg3" ng-if="$index==2" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+            <div ng-if="ImagenOriginal3" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                <p onclick="myFchangeimg3();" class="theimgshort">
+                    <img id="clonimg3"  class="img-responsive" ng-src="{{ImagenOriginal3}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                 </p>
             </div>
-            <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                <p onclick="myFchangeimg4();" class="theimgshort" ng-repeat="img in prod.original_img">
-                    <img id="clonimg4" ng-if="$index==3" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+            <div ng-if="ImagenOriginal4" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                <p onclick="myFchangeimg4();" class="theimgshort" >
+                    <img id="clonimg4"  class="img-responsive" ng-src="{{ImagenOriginal4}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                 </p>
             </div>
           </div>
 
           <div style="width: 100%;" class="row">
-              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                  <p onclick="myFchangeimg5();" class="theimgshort" ng-repeat="img in prod.original_img">
-                      <img id="clonimg5" ng-if="$index==4" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+              <div ng-if="ImagenOriginal5" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                  <p onclick="myFchangeimg5();" class="theimgshort" >
+                      <img id="clonimg5" class="img-responsive" ng-src="{{ImagenOriginal5}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                  <p onclick="myFchangeimg6();" class="theimgshort" ng-repeat="img in prod.original_img">
-                      <img id="clonimg6" ng-if="$index==5" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+              <div ng-if="ImagenOriginal6" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                  <p onclick="myFchangeimg6();" class="theimgshort" >
+                      <img id="clonimg6" class="img-responsive" ng-src="{{ImagenOriginal6}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                  <p onclick="myFchangeimg7();" class="theimgshort" ng-repeat="img in prod.original_img">
-                      <img id="clonimg7" ng-if="$index==6" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+              <div ng-if="ImagenOriginal7" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                  <p onclick="myFchangeimg7();" class="theimgshort">
+                      <img id="clonimg7" class="img-responsive" ng-src="{{ImagenOriginal7}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                   </p>
               </div>
-              <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                  <p onclick="myFchangeimg8();" class="theimgshort" ng-repeat="img in prod.original_img">
-                      <img id="clonimg8" ng-if="$index==7" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+              <div ng-if="ImagenOriginal8" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                  <p onclick="myFchangeimg8();" class="theimgshort">
+                      <img id="clonimg8" class="img-responsive" ng-src="{{ImagenOriginal8}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                   </p>
               </div>
             </div>
 
             <div style="width: 100%;" class="row">
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg9();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg9" ng-if="$index==8" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal9" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg9();" class="theimgshort">
+                        <img id="clonimg9" class="img-responsive" ng-src="{{ImagenOriginal9}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg10();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg10" ng-if="$index==9" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal10" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg10();" class="theimgshort">
+                        <img id="clonimg10" class="img-responsive" ng-src="{{ImagenOriginal10}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg11();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg11" ng-if="$index==10" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal11" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg11();" class="theimgshort">
+                        <img id="clonimg11" class="img-responsive" ng-src="{{ImagenOriginal11}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg12();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg12" ng-if="$index==11" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal12" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg12();" class="theimgshort">
+                        <img id="clonimg12" class="img-responsive" ng-src="{{ImagenOriginal12}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
             </div>
 
             <div style="width: 100%;" class="row">
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg13();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg13" ng-if="$index==12" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal13" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg13();" class="theimgshort">
+                        <img id="clonimg13" class="img-responsive" ng-src="{{ImagenOriginal13}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg14();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg14" ng-if="$index==13" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal14" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg14();" class="theimgshort">
+                        <img id="clonimg14" class="img-responsive" ng-src="{{ImagenOriginal14}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg15();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg15" ng-if="$index==14" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal15" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg15();" class="theimgshort">
+                        <img id="clonimg15" class="img-responsive" ng-src="{{ImagenOriginal15}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
-                <div class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
-                    <p onclick="myFchangeimg16();" class="theimgshort" ng-repeat="img in prod.original_img">
-                        <img id="clonimg16" ng-if="$index==15" class="img-responsive" ng-src="{{img}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
+                <div ng-if="ImagenOriginal16" class="item col-md-3 col-sm-3 col-xs-3 imgcolor">
+                    <p onclick="myFchangeimg16();" class="theimgshort">
+                        <img id="clonimg16" class="img-responsive" ng-src="{{ImagenOriginal16}}" style="border: 1px solid #fdcaa87d; border-radius: 1px;">
                     </p>
                 </div>
             </div>
@@ -123,26 +123,32 @@
         
         <div class="row" style="border-bottom: solid 1px #f9e4ca;">
           <div id="cambiaskucolor" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">
-              <p class="title">{{ prod.title }}</p>
+              <p class="title">{{ Tituloproducto }}</p>
               <br><br><br><br>
-              <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku }}">
+              <input id="valueskuid" class="valuesku" type="hidden" value="{{ prod.sku}}">
               <br>
               <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
               <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.sku}}"  ng-click="addToCard(prod)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>    
           </div>
         </div>
+
+
+
+
 <!-- Price-->
+        
+
         <div class="row">
-            <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
+            <div class="item col-md-12 col-sm-12 col-xs-12" >                                    
                 <div class="row">
                     <div class="item col-md-2 col-sm-3 col-xs-4">
                         <p >Price:</p>
                     </div>
                     <div class="item col-md-10 col-sm-9 col-xs-8"> 
 
-                        <label ng-if="prod.warehouse_list.YB.price || prod.warehouse_list.ZQ01.price || prod.warehouse_list.ZQDZ01.price || prod.warehouse_list.FCYWHQ.price ||  prod.warehouse_list.SZXIAWAN.price || prod.warehouse_list.B2BREXIAOWH.price" class="price"> <p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceonecn}}</p> <p class="wareallp" > CN</p> </label>
+                        <label ng-if="precioYB || precioZQ01 || precioZQDZ01 || precioFCYWHQ || precioSZXIAWAN ||  precioB2BREXIAOWH" class="price"> <p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceonecn}}</p> <p class="wareallp" > CN</p> </label>
 
-                        <label ng-if="prod.warehouse_list.FXLAWH.price || prod.warehouse_list.FXLAWH2.price || prod.warehouse_list.MXTJWH.price || prod.warehouse_list.FXJFKGC.price || prod.warehouse_list.USZYCB.price" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceoneus}}</p> <p class="wareallp" > US</p> </label>
+                        <label ng-if="precioFXLAWH || precioFXLAWH2 || precioMXTJWH || precioFXJFKGC || precioUSZYCB" class="price"><p class="price" style="margin: 0 0 2px !important; padding: 0px 1px !important;" >$ {{priceoneus}}</p> <p class="wareallp" > US</p> </label>
 
                           
                     </div>
@@ -164,7 +170,7 @@
                             </div>
                             <div class="item col-md-10 col-sm-9 col-xs-8">  
                                 <div class="row">
-                                    <div class="item col-md-2 col-sm-3 col-xs-3" ng-repeat="prod in product.msg" >
+                                    <div class="item col-md-2 col-sm-3 col-xs-3 widthcolorimg" ng-repeat="prod in product.msg" >
                                         <a   href="#/product{{$index+1}}/{{ prod.sku }}/{{warehousesolo}}">
                                             <p class="colorhide2" id="block{{prod.color}}"> {{ prod.color }}</p>
                                             <input type="hidden" class="idiconocolor" value="{{ prod.color }}">
@@ -175,9 +181,7 @@
                                             </div>    
                                         </a>
                                     </div>
-
                                 </div>
-                                
                             </div>
                         </div>
                 </div>
@@ -213,27 +217,26 @@
 
 
             <div class="row">
-                <div ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg">                                    
+                <div  class="item col-md-12 col-sm-12 col-xs-12" >                                    
                 
                         <div class="row">
                             <div class="item col-md-2 col-sm-3 col-xs-4">
                                     <p >Warehouse:</p>
                             </div>
-                            <div class="item col-md-10 col-sm-9 col-xs-8">  
+                            <div class="item col-md-10 col-sm-9 col-xs-8" >  
  
-                                <label class="wareallp2" ng-if="prod.warehouse_list.YB" > <a href="#/product1/{{ prod.sku }}/{{warehouse}}"> <p id="{{warehouse}}"> {{warehousename}} <img width="20" height="11" src="img/bchina.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock0 }} {{stockone0}}</p>  </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.ZQ01" > <a href="#/product1/{{ prod.sku }}/{{warehouse1}}">  <p id="{{warehouse1}}"> {{warehousename1}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock1 }} {{stockone1}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.ZQDZ01" > <a href="#/product1/{{ prod.sku }}/{{warehouse2}}">  <p id="{{warehouse2}}"> {{warehousename2}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock2 }} {{stockone2}}</p>  </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.FCYWHQ" > <a href="#/product1/{{ prod.sku }}/{{warehouse3}}">  <p id="{{warehouse3}}"> {{warehousename3}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock3 }} {{stockone3}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.SZXIAWAN" > <a href="#/product1/{{ prod.sku }}/{{warehouse4}}">  <p id="{{warehouse4}}"> {{warehousename4}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock4 }} {{stockone4}}</p>  </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.B2BREXIAOWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse5}}">  <p id="{{warehouse5}}"> {{warehousename5}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock5 }} {{stockone5}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.FXLAWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse6}}">  <p id="{{warehouse6}}"> {{warehousename6}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock6 }} {{stockone6}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.FXLAWH2" > <a href="#/product1/{{ prod.sku }}/{{warehouse7}}">  <p id="{{warehouse7}}"> {{warehousename7}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock7 }} {{stockone7}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.MXTJWH" > <a href="#/product1/{{ prod.sku }}/{{warehouse8}}">  <p id="{{warehouse8}}"> {{warehousename8}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock8 }} {{stockone8}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.FXJFKGC" > <a href="#/product1/{{ prod.sku }}/{{warehouse9}}">  <p id="{{warehouse9}}"> {{warehousename9}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock9 }} {{stockone9}}</p> </a> </label>
-                                <label class="wareallp2" ng-if="prod.warehouse_list.USZYCB" > <a href="#/product1/{{ prod.sku }}/{{warehouse10}}">  <p id="{{warehouse10}}"> {{warehousename10}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock10 }} {{stockone10}}</p> </a> </label>
-                                
-                                                        
+                                <label class="wareallp2" ng-if="warehouse" > <a href="#/product/{{ skuproducto }}/{{warehouse}}"> <p id="{{warehouse}}"> {{warehousename}} <img width="20" height="11" src="img/bchina.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock0 }} {{stockone0}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="warehouse1" > <a href="#/product/{{ skuproducto }}/{{warehouse1}}">  <p id="{{warehouse1}}"> {{warehousename1}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock1 }} {{stockone1}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse2" > <a href="#/product/{{ skuproducto }}/{{warehouse2}}">  <p id="{{warehouse2}}"> {{warehousename2}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock2 }} {{stockone2}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="warehouse3" > <a href="#/product/{{ skuproducto }}/{{warehouse3}}">  <p id="{{warehouse3}}"> {{warehousename3}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock3 }} {{stockone3}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse4" > <a href="#/product/{{ skuproducto }}/{{warehouse4}}">  <p id="{{warehouse4}}"> {{warehousename4}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock4 }} {{stockone4}}</p>  </a> </label>
+                                <label class="wareallp2" ng-if="warehouse5" > <a href="#/product/{{ skuproducto }}/{{warehouse5}}">  <p id="{{warehouse5}}"> {{warehousename5}} <img width="20" height="11"  src="img/bchina.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock5 }} {{stockone5}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse6" > <a href="#/product/{{ skuproducto }}/{{warehouse6}}">  <p id="{{warehouse6}}"> {{warehousename6}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock6 }} {{stockone6}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse7" > <a href="#/product/{{ skuproducto }}/{{warehouse7}}">  <p id="{{warehouse7}}"> {{warehousename7}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock7 }} {{stockone7}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse8" > <a href="#/product/{{ skuproducto }}/{{warehouse8}}">  <p id="{{warehouse8}}"> {{warehousename8}} <img width="20" height="11"  src="img/bus.png"></p> <p  style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock8 }} {{stockone8}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse9" > <a href="#/product/{{ skuproducto }}/{{warehouse9}}">  <p id="{{warehouse9}}"> {{warehousename9}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock9 }} {{stockone9}}</p> </a> </label>
+                                <label class="wareallp2" ng-if="warehouse10" > <a href="#/product/{{ skuproducto }}/{{warehouse10}}">  <p id="{{warehouse10}}"> {{warehousename10}} <img width="20" height="11"  src="img/bus.png"></p> <p style="margin: 0 0 2px !important; padding: 0px 1px !important;" >{{ stock10 }} {{stockone10}}</p> </a> </label>
+                                                   
                             </div>
                         </div>
                 </div>
@@ -465,17 +468,36 @@
     <br>
 
     <div class="row pageproductcont1">
-            <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
-              <h3>Product Information</h3>
-            </div>
+        <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
+          <h3>Product Information</h3>
+        </div>
+    </div>
+<!--
+    <div class="row pageproductcont1">
+      <div id="stylemobil" ng-if="$index==0" class="item col-md-12 col-sm-12 col-xs-12" ng-repeat="prod in product.msg" >
+        <p class="productinfo">{{ prod.title }}</p>
+        <button style="display: none" class="btn" ng-click="myFunctioninfo()">See details</button>
+        <input id="inputinfo" type="hidden" value="{{ prod.goods_desc}}">
+        <p id="infoprod"></p>
+      </div>
+    </div>
+-->
+    <div class="row pageproductcont1">
+        <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
+            <p class="productinfo">{{ Tituloproducto}}</p>
+            <p id="infoprod2"></p>
+        </div>
     </div>
 
-    <div class="row pageproductcont1">
-            <div id="stylemobil" class="item col-md-12 col-sm-12 col-xs-12" >
-                <p class="productinfo">{{ Tituloproducto}}</p>
-                <p id="infoprod2"></p>
-            </div>
-    </div>
 
   </div>  
+
+  <div ng-if="viewoutofstock2" class="container">
+    <div class="row pageproductcont1">
+        <div  class="item col-md-12 col-sm-12 col-xs-12" >
+            <img style="width: 100%;" src="img/OutofStock.png">
+        </div>
+    </div>    
+  </div> 
+
 </div>

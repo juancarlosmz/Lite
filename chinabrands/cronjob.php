@@ -21,10 +21,9 @@
     $result = curl_exec($curl); //resultado de retorno
     curl_close($curl);
     $datos = json_decode($result,true);
-
     $sendtokenbd=$datos['msg']['token'];
 */
-    $sendtokenbd='71acd3c216df477ed60c17e35060bee2';
+    $sendtokenbd='c7f8dd941161b08029a0db91445573ed';
     
     //$sql = "INSERT INTO tokentable (id,compare, tokenserial) VALUES (null,'1','$sendtokenbd')";
     $sql = "UPDATE tokentable SET tokenserial='$sendtokenbd' where compare=1 ";
