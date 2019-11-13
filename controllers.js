@@ -1155,7 +1155,7 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
             if($scope.product.msg[i]['status'] == 0 && $scope.product.msg[i]['sku'] == SKU){
                 console.log("otra data",$scope.product.msg[i]['sku']);
                 console.log("su status",$scope.product.msg[i]['status']);
-                $scope.viewoutofstock = true;
+                $scope.viewoutofstock = false;
                 $scope.viewoutofstock2 = true;
             }
            
@@ -1212,6 +1212,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                         
                         $scope.dataLoading = true;
                         $timeout(function() {
+
+                            console.log('test:',$scope.warehouse );
+
                             $http.post(rute+'chinabrands/GetShippingCost.php?sku='+$scope.prodSKU+'&warehouse='+$scope.warehouse+'&country='+country).then(function successCallback(response) {
                                 console.log('Shipping cost CN-1');
                                 $scope.shipcn1 = true;
@@ -1220,9 +1223,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn1 = 'China';
                                 $scope.warehousename = 'CN-1 :';
                                 $scope.stock0 = 'Stock :';
-                                $scope.precioenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn1);
                                 console.log('warehouse YB',$scope.shippingmodel);
                             }, function errorCallback(response) {
@@ -1254,9 +1257,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn5 = 'China';
                                 $scope.warehousename1 = 'CN-5 :';
                                 $scope.stock1 = 'Stock :';
-                                $scope.precioenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn5);
                                 console.log('warehouse ZQ01',$scope.shippingmodel1);
                             }, function errorCallback(response) {
@@ -1287,9 +1290,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn7 = 'China';
                                 $scope.warehousename2 = 'CN-7 :';
                                 $scope.stock2 = 'Stock :';
-                                $scope.precioenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn7);
                                 console.log('warehouse ZQDZ01',$scope.shippingmodel2);
                             }, function errorCallback(response) {
@@ -1321,9 +1324,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn8 = 'China';
                                 $scope.warehousename3 = 'CN-8 :'; 
                                 $scope.stock3 = 'Stock :';
-                                $scope.precioenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.warehousename3);
                                 console.log($scope.precioenviocn8);
                                 console.log('warehouse FCYWHQ',$scope.shippingmodel3);
@@ -1355,9 +1358,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn9 = 'China';
                                 $scope.warehousename4 = 'CN-9 :'; 
                                 $scope.stock4 = 'Stock :';
-                                $scope.precioenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn9);
                                 console.log('warehouse SZXIAWAN',$scope.shippingmodel4);
                             }, function errorCallback(response) {
@@ -1388,9 +1391,9 @@ empleadoControllers.controller('ProductviewController', ['$scope','product','sto
                                 $scope.Placecn11 = 'China';
                                 $scope.warehousename5 = 'CN-11 :'; 
                                 $scope.stock5 = 'Stock :';
-                                $scope.precioenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn11);
                                 console.log('warehouse B2BREXIAOWH',$scope.shippingmodel5);
                             }, function errorCallback(response) {
