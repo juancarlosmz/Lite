@@ -9,8 +9,19 @@
     } else {
         echo "0 results";
     }
+
+    $sql2 = "SELECT * FROM highpotential";
+    $result2 = $connection->query($sql2);
+    if ($result2->num_rows > 0) {
+        while($row = $result2->fetch_assoc()) {
+            $losskus =  $row["skus"];
+        }
+    } else {
+        echo "0 results";
+    }
     //api
-    $goods_sn = '455449301 ,454731501 ,453853101 ,453315901 ,453816401 ,453782601 ,454652001 ,186648801   ,451655801 ,219807001  ,451787001,282680901,450522101,454739801  '; //以英文逗号分隔
+    //$goods_sn = '455449301 ,454731501 ,453853101 ,453315901 ,453816401 ,453782601 ,454652001 ,186648801   ,451655801 ,219807001  ,451787001,282680901,450522101,454739801  '; //以英文逗号分隔
+    $goods_sn = $losskus;
     $post_data = array(
         'token' => $eltoken,
         'goods_sn' => json_encode($goods_sn)

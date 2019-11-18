@@ -9,8 +9,20 @@
     } else {
         echo "0 results";
     }
+
+    $sql2 = "SELECT * FROM bestselling";
+    $result2 = $connection->query($sql2);
+    if ($result2->num_rows > 0) {
+        while($row = $result2->fetch_assoc()) {
+            $losskus =  $row["skus"];
+        }
+    } else {
+        echo "0 results";
+    }
+
     //api
-    $goods_sn = '448280101 ,452550401 ,457680301   ,270482201,285556702 ,217027701 ,212232401  ,270364901,405247701,226998001,449161701,437677201,189036101,437511401   ';
+    //$goods_sn = '448280101 ,452550401 ,457680301   ,270482201,285556702 ,217027701 ,212232401  ,270364901,405247701,226998001,449161701,437677201,189036101,437511401   ';
+    $goods_sn = $losskus;
             $post_data = array(
             'token' => $eltoken,
             //'token' => $_SESSION['eltoken'], 

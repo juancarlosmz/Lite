@@ -43,16 +43,13 @@
     </div>
     
 </div>
-    
+
+    <!-- Customer list -->
     <div class="" id="contentlist">
-                  
         <div class="row">
-    
             <div class="item col-md-12 col-sm-12 col-xs-12" ng-controller="CustomerList" >
-            <h3>Customer List <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
-    
+            <h3>Customize Customer List <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
             <div class="panel panel-heading" >
-      
                 <table style="background-color: rgba(71, 120, 10, 0.19);" class="table table-bordered">
                     <tr style="border-bottom: solid #a2d06980 3px;"  ng-repeat="m in model">
                         <td>{{m.Nombre}}</td>
@@ -70,11 +67,57 @@
                     </tr>
                 </table>
             </div>
-    
             </div>
-    
         </div>
-    
+    </div>
+    <!-- end Customer list -->
+
+    <!-- Customize homepage-->
+    <div class="" id="contentlist">
+        <div class="row">
+            <div class="item col-md-12 col-sm-12 col-xs-12" >
+            <h3>Customize home page</h3>
+            <div class="panel panel-heading" >
+                <table style="background-color: rgba(71, 120, 10, 0.19);" class="table table-bordered">
+                    <tr style="border-bottom: solid #a2d06980 3px;" >
+                        <td>Best-Selling Products</td>
+                        <td>
+                            <div style="width: 100%; text-align: right;">
+                                <a class="btn btn-default btn-xs" href="#/Best_Selling">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: solid #a2d06980 3px;" >
+                        <td>High Potential Profit</td>
+                        <td>
+                            <div style="width: 100%; text-align: right;">
+                                <a class="btn btn-default btn-xs" href="#/High_Potential">
+                                    <i class="glyphicon glyphicon-edit"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: solid #a2d06980 3px;" >
+                        <td>New Arrivals</td>
+                        <td>
+                            <div style="width: 100%; text-align: right;">
+                                <a class="btn btn-default btn-xs" href="#/New_Arrivals">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
         </div>
+    </div>
+    <!-- end Customer list -->
+
+
+
+
     </div>   
 </div>

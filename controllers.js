@@ -191,39 +191,33 @@ for (var j in $scope.todossku) {
         $scope.dataLoading = true;
 
         //haciendo administrable los carruseles
+
         //New arrivals
+        /*
+        $scope.dataLoading3 = true;
         categories.list(function(categories) {
             $scope.categoriesNewArrival = categories;  
-            //console.log($scope.categories);
             var miArrayNewArrival = [];
             for(var i in $scope.categoriesNewArrival.msg){
                 if($scope.categoriesNewArrival.msg[i]['parent_id'] == 0){
+                        //console.log($scope.categoriesNewArrival.msg[i]);
                         $scope.enviocategoriaNewArrival =  $scope.categoriesNewArrival.msg[i]['cat_id'];
-
                         $http.post(rute+'chinabrands/GetNewArrival.php?category='+$scope.enviocategoriaNewArrival+'&page='+ 1).then(function successCallback(response) {
                             $scope.AllNewArrival = response.data;
-                                                     
                                 if($scope.AllNewArrival.status == 1){
                                     $scope.ResultadoNewArrival = $scope.AllNewArrival.msg['page_result'];
                                     miArrayNewArrival.push($scope.ResultadoNewArrival.toString());
-                                    
                                 }
-
-/*                        
+                                var ProductsNewArrival = 'myDataBestSell="'+miArrayNewArrival+'"';
                                 $timeout(function(){
-                                    console.log('New Arrivals 3',miArrayNewArrival);
-                                }, 15000);  
-*/
-
-                                    var ProductsNewArrival = 'myDataBestSell="'+miArrayNewArrival+'"';
-
-                                $timeout(function(){
+                                    
                                     $http({
                                         method : 'POST',
                                         url : rute+'chinabrands/GetBestSellProductsList.php',
                                         data: ProductsNewArrival,
                                         headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
                                     }).success(function(response){
+                                        $scope.dataLoading3 = false;
                                         $scope.BestSellRespuesta = response;
                                         var miArrayBestSellRespuesta2 = [];
                                         var miArrayBestSellRespuesta = [];
@@ -235,18 +229,9 @@ for (var j in $scope.todossku) {
                                             }
                                         }
                                         $scope.BestSellRespuesta2 = miArrayBestSellRespuesta2;
-
-
-                                        //para hacer multi carrusel
                                         var first = [],second;
-                                        //carrusel de 4 imagenes
                                         for (var k = 0; k < $scope.BestSellRespuesta2.length/4; k++) {
                                             if(k==0){
-                                                
-                                                console.log('C01',$scope.BestSellRespuesta2[k]);
-                                                console.log('C01',$scope.BestSellRespuesta2[k+1]);
-                                                console.log('C01',$scope.BestSellRespuesta2[k+2]);
-                                                console.log('C01',$scope.BestSellRespuesta2[k+3]);
                                                 second = {
                                                     image1: $scope.BestSellRespuesta2[k],  
                                                     image2: $scope.BestSellRespuesta2[k+1],
@@ -254,10 +239,6 @@ for (var j in $scope.todossku) {
                                                     image4: $scope.BestSellRespuesta2[k+3],
                                                 }; 
                                             }else if(k==1){
-                                                console.log('C02',$scope.BestSellRespuesta2[k+3]);
-                                                console.log('C02',$scope.BestSellRespuesta2[k+4]);
-                                                console.log('C02',$scope.BestSellRespuesta2[k+5]);
-                                                console.log('C02',$scope.BestSellRespuesta2[k+6]);
                                                 second = {
                                                     image1: $scope.BestSellRespuesta2[k+3],  
                                                     image2: $scope.BestSellRespuesta2[k+4],
@@ -265,10 +246,6 @@ for (var j in $scope.todossku) {
                                                     image4: $scope.BestSellRespuesta2[k+6],
                                                 }; 
                                             }else if(k==2){
-                                                console.log('C03',$scope.BestSellRespuesta2[k+6]);
-                                                console.log('C03',$scope.BestSellRespuesta2[k+7]);
-                                                console.log('C03',$scope.BestSellRespuesta2[k+8]);
-                                                console.log('C03',$scope.BestSellRespuesta2[k+9]);
                                                 second = {
                                                     image1: $scope.BestSellRespuesta2[k+6],  
                                                     image2: $scope.BestSellRespuesta2[k+7],
@@ -285,14 +262,13 @@ for (var j in $scope.todossku) {
                                         console.log(error); 
                                     });  
                                 }, 100);      
-
-
                         }, function errorCallback(response) {
                             console.log("error 505");    
                         });
                 }
             }
-        });    
+        }); 
+        */   
         //End new arrivals
         
         
@@ -419,6 +395,109 @@ for (var j in $scope.todossku) {
 
 
 }]);
+
+
+
+
+//customize home page
+empleadoControllers.controller('CustomizeHomepageController', ['$scope','products','categories','$localStorage','$sessionStorage','$timeout','$filter','$http','$location', function($scope,products,categories,$localStorage,$sessionStorage,$timeout,$filter,$http,$location) {
+    
+
+    $scope.saveduser = localStorage.getItem('todosuser');
+    $scope.SesionUser = JSON.parse($scope.saveduser);
+    //console.log("nuevo nuevo",JSON.stringify($scope.SesionUser));
+
+    for(var i in $scope.SesionUser){
+        //console.log($scope.SesionUser[i]['email']);
+        $scope.Email = $scope.SesionUser[i]['email'];
+        $scope.Rol = $scope.SesionUser[i]['rol'];
+    }
+    if($scope.Rol == '1' || $scope.Rol == '2'){
+        $scope.ulogin = 'ulogintrue';
+        $scope.uwelcome = 'uwelcomefalse';
+    }else{
+        $scope.ulogin = 'uloginfalse';
+        $scope.uwelcome = 'uwelcometrue';
+    }
+
+    if($scope.Rol == '1'){
+        console.log('user rol 1');
+        $scope.seetoadmin = true;
+    }else{
+        console.log('user rol 2');
+        $scope.seetoadmin = false;
+    }
+
+    /*Secciones administrables*/
+    $scope.updatebestselling = function(){
+        $scope.dataLoadingr = true;
+        var model =  { 
+            skus: JSON.stringify($scope.Theskus) 
+        };
+
+        $http.post(rute+'api/?a=deletebestsell').then(function successCallback(response) {
+            
+            $timeout(function(){
+                $http.post(rute+'api/?a=registerbestsell',model).then(function successCallback(response) {
+                    $scope.dataLoadingr = false;
+                    location.reload();
+                }, function errorCallback(response) {
+                    location.reload();
+                    $scope.error = 'Error 505';
+                });
+            }, 1000);
+        }, function errorCallback(response) {
+            $scope.error = 'Error 505';
+            $timeout(function(){
+                $http.post(rute+'api/?a=registerbestsell',model).then(function successCallback(response) {
+                    $scope.dataLoadingr = false;
+                    location.reload();
+                }, function errorCallback(response) {
+                    location.reload();
+                    $scope.error = 'Error 505';
+                });
+            }, 1000);
+        });
+
+        
+ 
+        console.log('best selling',model);
+    }
+    $scope.updatehighpotential = function(){
+        var model =  { 
+            skus: JSON.stringify($scope.Theskus) 
+        };
+        $http.post(rute+'api/?a=deletehighpotential').then(function successCallback(response) {
+            
+            $timeout(function(){
+                $http.post(rute+'api/?a=registerhighpotential',model).then(function successCallback(response) {
+                    $scope.dataLoadingr = false;
+                    location.reload();
+                }, function errorCallback(response) {
+                    location.reload();
+                    $scope.error = 'Error 505';
+                });
+            }, 1000);
+        }, function errorCallback(response) {
+            $scope.error = 'Error 505';
+            $timeout(function(){
+                $http.post(rute+'api/?a=registerhighpotential',model).then(function successCallback(response) {
+                    $scope.dataLoadingr = false;
+                    location.reload();
+                }, function errorCallback(response) {
+                    location.reload();
+                    $scope.error = 'Error 505';
+                });
+            }, 1000);
+        });
+        console.log('high potential',model);
+    }
+    
+
+
+}]);
+
+//end customize home page
 
 
 

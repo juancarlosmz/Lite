@@ -68,6 +68,29 @@ switch($action) {
         }
         $connection->close();
         break; 
+    
+
+    case 'registerbestsell':    
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        print_r(json_encode(registrobestsell($fluent, $data)));
+        break;
+    case 'deletebestsell':    
+        header('Content-Type: application/json');
+        print_r(json_encode(eliminarbestsell($fluent)));
+        break; 
+    case 'registerhighpotential':    
+        header('Content-Type: application/json');
+        $data = json_decode(utf8_encode(file_get_contents("php://input")), true);
+        print_r(json_encode(registrohighpotential($fluent, $data)));
+        break;
+    case 'deletehighpotential':    
+        header('Content-Type: application/json');
+        print_r(json_encode(eliminarhighpotential($fluent)));
+        break; 
+
+
+
     case 'listProducts':
         header('Content-Type: application/json');
         print_r(json_encode(listarProductos($fluent)));
@@ -364,6 +387,31 @@ function registroImportList($fluent, $data){
 function registroAllSKUs($fluent, $data){
     $fluent->insertInto('AllSKUs', $data)
            ->execute();    
+    return true;
+}
+
+function registrobestsell($fluent, $data){
+    $fluent->insertInto('bestselling', $data)
+           ->execute();    
+    return true;
+}
+
+function eliminarbestsell($fluent){
+    $fluent ->deleteFrom('bestselling')
+            ->execute();   
+    return true;
+}
+
+
+function registrohighpotential($fluent, $data){
+    $fluent->insertInto('highpotential', $data)
+           ->execute();    
+    return true;
+}
+
+function eliminarhighpotential($fluent){
+    $fluent ->deleteFrom('highpotential')
+            ->execute();   
     return true;
 }
 

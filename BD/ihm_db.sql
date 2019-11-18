@@ -72,6 +72,19 @@ CREATE TABLE `product` (
   `warehouse` varchar(10000) COLLATE utf8_spanish2_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+
+CREATE TABLE `bestselling` (
+  `skus` varchar(10000) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+CREATE TABLE `highpotential` (
+  `skus` varchar(10000) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+CREATE TABLE `newarrival` (
+  `skus` varchar(10000) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 

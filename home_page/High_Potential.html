@@ -1,0 +1,135 @@
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+  <div class="container container2prod"  ng-if="seetoadmin">  
+
+  
+            
+
+
+
+                      <div class="row" ng-controller="CustomizeHomepageController">
+                        <div class="col-md-6 col-md-offset-3" ng-controller="CustomizeHomepageController">
+                          <div class="login-page">
+                              <div class="form">
+                                  <div ng-show="error" class="alert alert-danger"><i class="glyphicon glyphicon-alert"> </i> {{error}}</div>
+                                <form class="login-form"  name="form" ng-submit="updatehighpotential()" role="form">
+                                     <h3>Enter SKU's</h3> 
+                                    <div class="form-group">   
+                                        <textarea style="height: 120px;" placeholder="217027701,437511401,437677201..." type="text" name="Theskus" id="Theskus" class="form-control" ng-model="Theskus" required></textarea>
+                                        <span ng-show="form.Theskus.$dirty && form.Theskus.$error.required" class="help-block">217027701,437511401,437677201...</span>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger">Update</button>
+                                        <img ng-if="dataLoadingr" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+
+  
+                    <!--CARRUSEL ADMINISTRABLE-->
+                    <!--Collections-->
+<div ng-controller="HomeController" >
+
+<!-- Alert msg-->
+<div id="alertskus" class="alert alert-success alertskus2" ng-class="'alert-' + (alert.type || 'success')" uib-alert close="close($index)" 
+ng-repeat="a in alert" 
+type="{{a.type}}">
+<i class="glyphicon glyphicon-ok">&nbsp; </i>
+{{a.value}} 
+</div>
+
+                    <h3>High Potential Profit <img ng-if="dataLoading2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/></h3>
+                    <div class="row" >
+                        <div class="item col-md-12 col-sm-12 col-xs-12">
+                    <div class="carrusel">  
+                        <div id="slides_control">
+                          <div>
+                            <carousel interval="myInterval">
+                              <slide  ng-repeat="prod in groupedSlides2 track by $index" active="slide.active">
+                                <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
+  
+                                  <a target="_blank" class="itemhover" href="#/product/{{ prod.image1.sku }}/{{ prod.image1.warehouse_list.YB.warehouse }}{{ prod.image1.warehouse_list.ZQ01.warehouse }}{{ prod.image1.warehouse_list.ZQDZ01.warehouse }}{{ prod.image1.warehouse_list.FCYWHQ.warehouse }}{{ prod.image1.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image1.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH.warehouse }}{{ prod.image1.warehouse_list.FXLAWH2.warehouse }}{{ prod.image1.warehouse_list.MXTJWH.warehouse }}{{ prod.image1.warehouse_list.FXJFKGC.warehouse }}{{ prod.image1.warehouse_list.USZYCB.warehouse }}">
+                                    <p class="theimg" ng-repeat="img in prod.image1.original_img">
+                                      <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                    </p>
+                                    <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image1.sku }}">
+                                    <input class="valuesparentid" type="hidden" value="{{ prod.image1.parent_id }}">
+                                    <p class="block-with-text">{{ prod.image1.title }}</p>
+                                    <p class="price">$ {{ prod.image1.warehouse_list.YB.price }} {{ prod.image1.warehouse_list.ZQ01.price }} {{ prod.image1.warehouse_list.ZQDZ01.price }} {{ prod.image1.warehouse_list.FCYWHQ.price }} {{ prod.image1.warehouse_list.SZXIAWAN.price }} {{ prod.image1.warehouse_list.B2BREXIAOWH.price }} {{ prod.image1.warehouse_list.FXLAWH.price }} {{ prod.image1.warehouse_list.FXLAWH2.price }} {{ prod.image1.warehouse_list.MXTJWH.price }} {{ prod.image1.warehouse_list.FXJFKGC.price }} {{ prod.image1.warehouse_list.USZYCB.price }}</p>
+                                  </a> 
+                                    <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                    <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image1.sku}}"  ng-click="addToCard(prod.image1)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>  
+                                    
+                                </div>    
+                                <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
+  
+                                  <a target="_blank" class="itemhover" href="#/product/{{ prod.image2.sku }}/{{ prod.image2.warehouse_list.YB.warehouse }}{{ prod.image2.warehouse_list.ZQ01.warehouse }}{{ prod.image2.warehouse_list.ZQDZ01.warehouse }}{{ prod.image2.warehouse_list.FCYWHQ.warehouse }}{{ prod.image2.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image2.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH.warehouse }}{{ prod.image2.warehouse_list.FXLAWH2.warehouse }}{{ prod.image2.warehouse_list.MXTJWH.warehouse }}{{ prod.image2.warehouse_list.FXJFKGC.warehouse }}{{ prod.image2.warehouse_list.USZYCB.warehouse }}">
+                                    <p class="theimg" ng-repeat="img in prod.image2.original_img">
+                                      <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                    </p>
+                                    <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image2.sku }}">
+                                    <input class="valuesparentid" type="hidden" value="{{ prod.image2.parent_id }}">
+                                    <p class="block-with-text">{{ prod.image2.title }}</p>
+                                    <p class="price">$ {{ prod.image2.warehouse_list.YB.price }} {{ prod.image2.warehouse_list.ZQ01.price }} {{ prod.image2.warehouse_list.ZQDZ01.price }} {{ prod.image2.warehouse_list.FCYWHQ.price }} {{ prod.image2.warehouse_list.SZXIAWAN.price }} {{ prod.image2.warehouse_list.B2BREXIAOWH.price }} {{ prod.image2.warehouse_list.FXLAWH.price }} {{ prod.image2.warehouse_list.FXLAWH2.price }} {{ prod.image2.warehouse_list.MXTJWH.price }} {{ prod.image2.warehouse_list.FXJFKGC.price }} {{ prod.image2.warehouse_list.USZYCB.price }}</p>
+                                  </a>  
+                                    <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                    <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image2.sku}}"  ng-click="addToCard(prod.image2)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p> 
+                                    
+                                </div>
+                                <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
+  
+                                  <a target="_blank" class="itemhover" href="#/product/{{ prod.image3.sku }}/{{ prod.image3.warehouse_list.YB.warehouse }}{{ prod.image3.warehouse_list.ZQ01.warehouse }}{{ prod.image3.warehouse_list.ZQDZ01.warehouse }}{{ prod.image3.warehouse_list.FCYWHQ.warehouse }}{{ prod.image3.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image3.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH.warehouse }}{{ prod.image3.warehouse_list.FXLAWH2.warehouse }}{{ prod.image3.warehouse_list.MXTJWH.warehouse }}{{ prod.image3.warehouse_list.FXJFKGC.warehouse }}{{ prod.image3.warehouse_list.USZYCB.warehouse }}">
+                                    <p class="theimg" ng-repeat="img in prod.image3.original_img">
+                                      <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                    </p>
+                                    <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image3.sku }}">
+                                    <input class="valuesparentid" type="hidden" value="{{ prod.image3.parent_id }}">
+                                    <p class="block-with-text">{{ prod.image3.title }}</p>
+                                    <p class="price">$ {{ prod.image3.warehouse_list.YB.price }} {{ prod.image3.warehouse_list.ZQ01.price }} {{ prod.image3.warehouse_list.ZQDZ01.price }} {{ prod.image3.warehouse_list.FCYWHQ.price }} {{ prod.image3.warehouse_list.SZXIAWAN.price }} {{ prod.image3.warehouse_list.B2BREXIAOWH.price }} {{ prod.image3.warehouse_list.FXLAWH.price }} {{ prod.image3.warehouse_list.FXLAWH2.price }} {{ prod.image3.warehouse_list.MXTJWH.price }} {{ prod.image3.warehouse_list.FXJFKGC.price }} {{ prod.image3.warehouse_list.USZYCB.price }}</p>
+                                  </a>   
+                                    <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                    <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image3.sku}}"  ng-click="addToCard(prod.image3)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+  
+                                </div>  
+                                
+                                <div class="item col-md-2 col-sm-3 col-xs-12 itemcarrusel leftmove">
+  
+                                    <a target="_blank" class="itemhover" href="#/product/{{ prod.image4.sku }}/{{ prod.image4.warehouse_list.YB.warehouse }}{{ prod.image4.warehouse_list.ZQ01.warehouse }}{{ prod.image4.warehouse_list.ZQDZ01.warehouse }}{{ prod.image4.warehouse_list.FCYWHQ.warehouse }}{{ prod.image4.warehouse_list.SZXIAWAN.warehouse }}{{ prod.image4.warehouse_list.B2BREXIAOWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH.warehouse }}{{ prod.image4.warehouse_list.FXLAWH2.warehouse }}{{ prod.image4.warehouse_list.MXTJWH.warehouse }}{{ prod.image4.warehouse_list.FXJFKGC.warehouse }}{{ prod.image4.warehouse_list.USZYCB.warehouse }}">
+                                      <p class="theimg" ng-repeat="img in prod.image4.original_img">
+                                        <img ng-if="$index==0" class="img-responsive" ng-src="{{img}}">
+                                      </p>
+                                      <input id="valueskuid" class="valuesku" type="text" value="{{ prod.image4.sku }}">
+                                      <input class="valuesparentid" type="hidden" value="{{ prod.image4.parent_id }}">
+                                      <p class="block-with-text">{{ prod.image4.title }}</p>
+                                      <p class="price">$ {{ prod.image4.warehouse_list.YB.price }} {{ prod.image4.warehouse_list.ZQ01.price }} {{ prod.image4.warehouse_list.ZQDZ01.price }} {{ prod.image4.warehouse_list.FCYWHQ.price }} {{ prod.image4.warehouse_list.SZXIAWAN.price }} {{ prod.image4.warehouse_list.B2BREXIAOWH.price }} {{ prod.image4.warehouse_list.FXLAWH.price }} {{ prod.image4.warehouse_list.FXLAWH2.price }} {{ prod.image4.warehouse_list.MXTJWH.price }} {{ prod.image4.warehouse_list.FXJFKGC.price }} {{ prod.image4.warehouse_list.USZYCB.price }}</p>
+                                    </a>   
+                                      <p class="btnadd3 {{ulogin}}"><button class="btn btnadd"><a href="#/login" style="text-decoration: none;color:white !important;"><span>+ | </span><span>Add to Import List</span></a></button></p>
+                                      <p class="btnadd3 {{uwelcome}}"><button id="disable{{prod.image4.sku}}"  ng-click="addToCard(prod.image4)" class="btn btnadd"><span>+ | </span><span>Add to Import List</span></button></p>
+                                      
+                                  </div> 
+  
+                              </slide> 
+                            </carousel>
+  
+  
+                          </div>
+  
+  
+  
+  
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--END CARRUSEL ADMINISTRABLE-->
+  
+    </div>                
+
+  </div> 
+                
+  </div>  
+  

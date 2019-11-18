@@ -76,9 +76,9 @@
         </div>
     </div>
 
-    <div class="main">
+    <div class="main container">
 
-      <div class="ng-view"></div>
+      <div class="ng-view containerP20"></div>
 
     </div>
 

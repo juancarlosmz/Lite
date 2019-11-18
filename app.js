@@ -273,7 +273,21 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'cifradorcesarController',
         method: 'GET',
       }).
-      
+      when('/Best_Selling', {
+        templateUrl: 'home_page/Best_Selling.html',
+        controller: 'CustomizeHomepageController',
+        method: 'GET',
+      }).
+      when('/High_Potential', {
+        templateUrl: 'home_page/High_Potential.html',
+        controller: 'CustomizeHomepageController',
+        method: 'GET',
+      }).
+      when('/New_Arrivals', {
+        templateUrl: 'home_page/New_Arrivals.html',
+        controller: 'CustomizeHomepageController',
+        method: 'GET',
+      }).
       otherwise({
         redirectTo: '/',
         method: 'GET',
