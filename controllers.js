@@ -191,69 +191,109 @@ for (var j in $scope.todossku) {
         $scope.dataLoading = true;
 
         //haciendo administrable los carruseles
-        $http.post(rute+"chinabrands/GetDownloadList.php").then(function successCallback(response) {
-            $scope.dataBestSell = response.data;
-            //console.log($scope.dataBestSell.msg.page_result); 
-            var sendDownloadList = [];
-            for (var i in $scope.dataBestSell.msg.page_result) {
-                sendDownloadList.push($scope.dataBestSell.msg.page_result[i]['goods_sn']);
+        //New arrivals
+        categories.list(function(categories) {
+            $scope.categoriesNewArrival = categories;  
+            //console.log($scope.categories);
+            var miArrayNewArrival = [];
+            for(var i in $scope.categoriesNewArrival.msg){
+                if($scope.categoriesNewArrival.msg[i]['parent_id'] == 0){
+                        $scope.enviocategoriaNewArrival =  $scope.categoriesNewArrival.msg[i]['cat_id'];
+
+                        $http.post(rute+'chinabrands/GetNewArrival.php?category='+$scope.enviocategoriaNewArrival+'&page='+ 1).then(function successCallback(response) {
+                            $scope.AllNewArrival = response.data;
+                                                     
+                                if($scope.AllNewArrival.status == 1){
+                                    $scope.ResultadoNewArrival = $scope.AllNewArrival.msg['page_result'];
+                                    miArrayNewArrival.push($scope.ResultadoNewArrival.toString());
+                                    
+                                }
+
+/*                        
+                                $timeout(function(){
+                                    console.log('New Arrivals 3',miArrayNewArrival);
+                                }, 15000);  
+*/
+
+                                    var ProductsNewArrival = 'myDataBestSell="'+miArrayNewArrival+'"';
+
+                                $timeout(function(){
+                                    $http({
+                                        method : 'POST',
+                                        url : rute+'chinabrands/GetBestSellProductsList.php',
+                                        data: ProductsNewArrival,
+                                        headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
+                                    }).success(function(response){
+                                        $scope.BestSellRespuesta = response;
+                                        var miArrayBestSellRespuesta2 = [];
+                                        var miArrayBestSellRespuesta = [];
+                                        
+                                        for (var i in $scope.BestSellRespuesta.msg) {
+                                            if($scope.BestSellRespuesta.msg[i]['sku'].substr(7,8) == "01" && $scope.BestSellRespuesta.msg[i]['status'] == 1){
+                                                miArrayBestSellRespuesta = JSON.parse(JSON.stringify($scope.BestSellRespuesta.msg[i]));
+                                                miArrayBestSellRespuesta2.push(miArrayBestSellRespuesta);
+                                            }
+                                        }
+                                        $scope.BestSellRespuesta2 = miArrayBestSellRespuesta2;
+
+
+                                        //para hacer multi carrusel
+                                        var first = [],second;
+                                        //carrusel de 4 imagenes
+                                        for (var k = 0; k < $scope.BestSellRespuesta2.length/4; k++) {
+                                            if(k==0){
+                                                
+                                                console.log('C01',$scope.BestSellRespuesta2[k]);
+                                                console.log('C01',$scope.BestSellRespuesta2[k+1]);
+                                                console.log('C01',$scope.BestSellRespuesta2[k+2]);
+                                                console.log('C01',$scope.BestSellRespuesta2[k+3]);
+                                                second = {
+                                                    image1: $scope.BestSellRespuesta2[k],  
+                                                    image2: $scope.BestSellRespuesta2[k+1],
+                                                    image3: $scope.BestSellRespuesta2[k+2],
+                                                    image4: $scope.BestSellRespuesta2[k+3],
+                                                }; 
+                                            }else if(k==1){
+                                                console.log('C02',$scope.BestSellRespuesta2[k+3]);
+                                                console.log('C02',$scope.BestSellRespuesta2[k+4]);
+                                                console.log('C02',$scope.BestSellRespuesta2[k+5]);
+                                                console.log('C02',$scope.BestSellRespuesta2[k+6]);
+                                                second = {
+                                                    image1: $scope.BestSellRespuesta2[k+3],  
+                                                    image2: $scope.BestSellRespuesta2[k+4],
+                                                    image3: $scope.BestSellRespuesta2[k+5],
+                                                    image4: $scope.BestSellRespuesta2[k+6],
+                                                }; 
+                                            }else if(k==2){
+                                                console.log('C03',$scope.BestSellRespuesta2[k+6]);
+                                                console.log('C03',$scope.BestSellRespuesta2[k+7]);
+                                                console.log('C03',$scope.BestSellRespuesta2[k+8]);
+                                                console.log('C03',$scope.BestSellRespuesta2[k+9]);
+                                                second = {
+                                                    image1: $scope.BestSellRespuesta2[k+6],  
+                                                    image2: $scope.BestSellRespuesta2[k+7],
+                                                    image3: $scope.BestSellRespuesta2[k+8],
+                                                    image4: $scope.BestSellRespuesta2[k+9],
+                                                }; 
+                                            }   
+                                            first.push(second);
+                                        }
+                                        $scope.groupedSlides3 = first;
+
+                                    }).error(function(error){
+                                        $scope.dataLoading = true;
+                                        console.log(error); 
+                                    });  
+                                }, 100);      
+
+
+                        }, function errorCallback(response) {
+                            console.log("error 505");    
+                        });
+                }
             }
-            var sendDownloadList2 = 'myDataBestSell='+JSON.stringify(sendDownloadList);
-            $http({
-                method : 'POST',
-                url : rute+'chinabrands/GetBestSellProductsList.php',
-                data: sendDownloadList2,
-                headers : {'Content-Type': 'application/x-www-form-urlencoded'}  
-            }).success(function(response){
-                $scope.BestSellRespuesta = response;
-                var miArrayBestSellRespuesta2 = [];
-                var miArrayBestSellRespuesta = [];
-                for (var i in $scope.BestSellRespuesta.msg) {
-                    if($scope.BestSellRespuesta.msg[i]['sku'].substr(7,8) == "01" && $scope.BestSellRespuesta.msg[i]['status'] == 1){
-                        miArrayBestSellRespuesta = JSON.parse(JSON.stringify($scope.BestSellRespuesta.msg[i]));
-                        miArrayBestSellRespuesta2.push(miArrayBestSellRespuesta);
-                    }
-                }
-                $scope.BestSellRespuesta2 = miArrayBestSellRespuesta2;
-                //para hacer multi carrusel
-                var first = [],second;
-                //carrusel de 4 imagenes
-                for (var k = 0; k < $scope.BestSellRespuesta2.length/4; k++) {
-                    if(k==0){
-                        second = {
-                            image1: $scope.BestSellRespuesta2[k],  
-                            image2: $scope.BestSellRespuesta2[k+1],
-                            image3: $scope.BestSellRespuesta2[k+2],
-                            image4: $scope.BestSellRespuesta2[k+3],
-                        }; 
-                    }else if(k==1){
-                        second = {
-                            image1: $scope.BestSellRespuesta2[k+3],  
-                            image2: $scope.BestSellRespuesta2[k+4],
-                            image3: $scope.BestSellRespuesta2[k+5],
-                            image4: $scope.BestSellRespuesta2[k+6],
-                        }; 
-                    }else if(k==2){
-                        second = {
-                            image1: $scope.BestSellRespuesta2[k+6],  
-                            image2: $scope.BestSellRespuesta2[k+7],
-                            image3: $scope.BestSellRespuesta2[k+8],
-                            image4: $scope.BestSellRespuesta2[k+9],
-                        }; 
-                    }   
-                    first.push(second);
-                }
-                $scope.groupedSlides3 = first;
-
-            }).error(function(error){
-                $scope.dataLoading = true;
-                console.log(error); 
-            });    
-
-            console.log(sendDownloadList2);  
-        }, function errorCallback(response) {
-            console.log("error 505");    
-        });
+        });    
+        //End new arrivals
         
         
         $http.post(rute+"chinabrands/GetBestSellProducts.php").then(function successCallback(response) {
@@ -652,9 +692,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn1 = 'China';
                                 $scope.warehousename = 'CN-1 :';
                                 $scope.stock0 = 'Stock :';
-                                $scope.precioenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn1 = $scope.shippingmodel.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn1 = $scope.shippingmodel.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn1);
                                 console.log('warehouse YB',$scope.shippingmodel);
                             }, function errorCallback(response) {
@@ -683,9 +723,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn5 = 'China';
                                 $scope.warehousename1 = 'CN-5 :';
                                 $scope.stock1 = 'Stock :';
-                                $scope.precioenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn5 = $scope.shippingmodel1.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn5 = $scope.shippingmodel1.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn5);
                                 console.log('warehouse ZQ01',$scope.shippingmodel1);
                             }, function errorCallback(response) {
@@ -713,9 +753,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn7 = 'China';
                                 $scope.warehousename2 = 'CN-7 :';
                                 $scope.stock2 = 'Stock :';
-                                $scope.precioenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn7 = $scope.shippingmodel2.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn7 = $scope.shippingmodel2.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn7);
                                 console.log('warehouse ZQDZ01',$scope.shippingmodel2);
                             }, function errorCallback(response) {
@@ -744,9 +784,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn8 = 'China';
                                 $scope.warehousename3 = 'CN-8 :'; 
                                 $scope.stock3 = 'Stock :';
-                                $scope.precioenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn8 = $scope.shippingmodel3.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn8 = $scope.shippingmodel3.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.warehousename3);
                                 console.log($scope.precioenviocn8);
                                 console.log('warehouse FCYWHQ',$scope.shippingmodel3);
@@ -775,9 +815,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn9 = 'China';
                                 $scope.warehousename4 = 'CN-9 :'; 
                                 $scope.stock4 = 'Stock :';
-                                $scope.precioenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn9 = $scope.shippingmodel4.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn9 = $scope.shippingmodel4.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn9);
                                 console.log('warehouse SZXIAWAN',$scope.shippingmodel4);
                             }, function errorCallback(response) {
@@ -805,9 +845,9 @@ empleadoControllers.controller('Productview', ['$scope','product','stock','$time
                                 $scope.Placecn11 = 'China';
                                 $scope.warehousename5 = 'CN-11 :'; 
                                 $scope.stock5 = 'Stock :';
-                                $scope.precioenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_fee'];
-                                $scope.nameenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_name'];
-                                $scope.timeenviocn11 = $scope.shippingmodel5.msg['USEXPLO']['shipping_time'];
+                                $scope.precioenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_fee'];
+                                $scope.nameenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_name'];
+                                $scope.timeenviocn11 = $scope.shippingmodel5.msg['GJEUBGDE']['shipping_time'];
                                 console.log($scope.precioenviocn11);
                                 console.log('warehouse B2BREXIAOWH',$scope.shippingmodel5);
                             }, function errorCallback(response) {
