@@ -23,7 +23,7 @@
     $datos = json_decode($result,true);
     $sendtokenbd=$datos['msg']['token'];
 */
-    $sendtokenbd='b17a99a92904d7c8569c34ccf127b8d3';
+    $sendtokenbd='789f492b57ddca1a28e4c71a0b48bd51';
     
     //$sql = "INSERT INTO tokentable (id,compare, tokenserial) VALUES (null,'1','$sendtokenbd')";
     $sql = "UPDATE tokentable SET tokenserial='$sendtokenbd' where compare=1 ";

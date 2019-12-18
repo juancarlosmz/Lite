@@ -36,7 +36,7 @@
       <div class="">
           <div class="container">
             <div class="row" data-ng-repeat="skus in ImportList track by $index">
-                <div class="item col-md-6 col-md-offset-3" ng-repeat="prod in filtroProducts track by $index" >
+                <div class="item col-md-6 col-md-offset-3" ng-repeat="prod in filtroProducts track by $index" ng-if="prod.status == 1 && skus.textsku == prod.sku ">
                   <div class="row">
                     <div class="item col-md-1 col-sm-1 col-xs-1">
                       <input type="checkbox" data-ng-model="skus.donesku">

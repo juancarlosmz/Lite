@@ -6863,7 +6863,6 @@ empleadoControllers.controller('ProductsControllerCategory', ['$scope','categori
 
 
 
-
     $http.post(rute+'api/?a=listProductsCat&category='+ $routeParams.category).then(function successCallback(response) {  
         $scope.dataLoading = false;
         $scope.dataLoadingText = false;
@@ -6879,6 +6878,8 @@ empleadoControllers.controller('ProductsControllerCategory', ['$scope','categori
             $scope.filtroProducts = arreglo.slice(principio, fin); // 
             console.log('pagineo');
         };
+
+
 
         $scope.buscarProducts = function (busquedaprod) {
             var buscados = $filter('filter') ($scope.ListAllProducts2, function (prod) {
@@ -7116,6 +7117,52 @@ empleadoControllers.controller('ProductsControllerCategory', ['$scope','categori
         $scope.hacerPagineoProducts($scope.ListAllProducts2);
         console.log('la data nueva',$scope.filtroProducts);
         $scope.dataResults = true;
+
+
+        //codigo para activar el alert
+        $scope.alert = [];
+       
+        $scope.savedsku = localStorage.getItem('todossku');
+        $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+        $scope.addToCard = function(p) {
+
+            var resultado = document.getElementsByClassName("valuesku");
+            console.log('el resultado es',resultado.length);
+            console.log('son',p.Viewsku);
+
+            for (var i = 0; i < resultado.length; i++) {
+                if (resultado[i].value == p.Viewsku) {
+                    $scope.todossku.push({
+                        textsku: resultado[i].value,
+                        donesku: false
+                    });
+                    localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+                    $scope.alert.push({
+                        type:'success',
+                        value:'Product added successfully to Import List'
+                    });
+                    //ocultar el boton x cada sku añadido
+                    document.getElementById('disable'+p.Viewsku).disabled = 'disabled';
+                    //end
+                    //mostrar y ocultar alerta
+                    $timeout(function() {
+                        var alerta = document.getElementsByClassName('alertskus2');
+                        for (var i = 0; i < alerta.length; i++) {
+                            alerta[i].style.display = "none";
+                        }
+                    }, 2000);
+                    break;
+                }; 
+            };
+            
+
+        };
+        //fin alert    
+
+
     }, function errorCallback(response) {
         console.log('no logrado');
     });
@@ -7358,6 +7405,57 @@ empleadoControllers.controller('ProductsControllersubCategory', ['$scope','categ
             $scope.dataResults = true;
             $scope.dataNoResults = false;
         }
+
+
+
+
+
+        //codigo para activar el alert
+        $scope.alert = [];
+       
+        $scope.savedsku = localStorage.getItem('todossku');
+        $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+        $scope.addToCard = function(p) {
+
+            var resultado = document.getElementsByClassName("valuesku");
+            console.log('el resultado es',resultado.length);
+            console.log('son',p.Viewsku);
+
+            for (var i = 0; i < resultado.length; i++) {
+                if (resultado[i].value == p.Viewsku) {
+                    $scope.todossku.push({
+                        textsku: resultado[i].value,
+                        donesku: false
+                    });
+                    localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+                    $scope.alert.push({
+                        type:'success',
+                        value:'Product added successfully to Import List'
+                    });
+                    //ocultar el boton x cada sku añadido
+                    document.getElementById('disable'+p.Viewsku).disabled = 'disabled';
+                    //end
+                    //mostrar y ocultar alerta
+                    $timeout(function() {
+                        var alerta = document.getElementsByClassName('alertskus2');
+                        for (var i = 0; i < alerta.length; i++) {
+                            alerta[i].style.display = "none";
+                        }
+                    }, 2000);
+                    break;
+                }; 
+            };
+            
+
+        };
+        //fin alert    
+
+
+
+
 
     }, function errorCallback(response) {
         console.log('no logrado');
@@ -7624,6 +7722,57 @@ empleadoControllers.controller('ProductsControllersubsubCategory', ['$scope','ca
             $scope.dataNoResults = false;
         }
 
+
+
+
+        //codigo para activar el alert
+        $scope.alert = [];
+       
+        $scope.savedsku = localStorage.getItem('todossku');
+        $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+        $scope.addToCard = function(p) {
+
+            var resultado = document.getElementsByClassName("valuesku");
+            console.log('el resultado es',resultado.length);
+            console.log('son',p.Viewsku);
+
+            for (var i = 0; i < resultado.length; i++) {
+                if (resultado[i].value == p.Viewsku) {
+                    $scope.todossku.push({
+                        textsku: resultado[i].value,
+                        donesku: false
+                    });
+                    localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+                    $scope.alert.push({
+                        type:'success',
+                        value:'Product added successfully to Import List'
+                    });
+                    //ocultar el boton x cada sku añadido
+                    document.getElementById('disable'+p.Viewsku).disabled = 'disabled';
+                    //end
+                    //mostrar y ocultar alerta
+                    $timeout(function() {
+                        var alerta = document.getElementsByClassName('alertskus2');
+                        for (var i = 0; i < alerta.length; i++) {
+                            alerta[i].style.display = "none";
+                        }
+                    }, 2000);
+                    break;
+                }; 
+            };
+            
+
+        };
+        //fin alert   
+
+
+
+
+
+
     }, function errorCallback(response) {
         console.log('no logrado');
     });
@@ -7888,6 +8037,58 @@ empleadoControllers.controller('ProductsControllersubsubsubCategory', ['$scope',
             $scope.dataResults = true;
             $scope.dataNoResults = false;
         }
+
+
+
+
+
+        //codigo para activar el alert
+        $scope.alert = [];
+       
+        $scope.savedsku = localStorage.getItem('todossku');
+        $scope.todossku = (localStorage.getItem('todossku')!==null) ? JSON.parse($scope.savedsku) : [ ];
+        localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+        $scope.addToCard = function(p) {
+
+            var resultado = document.getElementsByClassName("valuesku");
+            console.log('el resultado es',resultado.length);
+            console.log('son',p.Viewsku);
+
+            for (var i = 0; i < resultado.length; i++) {
+                if (resultado[i].value == p.Viewsku) {
+                    $scope.todossku.push({
+                        textsku: resultado[i].value,
+                        donesku: false
+                    });
+                    localStorage.setItem('todossku', JSON.stringify($scope.todossku));
+
+                    $scope.alert.push({
+                        type:'success',
+                        value:'Product added successfully to Import List'
+                    });
+                    //ocultar el boton x cada sku añadido
+                    document.getElementById('disable'+p.Viewsku).disabled = 'disabled';
+                    //end
+                    //mostrar y ocultar alerta
+                    $timeout(function() {
+                        var alerta = document.getElementsByClassName('alertskus2');
+                        for (var i = 0; i < alerta.length; i++) {
+                            alerta[i].style.display = "none";
+                        }
+                    }, 2000);
+                    break;
+                }; 
+            };
+            
+
+        };
+        //fin alert   
+        
+
+
+
+
 
     }, function errorCallback(response) {
         console.log('no logrado');
